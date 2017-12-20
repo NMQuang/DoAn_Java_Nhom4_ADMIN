@@ -1277,7 +1277,7 @@ p.back-link {
 /*  Phần đưọc thêm vào trong css */
 a.fix, button.fix{
     margin-top: 3px;
-    float: right !important;
+    /*float: right !important;*/
 }
 
 th.red-text-table, td.red-text-table {
@@ -1387,4 +1387,17 @@ a:hover, a:visited, a:link, a:active
 .modal label {
     font-size: 15px;
     color: #000000;
+}
+
+#input-search-header-bar {
+    margin-top: 5px;
+    height: 32px;
+}
+
+#input-search-header-bar:focus {
+
+}
+
+#btn-search-header-bar {
+    height: 32px;
 }

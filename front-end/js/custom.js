@@ -45,3 +45,14 @@ $('#modal-sua-danh-muc').on('show.bs.modal', function (event) {
     var modal = $(this);
     modal.find('#ten-danh-muc-1').val(data)
 });
+
+
+$('#input-search-header-bar').keyup(function() {
+    var $rows = $('#table-search-header-bar tbody tr');
+    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+
+    $rows.show().filter(function() {
+        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+        return !~text.indexOf(val);
+    }).hide();
+});

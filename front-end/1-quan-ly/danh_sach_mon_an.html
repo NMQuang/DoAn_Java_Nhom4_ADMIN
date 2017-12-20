@@ -82,11 +82,20 @@
 			
 		<div class="panel panel-info">
 			<div class="panel-heading">
-				Danh sách tất cả các món ăn
+				<div class="col-lg-7">
+					<div class="input-group col-md-12">
+						<input id="input-search-header-bar" type="text" class="form-control" placeholder="Tên món ăn">
+						<div class="input-group-btn">
+							<button id="btn-search-header-bar" class="btn btn-default fix" type="submit">
+								Tìm kiếm
+							</button>
+						</div>
+					</div>
+				</div>
 				<a href="tao_mon_an_moi.html" class="btn btn-default pull-right fix"><b>+</b> Thêm món ăn mới</a>
 			</div>
 
-		    <table class="table table-striped custab">
+		    <table class="table table-striped custab" id="table-search-header-bar">
 			    <thead>
 			        <tr>
 			            <th class="text-center red-text-table">ID</th>
@@ -96,46 +105,74 @@
 			            <th>Số lượng bán</th>
 			        </tr>
 			    </thead>
-	            <tr>
-	                <td class="text-center red-text-table">1</td>
-	                <td>ten danh muc</td>
-	                <td>ten san pham</td>
-	                <td>don vi tinh</td>
-	                <td>so luong ban</td>
-					<td width="5%">
-						<a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
-					</td>
-					<td width="5%">
-						<a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
-					</td>
-	            </tr>
-	            <tr>
-	                <td class="text-center red-text-table">2</td>
-	                <td>ten danh muc</td>
-	                <td>ten san pham</td>
-	                <td>don vi tinh</td>
-	                <td>so luong ban</td>
-					<td width="5%">
-						<a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
-					</td>
-					<td width="5%">
-						<a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
-					</td>
-	            </tr>
-	            <tr>
-	                <td class="text-center red-text-table">3</td>
-	                <td>ten danh muc</td>
-	                <td>ten san pham</td>
-	                <td>don vi tinh</td>
-	                <td>so luong ban</td>
-					<td width="5%">
-						<a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
-					</td>
-					<td width="5%">
-						<a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
-					</td>
-	           <!--      <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td> -->
-	            </tr>
+				<tbody>
+					<tr>
+						<td class="text-center red-text-table">1</td>
+						<td>Đồ rán</td>
+						<td>Gà rán nguyên con</td>
+						<td>don vi tinh</td>
+						<td>so luong ban</td>
+						<td width="5%">
+							<a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
+						</td>
+						<td width="5%">
+							<a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
+						</td>
+					</tr>
+					<tr>
+						<td class="text-center red-text-table">2</td>
+						<td>Đồ chiên</td>
+						<td>Vịt chiên nguyên con</td>
+						<td>don vi tinh</td>
+						<td>so luong ban</td>
+						<td width="5%">
+							<a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
+						</td>
+						<td width="5%">
+							<a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
+						</td>
+					</tr>
+					<tr>
+						<td class="text-center red-text-table">1</td>
+						<td>Đồ rán</td>
+						<td>Gà rán nguyên con</td>
+						<td>don vi tinh</td>
+						<td>so luong ban</td>
+						<td width="5%">
+							<a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
+						</td>
+						<td width="5%">
+							<a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
+						</td>
+					</tr>
+					<tr>
+						<td class="text-center red-text-table">3</td>
+						<td>Đồ nướng</td>
+						<td>Heo nướng nguyên con</td>
+						<td>don vi tinh</td>
+						<td>so luong ban</td>
+						<td width="5%">
+							<a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
+						</td>
+						<td width="5%">
+							<a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
+						</td>
+						<!--      <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td> -->
+					</tr>
+					<tr>
+						<td class="text-center red-text-table">1</td>
+						<td>Đồ rán</td>
+						<td>Gà rán nguyên con</td>
+						<td>don vi tinh</td>
+						<td>so luong ban</td>
+						<td width="5%">
+							<a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
+						</td>
+						<td width="5%">
+							<a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
+						</td>
+					</tr>
+				</tbody>
 		    </table>
 		</div>
 	</div>

@@ -86,41 +86,39 @@
 				<button type="button" class="btn btn-default pull-right fix"
 				        data-toggle="modal" data-target="#modal-tao-danh-muc"><b>+</b> Thêm danh mục mới</button>
 
-
-					<div class="modal fade" id="modal-tao-danh-muc" role="dialog">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal">&times;</button>
-									<h4 class="modal-title">Thêm danh mục mới</h4>
-								</div>
-								<div class="modal-body">
-									<form class="form-horizontal" role="form">
-										<div class="form-group">
-											<label class="col-lg-3" for="food-name">Tên món ăn:</label>
-											<div class="col-lg-9">
-												<input type="email" class="expanded-input" id="food-name">
-											</div>
+				<div class="modal fade" id="modal-tao-danh-muc" role="dialog">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Thêm danh mục mới</h4>
+							</div>
+							<div class="modal-body">
+								<form class="form-horizontal" role="form">
+									<div class="form-group">
+										<label class="col-lg-3" for="ten-danh-muc" style="margin-top: 2px">Tên danh mục:</label>
+										<div class="col-lg-9">
+											<input type="text" class="expanded-input" id="ten-danh-muc">
 										</div>
-										<div class="form-group">
-											<div class="col-sm-12">
-												<button type="button" class="btn btn-default pull-right" style="margin-left: 20px" data-dismiss="modal">Đóng</button>
-												<button type="submit" class="btn btn-success pull-right">Xác nhận</button>
-											</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-12">
+											<button type="button" class="btn btn-default pull-right" style="margin-left: 20px" data-dismiss="modal">Đóng</button>
+											<button type="submit" class="btn btn-success pull-right">Xác nhận</button>
 										</div>
-									</form>
-								</div>
+									</div>
+								</form>
 							</div>
 						</div>
 					</div>
-
+				</div>
 			</div>
 
 		    <table class="table table-striped custab">
 			    <thead>
 			        <tr>
 			            <th class="text-center red-text-table">ID</th>
-			            <th>Tên danh mục</th>
+			            <th width="40%">Tên danh mục</th>
 			            <th>Số lượng món ăn</th>
 			        </tr>
 			    </thead>
@@ -128,22 +126,59 @@
 	                <td class="text-center red-text-table">1</td>
 	                <td><a href="#">Tên danh mục</a></td>
 	                <td>Số lượng món ăn</td>
-					<td width="20%"><a href="chi_tiet_danh_muc.html" class="btn btn-info">Xem danh sách món ăn</a></td>
+					<td width="25%">
+						<button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal-sua-danh-muc" data-tendanhmuc="tên danh mục">Sửa</button>
+						<a href="chi_tiet_danh_muc.html" class="btn btn-info">Xem danh sách món ăn</a>
+					</td>
 	            </tr>
 	            <tr>
 					<td class="text-center red-text-table">2</td>
 					<td><a href="#">Tên danh mục</a></td>
 					<td>Số lượng món ăn</td>
-					<td width="20%"><a href="chi_tiet_danh_muc.html" class="btn btn-info">Xem danh sách món ăn</a></td>
+					<td>
+						<button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal-sua-danh-muc" data-tendanhmuc="tên danh mục 2">Sửa</button>
+						<a href="chi_tiet_danh_muc.html" class="btn btn-info">Xem danh sách món ăn</a>
+					</td>
 				</tr>
 	            <tr>
 					<td class="text-center red-text-table">3</td>
 					<td><a href="#">Tên danh mục</a></td>
 					<td>Số lượng món ăn</td>
-					<td width="20%"><a href="chi_tiet_danh_muc.html" class="btn btn-info">Xem danh sách món ăn</a></td>
+					<td>
+						<button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal-sua-danh-muc" data-tendanhmuc="tên danh mục 3">Sửa</button>
+						<a href="chi_tiet_danh_muc.html" class="btn btn-info">Xem danh sách món ăn</a>
+					</td>
 					<!--      <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td> -->
 	            </tr>
 		    </table>
+
+
+			<div class="modal fade" id="modal-sua-danh-muc" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Sửa thông tin danh mục</h4>
+						</div>
+						<div class="modal-body">
+							<form class="form-horizontal" role="form">
+								<div class="form-group">
+									<label class="col-lg-3 control-label" for="ten-danh-muc-1">Tên danh mục:</label>
+									<div class="col-lg-9">
+										<input type="text" class="expanded-input" id="ten-danh-muc-1">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-12">
+										<button type="button" class="btn btn-default pull-right" style="margin-left: 20px" data-dismiss="modal">Đóng</button>
+										<button type="submit" class="btn btn-warning pull-right">Sửa thông tin</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	

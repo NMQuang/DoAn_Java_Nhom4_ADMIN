@@ -38,3 +38,10 @@ $(document).ready(function () {
         $('#'+$(this).val()).show();
     })
 });
+
+$('#modal-sua-danh-muc').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var data = button.data('tendanhmuc') ;
+    var modal = $(this);
+    modal.find('#ten-danh-muc-1').val(data)
+});

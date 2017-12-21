@@ -1,4 +1,5 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
@@ -13,7 +14,7 @@
     <div class="panel panel-info">
         <div class="panel-heading">
             Danh sách tất cả các món ăn
-            <a href="tao_mon_an_moi.html" class="btn btn-default pull-right fix"><b>+</b> Thêm món ăn mới</a>
+            <a href="<c:url value="/quanly/monan/themmonan"/>" class="btn btn-default pull-right fix"><b>+</b> Thêm món ăn mới</a>
         </div>
 
         <table class="table table-striped custab">
@@ -33,39 +34,13 @@
                 <td>don vi tinh</td>
                 <td>so luong ban</td>
                 <td width="5%">
-                    <a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
+                    <a href="<c:url value="/quanly/monan/1"/>" class="btn btn-info">Xem</a>
                 </td>
                 <td width="5%">
                     <a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
                 </td>
             </tr>
-            <tr>
-                <td class="text-center red-text-table">2</td>
-                <td>ten danh muc</td>
-                <td>ten san pham</td>
-                <td>don vi tinh</td>
-                <td>so luong ban</td>
-                <td width="5%">
-                    <a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
-                </td>
-                <td width="5%">
-                    <a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
-                </td>
-            </tr>
-            <tr>
-                <td class="text-center red-text-table">3</td>
-                <td>ten danh muc</td>
-                <td>ten san pham</td>
-                <td>don vi tinh</td>
-                <td>so luong ban</td>
-                <td width="5%">
-                    <a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
-                </td>
-                <td width="5%">
-                    <a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
-                </td>
-                <!--      <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td> -->
-            </tr>
+            
         </table>
     </div>
 </div>

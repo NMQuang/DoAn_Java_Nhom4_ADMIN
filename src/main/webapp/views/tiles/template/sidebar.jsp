@@ -1,5 +1,5 @@
 <%@page pageEncoding="UTF-8" contentType="text/html" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
     <div class="profile-sidebar">
         <div class="profile-userpic">
@@ -19,7 +19,7 @@
     </form>
     <ul class="nav menu">
         <li class="active"><a href="index.html"><em class="fa fa-bars">&nbsp;</em> Dashboard </a></li>
-        <li><a href="danh_sach_mon_an.html"><em class="fa fa-cutlery">&nbsp;</em> Danh sách món ăn  </a></li>
+        <li><a href="<c:url value="/quanly/monan"/>"><em class="fa fa-cutlery">&nbsp;</em> Danh sách món ăn  </a></li>
         <li><a href="danh_sach_danh_muc.html"><em class="fa fa-list-alt">&nbsp;</em> Danh mục món ăn</a></li>
         <li><a href="danh_sach_chi_nhanh.html"><em class="fa fa-globe">&nbsp;</em> Danh sách chi nhánh </a></li>
         <li class="parent "><a data-toggle="collapse" href="#sub-item-1">

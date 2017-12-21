@@ -1,10 +1,12 @@
 <%@page pageEncoding="UTF-8" contentType="text/html" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
         <ol class="breadcrumb">
-            <li><a href="index.html"><i class="fa fa-home"></i></a></li>
-            <li><a href="danh_sach_mon_an.html" style="text-decoration: none;">Danh sách món ăn</a></li>
+            <li><a href="<c:url value="/quanly"/>"><i class="fa fa-home"></i></a></li>
+            <li><a href="<c:url value="/quanly/monan"/>" style="text-decoration: none;">Danh sách món ăn</a></li>
             <li class="active">Tạo món ăn mới</li>
         </ol>
     </div><!--/.row-->
@@ -15,11 +17,12 @@
         </div>
         <div class="panel-body">
             <div class="row">
-                <form>
+                <form:form method="post" modelAttribute="mon" enctype="multipart/form-data">
                     <div class="col-lg-4">
-                        <img src="http://via.placeholder.com/350x220" class="img-mon-an" width="350px" height="220px"/>
-                        <div class="text-center">
-                            <input type="file"/>
+                        <img src="http://via.placeholder.com/350x220" id="img-upload" class="img-mon-an" width="350px" height="220px"/>
+                        <div class="">
+                            <input type="file" accept="image/*" name="hinhanh" id="upload"/>
+                            <form:errors path="hinhAnh" cssClass="my_error"/>      
                         </div>
                     </div>
                     <div class="col-lg-8">
@@ -27,24 +30,32 @@
                             <div class="form-group">
                                 <label class="control-label col-lg-3" for="food-name">Tên món ăn:</label>
                                 <div class="col-lg-9">
-                                    <input type="email" class="expanded-input" id="food-name">
+                                    <form:input type="text" class="expanded-input" id="food-name" path="ten"/>
+                                    <form:errors path="ten" cssClass="my_error"/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-lg-3" for="description">Mô tả:</label>
                                 <div class="col-lg-9">
-                                    <textarea class="expanded-input" id="description" rows="7"></textarea>
+                                    <form:textarea class="expanded-input" id="description" rows="5" path="moTa"/>
+									<form:errors path="moTa" cssClass="my_error"/>                                
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-3" for="food-name">Đơn vị:</label>
+                                <div class="col-lg-9">
+                                    <form:input type="text" class="expanded-input" id="food-name" path="donViTinh"/>
+                                    <form:errors path="donViTinh" cssClass="my_error"/>       
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-lg-3" for="description">Chọn danh mục:</label>
                                 <div class="col-lg-5">
-                                    <select id="danhmuc" class="expanded-input">
-                                        <option value="1">Đồ ăn rán</option>
-                                        <option value="2">Đồ ăn chiên</option>
-                                        <option value="3">Đồ ăn xào</option>
-                                        <option value="4">Đồ ăn luộc</option>
-                                    </select>
+                                    <form:select id="danhmuc" class="expanded-input" path="danhmuc.danhMucId">
+                                    	<form:option value="-1" label="--------- Select --------"></form:option>
+                                        <form:options items="${ADanhmuc}" itemValue="danhMucId" itemLabel="ten"/>
+                                    </form:select>
+                                    <form:errors path="danhmuc" cssClass="my_error"/>   
                                 </div>
                             </div>
                             <div class="form-group">
@@ -54,7 +65,7 @@
                             </div>
                         </div>
                     </div>
-                </form>
+                </form:form>
             </div>
         </div>
 

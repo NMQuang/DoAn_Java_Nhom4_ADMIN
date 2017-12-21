@@ -18,7 +18,7 @@
         </div>
     </form>
     <ul class="nav menu">
-        <li class="active"><a href="index.html"><em class="fa fa-bars">&nbsp;</em> Dashboard </a></li>
+        <li ><a href="<c:url value="/quanly/index"/>"><em class="fa fa-bars">&nbsp;</em> Dashboard </a></li>
         <li><a href="<c:url value="/quanly/monan"/>"><em class="fa fa-cutlery">&nbsp;</em> Danh sách món ăn  </a></li>
         <li><a href="danh_sach_danh_muc.html"><em class="fa fa-list-alt">&nbsp;</em> Danh mục món ăn</a></li>
         <li><a href="danh_sach_chi_nhanh.html"><em class="fa fa-globe">&nbsp;</em> Danh sách chi nhánh </a></li>

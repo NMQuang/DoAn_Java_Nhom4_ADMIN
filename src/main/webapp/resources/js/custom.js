@@ -28,3 +28,26 @@ $(document).on('click', '.panel-heading span.clickable', function(e){
 		$this.find('em').removeClass('fa-toggle-down').addClass('fa-toggle-up');
 	}
 })
+
+//upload file
+function readURL(input) {
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+
+		reader.onload = function(e) {
+			$('#img-upload').attr('src', e.target.result);
+
+		}
+
+		reader.readAsDataURL(input.files[0]);
+	}
+}
+
+$("#upload").change(function() {
+	readURL(this);
+	
+});
+////////////////////////////////////
+$('input, textarea').on('change keyup paste',function(){
+	$(this).siblings('.my_error').hide();
+})

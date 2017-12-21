@@ -51,3 +51,24 @@ $("#upload").change(function() {
 $('input, textarea').on('change keyup paste',function(){
 	$(this).siblings('.my_error').hide();
 })
+////////////////////////////////////
+$(function(){
+	var pathname = window.location.pathname;
+	$('.nav li').removeClass('active')
+	$('.nav li').each(function(index, value){
+		if(pathname.indexOf( $(value).find('a').attr('href')) >= 0){
+			$(value).addClass('active')
+		}
+			
+	})
+})
+
+
+
+
+
+
+
+
+
+

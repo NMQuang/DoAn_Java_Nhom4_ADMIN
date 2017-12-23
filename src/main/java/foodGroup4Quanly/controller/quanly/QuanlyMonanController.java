@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import foodGroup4Quanly.common.MonValidator;
+import foodGroup4Quanly.entity.Chinhanhmon;
 import foodGroup4Quanly.entity.Mon;
+import foodGroup4Quanly.service.ChiNhanhMonService;
 import foodGroup4Quanly.service.DanhMucService;
 import foodGroup4Quanly.service.FoodService;
 
@@ -40,6 +42,9 @@ public class QuanlyMonanController {
 	@Autowired
 	FoodService foodService;
 	
+	@Autowired
+	ChiNhanhMonService chiNhanhMonService;
+	
     @RequestMapping(value = "/monan", method = RequestMethod.GET)
     public String getListMonan(Model model) {
         return "quanly-list-mon-an";
@@ -47,6 +52,59 @@ public class QuanlyMonanController {
 
     @RequestMapping(value = "/monan/{idMonan}", method = RequestMethod.GET)
     public String getChitietMonan(Model model, @PathVariable("idMonan") int idMonan) {
+    	model.addAttribute("ADanhmuc", danhMucService.getAllDanhMuc());
+    	model.addAttribute("mon", foodService.getFood(idMonan));
+    	model.addAttribute("listchinhanh", chiNhanhMonService.getListChiNhanhMonByMon(idMonan));
+        return "quanly-chi-tiet-mon-an";
+    }
+    
+    @RequestMapping(value = "/monan/{idMonan}", method = RequestMethod.POST)
+    public String updateChitietMonan(Model model, @PathVariable("idMonan") int idMonan, @RequestParam("hinhanh") MultipartFile file, @ModelAttribute("mon")   Mon mon, BindingResult result) {
+    	Mon m = foodService.getFood(idMonan);
+    	if(!file.isEmpty()){
+    		try{
+    		byte[] bytes = file.getBytes();
+
+			// Creating the directory to store file
+			String uploadPath = context.getRealPath("") + File.separator
+					+ UPLOAD_DIRECTORY;
+			File dir = new File(uploadPath);
+
+			if (!dir.exists())
+				dir.mkdirs();
+
+			// Create the file on server
+			File serverFile = new File(dir.getAbsolutePath()
+					+ File.separator + file.getOriginalFilename());
+			BufferedOutputStream stream = new BufferedOutputStream(
+					new FileOutputStream(serverFile));
+			stream.write(bytes);
+			stream.close();
+
+			System.out.println("Server File Location="
+					+ serverFile.getAbsolutePath());
+			String filepath = "/" + UPLOAD_DIRECTORY + "/"
+					+ file.getOriginalFilename();
+			m.setHinhAnh(file.getOriginalFilename());
+    		}catch(Exception e){
+    			
+    		}
+    	}
+    	mon.setHinhAnh(m.getHinhAnh());
+    	monValidator.validate(mon, result);
+    	if(result.hasErrors()){
+    		model.addAttribute("ADanhmuc", danhMucService.getAllDanhMuc());
+    		return "quanly-chi-tiet-mon-an";
+    	}
+    	m.setDanhmuc(mon.getDanhmuc());
+    	m.setDonViTinh(mon.getDonViTinh());
+    	m.setMoTa(mon.getMoTa());
+    	m.setTen(mon.getTen());
+    	
+    	foodService.update(m);
+    	
+    	model.addAttribute("ADanhmuc", danhMucService.getAllDanhMuc());
+    	model.addAttribute("mon", foodService.getFood(idMonan));
         return "quanly-chi-tiet-mon-an";
     }
     

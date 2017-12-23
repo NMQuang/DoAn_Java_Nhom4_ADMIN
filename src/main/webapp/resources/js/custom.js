@@ -62,7 +62,14 @@ $(function(){
 			
 	})
 })
-
+/////////////////////////////////////
+$(function(){
+	$('._single_price').each(function(index, element){
+		var price = $(element).attr('price');
+		price = Number(parseFloat(price)).toLocaleString();
+		$(element).text(price)
+	})
+})
 
 
 

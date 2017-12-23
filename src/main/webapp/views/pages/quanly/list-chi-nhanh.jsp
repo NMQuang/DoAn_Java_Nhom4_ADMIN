@@ -1,4 +1,5 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
@@ -26,31 +27,17 @@
                 <th width="10%"></th>
             </tr>
             </thead>
+            <c:forEach items="${listChiNhanh}" var="branch">
             <tr>
                 <td class="text-center red-text-table">1</td>
-                <td><a href="#">Ten chi nhanh</a></td>
-                <td>Dia chi</td>
-                <td>01666xxxxxx</td>
-                <td>Hồ Chí Minh</td>
-                <td><a href="chi_tiet_chi_nhanh.html" class="btn btn-info pull-right">Xem thông tin</a></td>
+                <td><a href="#">${branch.ten}</a></td>
+                <td>${branch.diaChi}</td>
+                <td>${branch.dienThoai}</td>
+                <td>${branch.tinhthanh}</td>
+                <td><a href="${pageContext.request.contextPath}/chinhanh/${branch.chiNhanhId}" class="btn btn-info pull-right">Xem thông tin</a></td>
             </tr>
-            <tr>
-                <td class="text-center red-text-table">2</td>
-                <td><a href="#">Ten chi nhanh</a></td>
-                <td>Dia chi</td>
-                <td>01666xxxxxx</td>
-                <td>Hà Nội</td>
-                <td><a href="chi_tiet_chi_nhanh.html" class="btn btn-info pull-right">Xem thông tin</a></td>
-            </tr>
-            <tr>
-                <td class="text-center red-text-table">3</td>
-                <td><a href="#">Ten chi nhanh</a></td>
-                <td>Dia chi</td>
-                <td>01666xxxxxx</td>
-                <td>Đồng Nai</td>
-                <td><a href="chi_tiet_chi_nhanh.html" class="btn btn-info pull-right">Xem thông tin</a></td>
-                <!--      <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td> -->
-            </tr>
+            </c:forEach>
+
         </table>
     </div>
 </div>

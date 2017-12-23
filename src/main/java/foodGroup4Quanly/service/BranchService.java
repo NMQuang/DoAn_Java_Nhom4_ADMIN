@@ -1,13 +1,11 @@
-package foodGroup4Quanly.dao;
+package foodGroup4Quanly.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import foodGroup4Quanly.config.HibernateUtil;
 import foodGroup4Quanly.entity.Chinhanh;
 
-public interface BranchDao {
+public interface BranchService {
+
 
 	public List<Chinhanh> getListChiNhanh();
 

@@ -49,6 +49,12 @@ public class QuanlyMonanController {
     public String getChitietMonan(Model model, @PathVariable("idMonan") int idMonan) {
         return "quanly-chi-tiet-mon-an";
     }
+    
+    @RequestMapping(value = "/monan/delete/{idMonan}", method = RequestMethod.GET)
+    public String xoaMonAn(Model model, @PathVariable("idMonan") int idMonan) {
+    	foodService.delete(idMonan);
+        return "redirect:/quanly/monan";
+    }
 
     @RequestMapping(value = "/monan/themmonan", method = RequestMethod.GET)
     public String getThemMonan(Model model) {
@@ -58,7 +64,7 @@ public class QuanlyMonanController {
     }
 
     @RequestMapping(value = "/monan/themmonan", method = RequestMethod.POST)
-    public String postThemMonan(@RequestParam("hinhanh") MultipartFile file, @ModelAttribute("mon") @Valid  Mon mon, BindingResult result, Model model) {
+    public String postThemMonan(@RequestParam("hinhanh") MultipartFile file,@RequestParam String hinhanh_backup , @ModelAttribute("mon")   Mon mon, BindingResult result, Model model) {
     	if(!file.isEmpty()){
     		try{
     		byte[] bytes = file.getBytes();
@@ -87,6 +93,10 @@ public class QuanlyMonanController {
     		}catch(Exception e){
     			
     		}
+    	}
+    	System.out.println(hinhanh_backup + "--" + mon.getHinhAnh());
+    	if((hinhanh_backup != "" || hinhanh_backup != null) && mon.getHinhAnh() == null){
+    		mon.setHinhAnh(hinhanh_backup);
     	}
     	monValidator.validate(mon, result);
     	if(result.hasErrors()){

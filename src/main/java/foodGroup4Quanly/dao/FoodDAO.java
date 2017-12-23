@@ -5,4 +5,5 @@ import foodGroup4Quanly.entity.Mon;
 
 public interface FoodDAO {
    void save(Mon mon);
+   void delete(int id);
 }

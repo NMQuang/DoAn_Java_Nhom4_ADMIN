@@ -37,7 +37,7 @@
                     <a href="<c:url value="/quanly/monan/1"/>" class="btn btn-info">Xem</a>
                 </td>
                 <td width="5%">
-                    <a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
+                    <a href="<c:url value="/quanly/monan/delete/1"/>" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-danger">Xóa</a>
                 </td>
             </tr>
             

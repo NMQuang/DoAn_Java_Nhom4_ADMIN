@@ -1,5 +1,6 @@
 package foodGroup4Quanly.service;
 
+import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,4 +19,8 @@ public class FoodServiceImp implements FoodService{
 		foodDao.save(mon);
 	}
 	
+	@Override
+	public void delete(int id) {
+		foodDao.delete(id);
+	}
 }

@@ -21,6 +21,13 @@ public class FoodDAOImp extends HibernateUtil implements FoodDAO {
 		create(mon);
 	}
 
+	@Override
+	public void delete(int id) {
+		String hql = "update Mon set active = false where id = :id";
+		Query query = getSession().createQuery(hql).setParameter("id", id);
+		query.executeUpdate();
+	}
+
     
 }
 

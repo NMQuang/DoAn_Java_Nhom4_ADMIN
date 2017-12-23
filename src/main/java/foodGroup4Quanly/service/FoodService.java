@@ -4,4 +4,5 @@ import foodGroup4Quanly.entity.Mon;
 
 public interface FoodService {
 	void save(Mon mon);
+	void delete(int id);
 }

@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import foodGroup4Quanly.common.ChiNhanhValidator;
 import foodGroup4Quanly.entity.Chinhanh;
-import foodGroup4Quanly.entity.Mon;
 import foodGroup4Quanly.service.BranchService;
 import foodGroup4Quanly.service.TinhThanhService;
 
@@ -36,6 +36,9 @@ public class QuanlyChinhanhController {
 
 	@Autowired
 	public TinhThanhService tinhThanhService;
+
+	@Autowired
+	public ChiNhanhValidator chiNhanhValidator;
 
 	@RequestMapping(value = "/chinhanh", method = RequestMethod.GET)
 	public String getListChinhanh(Model model) {
@@ -63,7 +66,7 @@ public class QuanlyChinhanhController {
 	}
 
 	@RequestMapping(value = "/chinhanh/themchinhanh", method = RequestMethod.POST)
-	public String postThemChinhanh(@RequestParam("hinhanh") MultipartFile file, @ModelAttribute("chiNhanh") @Valid  Chinhanh chiNhanh, BindingResult result, Model mode) {
+	public String postThemChinhanh(@RequestParam("hinhanh") MultipartFile file, @RequestParam String hinhanh_backup, @ModelAttribute("chiNhanh") @Valid  Chinhanh chiNhanh, BindingResult result, Model model) {
 		if(!file.isEmpty()){
 	    		try{
 	    		byte[] bytes = file.getBytes();
@@ -93,6 +96,18 @@ public class QuanlyChinhanhController {
 
 	    		}
 	    	}
-		return "quanly-list-chi-nhanh";
+
+		System.out.println(hinhanh_backup + "--" + chiNhanh.getHinhAnh());
+	    	if((hinhanh_backup != "" || hinhanh_backup != null) && chiNhanh.getHinhAnh() == null){
+	    		chiNhanh.setHinhAnh(hinhanh_backup);
+	    	}
+
+	    //	chiNhanhValidator.validate(chiNhanh, result);
+	    	if(result.hasErrors()){
+	    		model.addAttribute("tinhThanh", tinhThanhService.getAllTinhThanh());
+	    		return "quanly-them-chi-nhanh";
+	    	}
+	    	branchService.saveChiNhanh(chiNhanh);
+		return "redirect:/quanly/chinhanh";
 	}
 }

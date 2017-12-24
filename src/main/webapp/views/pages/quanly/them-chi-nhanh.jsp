@@ -9,7 +9,7 @@
                 <em class="fa fa-home"></em>
             </a></li>
             <li>
-                <a href="danh_sach_chi_nhanh.html"> Danh sách chi nhánh </a> </li>
+                <a href="${pageContext.request.contextPath}/quanly/chinhanh""> Danh sách chi nhánh </a> </li>
             <li>Tạo chi nhánh mới </li>
         </ol>
     </div><!--/.row-->
@@ -48,7 +48,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 cn-label label-right">Điện thoại</label>
                         <div class="col-sm-9">
-                            <form:textarea class="expanded-input" path="diaChi" placeholder="Điện thoại" rows="3" style="resize: none"></form:textarea>
+                            <form:textarea class="expanded-input" path="dienThoai" placeholder="Điện thoại" rows="3" style="resize: none"></form:textarea>
                             <form:errors path="dienThoai" cssClass="my_error"/>
                         </div>
                     </div>
@@ -80,9 +80,10 @@
                     </div> -->
                     <div class="form-group">
 
-                    	<img src="http://via.placeholder.com/350x220" id="img-upload" class="img-mon-an" width="350px" height="220px"/>
+                    	<img src="<c:url value="${chiNhanh.hinhAnh == null ? 'http://via.placeholder.com/350x220' : '/resources/images/mon-an/'+= mon.hinhAnh} " />" id="img-upload" class="img-mon-an" width="350px" height="220px"/>
                         <div class="col-lg-5 cn-label label-right">
                             <input type="file" accept="image/*" name="hinhanh" id="upload"/>
+                            <input type="text" value="${chiNhanh.hinhAnh }" hidden name="hinhanh_backup"/>
                             <form:errors path="hinhAnh" cssClass="my_error"/>
                         </div>
                     </div>

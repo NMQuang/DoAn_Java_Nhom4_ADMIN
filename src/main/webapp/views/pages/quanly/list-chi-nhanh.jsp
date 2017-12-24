@@ -30,11 +30,11 @@
             <c:forEach items="${listChiNhanh}" var="branch">
             <tr>
                 <td class="text-center red-text-table">1</td>
-                <td><a href="#">${branch.ten}</a></td>
+                <td><a href="${pageContext.request.contextPath}/quanly/chinhanh/${branch.chiNhanhId}">${branch.ten}</a></td>
                 <td>${branch.diaChi}</td>
                 <td>${branch.dienThoai}</td>
-                <td>${branch.tinhthanh}</td>
-                <td><a href="${pageContext.request.contextPath}/chinhanh/${branch.chiNhanhId}" class="btn btn-info pull-right">Xem thông tin</a></td>
+                <td>${branch.tinhthanh.tenTinh}</td>
+                <td><a href="${pageContext.request.contextPath}/quanly/chinhanh/${branch.chiNhanhId}" class="btn btn-info pull-right">Xem thông tin</a></td>
             </tr>
             </c:forEach>
 

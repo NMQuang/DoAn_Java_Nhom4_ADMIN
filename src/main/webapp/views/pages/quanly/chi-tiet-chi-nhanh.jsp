@@ -7,7 +7,7 @@
                 <em class="fa fa-home"></em>
             </a></li>
             <li>
-                <a href="danh_sach_chi_nhanh.html"> Danh sách chi nhánh </a> </li>
+                <a href="${pageContext.request.contextPath}/quanly/chinhanh"> Danh sách chi nhánh </a> </li>
             <li>Chi nhánh 1</li>
         </ol>
     </div><!--/.row-->

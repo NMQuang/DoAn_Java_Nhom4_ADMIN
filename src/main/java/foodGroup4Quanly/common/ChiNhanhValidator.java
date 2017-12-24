@@ -34,32 +34,29 @@ public class ChiNhanhValidator implements Validator{
 		try {
 			Chinhanh chiNhanh = (Chinhanh) cn;
 
-			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "sdt", "NotEmpty");
-			if (khachHang.getSdt().length() < 10 || khachHang.getSdt().length() > 11) {
-				errors.rejectValue("sdt", "Size.customerForm.sdt");
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "ten", "NotEmpty");
+			if (chiNhanh.getTen().length() < 2 || chiNhanh.getTen().length() > 100) {
+				errors.rejectValue("ten", "Size.ten");
 			}
 //			if (userService.getUserByUsername(user.getUsername()) != null) {
 //				errors.rejectValue("username", "Duplicate.userForm.username");
 //			}
 
-			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty");
-			if (khachHang.getPassword().length() < 5 || khachHang.getPassword().length() > 45) {
-				errors.rejectValue("password", "Size.customerForm.password");
-			}
-			if (!khachHang.getRePassword().equals(khachHang.getPassword())) {
-				errors.rejectValue("rePassword", "Diff.customerForm.rePassword");
-			}
-
-			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "ten", "NotEmpty");
-			if (khachHang.getTen().length() < 5 || khachHang.getTen().length() > 50) {
-				errors.rejectValue("ten", "Size.customerForm.ten");
-			}
-
-//			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "gender", "NotEmpty");
-
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "diaChi", "NotEmpty");
-			if (khachHang.getDiaChi().length() < 5 || khachHang.getDiaChi().length() > 100) {
-				errors.rejectValue("diaChi", "Size.customerForm.diaChi");
+			if (chiNhanh.getDiaChi().length() < 2 || chiNhanh.getDiaChi().length() > 255) {
+				errors.rejectValue("diaChi", "Size.diaChi");
+			}
+
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dienThoai", "NotEmpty");
+			if (chiNhanh.getDienThoai().length() < 12 || chiNhanh.getDienThoai().length() > 9) {
+				errors.rejectValue("dienThoai", "Size.dienThoai");
+			}
+
+			if (chiNhanh.getTinhthanh() != null){
+				if (chiNhanhService.getInfoChiNhanh(chiNhanh.getTinhthanh().getTinhThanhId()) == null)
+					errors.rejectValue("tinhthanh", "Invalid.TinhThanh");
+			} else {
+				errors.rejectValue("tinhthanh", "NotEmpty");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

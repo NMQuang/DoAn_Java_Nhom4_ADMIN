@@ -11,4 +11,5 @@ public interface FoodService {
 	void update(Mon mon);
 	int getCountFood(boolean active);
 	List<Mon> getList(int maxResult, int begin, boolean active);
+	void active(int idMonan);
 }

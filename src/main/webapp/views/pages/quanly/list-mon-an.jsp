@@ -42,7 +42,14 @@
                     <a href="<c:url value="/quanly/monan/1"/>" class="btn btn-info">Xem</a>
                 </td>
                 <td width="5%">
-                    <a href="<c:url value="/quanly/monan/delete/${item.monId }"/>" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-danger">Xóa</a>
+                <c:choose>
+                	<c:when test="${type == 'deleted'}">
+					     <a href="<c:url value="/quanly/monan/active/${item.monId }"/>" class="btn btn-success">Thêm</a>
+					</c:when>
+					<c:otherwise>
+						 <a href="<c:url value="/quanly/monan/delete/${item.monId }"/>" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-danger">Xóa</a>
+					</c:otherwise>
+                </c:choose>
                 </td>
             </tr>
             </c:forEach>

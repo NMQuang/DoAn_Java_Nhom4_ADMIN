@@ -47,4 +47,10 @@ public class FoodServiceImp implements FoodService{
 	public List<Mon> getList(int maxResult, int begin, boolean active) {
 		return foodDao.getList(maxResult, begin, active);
 	}
+
+	@Override
+	public void active(int idMonan) {
+		foodDao.active(idMonan);
+		
+	}
 }

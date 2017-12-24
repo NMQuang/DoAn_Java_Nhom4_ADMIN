@@ -197,4 +197,10 @@ public class QuanlyMonanController {
     public String getThemMonanVaoDanhmuc(Model model) {
         return "quanly-them-mon-an-vao-danh-muc";
     }
+    
+    @RequestMapping(value = "/monan/active/{idMonan}", method = RequestMethod.GET)
+    public String activeMonAn(Model model, @PathVariable("idMonan") int idMonan) {
+    	foodService.active(idMonan);
+        return "redirect:/quanly/monan?type=deleted";
+    }
 }

@@ -1,5 +1,7 @@
 package foodGroup4Quanly.service;
 
+import java.util.List;
+
 import foodGroup4Quanly.entity.Mon;
 
 public interface FoodService {
@@ -7,4 +9,6 @@ public interface FoodService {
 	void delete(int id);
 	Mon getFood(int id);
 	void update(Mon mon);
+	int getCountFood(boolean active);
+	List<Mon> getList(int maxResult, int begin, boolean active);
 }

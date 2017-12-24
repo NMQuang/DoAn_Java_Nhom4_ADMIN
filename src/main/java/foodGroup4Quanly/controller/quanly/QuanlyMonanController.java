@@ -3,6 +3,7 @@ package foodGroup4Quanly.controller.quanly;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.validation.Valid;
@@ -46,7 +47,32 @@ public class QuanlyMonanController {
 	ChiNhanhMonService chiNhanhMonService;
 	
     @RequestMapping(value = "/monan", method = RequestMethod.GET)
-    public String getListMonan(Model model) {
+    public String getListMonan(Model model, @RequestParam(required=false) String type, @RequestParam(required= false) Integer index) {
+    	int begin; 
+		int id = 1;
+		if(index == null || index < 1)
+			begin = 0;
+		else
+			id = index;
+		begin = 12 * (id - 1);
+    	if("deleted".equals(type)){
+    		int count = foodService.getCountFood(false);
+    		int pages = count / 12 + (count %12 == 0 ? 0 : 1);
+    		List<Mon> dsMon = foodService.getList(12, begin, false);
+    		model.addAttribute("index", id);
+    		model.addAttribute("pages", pages);
+    		model.addAttribute("listmon", dsMon);
+    		model.addAttribute("type", type);
+    	}else{
+    		int count = foodService.getCountFood(true);
+    		int pages = count / 12 + (count %12 == 0 ? 0 : 1);
+    		List<Mon> dsMon = foodService.getList(12, begin, true);
+    		model.addAttribute("index", id);
+    		model.addAttribute("pages", pages);
+    		model.addAttribute("listmon", dsMon);
+    		model.addAttribute("type", type);
+    	}
+    	System.out.println(id);
         return "quanly-list-mon-an";
     }
 

@@ -13,7 +13,11 @@
 
     <div class="panel panel-info">
         <div class="panel-heading">
-            Danh sách tất cả các món ăn
+            Danh sách tất cả các món ăn 
+            <select class="" id="type_mon" style="background-color: #30a5ff" name="type">
+			    <option value="current">hiện hành</option>
+			    <option value="deleted"  ${ type == 'deleted' ? 'selected': ''}>đã xóa</option>
+			</select>
             <a href="<c:url value="/quanly/monan/themmonan"/>" class="btn btn-default pull-right fix"><b>+</b> Thêm món ăn mới</a>
         </div>
 
@@ -27,20 +31,27 @@
                 <th>Số lượng bán</th>
             </tr>
             </thead>
-            <tr>
-                <td class="text-center red-text-table">1</td>
-                <td>ten danh muc</td>
-                <td>ten san pham</td>
-                <td>don vi tinh</td>
-                <td>so luong ban</td>
+            <c:forEach items="${listmon }" var="item">
+            	<tr>
+                <td class="text-center red-text-table">${item.monId }</td>
+                <td>${item.danhmuc.ten }</td>
+                <td>${item.ten }</td>
+                <td>${item.donViTinh }</td>
+                <td>${item.soLuongDaBan }</td>
                 <td width="5%">
                     <a href="<c:url value="/quanly/monan/1"/>" class="btn btn-info">Xem</a>
                 </td>
                 <td width="5%">
-                    <a href="<c:url value="/quanly/monan/delete/1"/>" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-danger">Xóa</a>
+                    <a href="<c:url value="/quanly/monan/delete/${item.monId }"/>" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-danger">Xóa</a>
                 </td>
             </tr>
+            </c:forEach>
+            
             
         </table>
+        <div style="text-align: center">
+        <ul id="pagination-demo" data-index="${index }" data-pages="${pages }" class="pagination-md" ></ul>
+        </div>
+        
     </div>
 </div>

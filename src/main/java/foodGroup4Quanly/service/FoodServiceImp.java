@@ -1,5 +1,7 @@
 package foodGroup4Quanly.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,5 +36,15 @@ public class FoodServiceImp implements FoodService{
 	@Override
 	public void update(Mon mon) {
 		((HibernateUtil)foodDao).update(mon);
+	}
+
+	@Override
+	public int getCountFood(boolean active) {
+		return foodDao.getCountFood(active);
+	}
+
+	@Override
+	public List<Mon> getList(int maxResult, int begin, boolean active) {
+		return foodDao.getList(maxResult, begin, active);
 	}
 }

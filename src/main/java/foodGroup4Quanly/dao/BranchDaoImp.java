@@ -17,7 +17,7 @@ public class BranchDaoImp implements BranchDao {
 
 	@Override
 	public List<Chinhanh> getListChiNhanh() {
-		String hql = "from chinhanh";
+		String hql = "from Chinhanh";
 		Query query = hibernateUtil.getSession().createQuery(hql);
 	        return query.list();
 	}

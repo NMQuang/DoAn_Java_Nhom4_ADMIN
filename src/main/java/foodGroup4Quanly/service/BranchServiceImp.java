@@ -18,8 +18,10 @@ public class BranchServiceImp implements BranchService {
 
 	@Override
 	public List<Chinhanh> getListChiNhanh() {
-		if (branchDao.getListChiNhanh().size() > 0) {
-			return branchDao.getListChiNhanh();
+
+		List<Chinhanh> list = branchDao.getListChiNhanh();
+		if (list.size() > 0) {
+			return list;
 		} else {
 			return null;
 		}
@@ -33,8 +35,9 @@ public class BranchServiceImp implements BranchService {
 
 	@Override
 	public Chinhanh getInfoChiNhanh(int idChinhanh) {
-		if (branchDao.getInfoChiNhanh(idChinhanh) != null) {
-			return branchDao.getInfoChiNhanh(idChinhanh);
+		Chinhanh chinhanh = branchDao.getInfoChiNhanh(idChinhanh);
+		if ( chinhanh!= null) {
+			return chinhanh;
 		} else {
 			return null;
 		}

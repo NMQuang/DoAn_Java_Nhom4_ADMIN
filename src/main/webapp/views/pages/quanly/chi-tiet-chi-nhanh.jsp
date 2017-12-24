@@ -87,7 +87,7 @@
         </div>
 
         <div class="text-center">
-            <button type="submit" class="btn btn-lg btn-primary">Tạo chi nhánh mới</button>
+            <button type="submit" class= "btn btn-lg btn-primary">Tạo chi nhánh mới</button>
         </div>
         <br>
     </form>

@@ -13,7 +13,7 @@
 
     <div class="panel panel-info">
         <div class="panel-heading">
-            <a href="tao_chi_nhanh_moi.html" class="btn btn-default pull-right fix"><b>+</b> Thêm chi nhánh mới </a>
+            <a href="<c:url value="/quanly/chinhanh/themchinhanh"/>" class="btn btn-default pull-right fix"><b>+</b> Thêm chi nhánh mới </a>
         </div>
 
         <table class="table table-striped custab">

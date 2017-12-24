@@ -1389,15 +1389,11 @@ a:hover, a:visited, a:link, a:active
     color: #000000;
 }
 
-#input-search-header-bar {
+#input-table-search-header-bar, #input-food-search-header-bar {
     margin-top: 5px;
     height: 32px;
 }
 
-#input-search-header-bar:focus {
-
-}
-
-#btn-search-header-bar {
+#btn-table-search-header-bar, #btn-food-search-header-bar {
     height: 32px;
 }

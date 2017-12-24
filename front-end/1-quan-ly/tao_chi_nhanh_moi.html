@@ -94,55 +94,53 @@
 
 
     <form role="form" class="form-horizontal">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                Thông tin chi nhánh
-            </div>
-            <div class="panel-body">
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label class="col-sm-3 cn-label label-right">Tên</label>
-                        <div class="col-sm-9">
-                            <input class="expanded-input" type="text" placeholder="Tên" required>
-                        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Thông tin chi nhánh
                     </div>
+                    <div class="panel-body">
+                        <div class="col-lg-5">
+                            <div class="col-lg-4">
+                                <img src="http://via.placeholder.com/350x220" class="img-mon-an" width="350px" height="220px"/>
+                                <div class="text-center">
+                                    <input type="file"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="form-group">
+                                <label class="col-sm-3 cn-label label-right">Tên</label>
+                                <div class="col-sm-9">
+                                    <input class="expanded-input" type="text" placeholder="Tên" required>
+                                </div>
+                            </div>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 cn-label label-right">Địa chỉ</label>
-                        <div class="col-sm-9">
-                            <textarea class="expanded-input" placeholder="Địa chỉ" rows="3"
-                                      style="resize: none"></textarea>
-                        </div>
-                    </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 cn-label label-right">Địa chỉ</label>
+                                <div class="col-sm-9">
+                        <textarea class="expanded-input" placeholder="Địa chỉ" rows="3"
+                                  style="resize: none"></textarea>
+                                </div>
+                            </div>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 cn-label label-right">Điện thoại</label>
-                        <div class="col-sm-9">
-                            <input class="expanded-input" type="text" placeholder="Điện thoại" required>
-                        </div>
-                    </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 cn-label label-right">Điện thoại</label>
+                                <div class="col-sm-9">
+                                    <input class="expanded-input" type="text" placeholder="Điện thoại" required>
+                                </div>
+                            </div>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 cn-label label-right">Tỉnh thành</label>
-                        <div class="col-sm-9">
-                            <input class="expanded-input" type="text" placeholder="Tỉnh thành" required>
+                            <div class="form-group">
+                                <label class="col-sm-3 cn-label label-right">Tỉnh thành</label>
+                                <div class="col-sm-9">
+                                    <input class="expanded-input" type="text" placeholder="Tỉnh thành" required>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label class="col-sm-4 cn-label label-right">Số lượng bàn</label>
-                        <div class="col-sm-8">
-                            <input class="expanded-input" type="text" placeholder="Số lượng" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 cn-label label-right">Thông tin bàn</label>
-                        <div class="col-sm-8">
-                            <textarea class="expanded-input" placeholder="Thông tin" rows="3"
-                                      style="resize: none"></textarea>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -153,33 +151,100 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="col-lg-3">
-                            Menu của chi nhánh
+                            Thông tin bàn
                         </div>
                         <div class="col-lg-5">
                             <div class="input-group col-md-12">
-                                <input id="input-search-header-bar" type="text" class="form-control"
-                                       placeholder="Tên món ăn">
+                                <input id="input-table-search-header-bar" type="text" class="form-control"
+                                       placeholder="ID, thông tin bàn">
                                 <div class="input-group-btn">
-                                    <button id="btn-search-header-bar" class="btn btn-default fix" type="submit">
+                                    <button id="btn-table-search-header-bar" class="btn btn-default fix" type="button">
                                         <i class="fa fa-search" aria-hidden="true"></i>
                                     </button>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4">
-                            <a href="tao_menu_chi_nhanh.html" class="btn btn-primary fix pull-right">Thêm món ăn vào
-                                menu</a>
-                        </div>
+                        <a href="tao_menu_chi_nhanh.html" class="btn btn-primary fix pull-right">Thêm bàn mới</a>
                     </div>
                     <div class="panel-body">
+                        <table class="table table-striped custab" id="table-search-header-bar">
+                            <thead>
+                            <tr>
+                                <th width="5%" class="text-center red-text-table">ID</th>
+                                <th>Thông tin bàn</th>
+                                <th width="5%"></th>
+                                <th width="5%"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="modal-sua-ban" class="modal fade" role="dialog">
+                        <form>
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Sửa thông tin bàn</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <input class="expanded-input" type="text" id="table-change-info">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-success">Xác nhận</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="col-lg-3">
+                            Menu của chi nhánh
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="input-group col-md-12">
+                                <input id="input-food-search-header-bar" type="text" class="form-control input-search-header-bar"
+                                       placeholder="Tên món ăn">
+                                <div class="input-group-btn">
+                                    <button id="btn-food-search-header-bar" class="btn btn-default btn-search-header-bar fix" type="button">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="tao_menu_chi_nhanh.html" class="btn btn-primary fix pull-right">Thêm món ăn vào menu</a>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-striped custab" id="food-search-header-bar">
+                            <thead>
+                            <tr>
+                                <th class="text-center red-text-table">ID</th>
+                                <th>Danh mục</th>
+                                <th>Tên món ăn</th>
+                                <th width="10%" class="text-center">Giá tiền</th>
+                                <th width="10%">Đơn vị tính</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="text-center">
-            <button type="submit" class="btn btn-lg btn-primary">Tạo chi nhánh mới</button>
+            <button type="submit" class="btn btn-lg btn-primary">Tạo chi nhánh</button>
         </div>
         <br>
     </form>

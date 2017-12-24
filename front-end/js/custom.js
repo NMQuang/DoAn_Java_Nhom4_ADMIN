@@ -41,14 +41,40 @@ $(document).ready(function () {
 
 $('#modal-sua-danh-muc').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);
-    var data = button.data('tendanhmuc') ;
-    var modal = $(this);
-    modal.find('#ten-danh-muc-1').val(data)
+    var data = button.data('tendanhmuc');
+    $(this).find('#ten-danh-muc-1').val(data);
+});
+
+$('#modal-sua-ban').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var data = button.data('info');
+    $(this).find('#table-change-info').val(data);
 });
 
 
-$('#input-search-header-bar').keyup(function() {
+
+$('#input-food-search-header-bar').keyup(function() {
+    var $rows = $('#food-search-header-bar tbody tr');
+    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+
+    $rows.show().filter(function() {
+        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+        return !~text.indexOf(val);
+    }).hide();
+});
+
+$('#input-table-search-header-bar').keyup(function() {
     var $rows = $('#table-search-header-bar tbody tr');
+    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+
+    $rows.show().filter(function() {
+        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+        return !~text.indexOf(val);
+    }).hide();
+});
+
+$('#input-search-header-bar2').keyup(function() {
+    var $rows = $('#food-search-header-bar2 tbody tr');
     var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
 
     $rows.show().filter(function() {

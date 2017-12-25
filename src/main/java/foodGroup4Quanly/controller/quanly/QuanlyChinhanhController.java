@@ -194,6 +194,9 @@ public class QuanlyChinhanhController {
 	 * */
 	@RequestMapping(value = "/chinhanh-menu/{idChinhanh}", method = RequestMethod.GET)
 	public String getChitietMenuChinhanh(Model model, @PathVariable("idChinhanh") int idChinhanh) {
+
+		model.addAttribute("menu", chiNhanhMonService.getListChiNhanhMonByChiNhanh(idChinhanh));
+		model.addAttribute("branch", branchService.getInfoChiNhanh(idChinhanh));
 		return "quanly-chi-tiet-chi-nhanh-menu";
 	}
 }

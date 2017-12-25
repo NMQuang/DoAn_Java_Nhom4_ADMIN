@@ -10,7 +10,7 @@
             </a></li>
             <li>
                 <a href="danh_sach_chi_nhanh.html"> Danh sách chi nhánh </a></li>
-            <li>Chi nhánh 1</li>
+            <li><a href="${pageContext.request.contextPath}/quanly/chinhanh/${branch.chiNhanhId}">Chi nhánh ${branch.ten}</a></li>
         </ol>
     </div><!--/.row-->
 
@@ -47,72 +47,22 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td class="text-center red-text-table">1</td>
-                                <td>Đồ rán</td>
-                                <td>Gà rán nguyên con</td>
-                                <td><input class="expanded-input"></td>
-                                <td>don vi tinh</td>
-                                <td width="5%">
-                                    <a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
-                                </td>
-                                <td width="5%">
-                                    <a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center red-text-table">2</td>
-                                <td>Đồ chiên</td>
-                                <td>Vịt chiên nguyên con</td>
-                                <td><input class="expanded-input"></td>
-                                <td>don vi tinh</td>
-                                <td width="5%">
-                                    <a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
-                                </td>
-                                <td width="5%">
-                                    <a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center red-text-table">1</td>
-                                <td>Đồ rán</td>
-                                <td>Gà rán nguyên con</td>
-                                <td><input class="expanded-input"></td>
-                                <td>don vi tinh</td>
-                                <td width="5%">
-                                    <a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
-                                </td>
-                                <td width="5%">
-                                    <a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center red-text-table">3</td>
-                                <td>Đồ nướng</td>
-                                <td>Heo nướng nguyên con</td>
-                                <td><input class="expanded-input"></td>
-                                <td>don vi tinh</td>
-                                <td width="5%">
-                                    <a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
-                                </td>
-                                <td width="5%">
-                                    <a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
-                                </td>
-                                <!--      <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td> -->
-                            </tr>
-                            <tr>
-                                <td class="text-center red-text-table">1</td>
-                                <td>Đồ rán</td>
-                                <td>Gà rán nguyên con</td>
-                                <td><input class="expanded-input"></td>
-                                <td>don vi tinh</td>
-                                <td width="5%">
-                                    <a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
-                                </td>
-                                <td width="5%">
-                                    <a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
-                                </td>
-                            </tr>
+                            <c:forEach items="${menu}" var="item">
+                             <tr>
+                                 <td class="text-center red-text-table">1</td>
+
+                                 <td>${item.pk.mon.danhmuc.ten}</td>
+                                 <td>${item.pk.mon.ten}</td>
+                                 <td>${item.gia}</td>
+                                 <td>${item.pk.mon.donViTinh}</td>
+                                 <td width="5%">
+                                     <a href="" class="btn btn-info">Xem</a>
+                                 </td>
+                                 <td width="5%">
+                                     <a href="" class="btn btn-danger">Xóa</a>
+                                 </td>
+                             </tr>
+                            </c:forEach>
                             </tbody>
                         </table>
                     </div>
@@ -145,44 +95,12 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td class="text-center red-text-table">1</td>
-                                        <td>ten san pham</td>
-                                        <td>ten danh muc</td>
-                                        <td>don vi tinh</td>
-                                        <td>so luong</td>
-                                        <td width="5%">
-                                            <a href="" class="btn btn-info">Xem</a>
-                                        </td>
-                                        <td width="5%">
-                                            <a href="" class="btn btn-danger">Xóa</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center red-text-table">2</td>
-                                        <td>ten san pham</td>
-                                        <td>ten danh muc</td>
-                                        <td>don vi tinh</td>
-                                        <td>so luong </td>
-                                        <td width="5%">
-                                            <a href="" class="btn btn-info">Xem</a>
-                                        </td>
-                                        <td width="5%">
-                                            <a href="" class="btn btn-danger">Xóa</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center red-text-table">3</td>
-                                        <td>ten san pham</td>
-                                        <td>ten danh muc</td>
-                                        <td>don vi tinh</td>
-                                        <td>so luong </td>
-                                        <td width="5%">
-                                            <a href="" class="btn btn-info">Xem</a>
-                                        </td>
-                                        <td width="5%">
-                                            <a href="" class="btn btn-danger">Xóa</a>
-                                        </td>
+									<tr>
+                                        <th class="text-center red-text-table">ID</th>
+                                        <th>Tên món ăn</th>
+                                        <th>Danh mục</th>
+                                        <th>Đơn vị tính</th>
+                                        <th>Số lượng</th>
                                     </tr>
                                     </tbody>
                                 </table>

@@ -12,7 +12,7 @@
     <!--Custom Font-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <!--[if lt IE 9]>
-    <script src="../js/html5shiv.js"></script>
+    <script src="../js/html5shiv.min.js"></script>
     <script src="../js/respond.min.js"></script>
     <![endif]-->
 </head>
@@ -24,60 +24,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span></button>
-				<a class="navbar-brand" href="index.html"><span>MyFood</span>Manager</a>
-				<ul class="nav navbar-top-links navbar-right">
-					<li class="dropdown"><a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-						<em class="fa fa-envelope"></em><span class="label label-danger">15</span>
-					</a>
-						<ul class="dropdown-menu dropdown-messages">
-							<li>
-								<div class="dropdown-messages-box"><a href="profile.html" class="pull-left">
-									<img alt="image" class="img-circle" src="http://placehold.it/40/30a5ff/fff">
-									</a>
-									<div class="message-body"><small class="pull-right">3 mins ago</small>
-										<a href="#"><strong>John Doe</strong> commented on <strong>your photo</strong>.</a>
-									<br /><small class="text-muted">1:24 pm - 25/03/2015</small></div>
-								</div>
-							</li>
-							<li class="divider"></li>
-							<li>
-								<div class="dropdown-messages-box"><a href="profile.html" class="pull-left">
-									<img alt="image" class="img-circle" src="http://placehold.it/40/30a5ff/fff">
-									</a>
-									<div class="message-body"><small class="pull-right">1 hour ago</small>
-										<a href="#">New message from <strong>Jane Doe</strong>.</a>
-									<br /><small class="text-muted">12:27 pm - 25/03/2015</small></div>
-								</div>
-							</li>
-							<li class="divider"></li>
-							<li>
-								<div class="all-button"><a href="#">
-									<em class="fa fa-inbox"></em> <strong>All Messages</strong>
-								</a></div>
-							</li>
-						</ul>
-					</li>
-					<li class="dropdown"><a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-						<em class="fa fa-bell"></em><span class="label label-info">5</span>
-					</a>
-						<ul class="dropdown-menu dropdown-alerts">
-							<li><a href="#">
-								<div><em class="fa fa-envelope"></em> 1 New Message
-									<span class="pull-right text-muted small">3 mins ago</span></div>
-							</a></li>
-							<li class="divider"></li>
-							<li><a href="#">
-								<div><em class="fa fa-heart"></em> 12 New Likes
-									<span class="pull-right text-muted small">4 mins ago</span></div>
-							</a></li>
-							<li class="divider"></li>
-							<li><a href="#">
-								<div><em class="fa fa-user"></em> 5 New Followers
-									<span class="pull-right text-muted small">4 mins ago</span></div>
-							</a></li>
-						</ul>
-					</li>
-				</ul>
+				<a class="navbar-brand" href="tao-don-hang.html"><span>MyFood</span>Manager</a>
 			</div>
 		</div><!-- /.container-fluid -->
 	</nav>
@@ -94,10 +41,10 @@
 		</div>
 		<div class="divider"></div>
 		<ul class="nav menu">
-		    <li><a href="tao-don-hang.html.html"><em class="fa fa-list-alt">&nbsp;</em> Tạo đơn hàng mới </a></li>
-			<li><a href="danh_sach_mon_an.html"> <em class="fa fa-list-ul">&nbsp;</em> Danh sách đơn hàng </a></li>
-			<li><a href="chi-phi.html.html"><em class="fa fa-credit-card-alt">&nbsp;</em> Thông tin chi phí </a></li>
-			<li><a href="login.html"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+		    <li><a href="tao-don-hang.html"><em class="fa fa-list-alt">&nbsp;</em> Tạo đơn hàng mới </a></li>
+			<li><a href="danh-sach-don-hang.html"> <em class="fa fa-list-ul">&nbsp;</em> Danh sách đơn hàng </a></li>
+			<li><a href="chi-phi.html"><em class="fa fa-credit-card-alt">&nbsp;</em> Thông tin chi phí </a></li>
+			<li><a href="login.html"><em class="fa fa-power-off">&nbsp;</em> Đăng xuất</a></li>
 		</ul>
 	</div><!--/.sidebar-->
 
@@ -112,7 +59,7 @@
 		</div><!--/.row-->
 
         <div class="content">
-            <div class="row" style="margin: 15px 0px 0px 25px ;">
+            <div class="row" style="margin: 15px 0 0 25px ;">
                 <form class="form-horizontal">
                     <div class="form-group">
                         <label class="control-label col-lg-2">Chọn loại đơn hàng:</label>
@@ -128,221 +75,232 @@
 
             <div id="option-tai-quan" class="option-don-hang">
                 <form class="form-horizontal">
-                    <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Thông tin đơn hàng
-                    </div>
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <label class="col-sm-4 cn-label label-right">Khách hàng</label>
-                            <div class="col-sm-4">
-                                <input class="expanded-input" type="text" placeholder="Tên khách hàng" required>
-                            </div>
+                    <div class="row" style="display: flex;">
+                        <div class="col-lg-6" style="min-height: 400px;">
+                            <ul style="list-style-type: none">
+                                <li class="col-sm-2">
+                                    <div>
+                                        <img src="../images/table.png" class="img-responsive"/>
+                                    </div>
+                                </li>
+                                <li class="col-sm-2"><img src="../images/table.png" class="img-responsive"/></li>
+                                <li class="col-sm-2"><img src="../images/table.png" class="img-responsive"/></li>
+                                <li class="col-sm-2"><img src="../images/table.png" class="img-responsive"/></li>
+                                <li class="col-sm-2"><img src="../images/table.png" class="img-responsive"/></li>
+                                <li class="col-sm-2"><img src="../images/table.png" class="img-responsive"/></li>
+                                <li class="col-sm-2"><img src="../images/table.png" class="img-responsive"/></li>
+                            </ul>
                         </div>
-                    </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-lg-6">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     Menu của chi nhánh
-                                    <button id="btn-tai-quan" class="btn btn-primary fix" type="button"
-                                            data-toggle="modal" data-target="#modal-tai-quan">Thêm món ăn vào menu</button>
+                                    <button id="btn-tai-quan" class="btn btn-primary pull-right fix" type="button"
+                                            data-toggle="modal" data-target="#modal-tai-quan">Thêm món ăn vào đơn hàng</button>
                                 </div>
                                 <div class="modal fade" id="modal-tai-quan" role="dialog">
                                     <div class="modal-dialog modal-lg">
                                         <!-- Modal content-->
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                <h4 class="modal-title">Chọn món ăn vào đơn hàng</h4>
+                                                <div class="modal-title">
+                                                    <div class="input-group col-md-10 col-md-offset-1">
+                                                        <div class="input-group-btn">
+                                                            <div id="btn-search-header-bar" class="btn btn-default fix" style="margin-top: 5px; border: 1px solid #E5E5E5" >
+                                                                <i class="fa fa-search" aria-hidden="true"></i>
+                                                            </div>
+                                                        </div>
+                                                        <input id="input-search-header-bar" type="text" class="form-control" placeholder="Tìm kiếm món ăn">
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="modal-body">
-                                                <table class="table table-striped custab">
+                                                <table class="table table-striped custab" id="mon-an-search-header-bar">
                                                     <thead>
-                                                        <tr>
-                                                            <th class="text-center red-text-table">ID</th>
-                                                            <th>Tên món ăn</th>
-                                                            <th>Danh mục</th>
-                                                            <th>Đơn vị tính</th>
-                                                            <th>Số lượng</th>
-                                                        </tr>
+                                                    <tr>
+                                                        <th class="text-center red-text-table">ID</th>
+                                                        <th>Tên món ăn</th>
+                                                        <th>Danh mục</th>
+                                                        <th>Đơn vị tính</th>
+                                                        <th>Số lượng</th>
+                                                    </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td class="text-center red-text-table">1</td>
-                                                            <td>ten san pham</td>
-                                                            <td>ten danh muc</td>
-                                                            <td>don vi tinh</td>
-                                                            <td>so luong</td>
-                                                            <td width="5%">
-                                                                <a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
-                                                            </td>
-                                                            <td width="5%">
-                                                                <a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center red-text-table">2</td>
-                                                            <td>ten san pham</td>
-                                                            <td>ten danh muc</td>
-                                                            <td>don vi tinh</td>
-                                                            <td>so luong </td>
-                                                            <td width="5%">
-                                                                <a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
-                                                            </td>
-                                                            <td width="5%">
-                                                                <a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center red-text-table">3</td>
-                                                            <td>ten san pham</td>
-                                                            <td>ten danh muc</td>
-                                                            <td>don vi tinh</td>
-                                                            <td>so luong </td>
-                                                            <td width="5%">
-                                                                <a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
-                                                            </td>
-                                                            <td width="5%">
-                                                                <a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center red-text-table">3</td>
-                                                            <td>ten san pham</td>
-                                                            <td>ten danh muc</td>
-                                                            <td>don vi tinh</td>
-                                                            <td>so luong </td>
-                                                            <td width="5%">
-                                                                <a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
-                                                            </td>
-                                                            <td width="5%">
-                                                                <a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center red-text-table">3</td>
-                                                            <td>ten san pham</td>
-                                                            <td>ten danh muc</td>
-                                                            <td>don vi tinh</td>
-                                                            <td>so luong </td>
-                                                            <td width="5%">
-                                                                <a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
-                                                            </td>
-                                                            <td width="5%">
-                                                                <a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center red-text-table">3</td>
-                                                            <td>ten san pham</td>
-                                                            <td>ten danh muc</td>
-                                                            <td>don vi tinh</td>
-                                                            <td>so luong </td>
-                                                            <td width="5%">
-                                                                <a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
-                                                            </td>
-                                                            <td width="5%">
-                                                                <a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center red-text-table">3</td>
-                                                            <td>ten san pham</td>
-                                                            <td>ten danh muc</td>
-                                                            <td>don vi tinh</td>
-                                                            <td>so luong </td>
-                                                            <td width="5%">
-                                                                <a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
-                                                            </td>
-                                                            <td width="5%">
-                                                                <a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center red-text-table">3</td>
-                                                            <td>ten san pham</td>
-                                                            <td>ten danh muc</td>
-                                                            <td>don vi tinh</td>
-                                                            <td>so luong </td>
-                                                            <td width="5%">
-                                                                <a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
-                                                            </td>
-                                                            <td width="5%">
-                                                                <a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center red-text-table">3</td>
-                                                            <td>ten san pham</td>
-                                                            <td>ten danh muc</td>
-                                                            <td>don vi tinh</td>
-                                                            <td>so luong </td>
-                                                            <td width="5%">
-                                                                <a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
-                                                            </td>
-                                                            <td width="5%">
-                                                                <a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center red-text-table">3</td>
-                                                            <td>ten san pham</td>
-                                                            <td>ten danh muc</td>
-                                                            <td>don vi tinh</td>
-                                                            <td>so luong </td>
-                                                            <td width="5%">
-                                                                <a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
-                                                            </td>
-                                                            <td width="5%">
-                                                                <a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center red-text-table">3</td>
-                                                            <td>ten san pham</td>
-                                                            <td>ten danh muc</td>
-                                                            <td>don vi tinh</td>
-                                                            <td>so luong </td>
-                                                            <td width="5%">
-                                                                <a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
-                                                            </td>
-                                                            <td width="5%">
-                                                                <a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center red-text-table">3</td>
-                                                            <td>ten san pham</td>
-                                                            <td>ten danh muc</td>
-                                                            <td>don vi tinh</td>
-                                                            <td>so luong </td>
-                                                            <td width="5%">
-                                                                <a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
-                                                            </td>
-                                                            <td width="5%">
-                                                                <a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center red-text-table">3</td>
-                                                            <td>ten san pham</td>
-                                                            <td>ten danh muc</td>
-                                                            <td>don vi tinh</td>
-                                                            <td>so luong </td>
-                                                            <td width="5%">
-                                                                <a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
-                                                            </td>
-                                                            <td width="5%">
-                                                                <a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
-                                                            </td>
-                                                        </tr>
+                                                    <tr>
+                                                        <td class="text-center red-text-table">1</td>
+                                                        <td>ten san pham</td>
+                                                        <td>ten danh muc</td>
+                                                        <td>don vi tinh</td>
+                                                        <td>so luong</td>
+                                                        <td width="5%">
+                                                            <a href="" class="btn btn-info">Xem</a>
+                                                        </td>
+                                                        <td width="5%">
+                                                            <a href="" class="btn btn-danger">Xóa</a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center red-text-table">2</td>
+                                                        <td>ten san pham</td>
+                                                        <td>ten danh muc</td>
+                                                        <td>don vi tinh</td>
+                                                        <td>so luong </td>
+                                                        <td width="5%">
+                                                            <a href="" class="btn btn-info">Xem</a>
+                                                        </td>
+                                                        <td width="5%">
+                                                            <a href="" class="btn btn-danger">Xóa</a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center red-text-table">3</td>
+                                                        <td>ten san pham</td>
+                                                        <td>ten danh muc</td>
+                                                        <td>don vi tinh</td>
+                                                        <td>so luong </td>
+                                                        <td width="5%">
+                                                            <a href="" class="btn btn-info">Xem</a>
+                                                        </td>
+                                                        <td width="5%">
+                                                            <a href="" class="btn btn-danger">Xóa</a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center red-text-table">3</td>
+                                                        <td>ten san pham</td>
+                                                        <td>ten danh muc</td>
+                                                        <td>don vi tinh</td>
+                                                        <td>so luong </td>
+                                                        <td width="5%">
+                                                            <a href="" class="btn btn-info">Xem</a>
+                                                        </td>
+                                                        <td width="5%">
+                                                            <a href="" class="btn btn-danger">Xóa</a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center red-text-table">3</td>
+                                                        <td>ten san pham</td>
+                                                        <td>ten danh muc</td>
+                                                        <td>don vi tinh</td>
+                                                        <td>so luong </td>
+                                                        <td width="5%">
+                                                            <a href="" class="btn btn-info">Xem</a>
+                                                        </td>
+                                                        <td width="5%">
+                                                            <a href="" class="btn btn-danger">Xóa</a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center red-text-table">3</td>
+                                                        <td>ten san pham</td>
+                                                        <td>ten danh muc</td>
+                                                        <td>don vi tinh</td>
+                                                        <td>so luong </td>
+                                                        <td width="5%">
+                                                            <a href="" class="btn btn-info">Xem</a>
+                                                        </td>
+                                                        <td width="5%">
+                                                            <a href="" class="btn btn-danger">Xóa</a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center red-text-table">3</td>
+                                                        <td>ten san pham</td>
+                                                        <td>ten danh muc</td>
+                                                        <td>don vi tinh</td>
+                                                        <td>so luong </td>
+                                                        <td width="5%">
+                                                            <a href="" class="btn btn-info">Xem</a>
+                                                        </td>
+                                                        <td width="5%">
+                                                            <a href="" class="btn btn-danger">Xóa</a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center red-text-table">3</td>
+                                                        <td>ten san pham</td>
+                                                        <td>ten danh muc</td>
+                                                        <td>don vi tinh</td>
+                                                        <td>so luong </td>
+                                                        <td width="5%">
+                                                            <a href="" class="btn btn-info">Xem</a>
+                                                        </td>
+                                                        <td width="5%">
+                                                            <a href="" class="btn btn-danger">Xóa</a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center red-text-table">3</td>
+                                                        <td>ten san pham</td>
+                                                        <td>ten danh muc</td>
+                                                        <td>don vi tinh</td>
+                                                        <td>so luong </td>
+                                                        <td width="5%">
+                                                            <a href="" class="btn btn-info">Xem</a>
+                                                        </td>
+                                                        <td width="5%">
+                                                            <a href="" class="btn btn-danger">Xóa</a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center red-text-table">3</td>
+                                                        <td>ten san pham</td>
+                                                        <td>ten danh muc</td>
+                                                        <td>don vi tinh</td>
+                                                        <td>so luong </td>
+                                                        <td width="5%">
+                                                            <a href="" class="btn btn-info">Xem</a>
+                                                        </td>
+                                                        <td width="5%">
+                                                            <a href="" class="btn btn-danger">Xóa</a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center red-text-table">3</td>
+                                                        <td>ten san pham</td>
+                                                        <td>ten danh muc</td>
+                                                        <td>don vi tinh</td>
+                                                        <td>so luong </td>
+                                                        <td width="5%">
+                                                            <a href="" class="btn btn-info">Xem</a>
+                                                        </td>
+                                                        <td width="5%">
+                                                            <a href="" class="btn btn-danger">Xóa</a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center red-text-table">3</td>
+                                                        <td>ten san pham</td>
+                                                        <td>ten danh muc</td>
+                                                        <td>don vi tinh</td>
+                                                        <td>so luong </td>
+                                                        <td width="5%">
+                                                            <a href="" class="btn btn-info">Xem</a>
+                                                        </td>
+                                                        <td width="5%">
+                                                            <a href="" class="btn btn-danger">Xóa</a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center red-text-table">3</td>
+                                                        <td>ten san pham</td>
+                                                        <td>ten danh muc</td>
+                                                        <td>don vi tinh</td>
+                                                        <td>so luong </td>
+                                                        <td width="5%">
+                                                            <a href="" class="btn btn-info">Xem</a>
+                                                        </td>
+                                                        <td width="5%">
+                                                            <a href="" class="btn btn-danger">Xóa</a>
+                                                        </td>
+                                                    </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
                                             <div class="modal-footer">
+                                                <button type="submit" class="btn btn-success">Xác nhận</button>
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
                                             </div>
                                         </div>
@@ -351,6 +309,7 @@
                             </div>
                         </div>
                     </div>
+
 
                     <div class="text-center">
                         <button type="submit" class="btn btn-lg btn-primary">Tạo đơn hàng</button>

@@ -8,4 +8,6 @@ public interface ChiNhanhMonDAO {
 
 
 	List<Chinhanhmon> getListChiNhanhMon(int idMon);
+
+	List<Chinhanhmon> getListChiNhanhMonByChiNhanh(int idChiNhanh);
 }

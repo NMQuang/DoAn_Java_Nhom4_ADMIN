@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import foodGroup4Quanly.common.ChiNhanhValidator;
 import foodGroup4Quanly.entity.Chinhanh;
 import foodGroup4Quanly.service.BranchService;
+import foodGroup4Quanly.service.ChiNhanhMonService;
 import foodGroup4Quanly.service.TinhThanhService;
 
 @Controller
@@ -40,12 +41,21 @@ public class QuanlyChinhanhController {
 	@Autowired
 	public ChiNhanhValidator chiNhanhValidator;
 
+	@Autowired
+	public ChiNhanhMonService chiNhanhMonService;
+
+	/***
+	 * get danh sách tất cả các chi nhánh
+	 * */
 	@RequestMapping(value = "/chinhanh", method = RequestMethod.GET)
 	public String getListChinhanh(Model model) {
 		model.addAttribute("listChiNhanh", branchService.getListChiNhanh());
 		return "quanly-list-chi-nhanh";
 	}
 
+	/***
+	 * get thông tin chi tiết của 1 chi nhánh
+	 * */
 	@RequestMapping(value = "/chinhanh/{idChinhanh}", method = RequestMethod.GET)
 	public String getChitietChinhanh(Model model, @PathVariable("idChinhanh") int idChinhanh) {
 
@@ -53,11 +63,68 @@ public class QuanlyChinhanhController {
 			return "quanly-list-chi-nhanh";
 		} else {
 			Chinhanh chiNhanh = branchService.getInfoChiNhanh(idChinhanh);
-			model.addAttribute("branch",chiNhanh);
+			model.addAttribute("chiNhanh",chiNhanh);
+			model.addAttribute("tinhThanh", tinhThanhService.getAllTinhThanh());
 		}
 		return "quanly-chi-tiet-chi-nhanh";
 	}
 
+	/***
+	 * update 1 chi nhánh
+	 * */
+	@RequestMapping(value = "/chinhanh/{idChinhanh}", method = RequestMethod.POST)
+	    public String updateChitietMonan(Model model, @PathVariable("idChinhanh") int idChiNhanh, @RequestParam("hinhanh") MultipartFile file, @ModelAttribute("chiNhanh") Chinhanh chiNhanh, BindingResult result) {
+	    	Chinhanh cn = branchService.getInfoChiNhanh(idChiNhanh);
+	    	if(!file.isEmpty()){
+	    		try{
+	    		byte[] bytes = file.getBytes();
+
+				// Creating the directory to store file
+				String uploadPath = context.getRealPath("") + File.separator
+						+ UPLOAD_DIRECTORY;
+				File dir = new File(uploadPath);
+
+				if (!dir.exists()) {
+					dir.mkdirs();
+				}
+				// Create the file on server
+				File serverFile = new File(dir.getAbsolutePath()
+						+ File.separator + file.getOriginalFilename());
+				BufferedOutputStream stream = new BufferedOutputStream(
+						new FileOutputStream(serverFile));
+				stream.write(bytes);
+				stream.close();
+
+				System.out.println("Server File Location="
+						+ serverFile.getAbsolutePath());
+				String filepath = "/" + UPLOAD_DIRECTORY + "/"
+						+ file.getOriginalFilename();
+				cn.setHinhAnh(file.getOriginalFilename());
+	    		}catch(Exception e){
+
+	    		}
+	    	}
+	    	chiNhanh.setHinhAnh(cn.getHinhAnh());
+	    	chiNhanhValidator.validate(chiNhanh, result);
+	    	if(result.hasErrors()){
+	    		model.addAttribute("tinhThanh", tinhThanhService.getAllTinhThanh());
+	    		model.addAttribute("chiNhanh",chiNhanh);
+	    		return "quanly-chi-tiet-chi-nhanh";
+	    	}
+	    	cn.setTen(chiNhanh.getTen());
+	    	cn.setDiaChi(chiNhanh.getDiaChi());
+	    	cn.setDienThoai(chiNhanh.getDienThoai());
+	    	cn.setTinhthanh(chiNhanh.getTinhthanh());
+	    	branchService.update(cn);
+
+	    	model.addAttribute("tinhThanh", tinhThanhService.getAllTinhThanh());
+	    	model.addAttribute("chiNhanh", branchService.getInfoChiNhanh(idChiNhanh));
+	        return "quanly-chi-tiet-chi-nhanh";
+	    }
+
+	/***
+	 * thêm 1 chi nhánh
+	 * */
 	@RequestMapping(value = "chinhanh/themchinhanh", method = RequestMethod.GET)
 	public String getThemChinhanh(Model model) {
 		model.addAttribute("chiNhanh", new Chinhanh());
@@ -65,6 +132,9 @@ public class QuanlyChinhanhController {
 		return "quanly-them-chi-nhanh";
 	}
 
+	/***
+	 * thêm 1 chi nhánh
+	 * */
 	@RequestMapping(value = "/chinhanh/themchinhanh", method = RequestMethod.POST)
 	public String postThemChinhanh(@RequestParam("hinhanh") MultipartFile file, @RequestParam String hinhanh_backup, @ModelAttribute("chiNhanh") @Valid  Chinhanh chiNhanh, BindingResult result, Model model) {
 		if(!file.isEmpty()){
@@ -102,12 +172,28 @@ public class QuanlyChinhanhController {
 	    		chiNhanh.setHinhAnh(hinhanh_backup);
 	    	}
 
-	    //	chiNhanhValidator.validate(chiNhanh, result);
+	    	chiNhanhValidator.validate(chiNhanh, result);
 	    	if(result.hasErrors()){
 	    		model.addAttribute("tinhThanh", tinhThanhService.getAllTinhThanh());
 	    		return "quanly-them-chi-nhanh";
 	    	}
 	    	branchService.saveChiNhanh(chiNhanh);
 		return "redirect:/quanly/chinhanh";
+	}
+
+	/***
+	 * get thông tin chi tiết bàn của 1 chi nhánh
+	 * */
+	@RequestMapping(value = "/chinhanh-ban/{idChinhanh}", method = RequestMethod.GET)
+	public String getChitietBanChinhanh(Model model, @PathVariable("idChinhanh") int idChinhanh) {
+		return "quanly-chi-tiet-chi-nhanh-ban";
+	}
+
+	/***
+	 * get thông tin chi tiết bàn của 1 chi nhánh
+	 * */
+	@RequestMapping(value = "/chinhanh-menu/{idChinhanh}", method = RequestMethod.GET)
+	public String getChitietMenuChinhanh(Model model, @PathVariable("idChinhanh") int idChinhanh) {
+		return "quanly-chi-tiet-chi-nhanh-menu";
 	}
 }

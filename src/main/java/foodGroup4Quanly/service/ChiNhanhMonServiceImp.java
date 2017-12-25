@@ -21,4 +21,13 @@ public class ChiNhanhMonServiceImp implements ChiNhanhMonService{
 		return chiNhanhMonDAO.getListChiNhanhMon(idMon);
 	}
 
+	@Override
+	public List<Chinhanhmon> getListChiNhanhMonByChiNhanh(int idChiNhanh) {
+		List<Chinhanhmon> list = chiNhanhMonDAO.getListChiNhanhMonByChiNhanh(idChiNhanh);
+		if (list.size() > 0) {
+			return list;
+		}
+		return null;
+	}
+
 }

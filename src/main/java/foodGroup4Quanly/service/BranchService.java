@@ -12,4 +12,6 @@ public interface BranchService {
 	public void saveChiNhanh(Chinhanh chiNhanh);
 
 	public Chinhanh getInfoChiNhanh(int idChinhanh);
+
+	public void update(Chinhanh chiNhanh);
 }

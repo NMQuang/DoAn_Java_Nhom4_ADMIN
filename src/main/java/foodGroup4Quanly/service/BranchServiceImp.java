@@ -43,4 +43,9 @@ public class BranchServiceImp implements BranchService {
 		}
 	}
 
+	@Override
+	public void update(Chinhanh chiNhanh) {
+		branchDao.update(chiNhanh);
+	}
+
 }

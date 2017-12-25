@@ -48,7 +48,7 @@ public class ChiNhanhValidator implements Validator{
 			}
 
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dienThoai", "NotEmpty");
-			if (chiNhanh.getDienThoai().length() < 12 || chiNhanh.getDienThoai().length() > 9) {
+			if (chiNhanh.getDienThoai().length() < 9 || chiNhanh.getDienThoai().length() > 12) {
 				errors.rejectValue("dienThoai", "Size.dienThoai");
 			}
 

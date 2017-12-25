@@ -40,4 +40,10 @@ public class BranchDaoImp implements BranchDao {
 			return chiNhanh;
 		}
 	}
+
+	@Override
+	public void update(Chinhanh chiNhanh) {
+
+		hibernateUtil.update(chiNhanh);
+	}
 }

@@ -34,7 +34,19 @@
                 <td>${branch.diaChi}</td>
                 <td>${branch.dienThoai}</td>
                 <td>${branch.tinhthanh.tenTinh}</td>
-                <td><a href="${pageContext.request.contextPath}/quanly/chinhanh/${branch.chiNhanhId}" class="btn btn-info pull-right">Xem thông tin</a></td>
+                <td>
+                    <div class="dropdown pull-right" style="margin: 0">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                            <i class="fa fa-cogs" aria-hidden="true"></i>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a href="${pageContext.request.contextPath}/quanly/chinhanh/${branch.chiNhanhId}">Chỉnh sửa thông tin chi nhánh</a></li>
+                            <li><a href="${pageContext.request.contextPath}/quanly/chinhanh-ban/${branch.chiNhanhId}">Chỉnh sửa thông tin bàn </a></li>
+                            <li><a href="${pageContext.request.contextPath}/quanly/chinhanh-menu/${branch.chiNhanhId}">Chỉnh sửa menu</a></li>
+                        </ul>
+                    </div>
+                </td>
             </tr>
             </c:forEach>
 

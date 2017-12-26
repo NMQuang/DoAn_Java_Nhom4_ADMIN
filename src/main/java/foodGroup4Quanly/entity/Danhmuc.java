@@ -61,7 +61,7 @@ public class Danhmuc {
         return result;
     }
 
-    @OneToMany(mappedBy = "danhmuc")
+    @OneToMany(mappedBy = "danhmuc", fetch = FetchType.EAGER)
     public Set<Mon> getMons() {
         return mons;
     }

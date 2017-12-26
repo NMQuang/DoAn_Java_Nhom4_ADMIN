@@ -314,6 +314,7 @@
                         <!-- Modal content-->
                         <div class="modal-content">
                             <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" style="margin-top: 6px">&times;</button>
                                 <div class="modal-title">
                                     <div class="input-group col-md-10 col-md-offset-1">
                                         <div class="input-group-btn">
@@ -326,58 +327,65 @@
                                 </div>
                             </div>
                             <div class="modal-body">
-                                <table class="table table-striped custab" id="mon-an-search-header-bar">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center red-text-table">ID</th>
-                                            <th>Tên món ăn</th>
-                                            <th>Danh mục</th>
-                                            <th>Đơn vị tính</th>
-                                            <th>Số lượng</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="text-center red-text-table">1</td>
-                                            <td>ten san pham</td>
-                                            <td>ten danh muc</td>
-                                            <td>don vi tinh</td>
-                                            <td>so luong</td>
-                                            <td width="5%">
-                                                <a href="" class="btn btn-info">Xem</a>
-                                            </td>
-                                            <td width="5%">
-                                                <a href="" class="btn btn-danger">Xóa</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center red-text-table">2</td>
-                                            <td>ten san pham</td>
-                                            <td>ten danh muc</td>
-                                            <td>don vi tinh</td>
-                                            <td>so luong </td>
-                                            <td width="5%">
-                                                <a href="" class="btn btn-info">Xem</a>
-                                            </td>
-                                            <td width="5%">
-                                                <a href="" class="btn btn-danger">Xóa</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center red-text-table">3</td>
-                                            <td>ten san pham</td>
-                                            <td>ten danh muc</td>
-                                            <td>don vi tinh</td>
-                                            <td>so luong </td>
-                                            <td width="5%">
-                                                <a href="" class="btn btn-info">Xem</a>
-                                            </td>
-                                            <td width="5%">
-                                                <a href="" class="btn btn-danger">Xóa</a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <div class="row toggle" id="dropdown-detail-1" data-toggle="list-mon-an-1">
+                                            <div class="col-xs-10">
+                                                <strong>Đồ xào</strong>
+                                            </div>
+                                            <div class="col-xs-2"><i class="fa fa-chevron-down pull-right"></i></div>
+                                        </div>
+                                        <div id="list-mon-an-1" class="collapse">
+                                            <hr>
+                                            <div class="container">
+                                                <ul class="list-group">
+                                                    <li class="list-group-item col-lg-8">Gà xào nguyên con</li>
+                                                    <li class="list-group-item col-lg-8">Vịt xào nguyên con</li>
+                                                    <li class="list-group-item col-lg-8">Heo xào nguyên con</li>
+                                                    <li class="list-group-item col-lg-8">Bò xào nguyên con</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row toggle" id="dropdown-detail-2" data-toggle="list-mon-an-2">
+                                            <div class="col-xs-10">
+                                                <strong>Đồ chiên</strong>
+                                            </div>
+                                            <div class="col-xs-2"><i class="fa fa-chevron-down pull-right"></i></div>
+                                        </div>
+                                        <div id="list-mon-an-2" class="collapse">
+                                            <hr>
+                                            <div class="container">
+                                                <ul class="list-group">
+                                                    <li class="list-group-item col-lg-8">Gà chiên nguyên con</li>
+                                                    <li class="list-group-item col-lg-8">Vịt chiên nguyên con</li>
+                                                    <li class="list-group-item col-lg-8">Heo chiên nguyên con</li>
+                                                    <li class="list-group-item col-lg-8">Bò chiên nguyên con</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row toggle" id="dropdown-detail-3" data-toggle="list-mon-an-3">
+                                            <div class="col-xs-10">
+                                                <strong>Đồ nướng</strong>
+                                            </div>
+                                            <div class="col-xs-2"><i class="fa fa-chevron-down pull-right"></i></div>
+                                        </div>
+                                        <div id="list-mon-an-3" class="collapse">
+                                            <hr>
+                                            <div class="container">
+                                                <ul class="list-group">
+                                                    <li class="list-group-item col-lg-8">Gà nướng nguyên con</li>
+                                                    <li class="list-group-item col-lg-8">Vịt nướng nguyên con</li>
+                                                    <li class="list-group-item col-lg-8">Heo nướng nguyên con</li>
+                                                    <li class="list-group-item col-lg-8">Bò nướng nguyên con</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-success">Thêm món ăn đã chọn</button>

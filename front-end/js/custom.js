@@ -51,8 +51,6 @@ $('#modal-sua-ban').on('show.bs.modal', function (event) {
     $(this).find('#table-change-info').val(data);
 });
 
-
-
 $('#input-food-search-header-bar').keyup(function() {
     var $rows = $('#food-search-header-bar tbody tr');
     var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
@@ -83,9 +81,17 @@ $('#input-search-header-bar2').keyup(function() {
     }).hide();
 });
 
+$(document).ready(function() {
+    $('[id^=detail-]').hide();
+    $('.toggle').click(function() {
+        $input = $( this );
+        $target = $('#'+$input.attr('data-toggle'));
+        $target.slideToggle();
+    });
+});
 
-$(document).ready(function () {
-    $(".ul-toggle ul").click(function () {
-        $("table", this).toggle();
+$(function () {
+    $("div[id*='list-mon-an-']").on('click', '.list-group .list-group-item', function () {
+        $(this).toggleClass('active');
     });
 });

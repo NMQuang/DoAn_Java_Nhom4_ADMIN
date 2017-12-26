@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
-
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
         <ol class="breadcrumb">
@@ -10,39 +11,16 @@
             <li class="active">Danh mục món ăn</li>
         </ol>
     </div><!--/.row-->
-
+    <c:if test="${not empty createDmSuccess}">
+        <div class="alert alert-success notify">
+            <strong><spring:message code="danhmuc.create.success"/></strong>
+        </div>
+    </c:if>
     <div class="panel panel-info">
         <div class="panel-heading">
             Danh sách tất cả các danh mục
             <button type="button" class="btn btn-default pull-right fix"
                     data-toggle="modal" data-target="#modal-tao-danh-muc"><b>+</b> Thêm danh mục mới</button>
-
-            <div class="modal fade" id="modal-tao-danh-muc" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Thêm danh mục mới</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form class="form-horizontal" role="form">
-                                <div class="form-group">
-                                    <label class="col-lg-3" for="ten-danh-muc" style="margin-top: 2px">Tên danh mục:</label>
-                                    <div class="col-lg-9">
-                                        <input type="text" class="expanded-input" id="ten-danh-muc">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <button type="button" class="btn btn-default pull-right" style="margin-left: 20px" data-dismiss="modal">Đóng</button>
-                                        <button type="submit" class="btn btn-success pull-right">Xác nhận</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <table class="table table-striped custab">
@@ -70,6 +48,33 @@
             </c:forEach>
         </table>
 
+        <div class="modal fade" id="modal-tao-danh-muc" data-autoshow="${hasErrorCreateDm}" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Thêm danh mục mới</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form:form method="post" action="/quanly/danhmuc" modelAttribute="newDm" class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-lg-3" for="ten-danh-muc" style="margin-top: 2px">Tên danh mục:</label>
+                                <div class="col-lg-9">
+                                    <form:input type="text" class="expanded-input" path="ten" id="ten-danh-muc"/>
+                                    <form:errors path="ten" cssClass="error"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn btn-default pull-right" style="margin-left: 20px" data-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-info pull-right">Xác nhận</button>
+                                </div>
+                            </div>
+                        </form:form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="modal fade" id="modal-sua-danh-muc" role="dialog">
             <div class="modal-dialog">

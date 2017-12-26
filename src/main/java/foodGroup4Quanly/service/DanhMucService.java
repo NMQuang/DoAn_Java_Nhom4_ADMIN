@@ -9,4 +9,5 @@ public interface DanhMucService {
 
 	List<Danhmuc> getAllDanhMuc();
 	Danhmuc get(int id);
+	void create(Danhmuc dm);
 }

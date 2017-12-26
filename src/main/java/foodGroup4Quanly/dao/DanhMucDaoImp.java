@@ -19,4 +19,9 @@ public class DanhMucDaoImp extends HibernateUtil implements DanhMucDao{
         Query query = getSession().createQuery(hql);
         return query.list();
     }
+
+    @Override
+    public void create(Danhmuc dm) {
+        super.create(dm);
+    }
 }

@@ -53,20 +53,20 @@
                                                             class="icon pull-right"><em class="fa fa-plus"></em></span>
         </a>
             <ul class="children collapse" id="sub-item-1">
-                <li><a class="" href="#">
-                    <span class="fa fa-arrow-right"></span> Doanh thu
+                <li><a href="bao_cao_doanh_thu.html">
+                    <span class="fa fa-arrow-right">&nbsp;</span> Doanh thu
                 </a></li>
-                <li><a class="" href="#">
-                    <span class="fa fa-arrow-right"></span> Đơn hàng
+                <li><a href="bao_cao_don_hang.html">
+                    <span class="fa fa-arrow-right">&nbsp;</span> Đơn hàng
                 </a></li>
-                <li><a class="" href="#">
-                    <span class="fa fa-arrow-right"></span> Chi phí
+                <li><a href="bao_cao_chi_phi.html">
+                    <span class="fa fa-arrow-right">&nbsp;</span> Chi phí
                 </a></li>
-                <li><a class="" href="#">
-                    <span class="fa fa-arrow-right"></span> Món ăn
+                <li><a href="bao_cao_mon_an.html">
+                    <span class="fa fa-arrow-right">&nbsp;</span> Món ăn
                 </a></li>
-                <li><a class="" href="#">
-                    <span class="fa fa-arrow-right"></span> Khách hàng
+                <li><a href="bao_cao_khach_hang.html">
+                    <span class="fa fa-arrow-right">&nbsp;</span> Khách hàng
                 </a></li>
             </ul>
         </li>
@@ -194,8 +194,9 @@
                         <!-- Modal content-->
                         <div class="modal-content">
                             <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 <div class="modal-title">
-                                    <div class="input-group col-md-10 col-md-offset-1">
+                                    <div class="input-group col-md-9 col-md-offset-1">
                                         <div class="input-group-btn">
                                             <div id="btn-modal-search-food" class="btn btn-default fix" style="margin-top: 5px; border: 1px solid #E5E5E5" >
                                                 <i class="fa fa-search" aria-hidden="true"></i>
@@ -206,58 +207,66 @@
                                 </div>
                             </div>
                             <div class="modal-body">
-                                <table class="table table-striped custab" id="mon-an-search-header-bar">
-                                    <thead>
-                                    <tr>
-                                        <th class="text-center red-text-table">ID</th>
-                                        <th>Tên món ăn</th>
-                                        <th>Danh mục</th>
-                                        <th>Đơn vị tính</th>
-                                        <th>Số lượng</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td class="text-center red-text-table">1</td>
-                                        <td>ten san pham</td>
-                                        <td>ten danh muc</td>
-                                        <td>don vi tinh</td>
-                                        <td>so luong</td>
-                                        <td width="5%">
-                                            <a href="" class="btn btn-info">Xem</a>
-                                        </td>
-                                        <td width="5%">
-                                            <a href="" class="btn btn-danger">Xóa</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center red-text-table">2</td>
-                                        <td>ten san pham</td>
-                                        <td>ten danh muc</td>
-                                        <td>don vi tinh</td>
-                                        <td>so luong </td>
-                                        <td width="5%">
-                                            <a href="" class="btn btn-info">Xem</a>
-                                        </td>
-                                        <td width="5%">
-                                            <a href="" class="btn btn-danger">Xóa</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center red-text-table">3</td>
-                                        <td>ten san pham</td>
-                                        <td>ten danh muc</td>
-                                        <td>don vi tinh</td>
-                                        <td>so luong </td>
-                                        <td width="5%">
-                                            <a href="" class="btn btn-info">Xem</a>
-                                        </td>
-                                        <td width="5%">
-                                            <a href="" class="btn btn-danger">Xóa</a>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                <div class="ul-toggle">
+                                    <ul><a class="btn btn-default" href="#" style='text-decoration: none;'>Danh sách món ăn nướng</a>
+                                        <table class="table table-striped custab" id="mon-an-search-header-bar">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center red-text-table">ID</th>
+                                                <th>Tên món ăn</th>
+                                                <th>Danh mục</th>
+                                                <th>Đơn vị tính</th>
+                                                <th>Số lượng</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td class="text-center red-text-table">1</td>
+                                                <td>ten san pham</td>
+                                                <td>ten danh muc</td>
+                                                <td>don vi tinh</td>
+                                                <td>so luong</td>
+                                                <td width="5%">
+                                                    <a href="" class="btn btn-info">Xem</a>
+                                                </td>
+                                                <td width="5%">
+                                                    <a href="" class="btn btn-danger">Xóa</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center red-text-table">2</td>
+                                                <td>ten san pham</td>
+                                                <td>ten danh muc</td>
+                                                <td>don vi tinh</td>
+                                                <td>so luong </td>
+                                                <td width="5%">
+                                                    <a href="" class="btn btn-info">Xem</a>
+                                                </td>
+                                                <td width="5%">
+                                                    <a href="" class="btn btn-danger">Xóa</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center red-text-table">3</td>
+                                                <td>ten san pham</td>
+                                                <td>ten danh muc</td>
+                                                <td>don vi tinh</td>
+                                                <td>so luong </td>
+                                                <td width="5%">
+                                                    <a href="" class="btn btn-info">Xem</a>
+                                                </td>
+                                                <td width="5%">
+                                                    <a href="" class="btn btn-danger">Xóa</a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </ul>
+                                    <ul><a href="#" style='text-decoration: none;'>Danh sách món ăn xào</a>
+                                        <li>This is a paragraph.</li>
+                                    </ul>
+                                </div>
+
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-success">Thêm món ăn đã chọn</button>

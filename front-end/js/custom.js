@@ -82,3 +82,10 @@ $('#input-search-header-bar2').keyup(function() {
         return !~text.indexOf(val);
     }).hide();
 });
+
+
+$(document).ready(function () {
+    $(".ul-toggle ul").click(function () {
+        $("table", this).toggle();
+    });
+});

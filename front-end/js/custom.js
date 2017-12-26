@@ -95,3 +95,15 @@ $(function () {
         $(this).toggleClass('active');
     });
 });
+
+$(function(){
+    $('input[id="input-modal-search-food"]').keyup(function(){
+        var searchText = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+        $('ul.ul-search-mon-an > li').each(function(){
+            var currentLiText = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+                showCurrentLi = currentLiText.indexOf(searchText) !== -1;
+            $(this).toggle(showCurrentLi);
+        });
+    });
+});
+

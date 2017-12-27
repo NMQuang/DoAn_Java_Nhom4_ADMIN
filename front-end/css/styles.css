@@ -1394,7 +1394,7 @@ a:hover, a:visited, a:link, a:active
     height: 32px;
 }
 
-#btn-search-table-header-bar, #btn-search-food-header-bar, #btn-modal-search-food {
+#btn-search-table-header-bar, #btn-search-food-header-bar, #btn-modal-search-food, #input-modal-search-food-menu {
     margin-top: 2px;
     height: 32px;
 }

@@ -42,7 +42,7 @@ public class AccountAdminServiceDetail implements UserDetailsService{
 		roles.add(ac.getQuyen());
 		List<GrantedAuthority> grandList = new ArrayList<>();
 		for (String role : roles) {
-			GrantedAuthority authority = new SimpleGrantedAuthority(role);
+			GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + role);
 			grandList.add(authority);
 		}
 		

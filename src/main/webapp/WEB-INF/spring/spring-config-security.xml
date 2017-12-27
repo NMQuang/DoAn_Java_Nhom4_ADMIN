@@ -14,12 +14,14 @@
                                 http://www.springframework.org/schema/security/spring-security-4.2.xsd">
 
       <security:http auto-config="true" use-expressions="true">
-           <security:intercept-url pattern="/customer/**" access="isAuthenticated()"/>
-           <security:intercept-url pattern="/order/order-info" access="isAuthenticated()"/>
-          <security:intercept-url pattern="/order/history/**" access="isAuthenticated()"/>
+           <security:intercept-url pattern="/" access="isAuthenticated()"/>
+           <security:intercept-url pattern="/login" access="permitAll()"/>
+           <security:intercept-url pattern="/quanly/**" access="hasRole('QUANLY')"/>
+          <security:intercept-url pattern="/tongdai/**" access="hasRole('TONGDAI')"/>
+          <security:intercept-url pattern="/chinhanh/**" access="hasRole('CHINHANH')"/>
            <security:form-login 
            		login-page="/login" 
-           		default-target-url="/redirect_user" 
+           		default-target-url="/" 
            		authentication-failure-url="/login?error=true"
                 username-parameter="username"
                 password-parameter="password"
@@ -27,7 +29,7 @@
 
            	<security:csrf />
           <security:logout
-                  invalidate-session="false"
+                  invalidate-session="true"
                   logout-url="/logout"
                   logout-success-url="/login"
           />

@@ -17,4 +17,5 @@ public class QuanlyHomeController {
     public String getIndex(Model model) {
         return "quanly-index";
     }
+    
 }

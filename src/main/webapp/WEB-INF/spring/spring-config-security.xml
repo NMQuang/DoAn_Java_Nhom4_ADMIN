@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>   
+ <beans xmlns="http://www.springframework.org/schema/beans"   
+    xmlns:context="http://www.springframework.org/schema/context"   
+    xmlns:mvc="http://www.springframework.org/schema/mvc"   
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:security="http://www.springframework.org/schema/security"   
+    xsi:schemaLocation="http://www.springframework.org/schema/mvc   
+                              http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd  
+                                http://www.springframework.org/schema/beans  
+                                http://www.springframework.org/schema/beans/spring-beans-4.3.xsd  
+                                http://www.springframework.org/schema/context  
+                                http://www.springframework.org/schema/context/spring-context-4.3.xsd  
+                                http://www.springframework.org/schema/security   
+                                http://www.springframework.org/schema/security/spring-security-4.2.xsd">
+
+      <security:http auto-config="true" use-expressions="true">
+           <security:intercept-url pattern="/" access="isAuthenticated()"/>
+           <security:intercept-url pattern="/login" access="permitAll()"/>
+           <security:intercept-url pattern="/quanly/**" access="hasRole('QUANLY')"/>
+          <security:intercept-url pattern="/tongdai/**" access="hasRole('TONGDAI')"/>
+          <security:intercept-url pattern="/chinhanh/**" access="hasRole('CHINHANH')"/>
+           <security:form-login 
+           		login-page="/login" 
+           		default-target-url="/" 
+           		authentication-failure-url="/login?error=true"
+                username-parameter="username"
+                password-parameter="password"
+           />
+
+           	<security:csrf />
+          <security:logout
+                  invalidate-session="true"
+                  logout-url="/logout"
+                  logout-success-url="/login"
+          />
+
+          <security:remember-me
+                  key="rememberme-foodgroup"
+                  remember-me-parameter="remember-me"
+                  remember-me-cookie="rememberme-foodgroup"
+                  token-validity-seconds="86400"
+          />
+      </security:http>
+
+	<bean id="accountAdminDao" class="foodGroup4Quanly.dao.AccountAdminDaoImp">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+    <bean id="accountAdminServiceDetail" class="foodGroup4Quanly.service.AccountAdminServiceDetail">
+    	<property name="accountAdminDao" ref="accountAdminDao"></property>
+    </bean>
+
+    <security:authentication-manager>
+        <security:authentication-provider user-service-ref="accountAdminServiceDetail">
+           <security:password-encoder hash="bcrypt"/>
+        </security:authentication-provider> 
+      </security:authentication-manager>       
+ </beans>   

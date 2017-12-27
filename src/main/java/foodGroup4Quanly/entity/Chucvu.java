@@ -8,7 +8,7 @@ import java.util.Set;
 public class Chucvu {
     private int chucVuId;
     private String ten;
-    private int moTa;
+    private String moTa;
     private Set<Nhanvien> nhanviens;
 
     @Id
@@ -34,11 +34,11 @@ public class Chucvu {
 
     @Basic
     @Column(name = "MoTa")
-    public int getMoTa() {
+    public String getMoTa() {
         return moTa;
     }
 
-    public void setMoTa(int moTa) {
+    public void setMoTa(String moTa) {
         this.moTa = moTa;
     }
 
@@ -60,7 +60,7 @@ public class Chucvu {
     public int hashCode() {
         int result = chucVuId;
         result = 31 * result + (ten != null ? ten.hashCode() : 0);
-        result = 31 * result + moTa;
+        result = 31 * result + (moTa != null ? moTa.hashCode() : 0);
         return result;
     }
 

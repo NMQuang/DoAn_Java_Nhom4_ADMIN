@@ -51,7 +51,7 @@ $('#modal-sua-ban').on('show.bs.modal', function (event) {
     $(this).find('#table-change-info').val(data);
 });
 
-$('#input-food-search-header-bar').keyup(function() {
+$('#input-search-food-header-bar').keyup(function() {
     var $rows = $('#food-search-header-bar tbody tr');
     var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
 
@@ -61,7 +61,7 @@ $('#input-food-search-header-bar').keyup(function() {
     }).hide();
 });
 
-$('#input-table-search-header-bar').keyup(function() {
+$('#input-search-table-header-bar').keyup(function() {
     var $rows = $('#table-search-header-bar tbody tr');
     var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
 
@@ -71,15 +71,15 @@ $('#input-table-search-header-bar').keyup(function() {
     }).hide();
 });
 
-$('#input-search-header-bar2').keyup(function() {
-    var $rows = $('#food-search-header-bar2 tbody tr');
-    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
-
-    $rows.show().filter(function() {
-        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
-        return !~text.indexOf(val);
-    }).hide();
-});
+// $('#input-search-header-bar2').keyup(function() {
+//     var $rows = $('#food-search-header-bar2 tbody tr');
+//     var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+//
+//     $rows.show().filter(function() {
+//         var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+//         return !~text.indexOf(val);
+//     }).hide();
+// });
 
 $(document).ready(function() {
     $('[id^=detail-]').hide();
@@ -96,14 +96,14 @@ $(function () {
     });
 });
 
-$(function(){
-    $('input[id="input-modal-search-food"]').keyup(function(){
-        var searchText = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
-        $('ul.ul-search-mon-an > li').each(function(){
-            var currentLiText = $(this).text().replace(/\s+/g, ' ').toLowerCase();
-                showCurrentLi = currentLiText.indexOf(searchText) !== -1;
-            $(this).toggle(showCurrentLi);
-        });
+
+$("#input-modal-search-food-menu").keyup(function(){
+    var searchText = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+    $('ul.ul-search-mon-an > li').each(function(){
+        var currentLiText = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+            showCurrentLi = currentLiText.indexOf(searchText) !== -1;
+        $(this).toggle(showCurrentLi);
     });
 });
+
 

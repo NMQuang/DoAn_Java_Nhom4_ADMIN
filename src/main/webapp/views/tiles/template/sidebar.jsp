@@ -20,8 +20,8 @@
     <ul class="nav menu">
         <li ><a href="<c:url value="/quanly/index"/>"><em class="fa fa-bars">&nbsp;</em> Dashboard </a></li>
         <li><a href="<c:url value="/quanly/monan"/>"><em class="fa fa-cutlery">&nbsp;</em> Danh sách món ăn  </a></li>
-        <li><a href="danh_sach_danh_muc.html"><em class="fa fa-list-alt">&nbsp;</em> Danh mục món ăn</a></li>
-        <li><a href="danh_sach_chi_nhanh.html"><em class="fa fa-globe">&nbsp;</em> Danh sách chi nhánh </a></li>
+        <li><a href="<c:url value="/quanly/danhmuc"/>"><em class="fa fa-list-alt">&nbsp;</em> Danh mục món ăn</a></li>
+        <li><a href="<c:url value="/quanly/chinhanh"/>"><em class="fa fa-globe">&nbsp;</em> Danh sách chi nhánh </a></li>
         <li class="parent "><a data-toggle="collapse" href="#sub-item-1">
             <em class="fa fa-bar-chart">&nbsp;</em> Báo cáo <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
         </a>

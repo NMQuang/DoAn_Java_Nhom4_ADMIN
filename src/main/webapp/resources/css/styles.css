@@ -1372,3 +1372,11 @@ a:hover, a:visited, a:link, a:active
 {
     text-decoration: none;
 }
+
+div.notify {
+    margin-top: 10px;
+}
+
+span.error {
+    color: red;
+}

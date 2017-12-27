@@ -97,6 +97,13 @@ $(function(){
 	})
 })
 
+$(function () {
+	if($('#modal-tao-danh-muc').attr('data-autoshow')) {
+        $(window).on('load',function(){
+            $('#modal-tao-danh-muc').modal('show');
+        });
+	}
+})
 
 
 

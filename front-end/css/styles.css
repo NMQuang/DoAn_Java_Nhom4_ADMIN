@@ -1311,7 +1311,7 @@ select.expanded-input {
     width: 100%;
     height: 32px;
     border-radius: 3px;
-    border: 2px solid #ddd;
+    border: 2px solid #cccccc;
 }
 
 select.expanded-input:focus {
@@ -1334,11 +1334,11 @@ textarea.expanded-input:focus {
 
 div.date input {
     height: 32px;
-    border: 2px solid #ddd;
+    border: 2px solid #cccccc;
 }
 
 div.input-fix {
-    border: 2px solid #ddd;
+    border: 2px solid #cccccc;
 }
 
 .cn-label {
@@ -1417,6 +1417,10 @@ a:hover, a:visited, a:link, a:active
 .dropdown-check-list li {
     list-style-type: none;
     font-size: 14px;
+}
+
+.btn-dat-ban {
+    margin-bottom: 10px;
 }
 
 

@@ -59,9 +59,9 @@
 		</div><!--/.row-->
 
         <div class="content">
-            <div class="row" style="margin: 15px 0 0 25px ;">
+            <div class="row" style="margin: 15px 0 15px 0 ;">
                 <div class="form-group">
-                    <label class="control-label col-lg-2">Chọn loại đơn hàng:</label>
+                    <label class="control-label col-lg-2" style="margin-top: 7px">Chọn loại đơn hàng:</label>
                     <div class="col-lg-3">
                         <select id="option-don-hang" class="expanded-input">
                             <option value="option-tai-quan">Đơn hàng tại chỗ</option>
@@ -74,28 +74,75 @@
             <div id="option-tai-quan" class="option-don-hang">
                 <form class="form-horizontal">
                     <div class="row" style="display: flex;">
-                        <div class="col-lg-6" style="min-height: 400px;">
-                            <ul style="list-style-type: none">
-                                <li class="col-sm-2">
-                                    <div>
-                                        <img src="../images/table.png" class="img-responsive"/>
+                        <div class="col-lg-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    Danh sách bàn trong quán
+                                </div>
+                                <div class="panel-body" style="min-height: 400px;">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="btn-dat-ban">
+                                                <button><img src="../images/table.png" class="img-responsive"/> </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="btn-dat-ban">
+                                                <button><img src="../images/table.png" class="img-responsive"/> </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="btn-dat-ban">
+                                                <button><img src="../images/table.png" class="img-responsive"/> </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="btn-dat-ban">
+                                                <button><img src="../images/table.png" class="img-responsive"/> </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="btn-dat-ban">
+                                                <button><img src="../images/table.png" class="img-responsive"/> </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="btn-dat-ban">
+                                                <button><img src="../images/table.png" class="img-responsive"/> </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="btn-dat-ban">
+                                                <button><img src="../images/table.png" class="img-responsive"/> </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="btn-dat-ban">
+                                                <button><img src="../images/table.png" class="img-responsive"/> </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="btn-dat-ban">
+                                                <button><img src="../images/table.png" class="img-responsive"/> </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="btn-dat-ban">
+                                                <button><img src="../images/table.png" class="img-responsive"/> </button>
+                                            </div>
+                                        </div>
+
                                     </div>
-                                </li>
-                                <li class="col-sm-2"><img src="../images/table.png" class="img-responsive"/></li>
-                                <li class="col-sm-2"><img src="../images/table.png" class="img-responsive"/></li>
-                                <li class="col-sm-2"><img src="../images/table.png" class="img-responsive"/></li>
-                                <li class="col-sm-2"><img src="../images/table.png" class="img-responsive"/></li>
-                                <li class="col-sm-2"><img src="../images/table.png" class="img-responsive"/></li>
-                                <li class="col-sm-2"><img src="../images/table.png" class="img-responsive"/></li>
-                            </ul>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="col-lg-6">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     Menu của chi nhánh
-                                    <button id="btn-tai-quan" class="btn btn-primary pull-right fix" type="button"
-                                            data-toggle="modal" data-target="#modal-tai-quan">Thêm món ăn vào đơn hàng</button>
+                                </div>
+                                <div class="panel-body" style="min-height: 400px;">
                                 </div>
                                 <div class="modal fade" id="modal-tai-quan" role="dialog">
                                     <div class="modal-dialog modal-lg">
@@ -381,6 +428,9 @@
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/bootstrap-datepicker.js"></script>
 <script src="../js/custom.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
 </body>
 </html>

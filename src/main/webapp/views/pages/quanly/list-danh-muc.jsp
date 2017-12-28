@@ -21,6 +21,11 @@
             <strong><spring:message code="danhmuc.delete.success"/></strong>
         </div>
     </c:if>
+    <c:if test="${not empty activeDmSuccess}">
+        <div class="alert alert-success notify">
+            <strong><spring:message code="danhmuc.delete.activesuccess"/></strong>
+        </div>
+    </c:if>
     <div class="panel panel-info">
         <div class="panel-heading">
             Danh sách tất cả các danh mục
@@ -42,13 +47,23 @@
             <c:forEach items="${listDanhmuc}" var="danhmuc">
             <tr>
                 <td class="text-center red-text-table">${danhmuc.danhMucId}</td>
-                <td><a href="#">${danhmuc.ten}</a></td>
+                <td>
+                    <a href="#">${danhmuc.ten}</a>
+                    <c:if test="${!danhmuc.active}">
+                        <p><span class="error"><small>*Đã bị xóa</small></p>
+                    </c:if>
+                </td>
                 <td class="text-center">${danhmuc.mons.size()}</td>
                 <td>
                     <button class="btn btn-warning pull-right" type="button" data-toggle="modal" data-target="#modal-sua-danh-muc" data-tendanhmuc="tên danh mục">Sửa</button>
                 </td>
                 <td>
-                    <a href="<c:url value="/quanly/danhmuc/delete/${danhmuc.danhMucId}"/>" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-danger pull-right" >Xóa</a>
+                    <c:if test="${danhmuc.active}">
+                        <a href="<c:url value="/quanly/danhmuc/delete/${danhmuc.danhMucId}"/>" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-danger pull-right" >Xóa</a>
+                    </c:if>
+                    <c:if test="${!danhmuc.active}">
+                        <a href="<c:url value="/quanly/danhmuc/active/${danhmuc.danhMucId}"/>" onclick="return confirm('Bạn có chắc chắn muốn hồi phục')" class="btn btn-success pull-right" >Thêm</a>
+                    </c:if>
                 </td>
                 <td>
                     <a href="<c:url value="/quanly/danhmuc/${danhmuc.danhMucId}"/>" class="btn btn-info pull-right">Xem danh sách món ăn</a>

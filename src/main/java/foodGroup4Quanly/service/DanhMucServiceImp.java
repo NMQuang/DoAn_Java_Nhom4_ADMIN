@@ -22,6 +22,12 @@ public class DanhMucServiceImp implements DanhMucService{
 		//return ((HibernateUtil)danhMucDao).fetchAll("from Danhmuc where active is true");
 		return danhMucDao.getAllDanhmucs();
 	}
+
+	@Override
+	public List<Danhmuc> getAllDanhmucDontcareActive() {
+		return danhMucDao.getAllDanhmucDontcareActive();
+	}
+
 	@Override
 	public Danhmuc get(int id) {
 		return ((HibernateUtil)danhMucDao).fetchById(id, Danhmuc.class);
@@ -34,7 +40,12 @@ public class DanhMucServiceImp implements DanhMucService{
 
 	@Override
 	public void deactiveDanhmuc(int idDanhmuc) {
-		danhMucDao.deactiveDanhmuc(idDanhmuc);
+		danhMucDao.setActiveDm(idDanhmuc, false);
+	}
+
+	@Override
+	public void activeDanhmuc(int idDanhmuc) {
+		danhMucDao.setActiveDm(idDanhmuc, true);
 	}
 
 	@Override

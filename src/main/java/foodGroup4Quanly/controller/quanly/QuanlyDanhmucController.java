@@ -30,7 +30,7 @@ public class QuanlyDanhmucController {
 
     @RequestMapping(value = "/danhmuc", method = RequestMethod.GET)
     public String getListDanhmuc(Model model) {
-        model.addAttribute("listDanhmuc", danhMucService.getAllDanhMuc());
+        model.addAttribute("listDanhmuc", danhMucService.getAllDanhmucDontcareActive());
         model.addAttribute("newDm", new Danhmuc());
         return "quanly-list-danh-muc";
     }
@@ -77,15 +77,21 @@ public class QuanlyDanhmucController {
 
     @RequestMapping(value = "/danhmuc/delete/{idDanhmuc}", method = RequestMethod.GET)
     public String getDeleteDanhmuc(Model model,
-                                   HttpServletRequest request,
-                                   HttpServletResponse response,
                                    @PathVariable("idDanhmuc") int idDanhmuc,
-                                   RedirectAttributes redirectAttributes) throws ServletException, IOException {
+                                   RedirectAttributes redirectAttributes) {
         danhMucService.deactiveDanhmuc(idDanhmuc);
 
         redirectAttributes.addFlashAttribute("deleteDmSuccess", true);
         return "redirect:/quanly/danhmuc";
     }
 
+    @RequestMapping(value = "/danhmuc/active/{idDanhmuc}", method = RequestMethod.GET)
+    public String getActiveDanhmuc(Model model,
+                                   @PathVariable("idDanhmuc") int idDanhmuc,
+                                   RedirectAttributes redirectAttributes) {
+        danhMucService.activeDanhmuc(idDanhmuc);
 
+        redirectAttributes.addFlashAttribute("activeDmSuccess", true);
+        return "redirect:/quanly/danhmuc";
+    }
 }

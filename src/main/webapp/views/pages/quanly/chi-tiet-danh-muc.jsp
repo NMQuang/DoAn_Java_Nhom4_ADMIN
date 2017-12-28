@@ -53,7 +53,7 @@
             <c:set var="end" value="${begin + itemOnePage - 1}"/>
             <c:forEach items="${listMonByType}" var="mon" varStatus="status" begin="${begin}" end="${end}">
                 <tr>
-                    <td class="text-center red-text-table">1</td>
+                    <td class="text-center red-text-table">${mon.monId}</td>
                     <td>${mon.danhmuc.ten}</td>
                     <td>${mon.ten}</td>
                     <td>${mon.donViTinh}</td>

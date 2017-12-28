@@ -72,6 +72,7 @@ public class JasperExportUtils {
 			}
 	        SimpleXlsxReportConfiguration xlsxReportConfiguration = new SimpleXlsxReportConfiguration();
 	        xlsxReportConfiguration.setOnePagePerSheet(false);
+	        xlsxReportConfiguration.setShrinkToFit(true);
 	        xlsxReportConfiguration.setRemoveEmptySpaceBetweenRows(true);
 	        xlsxReportConfiguration.setDetectCellType(false);
 	        xlsxReportConfiguration.setWhitePageBackground(false);

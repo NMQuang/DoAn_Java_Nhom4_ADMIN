@@ -3,6 +3,7 @@ package foodGroup4Quanly.controller.quanly;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -97,7 +98,19 @@ public class ReportController {
 			data = thongKeService.thongkeTongDoanhThuNgay(ngay);
 			break;
 		case "option-tuan":
-			parameters.put("type", "Theo tuần");
+			if(tuan == null)
+				throw  new MyBadRequestException("/quanly/baocao/tongdoanhthu?error=");
+			Calendar c = Calendar.getInstance();
+			c.setTime(tuan);
+			int dow = c.get(Calendar.DAY_OF_WEEK);
+			if(dow == Calendar.SUNDAY)
+				dow = 8;
+			c.add(Calendar.DATE, 2 - dow);
+			data = thongKeService.thongkeTongDoanhThuTuan(c.getTime());
+			Date begin = c.getTime();
+			c.add(Calendar.DATE, 7);
+			Date end = c.getTime();
+			parameters.put("type", "Tuần: " + dateFormat.format(begin) + " đến " + dateFormat.format(end));
 			break;
 		default:
 			break;

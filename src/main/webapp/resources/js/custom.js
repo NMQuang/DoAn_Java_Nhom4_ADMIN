@@ -97,6 +97,44 @@ $(function(){
 	})
 })
 
+$(function () {
+	if($('#modal-tao-danh-muc').attr('data-autoshow')) {
+        $(window).on('load',function(){
+            $('#modal-tao-danh-muc').modal('show');
+        });
+	}
+})
+/////////////////////////////////////
+//  Change option
+$(document).ready(function () {
+    $('.option-thong-ke').hide();
+    $('#option-ngay').show();
+    $('#option-thong-ke').change(function () {
+        $('.option-thong-ke').hide();
+        $('#'+$(this).val()).show();
+    })
+});
+
+$('[data-provide="datepicker"]').datepicker({
+    format: 'dd-mm-yyyy',
+    endDate: new Date(),
+    "autoclose": true
+});
+
+$('[data-provide="datepicker-month"]').datepicker({
+    format: 'mm-yyyy',
+    minViewMode: 1,
+    endDate: new Date(),
+    "autoclose": true
+});
+
+$('[data-provide="datepicker-year"]').datepicker({
+    format: 'yyyy',
+    minViewMode: 2,
+    endDate: new Date(),
+    "autoclose": true
+});
+
 
 
 

@@ -26,5 +26,10 @@ public class DanhMucServiceImp implements DanhMucService{
 		return ((HibernateUtil)danhMucDao).fetchById(id, Danhmuc.class);
 	}
 
-	
+	@Override
+	public void create(Danhmuc dm) {
+		danhMucDao.create(dm);
+	}
+
+
 }

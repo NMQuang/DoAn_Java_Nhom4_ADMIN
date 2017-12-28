@@ -64,7 +64,7 @@ public class QuanlyDanhmucController {
                                   RedirectAttributes redirectAttributes) {
         danhmucValidator.validate(newDm, bindingResult);
         if(bindingResult.hasErrors()) {
-            model.addAttribute("listDanhmuc", danhMucService.getAllDanhMuc());
+            model.addAttribute("listDanhmuc", danhMucService.getAllDanhmucDontcareActive());
             model.addAttribute("hasErrorCreateDm", true);
             return "quanly-list-danh-muc";
         }

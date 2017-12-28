@@ -23,7 +23,10 @@ public class DanhMucDaoImp extends HibernateUtil implements DanhMucDao{
 
     @Override
     public List<Danhmuc> getAllDanhmucDontcareActive() {
-        return super.fetchAll(Danhmuc.class);
+        //language=HQL
+        String hql = "from Danhmuc DM order by DM.active desc, DM.danhMucId";
+        Query query = getSession().createQuery(hql);
+        return query.list();
     }
 
     @Override

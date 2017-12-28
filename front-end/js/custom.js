@@ -106,33 +106,4 @@ $("#input-modal-search-food-menu").keyup(function(){
     });
 });
 
-//  Change option
-$(document).ready(function () {
-    $('.option-thong-ke').hide();
-    $('#option-ngay').show();
-    $('#option-thong-ke').change(function () {
-        $('.option-thong-ke').hide();
-        $('#'+$(this).val()).show();
-    })
-});
-
-$('[data-provide="datepicker"]').datepicker({
-    format: 'dd-mm-yyyy',
-    endDate: new Date(),
-    "autoclose": true
-});
-
-$('[data-provide="datepicker-month"]').datepicker({
-    format: 'mm-yyyy',
-    minViewMode: 1,
-    endDate: new Date(),
-    "autoclose": true
-});
-
-$('[data-provide="datepicker-year"]').datepicker({
-    format: 'yyyy',
-    minViewMode: 2,
-    endDate: new Date(),
-    "autoclose": true
-});
 

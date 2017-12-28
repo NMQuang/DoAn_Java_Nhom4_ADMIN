@@ -63,8 +63,8 @@ public class ThongKeServiceImp implements ThongKeService {
 			c.setTime(listhd.get(i).getNgay());
 			int day = c.get(Calendar.DAY_OF_WEEK);
 			if(day == Calendar.SUNDAY){
-				long previous = (long) kq.get(7).get("value");
-				kq.get(7).put("value", previous + listhd.get(i).getTongTien());
+				long previous = (long) kq.get(6).get("value");
+				kq.get(6).put("value", previous + listhd.get(i).getTongTien());
 			}else{
 				long previous = (long) kq.get(day - 2).get("value");
 				kq.get(day - 2).put("value", previous + listhd.get(i).getTongTien());
@@ -73,5 +73,40 @@ public class ThongKeServiceImp implements ThongKeService {
 		}
 		
 		return kq;
+	}
+
+	@Override
+	public List<Map<String, Object>> thongkeTongDoanhThuThang(Date begin) {
+		List<Map<String, Object>> kq = new ArrayList<Map<String,Object>>();
+		Calendar c = Calendar.getInstance();
+		c.setTime(begin);
+		for (int i = 1; i <= c.getActualMaximum(Calendar.DAY_OF_MONTH); i++) {
+			Map<String, Object> record = new HashMap<>();
+			record.put("unit", i/10 + ""+ i%10 + "/" + (c.get(Calendar.MONTH) + 1) + "/" + c.get(Calendar.YEAR));
+			record.put("value", 0l);
+			kq.add(record);
+		}
+		c.add(Calendar.MONTH, 1);
+		List<Hoadon> listhd = hoaDonDao.getListIn(begin, c.getTime());
+		for (int i = 0; i < listhd.size(); i++) {
+			c.setTime(listhd.get(i).getNgay());
+			int day = c.get(Calendar.DAY_OF_MONTH);
+			long previous = (long) kq.get(day - 1).get("value");
+			kq.get(day - 1).put("value", previous + listhd.get(i).getTongTien());
+			
+		}
+		return kq;
+	}
+
+	@Override
+	public List<Map<String, Object>> thongkeTongDoanhThuQuy(Date begin) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Map<String, Object>> thongkeTongDoanhThuNam(Date begin) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

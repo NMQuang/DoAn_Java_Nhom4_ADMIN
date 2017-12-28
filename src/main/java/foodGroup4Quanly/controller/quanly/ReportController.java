@@ -97,7 +97,7 @@ public class ReportController {
 			parameters.put("type", "Ngày: " + dateFormat.format(ngay));
 			data = thongKeService.thongkeTongDoanhThuNgay(ngay);
 			break;
-		case "option-tuan":
+		case "option-tuan":{
 			if(tuan == null)
 				throw  new MyBadRequestException("/quanly/baocao/tongdoanhthu?error=");
 			Calendar c = Calendar.getInstance();
@@ -108,10 +108,25 @@ public class ReportController {
 			c.add(Calendar.DATE, 2 - dow);
 			data = thongKeService.thongkeTongDoanhThuTuan(c.getTime());
 			Date begin = c.getTime();
-			c.add(Calendar.DATE, 7);
+			c.add(Calendar.DATE, 6);
+			System.out.println(c.getTime());
 			Date end = c.getTime();
 			parameters.put("type", "Tuần: " + dateFormat.format(begin) + " đến " + dateFormat.format(end));
 			break;
+		}
+		case "option-thang":{
+			if(thang == null)
+				throw  new MyBadRequestException("/quanly/baocao/tongdoanhthu?error=");
+			Calendar c = Calendar.getInstance();
+			c.setTime(thang);
+			data = thongKeService.thongkeTongDoanhThuThang(thang);
+			Date begin = c.getTime();
+			c.add(Calendar.DATE, c.getActualMaximum(Calendar.DAY_OF_MONTH) - 1);
+			System.out.println(c.getTime());
+			Date end = c.getTime();
+			parameters.put("type", "Tháng: " + dateFormat.format(begin) + " đến " + dateFormat.format(end));
+			break;
+		}
 		default:
 			break;
 		}

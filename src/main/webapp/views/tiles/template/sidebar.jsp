@@ -26,8 +26,11 @@
             <em class="fa fa-bar-chart">&nbsp;</em> Báo cáo <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
         </a>
             <ul class="children collapse" id="sub-item-1">
-                <li><a class="" href="#">
-                    <span class="fa fa-arrow-right">&nbsp;</span> Doanh thu
+                <li><a class="" href="<c:url value="/quanly/baocao/tongdoanhthu"/>">
+                    <span class="fa fa-arrow-right">&nbsp;</span> Doanh thu tổng
+                </a></li>
+                 <li><a class="" href="<c:url value="/quanly/baocao/tongdoanhthuchinhanh"/>">
+                    <span class="fa fa-arrow-right">&nbsp;</span> Doanh thu chi nhánh
                 </a></li>
                 <li><a class="" href="#">
                     <span class="fa fa-arrow-right">&nbsp;</span> Đơn hàng

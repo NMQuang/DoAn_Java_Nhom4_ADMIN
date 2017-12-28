@@ -5,7 +5,6 @@
 <tiles-definitions>
 	<definition name="login-page" template="/views/tiles/layouts/Login.jsp"></definition>
 	
-	
     <definition name="base-definition"
                 template="/views/tiles/layouts/defaultLayout.jsp">
         <put-attribute name="navigation" value="/views/tiles/template/navigation.jsp" />
@@ -69,5 +68,9 @@
         <put-attribute name="content" value="/views/pages/quanly/them-mon-an-vao-danh-muc.jsp" />
     </definition>
 
+	<definition name="quanly-tong-danh-thu" extends="base-definition">
+        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="content" value="/views/pages/quanly/tong-danh-thu.jsp" />
+    </definition>
     <!-- /QUAN LY -->
 </tiles-definitions>

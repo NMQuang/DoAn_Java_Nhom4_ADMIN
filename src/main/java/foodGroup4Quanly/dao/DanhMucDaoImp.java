@@ -2,6 +2,7 @@ package foodGroup4Quanly.dao;
 
 import java.util.List;
 
+import foodGroup4Quanly.entity.Mon;
 import org.hibernate.Query;
 import org.springframework.stereotype.Component;
 
@@ -23,5 +24,22 @@ public class DanhMucDaoImp extends HibernateUtil implements DanhMucDao{
     @Override
     public void create(Danhmuc dm) {
         super.create(dm);
+    }
+
+    @Override
+    public void deactiveDanhmuc(int idDanhmuc) {
+        String hql = "update Danhmuc set active = false where id = :id";
+        Query query = getSession().createQuery(hql).setParameter("id", idDanhmuc);
+        query.executeUpdate();
+    }
+
+    @Override
+    public List<Mon> getMonByIdDm(int idDanhmuc, boolean monIsActive) {
+        String hql = "from Mon M where M.danhmuc.danhMucId=:idDanhmuc and M.active=:monIsActive";
+        Query query = getSession().createQuery(hql);
+        query.setParameter("idDanhmuc", idDanhmuc);
+        query.setParameter("monIsActive", monIsActive);
+
+        return query.list();
     }
 }

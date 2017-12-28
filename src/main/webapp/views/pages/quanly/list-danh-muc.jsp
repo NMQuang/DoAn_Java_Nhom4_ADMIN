@@ -16,6 +16,11 @@
             <strong><spring:message code="danhmuc.create.success"/></strong>
         </div>
     </c:if>
+    <c:if test="${not empty deleteDmSuccess}">
+        <div class="alert alert-success notify">
+            <strong><spring:message code="danhmuc.delete.success"/></strong>
+        </div>
+    </c:if>
     <div class="panel panel-info">
         <div class="panel-heading">
             Danh sách tất cả các danh mục
@@ -31,6 +36,7 @@
                 <th class="text-center">Số lượng món ăn</th>
                 <th width="1%"></th>
                 <th width="1%"></th>
+                <th width="1%"></th>
             </tr>
             </thead>
             <c:forEach items="${listDanhmuc}" var="danhmuc">
@@ -40,6 +46,9 @@
                 <td class="text-center">${danhmuc.mons.size()}</td>
                 <td>
                     <button class="btn btn-warning pull-right" type="button" data-toggle="modal" data-target="#modal-sua-danh-muc" data-tendanhmuc="tên danh mục">Sửa</button>
+                </td>
+                <td>
+                    <a href="<c:url value="/quanly/danhmuc/delete/${danhmuc.danhMucId}"/>" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-danger pull-right" >Xóa</a>
                 </td>
                 <td>
                     <a href="<c:url value="/quanly/danhmuc/${danhmuc.danhMucId}"/>" class="btn btn-info pull-right">Xem danh sách món ăn</a>

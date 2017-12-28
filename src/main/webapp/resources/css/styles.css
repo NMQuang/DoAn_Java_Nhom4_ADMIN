@@ -1280,7 +1280,7 @@ p.back-link {
 /*  Pháº§n Ä‘Æ°á»�c thÃªm vÃ o trong css */
 a.fix, button.fix{
     margin-top: 3px;
-    float: right !important;
+    /*float: right !important;*/
 }
 
 th.red-text-table, td.red-text-table {
@@ -1379,4 +1379,24 @@ div.notify {
 
 span.error {
     color: red;
+}
+
+.modal input {
+    font-size: 14px;
+    color: #000000;
+}
+
+.modal label {
+    font-size: 15px;
+    color: #000000;
+}
+
+#input-search-table-header-bar, #input-search-food-header-bar, #input-modal-search-food {
+    margin-top: 4px;
+    height: 32px;
+}
+
+#btn-search-table-header-bar, #btn-search-food-header-bar, #btn-modal-search-food {
+    margin-top: 2px;
+    height: 32px;
 }

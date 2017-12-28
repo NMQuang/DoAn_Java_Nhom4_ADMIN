@@ -2,6 +2,7 @@ package foodGroup4Quanly.service;
 
 import java.util.List;
 
+import foodGroup4Quanly.entity.Mon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +30,21 @@ public class DanhMucServiceImp implements DanhMucService{
 	@Override
 	public void create(Danhmuc dm) {
 		danhMucDao.create(dm);
+	}
+
+	@Override
+	public void deactiveDanhmuc(int idDanhmuc) {
+		danhMucDao.deactiveDanhmuc(idDanhmuc);
+	}
+
+	@Override
+	public List<Mon> getMonActiveByIdDm(int idDanhmuc) {
+		return danhMucDao.getMonByIdDm(idDanhmuc, true);
+	}
+
+	@Override
+	public List<Mon> getMonDeactiveByIdDm(int idDanhmuc) {
+		return danhMucDao.getMonByIdDm(idDanhmuc, false);
 	}
 
 

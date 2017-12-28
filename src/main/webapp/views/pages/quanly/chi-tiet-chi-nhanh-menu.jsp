@@ -33,7 +33,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" data-toggle="modal" data-target="#modal-them-mon" class="btn btn-primary pull-right fix">Thêm món ăn vào menu</button>
+                        <button type="button" data-toggle="modal" data-target="#modal-them-mon" class="btn btn-primary pull-right fix"><a href="${pageContext.request.contextPath}/quanly/chinhanh-menu/themmonan">Thêm món ăn vào menu</a></button>
                     </div>
                     <div class="panel-body">
                         <table class="table table-striped custab" id="food-search-header-bar">
@@ -67,9 +67,9 @@
                         </table>
                     </div>
                 </div>
-                <div class="modal fade" id="modal-them-mon" role="dialog">
+                <!-- <div class="modal fade" id="modal-them-mon" role="dialog">
                     <div class="modal-dialog modal-lg">
-                        <!-- Modal content-->
+                        Modal content
                         <div class="modal-content">
                             <div class="modal-header">
                                 <div class="modal-title">
@@ -111,7 +111,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
 

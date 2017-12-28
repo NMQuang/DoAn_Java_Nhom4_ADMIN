@@ -19,9 +19,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import foodGroup4Quanly.common.ChiNhanhValidator;
+import foodGroup4Quanly.common.MonValidator;
 import foodGroup4Quanly.entity.Chinhanh;
+import foodGroup4Quanly.entity.Mon;
 import foodGroup4Quanly.service.BranchService;
 import foodGroup4Quanly.service.ChiNhanhMonService;
+import foodGroup4Quanly.service.DanhMucService;
+import foodGroup4Quanly.service.FoodService;
 import foodGroup4Quanly.service.TinhThanhService;
 
 @Controller
@@ -44,6 +48,14 @@ public class QuanlyChinhanhController {
 	@Autowired
 	public ChiNhanhMonService chiNhanhMonService;
 
+	@Autowired
+	public DanhMucService danhMucService;
+
+	@Autowired
+	public MonValidator monValidator;
+
+	@Autowired
+	public FoodService foodService;
 	/***
 	 * get danh sách tất cả các chi nhánh
 	 * */
@@ -190,7 +202,7 @@ public class QuanlyChinhanhController {
 	}
 
 	/***
-	 * get thông tin chi tiết bàn của 1 chi nhánh
+	 * get thông tin chi tiết món của 1 chi nhánh
 	 * */
 	@RequestMapping(value = "/chinhanh-menu/{idChinhanh}", method = RequestMethod.GET)
 	public String getChitietMenuChinhanh(Model model, @PathVariable("idChinhanh") int idChinhanh) {
@@ -199,4 +211,11 @@ public class QuanlyChinhanhController {
 		model.addAttribute("branch", branchService.getInfoChiNhanh(idChinhanh));
 		return "quanly-chi-tiet-chi-nhanh-menu";
 	}
+
+	@RequestMapping(value = "/chinhanh-menu/themmonan", method = RequestMethod.GET)
+	    public String getThemMonan(Model model) {
+	    	model.addAttribute("ADanhmuc", danhMucService.getAllDanhMuc());
+	    	model.addAttribute("mon", new Mon());
+	        return "quanly-them-mon-an";
+	    }
 }

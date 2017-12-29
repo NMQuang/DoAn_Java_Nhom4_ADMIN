@@ -7,7 +7,7 @@
             <li><a href="<c:url value='/quanly' />">
                 <em class="fa fa-home"></em>
             </a></li>
-            <li class="active">Báo cáo doanh thu tổng</li>
+            <li class="active">Báo cáo doanh thu tổng của chi nhánh</li>
         </ol>
     </div>
 

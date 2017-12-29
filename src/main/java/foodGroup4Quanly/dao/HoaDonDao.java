@@ -11,4 +11,5 @@ public interface HoaDonDao {
 	
 	List<Hoadon> getListIn(Date begin, Date end, int chinhanh);
 	long getSum(Date begin, Date end, int chinhanh);
+	long getCountTypeBill(Date begin, Date end, int chinhanh, String loai);
 }

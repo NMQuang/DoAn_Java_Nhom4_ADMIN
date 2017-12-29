@@ -13,6 +13,10 @@ body {
     font-family: Tahoma;
 }
 
+.well {
+    background: #FCFFFF;
+}
+
 p {
     color: #777;
 }
@@ -1488,3 +1492,45 @@ a:hover, a:visited, a:link, a:active
     display: inline-block;
     margin-top: 9px;
 }
+
+#table-don-hang-tai-quan {
+    font-size: 14px;
+    width: 100%;
+}
+
+#table-don-hang-tai-quan thead {
+    background: #30a5ff;
+    color: white;
+}
+
+#table-don-hang-tai-quan tbody {
+    display:block;
+    height:250px;
+    overflow:auto;
+}
+
+#table-don-hang-tai-quan thead, #table-don-hang-tai-quan tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;/* even columns width , fix width of table too*/
+}
+
+#table-don-hang-tai-quan td, #table-don-hang-tai-quan th {
+    border: 1px solid #30a5ff;
+    border-top: 0px;
+    padding: 8px;
+}
+
+#table-don-hang-tai-quan>thead>tr>th {
+    text-align: center;
+}
+
+#table-don-hang-tai-quan>tbody>tr>td {
+    font-weight: normal;
+}
+
+#table-don-hang-tai-quan tr:nth-child(even) {
+    background-color: #eeeeee;
+}
+
+

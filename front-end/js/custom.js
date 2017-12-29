@@ -29,16 +29,6 @@ $(document).on('click', '.panel-heading span.clickable', function(e){
 	}
 })
 
-
-$(document).ready(function () {
-    $('.option-don-hang').hide();
-    $('#option-tai-quan').show();
-    $('#option-don-hang').change(function () {
-        $('.option-don-hang').hide();
-        $('#'+$(this).val()).show();
-    })
-});
-
 $('#modal-sua-danh-muc').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);
     var data = button.data('tendanhmuc');

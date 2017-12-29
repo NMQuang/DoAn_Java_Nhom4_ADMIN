@@ -34,7 +34,7 @@
                                     <select id="option-thong-ke" name="format" class="form-control expanded-input" style="border: 1px solid #cccccc; width: 250px;">
                                         <option value="html">HTML</option>
                                         <option value="pdf">PDF</option>
-                                        <option value="image">Hình ảnh</option>
+                                        <option value="png">Hình ảnh .PNG</option>
                                         <option value="xlsx">Excel</option>
                                     </select>
                                 </div>
@@ -87,7 +87,7 @@
                                     <div class="form-group form-inline">
                                         <label class="control-label col-md-5">Chọn năm:</label>
                                         <div class="input-group date" data-provide="datepicker-year">
-                                            <input id="id-quy" type="text" name="nam" class="form-control" style="border: 1px solid #cccccc;">
+                                            <input id="id-quy" type="text" name="nam_quy" class="form-control" style="border: 1px solid #cccccc;">
                                             <div class="input-group-addon">
                                                 <span class="fa fa-calendar"></span>
                                             </div>
@@ -99,7 +99,7 @@
                                     <div class="form-group form-inline">
                                         <label class="control-label col-md-5">Chọn năm:</label>
                                         <div class="input-group date" data-provide="datepicker-year">
-                                            <input id="id-nam" type="text" class="form-control" style="border: 1px solid #cccccc;">
+                                            <input id="id-nam" type="text" name="nam" class="form-control" style="border: 1px solid #cccccc;">
                                             <div class="input-group-addon">
                                                 <span class="fa fa-calendar"></span>
                                             </div>

@@ -100,13 +100,50 @@ public class ThongKeServiceImp implements ThongKeService {
 
 	@Override
 	public List<Map<String, Object>> thongkeTongDoanhThuQuy(Date begin) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Map<String, Object>> kq = new ArrayList<Map<String,Object>>();
+		Map<String, Object> record1 = new HashMap<>();
+		Map<String, Object> record2 = new HashMap<>();
+		Map<String, Object> record3 = new HashMap<>();
+		kq.add(record1);
+		kq.add(record2);
+		kq.add(record3);
+		Calendar c = Calendar.getInstance();
+		c.setTime(begin);
+		Date begin1 = c.getTime();
+		record1.put("unit", "Tháng " + (c.get(Calendar.MONTH) + 1) + "/" + c.get(Calendar.YEAR));
+		c.add(Calendar.MONTH, 1);
+		Date begin2 = c.getTime();
+		record2.put("unit", "Tháng " + (c.get(Calendar.MONTH) + 1) + "/" + c.get(Calendar.YEAR));
+		c.add(Calendar.MONTH, 1);
+		Date begin3 = c.getTime();
+		record3.put("unit", "Tháng " + (c.get(Calendar.MONTH) + 1) + "/" + c.get(Calendar.YEAR));
+		c.add(Calendar.MONTH, 1);
+		Date end = c.getTime();
+		
+		long sum1 = hoaDonDao.getSum(begin1, begin2);
+		record1.put("value", sum1);
+		long sum2 = hoaDonDao.getSum(begin2, begin3);
+		record2.put("value", sum2);
+		long sum3 = hoaDonDao.getSum(begin3, end);
+		record3.put("value", sum3);
+		return kq;
 	}
 
 	@Override
 	public List<Map<String, Object>> thongkeTongDoanhThuNam(Date begin) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Map<String, Object>> kq = new ArrayList<Map<String,Object>>();
+		Calendar c = Calendar.getInstance();
+		c.setTime(begin);
+		for(int i = 1; i <= 12 ; i++){
+			Map<String, Object> record = new HashMap<>();
+			record.put("unit", "Tháng " + i + "/" + c.get(Calendar.YEAR));
+			Date b = c.getTime();
+			c.add(Calendar.MONTH, 1);
+			Date e = c.getTime();
+			record.put("value", hoaDonDao.getSum(b, e));
+			kq.add(record);
+		}
+		
+		return kq;
 	}
 }

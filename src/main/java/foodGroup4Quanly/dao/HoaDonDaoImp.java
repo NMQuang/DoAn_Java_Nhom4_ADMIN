@@ -23,7 +23,7 @@ public class HoaDonDaoImp extends HibernateUtil implements HoaDonDao{
 
 	@Override
 	public long getSum(Date begin, Date end) {
-		String hql = "select count(tongTien) from Hoadon where :ngay >= begin and ngay < :end";
+		String hql = "select COALESCE(sum(tongTien),0) from Hoadon where ngay >= :begin and ngay < :end";
 		Query query = getSession().createQuery(hql);
 		query.setParameter("begin", begin);
 		query.setParameter("end", end);

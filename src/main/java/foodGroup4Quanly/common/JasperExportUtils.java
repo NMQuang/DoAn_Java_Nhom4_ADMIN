@@ -42,7 +42,7 @@ public class JasperExportUtils {
 				e1.printStackTrace();
 			}
 			break;
-		case "image":
+		case "png":
 			response.setContentType("image/png");
 			JasperPrintManager printManager = JasperPrintManager.getInstance(DefaultJasperReportsContext.getInstance());
 			BufferedImage rendered_image = null;      

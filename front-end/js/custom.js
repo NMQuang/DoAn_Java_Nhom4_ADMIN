@@ -150,11 +150,11 @@ $(document).ready(function() {
             var divTenMonAn = $('<div class="col-md-6"></div>');
             divTenMonAn.append(labelTenMonAn);
 
-            var inputSoluong = $('<input type="number" class="input-sl-mon-an" id value="1" price/>');
+            var inputSoluong = $('<input type="number" class="input-sl-mon-an" value="1" price/>');
             inputSoluong.attr({id: id, price: price});
 
-            var inputTongTien = $('<input class="input-gia-mon-an" type="text">');
-            inputTongTien.attr({value: price});
+            var inputTongTien = $('<input class="input-gia-mon-an" type="text" price>');
+            inputTongTien.attr({value: price, price: price});
 
             var btnXoa = $('<a href="#" class="btn-remove"><i class="fa fa-times" aria-hidden="true"></i></a>');
 
@@ -165,7 +165,8 @@ $(document).ready(function() {
             divFormInline.append(inputTongTien);
             divFormInline.append(btnXoa);
 
-            var myLi = $('<li/>');
+            var myLi = $('<li id-chon-mon/>');
+            myLi.attr({'id-chon-mon': id});
             myLi.append(divTenMonAn);
             myLi.append(divFormInline);
 
@@ -179,10 +180,19 @@ $(document).on('click', 'a.btn-remove', function () {
     $(this).closest('li').remove();
 });
 
-//  Giới hạn số lượng món ăn được chọn bên phải
+//  Giới hạn số lượng món ăn được chọn bên phải, tính tiền và hiển thị lên tổng tiền
 $(document).on('change', '.input-sl-mon-an', function () {
     var value = $(this).val();
+    var price = $(this).attr('price');
+    var myLi = $(this).closest('li');
+    console.log(myLi);
     if ((value !== '') && (value.indexOf('.') === -1)) {
-        $(this).val(Math.max(Math.min(value, 50), 1));
+        if (value < 1 || value > 50) {
+            $(this).val(Math.max(Math.min(value, 50), 1));
+        }   else {
+            var totalPrice = value * price;
+            console.log(totalPrice);
+            $(myLi).find('.input-gia-mon-an').attr({value: totalPrice});
+        }
     }
 });

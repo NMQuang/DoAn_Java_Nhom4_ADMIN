@@ -106,6 +106,11 @@ $(document).ready(function () {
     })
 });
 
+$('[data-provide="datepicker"]').datepicker({
+    format: 'dd-mm-yyyy',
+    endDate: new Date(),
+    "autoclose": true
+});
 
 $('[data-provide="datepicker-month"]').datepicker({
     format: 'mm-yyyy',

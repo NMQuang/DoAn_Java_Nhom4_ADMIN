@@ -138,12 +138,26 @@ $(document).ready(function () {
 
 //  Thêm món ăn vào danh sách món ăn được chọn bên phải
 $(document).ready(function() {
+
     $('.btn-them-mon-an').click(function () {
+
         var text = $(this).attr('name');
         var id = $(this).attr('id-sp');
         var price = $(this).attr('price');
+        var found = false;
 
-        if (text.length) {
+        if ($('li.ds-mon-an-da-chon').length !== 0) {
+
+            $('li.ds-mon-an-da-chon').each(function (i) {
+
+                if ($(this).attr('id-chon-mon') === id) {
+                    found = true;
+                    return;
+                }
+            })
+        }
+
+        if (text.length && found===false) {
 
             var labelTenMonAn = $('<p class="li-p-ten-mon-an"></p>');
             labelTenMonAn.append(text);
@@ -165,7 +179,7 @@ $(document).ready(function() {
             divFormInline.append(inputTongTien);
             divFormInline.append(btnXoa);
 
-            var myLi = $('<li id-chon-mon/>');
+            var myLi = $('<li id-chon-mon class="ds-mon-an-da-chon"/>');
             myLi.attr({'id-chon-mon': id});
             myLi.append(divTenMonAn);
             myLi.append(divFormInline);

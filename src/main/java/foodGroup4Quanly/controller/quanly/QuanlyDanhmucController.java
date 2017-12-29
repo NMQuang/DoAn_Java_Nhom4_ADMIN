@@ -32,6 +32,7 @@ public class QuanlyDanhmucController {
     public String getListDanhmuc(Model model) {
         model.addAttribute("listDanhmuc", danhMucService.getAllDanhmucDontcareActive());
         model.addAttribute("newDm", new Danhmuc());
+        model.addAttribute("updateDm", new Danhmuc());
         return "quanly-list-danh-muc";
     }
 
@@ -64,6 +65,7 @@ public class QuanlyDanhmucController {
                                   RedirectAttributes redirectAttributes) {
         danhmucValidator.validate(newDm, bindingResult);
         if(bindingResult.hasErrors()) {
+            model.addAttribute("updateDm", new Danhmuc());
             model.addAttribute("listDanhmuc", danhMucService.getAllDanhmucDontcareActive());
             model.addAttribute("hasErrorCreateDm", true);
             return "quanly-list-danh-muc";
@@ -82,6 +84,26 @@ public class QuanlyDanhmucController {
         danhMucService.deactiveDanhmuc(idDanhmuc);
 
         redirectAttributes.addFlashAttribute("deleteDmSuccess", true);
+        return "redirect:/quanly/danhmuc";
+    }
+
+    @RequestMapping(value = "/danhmuc/update", method = RequestMethod.POST)
+    public String postUpdateDanhmuc(Model model,
+                                   @ModelAttribute(value = "updateDm") Danhmuc updateDm,
+                                   BindingResult result,
+                                   RedirectAttributes redirectAttributes) {
+        updateDm.setActive(true);
+        System.out.println("id danh muc " + updateDm.getDanhMucId());
+        danhmucValidator.validate(updateDm, result);
+        System.out.println(updateDm.getActive());
+        if(result.hasErrors()) {
+            System.out.println(result.getAllErrors().get(0).toString());
+            model.addAttribute("newDm", new Danhmuc());
+            model.addAttribute("listDanhmuc", danhMucService.getAllDanhmucDontcareActive());
+            model.addAttribute("hasErrorUpdateDm", true);
+            return "quanly-list-danh-muc";
+        }
+        redirectAttributes.addFlashAttribute("updateDmSuccess", true);
         return "redirect:/quanly/danhmuc";
     }
 

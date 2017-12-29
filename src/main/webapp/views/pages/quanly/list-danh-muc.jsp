@@ -55,7 +55,7 @@
                 </td>
                 <td class="text-center">${danhmuc.mons.size()}</td>
                 <td>
-                    <button class="btn btn-warning pull-right" type="button" data-toggle="modal" data-target="#modal-sua-danh-muc" data-tendanhmuc="tên danh mục">Sửa</button>
+                    <button class="btn btn-warning pull-right" type="button" data-toggle="modal" data-active-danh-muc-sua="${danhmuc.active}" data-ten-danh-muc-sua="${danhmuc.ten}" data-id-danh-muc-sua="${danhmuc.danhMucId}" data-target="#modal-sua-danh-muc">Sửa</button>
                 </td>
                 <td>
                     <c:if test="${danhmuc.active}">
@@ -100,7 +100,7 @@
             </div>
         </div>
 
-        <div class="modal fade" id="modal-sua-danh-muc" role="dialog">
+        <div class="modal fade" id="modal-sua-danh-muc" data-autoshow="${hasErrorUpdateDm}" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -108,13 +108,16 @@
                         <h4 class="modal-title">Sửa thông tin danh mục</h4>
                     </div>
                     <div class="modal-body">
-                        <form class="form-horizontal" role="form">
+                        <c:out value="${updateDm.danhMucId}"/>
+                        <form action="<c:url value="/quanly/danhmuc/update"/>" method="post" class="form-horizontal" role="form">
                             <div class="form-group">
-                                <label class="col-lg-3 control-label" for="ten-danh-muc-1">Tên danh mục:</label>
+                                <label class="col-lg-3 control-label" for="ten-danh-muc-sua">Tên danh mục:</label>
                                 <div class="col-lg-9">
-                                    <input type="text" class="expanded-input" id="ten-danh-muc-1">
+                                    <input name="updateDm.ten" value="${updateDm.ten}" type="text" class="expanded-input" id="ten-danh-muc-sua"/>
+                                    <form:errors path="ten" cssClass="error"/>
                                 </div>
                             </div>
+                            <input type="hidden" name="updateDm.danhMucId" value="${updateDm.danhMucId}" id="id-danh-muc-sua"/>
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <button type="button" class="btn btn-default pull-right" style="margin-left: 20px" data-dismiss="modal">Đóng</button>

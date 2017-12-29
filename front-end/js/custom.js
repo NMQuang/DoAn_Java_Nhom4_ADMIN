@@ -29,16 +29,6 @@ $(document).on('click', '.panel-heading span.clickable', function(e){
 	}
 })
 
-
-$(document).ready(function () {
-    $('.option-don-hang').hide();
-    $('#option-tai-quan').show();
-    $('#option-don-hang').change(function () {
-        $('.option-don-hang').hide();
-        $('#'+$(this).val()).show();
-    })
-});
-
 $('#modal-sua-danh-muc').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);
     var data = button.data('tendanhmuc');
@@ -136,6 +126,7 @@ $(document).ready(function () {
     })
 });
 
+//// Xử lý cho trang "tạo đơn hàng tại quán"
 //  Thêm món ăn vào danh sách món ăn được chọn bên phải
 $(document).ready(function() {
 
@@ -210,3 +201,37 @@ $(document).on('change', '.input-sl-mon-an', function () {
         }
     }
 });
+////
+
+//// Xử lý cho trang "tạo đơn hàng mang về"
+$(document).on('change', '.input-sl-mon-an-dem-ve', function () {
+
+    var value = $(this).val();
+
+    if ((value !== '') && (value.indexOf('.') === -1)) {
+
+        if (value < 1 || value > 50) {
+
+            $(this).val(Math.max(Math.min(value, 50), 1));
+        }   else {
+
+            var price = $(this).attr('price');
+            var parent = $(this).closest('tr');
+            var totalPrice = value * price;
+            $(parent).find('.input-gia-mon-an').attr({value: totalPrice});
+
+            var TongTien = 0;
+            $('.input-gia-mon-an').each(function (i) {
+
+                TongTien += parseInt($(this).val());
+            })
+
+            $('#tong-tien-don-hang-mang-ve').attr({value: TongTien});
+        }
+    }
+});
+
+$('.btn-remove-mon-an-mang-ve').click(function () {
+    $(this).closest('tr').remove();
+});
+////

@@ -68,9 +68,14 @@
         <put-attribute name="content" value="/views/pages/quanly/them-mon-an-vao-danh-muc.jsp" />
     </definition>
 
-	<definition name="quanly-tong-danh-thu" extends="base-definition">
+	<definition name="quanly-tong-doanh-thu" extends="base-definition">
         <put-attribute name="title" value="Dashboard" />
-        <put-attribute name="content" value="/views/pages/quanly/tong-danh-thu.jsp" />
+        <put-attribute name="content" value="/views/pages/quanly/report-tong-doanh-thu.jsp" />
+    </definition>
+    
+    <definition name="quanly-tong-doanh-thu-chi-nhanh" extends="base-definition">
+        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="content" value="/views/pages/quanly/report-tong-doanh-thu-chi-nhanh.jsp" />
     </definition>
     <!-- /QUAN LY -->
 </tiles-definitions>

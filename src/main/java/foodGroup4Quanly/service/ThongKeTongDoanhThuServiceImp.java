@@ -16,7 +16,7 @@ import foodGroup4Quanly.entity.Hoadon;
 
 @Component
 @Transactional
-public class ThongKeServiceImp implements ThongKeService {
+public class ThongKeTongDoanhThuServiceImp implements ThongKeTongDoanhThuService {
 	@Autowired
 	private HoaDonDao hoaDonDao;
 	

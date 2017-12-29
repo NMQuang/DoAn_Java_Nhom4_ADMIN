@@ -3,6 +3,8 @@
         "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
+	<definition name="login-page" template="/views/tiles/layouts/Login.jsp"></definition>
+	
     <definition name="base-definition"
                 template="/views/tiles/layouts/defaultLayout.jsp">
         <put-attribute name="navigation" value="/views/tiles/template/navigation.jsp" />
@@ -24,6 +26,16 @@
     <definition name="quanly-chi-tiet-chi-nhanh" extends="base-definition">
         <put-attribute name="title" value="Dashboard" />
         <put-attribute name="content" value="/views/pages/quanly/chi-tiet-chi-nhanh.jsp" />
+    </definition>
+
+        <definition name="quanly-chi-tiet-chi-nhanh-menu" extends="base-definition">
+        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="content" value="/views/pages/quanly/chi-tiet-chi-nhanh-menu.jsp" />
+    </definition>
+
+        <definition name="quanly-chi-tiet-chi-nhanh-ban" extends="base-definition">
+        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="content" value="/views/pages/quanly/chi-tiet-chi-nhanh-ban.jsp" />
     </definition>
 
     <definition name="quanly-them-chi-nhanh" extends="base-definition">
@@ -66,5 +78,9 @@
         <put-attribute name="content" value="/views/pages/quanly/them-mon-an-vao-danh-muc.jsp" />
     </definition>
 
+	<definition name="quanly-tong-danh-thu" extends="base-definition">
+        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="content" value="/views/pages/quanly/tong-danh-thu.jsp" />
+    </definition>
     <!-- /QUAN LY -->
 </tiles-definitions>

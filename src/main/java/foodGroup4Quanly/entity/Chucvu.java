@@ -1,14 +1,22 @@
 package foodGroup4Quanly.entity;
 
-import javax.persistence.*;
 import java.util.Set;
+
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "chucvu",  schema = "java_foodsystem")
 public class Chucvu {
     private int chucVuId;
     private String ten;
-    private int moTa;
+    private String moTa;
     private Set<Nhanvien> nhanviens;
 
     @Id
@@ -34,11 +42,11 @@ public class Chucvu {
 
     @Basic
     @Column(name = "MoTa")
-    public int getMoTa() {
+    public String getMoTa() {
         return moTa;
     }
 
-    public void setMoTa(int moTa) {
+    public void setMoTa(String moTa) {
         this.moTa = moTa;
     }
 
@@ -60,7 +68,7 @@ public class Chucvu {
     public int hashCode() {
         int result = chucVuId;
         result = 31 * result + (ten != null ? ten.hashCode() : 0);
-        result = 31 * result + moTa;
+        result = 31 * result + (moTa != null ? moTa.hashCode() : 0);
         return result;
     }
 

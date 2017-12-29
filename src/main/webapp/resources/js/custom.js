@@ -28,3 +28,118 @@ $(document).on('click', '.panel-heading span.clickable', function(e){
 		$this.find('em').removeClass('fa-toggle-down').addClass('fa-toggle-up');
 	}
 })
+//////////////////////////////////////////////////
+//upload file
+function readURL(input) {
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+
+		reader.onload = function(e) {
+			$('#img-upload').attr('src', e.target.result);
+
+		}
+
+		reader.readAsDataURL(input.files[0]);
+	}
+}
+
+$("#upload").change(function() {
+	readURL(this);
+	
+});
+////////////////////////////////////
+//Khi thay đổi giá trị thì các error biến mất
+$('input, textarea').on('change keyup paste',function(){
+	$(this).siblings('.my_error').hide();
+})
+////////////////////////////////////
+//Active menu màu xanh
+$(function(){
+	var pathname = window.location.pathname;
+	$('.nav li').removeClass('active')
+	$('.nav li').each(function(index, value){
+		if(pathname.indexOf( $(value).find('a').attr('href')) >= 0){
+			$(value).addClass('active')
+		}
+			
+	})
+})
+/////////////////////////////////////
+//Hiển thị giá theo format
+$(function(){
+	$('._single_price').each(function(index, element){
+		var price = $(element).attr('price');
+		price = Number(parseFloat(price)).toLocaleString();
+		$(element).text(price)
+	})
+})
+/////////////////////////////////////
+//Phân trang
+$(function(){
+	$('#pagination-demo').twbsPagination({
+        totalPages: $('#pagination-demo').attr('data-pages'),
+        visiblePages: 7,
+        startPage: parseInt($('#pagination-demo').attr('data-index')),
+        initiateStartPageClick: false,
+        onPageClick: function (event, page) {
+        	var path = window.location.pathname; 
+        	var url = path + "?index=" + page + "&type=" + $('#type_mon').find('option:selected').val();
+        	window.location.href= url
+        }
+	})
+})
+////////////////////////////////////
+$(function(){
+	$('#type_mon').on('change', function(){
+		var path = window.location.pathname; 
+    	var url = path + "?index=" + 1 + "&type=" + $('#type_mon').find('option:selected').val();
+    	window.location.href= url
+	})
+})
+
+$(function () {
+	if($('#modal-tao-danh-muc').attr('data-autoshow')) {
+        $(window).on('load',function(){
+            $('#modal-tao-danh-muc').modal('show');
+        });
+	}
+})
+/////////////////////////////////////
+//  Change option
+$(document).ready(function () {
+    $('.option-thong-ke').hide();
+    $('#option-ngay').show();
+    $('#option-thong-ke').change(function () {
+        $('.option-thong-ke').hide();
+        $('#'+$(this).val()).show();
+    })
+});
+
+$('[data-provide="datepicker"]').datepicker({
+    format: 'dd-mm-yyyy',
+    endDate: new Date(),
+    "autoclose": true
+});
+
+$('[data-provide="datepicker-month"]').datepicker({
+    format: 'mm-yyyy',
+    minViewMode: 1,
+    endDate: new Date(),
+    "autoclose": true
+});
+
+$('[data-provide="datepicker-year"]').datepicker({
+    format: 'yyyy',
+    minViewMode: 2,
+    endDate: new Date(),
+    "autoclose": true
+});
+
+
+
+
+
+
+
+
+

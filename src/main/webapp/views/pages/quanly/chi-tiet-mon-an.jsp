@@ -1,58 +1,72 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
         <ol class="breadcrumb">
-            <li><a href="index.html"><i class="fa fa-home"></i></a></li>
-            <li><a href="danh_sach_mon_an.html">Danh sách món ăn</a></li>
-            <li class="active">Gà rán</li>
+            <li><a href="<c:url value="/quanly" />"><i class="fa fa-home"></i></a></li>
+            <li><a href="<c:url value="/quanly/monan" /> ">Danh sách món ăn</a></li>
+            <li class="active">${mon.ten }</li>
         </ol>
     </div><!--/.row-->
 
     <div class="panel panel-info">
         <div class="panel-heading">
-            Thông tin món <b>gà rán</b>
+            Thông tin món <b>${mon.ten }</b>
         </div>
         <div class="panel-body">
             <div class="row">
-                <div class="col-lg-4">
-                    <img src="images/mon-an/ga-ran.jpg" class="img-mon-an" width="350px" height="220px"/>
-                    <div class="text-center">
-                        <input type="file"/>
+                
+                <form:form method="post" modelAttribute="mon" enctype="multipart/form-data">
+                    <div class="col-lg-4">
+                        <img src="<c:url value="${mon.hinhAnh == null ? 'http://via.placeholder.com/350x220' : '/resources/images/mon-an/'+= mon.hinhAnh} " />" id="img-upload" class="img-mon-an" width="350px" height="220px"/>
+                        <div class="">
+                            <input type="file" accept="image/*" name="hinhanh" id="upload"/>
+                            <form:errors path="hinhAnh" cssClass="my_error"/>      
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-8">
-                    <form class="form-horizontal">
-                        <div class="form-group">
-                            <label class="control-label col-lg-3" for="food-name">Tên món ăn:</label>
-                            <div class="col-lg-9">
-                                <input type="email" class="expanded-input" id="food-name" value="Gà rán nguyên con">
+                    <div class="col-lg-8">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="control-label col-lg-3" for="food-name">Tên món ăn:</label>
+                                <div class="col-lg-9">
+                                    <form:input type="text" class="expanded-input" id="food-name" path="ten"/>
+                                    <form:errors path="ten" cssClass="my_error"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-3" for="description">Mô tả:</label>
+                                <div class="col-lg-9">
+                                    <form:textarea class="expanded-input" id="description" rows="5" path="moTa"/>
+									<form:errors path="moTa" cssClass="my_error"/>                                
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-3" for="food-name">Đơn vị:</label>
+                                <div class="col-lg-9">
+                                    <form:input type="text" class="expanded-input" id="food-name" path="donViTinh"/>
+                                    <form:errors path="donViTinh" cssClass="my_error"/>       
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-3" for="description">Chọn danh mục:</label>
+                                <div class="col-lg-5">
+                                    <form:select id="danhmuc" class="expanded-input" path="danhmuc.danhMucId">
+                                    	<form:option value="-1" label="--------- Select --------"></form:option>
+                                        <form:options items="${ADanhmuc}" itemValue="danhMucId" itemLabel="ten"/>
+                                    </form:select>
+                                    <form:errors path="danhmuc" cssClass="my_error"/>   
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-offset-3 col-lg-9">
+                                    <button type="submit" class="btn btn-info btn-lg">Cập nhật</button>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="control-label col-lg-3" for="description">Mô tả:</label>
-                            <div class="col-lg-9">
-                                <textarea class="expanded-input" id="description" rows="7">Món gà chiên giòn với phần thịt bên trong chín mềm đậm đà cùng lớp vỏ giòn rụm vàng nâu vừa tới - nếu đó là những gì bạn mong muốn thì hãy đặt hàng ngay nhé!</textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-lg-3" for="description">Chọn danh mục:</label>
-                            <div class="col-lg-5">
-                                <select id="danhmuc" class="expanded-input">
-                                    <option value="1">Đồ ăn rán</option>
-                                    <option value="2">Đồ ăn chiên</option>
-                                    <option value="3">Đồ ăn xào</option>
-                                    <option value="4">Đồ ăn luộc</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-lg-offset-4">
-                                <button type="submit" class="btn btn-info btn-lg">Thay đổi</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                </form:form>
             </div>
             <div class="row col-lg-12">
                 <table class="table table-food">
@@ -64,33 +78,18 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
+                    <c:forEach items="${ listchinhanh}" var="item">
+                    	 <tr>
                         <td width="60%">
-                            <h5>Chi nhánh 1</h5>
+                            <h5>${item.pk.chinhanh.ten }</h5>
                             <p> <i class="fa fa-map-marker"></i> &nbsp Địa chỉ:</p>
                         </td>
                         <td>
-                            <i class="fa fa-tag"></i> Giá 100.000 VND
+                            <i class="fa fa-tag"></i> Giá <span class="_single_price" price="${item.gia }"></span> VND
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            <h5>Chi nhánh 2</h5>
-                            <p> <i class="fa fa-map-marker"></i> &nbsp Địa chỉ:</p>
-                        </td>
-                        <td>
-                            <i class="fa fa-tag" ></i> Giá 150.000 VND
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h5>Chi nhánh 3</h5>
-                            <p> <i class="fa fa-map-marker"></i> &nbsp Địa chỉ:</p>
-                        </td>
-                        <td>
-                            <i class="fa fa-tag"></i> Giá 200.000 VND
-                        </td>
-                    </tr>
+                    </c:forEach>
+                   
                     </tbody>
                 </table>
             </div>

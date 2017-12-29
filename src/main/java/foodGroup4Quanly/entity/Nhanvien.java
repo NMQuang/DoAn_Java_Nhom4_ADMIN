@@ -162,7 +162,7 @@ public class Nhanvien {
     }
 
     @ManyToOne
-    @JoinColumn(name = "ChiNhanh", referencedColumnName = "ChiNhanhID", nullable = false)
+    @JoinColumn(name = "ChiNhanh", referencedColumnName = "ChiNhanhID", nullable = true)
     public Chinhanh getChinhanh() {
         return chinhanh;
     }

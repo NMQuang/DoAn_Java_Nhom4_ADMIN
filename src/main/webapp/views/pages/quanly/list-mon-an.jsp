@@ -1,9 +1,10 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
         <ol class="breadcrumb">
-            <li><a href="#">
+            <li><a href="<c:url value="/quanly" />">
                 <em class="fa fa-home"></em>
             </a></li>
             <li class="active">Danh sách món ăn</li>
@@ -12,8 +13,12 @@
 
     <div class="panel panel-info">
         <div class="panel-heading">
-            Danh sách tất cả các món ăn
-            <a href="tao_mon_an_moi.html" class="btn btn-default pull-right fix"><b>+</b> Thêm món ăn mới</a>
+            Danh sách tất cả các món ăn 
+            <select class="" id="type_mon" style="background-color: #30a5ff" name="type">
+			    <option value="current">hiện hành</option>
+			    <option value="deleted"  ${ type == 'deleted' ? 'selected': ''}>đã xóa</option>
+			</select>
+            <a href="<c:url value="/quanly/monan/themmonan"/>" class="btn btn-default pull-right fix"><b>+</b> Thêm món ăn mới</a>
         </div>
 
         <table class="table table-striped custab">
@@ -26,46 +31,34 @@
                 <th>Số lượng bán</th>
             </tr>
             </thead>
-            <tr>
-                <td class="text-center red-text-table">1</td>
-                <td>ten danh muc</td>
-                <td>ten san pham</td>
-                <td>don vi tinh</td>
-                <td>so luong ban</td>
+            <c:forEach items="${listmon }" var="item">
+            	<tr>
+                <td class="text-center red-text-table">${item.monId }</td>
+                <td>${item.danhmuc.ten }</td>
+                <td>${item.ten }</td>
+                <td>${item.donViTinh }</td>
+                <td>${item.soLuongDaBan }</td>
                 <td width="5%">
-                    <a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
+                    <a href="<c:url value="/quanly/monan/1"/>" class="btn btn-info">Xem</a>
                 </td>
                 <td width="5%">
-                    <a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
-                </td>
-            </tr>
-            <tr>
-                <td class="text-center red-text-table">2</td>
-                <td>ten danh muc</td>
-                <td>ten san pham</td>
-                <td>don vi tinh</td>
-                <td>so luong ban</td>
-                <td width="5%">
-                    <a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
-                </td>
-                <td width="5%">
-                    <a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
+                <c:choose>
+                	<c:when test="${type == 'deleted'}">
+					     <a href="<c:url value="/quanly/monan/active/${item.monId }"/>" class="btn btn-success">Thêm</a>
+					</c:when>
+					<c:otherwise>
+						 <a href="<c:url value="/quanly/monan/delete/${item.monId }"/>" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-danger">Xóa</a>
+					</c:otherwise>
+                </c:choose>
                 </td>
             </tr>
-            <tr>
-                <td class="text-center red-text-table">3</td>
-                <td>ten danh muc</td>
-                <td>ten san pham</td>
-                <td>don vi tinh</td>
-                <td>so luong ban</td>
-                <td width="5%">
-                    <a href="chi_tiet_mon_an.html" class="btn btn-info">Xem</a>
-                </td>
-                <td width="5%">
-                    <a href="chi_tiet_mon_an.html" class="btn btn-danger">Xóa</a>
-                </td>
-                <!--      <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td> -->
-            </tr>
+            </c:forEach>
+            
+            
         </table>
+        <div style="text-align: center">
+        <ul id="pagination-demo" data-index="${index }" data-pages="${pages }" class="pagination-md" ></ul>
+        </div>
+        
     </div>
 </div>

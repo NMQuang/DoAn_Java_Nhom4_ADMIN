@@ -36,7 +36,9 @@
 <script src="<c:url value="/resources/js/easypiechart.js"/>"></script>
 <script src="<c:url value="/resources/js/easypiechart-data.js"/>"></script>
 <script src="<c:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
+<script src="<c:url value="/resources/js/jquery.twbsPagination.js"/>"></script>
 <script src="<c:url value="/resources/js/custom.js"/>"></script>
+
 <script>
     window.onload = function () {
         var chart1 = document.getElementById("line-chart").getContext("2d");

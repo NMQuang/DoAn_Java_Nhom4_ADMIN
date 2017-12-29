@@ -1,3 +1,10 @@
+@media (min-width: 768px) {
+    .modal-xl {
+        width: 90%;
+        max-width:1200px;
+    }
+}
+
 body {
     background: #f1f4f7;
     padding-top: 60px;
@@ -1423,4 +1430,61 @@ a:hover, a:visited, a:link, a:active
     margin-bottom: 10px;
 }
 
+.btn-dat-ban img {
+    content: url("../images/wooden-table.png");
+}
 
+.btn-dat-ban p {
+    font-size: 18px;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #555555;
+}
+
+.select-danh-muc li, .list-mon-an-da-chon li {
+    line-height: 32px;
+    vertical-align: middle;
+    list-style-type: none;
+    margin-left: -30px;
+    border-bottom: 1px solid #dfdfdf;
+    color: #555555;
+}
+
+.select-danh-muc li:last-child, .list-mon-an-da-chon li:last-child {
+    border: 0px;
+}
+
+.select-danh-muc li>button, .list-mon-an-da-chon li>button {
+    margin-top: 5px;
+}
+
+.fa-times {
+    color: orangered;
+}
+
+.input-sl-mon-an, .input-gia-mon-an {
+    height: 28px;
+    text-align: right;
+    margin-top: 5px;
+    margin-right: 10px;
+}
+
+.input-sl-mon-an {
+    width: 50px;
+}
+
+.input-gia-mon-an {
+    width: 70px;
+}
+
+.gia-mon-an {
+    margin-right: 20px;
+}
+
+.li-p-ds-mon-an, .li-p-ten-mon-an {
+    display: inline-block;
+    margin-top: 9px;
+}

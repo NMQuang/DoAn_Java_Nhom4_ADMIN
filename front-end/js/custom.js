@@ -71,16 +71,6 @@ $('#input-search-table-header-bar').keyup(function() {
     }).hide();
 });
 
-// $('#input-search-header-bar2').keyup(function() {
-//     var $rows = $('#food-search-header-bar2 tbody tr');
-//     var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
-//
-//     $rows.show().filter(function() {
-//         var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
-//         return !~text.indexOf(val);
-//     }).hide();
-// });
-
 $(document).ready(function() {
     $('[id^=detail-]').hide();
     $('.toggle').click(function() {
@@ -106,4 +96,117 @@ $("#input-modal-search-food-menu").keyup(function(){
     });
 });
 
+//  Change option báo cáo thống kê
+$(document).ready(function () {
+    $('.option-thong-ke').hide();
+    $('#option-ngay').show();
+    $('#option-thong-ke').change(function () {
+        $('.option-thong-ke').hide();
+        $('#'+$(this).val()).show();
+    })
+});
 
+$('[data-provide="datepicker"]').datepicker({
+    format: 'dd-mm-yyyy',
+    endDate: new Date(),
+    "autoclose": true
+});
+
+$('[data-provide="datepicker-month"]').datepicker({
+    format: 'mm-yyyy',
+    minViewMode: 1,
+    endDate: new Date(),
+    "autoclose": true
+});
+
+$('[data-provide="datepicker-year"]').datepicker({
+    format: 'yyyy',
+    minViewMode: 2,
+    endDate: new Date(),
+    "autoclose": true
+});
+
+//  thay đổi lựa chọn danh mục của tạo đơn hàng tại quá
+$(document).ready(function () {
+    $('.select-danh-muc').hide();
+    $('#option-mon-an-nuong').show();
+    $('#select-danh-muc').change(function () {
+        $('.select-danh-muc').hide();
+        $('#'+$(this).val()).show();
+    })
+});
+
+//  Thêm món ăn vào danh sách món ăn được chọn bên phải
+$(document).ready(function() {
+
+    $('.btn-them-mon-an').click(function () {
+
+        var text = $(this).attr('name');
+        var id = $(this).attr('id-sp');
+        var price = $(this).attr('price');
+        var found = false;
+
+        if ($('li.ds-mon-an-da-chon').length !== 0) {
+
+            $('li.ds-mon-an-da-chon').each(function (i) {
+
+                if ($(this).attr('id-chon-mon') === id) {
+                    found = true;
+                    return;
+                }
+            })
+        }
+
+        if (text.length && found===false) {
+
+            var labelTenMonAn = $('<p class="li-p-ten-mon-an"></p>');
+            labelTenMonAn.append(text);
+            var divTenMonAn = $('<div class="col-md-6"></div>');
+            divTenMonAn.append(labelTenMonAn);
+
+            var inputSoluong = $('<input type="number" class="input-sl-mon-an" value="1" price/>');
+            inputSoluong.attr({id: id, price: price});
+
+            var inputTongTien = $('<input class="input-gia-mon-an" type="text" price>');
+            inputTongTien.attr({value: price, price: price});
+
+            var btnXoa = $('<a href="#" class="btn-remove"><i class="fa fa-times" aria-hidden="true"></i></a>');
+
+            var divFormInline = $('<div class="form-inline"></div>');
+            divFormInline.append('<p class="li-p-ds-mon-an">Số lượng: </p>');
+            divFormInline.append(inputSoluong);
+            divFormInline.append('<p class="li-p-ds-mon-an t">Tổng tiền: </p>');
+            divFormInline.append(inputTongTien);
+            divFormInline.append(btnXoa);
+
+            var myLi = $('<li id-chon-mon class="ds-mon-an-da-chon"/>');
+            myLi.attr({'id-chon-mon': id});
+            myLi.append(divTenMonAn);
+            myLi.append(divFormInline);
+
+            $('ul#danh-sach-mon-an-da-chon').append(myLi);
+        }
+    });
+});
+
+//  Nút xóa món ăn khỏi danh sách món ăn được chọn bên phải
+$(document).on('click', 'a.btn-remove', function () {
+    $(this).closest('li').remove();
+});
+
+//  Giới hạn số lượng món ăn được chọn bên phải, tính tiền và hiển thị lên tổng tiền
+$(document).on('change', '.input-sl-mon-an', function () {
+    var value = $(this).val();
+    var price = $(this).attr('price');
+    var myLi = $(this).closest('li');
+    console.log(myLi);
+    if ((value !== '') && (value.indexOf('.') === -1)) {
+        if (value < 1 || value > 50) {
+            $(this).val(Math.max(Math.min(value, 50), 1));
+        }   else {
+            var totalPrice = value * price;
+            console.log(totalPrice);
+            $(myLi).find('.input-gia-mon-an').attr({value: totalPrice});
+        }
+    }
+});

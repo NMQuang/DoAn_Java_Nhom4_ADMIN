@@ -1,6 +1,9 @@
 package foodGroup4Quanly.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "luongchonhanvien")
@@ -9,9 +12,8 @@ public class Luongchonhanvien {
     private int nhanVien;
     private String thang;
     private String nam;
-    private String diaChi;
-    private String ten;
     private String moTa;
+    private Timestamp ngay;
     private Nhanvien nhanvien;
 
     @Id
@@ -45,26 +47,6 @@ public class Luongchonhanvien {
     }
 
     @Basic
-    @Column(name = "DiaChi")
-    public String getDiaChi() {
-        return diaChi;
-    }
-
-    public void setDiaChi(String diaChi) {
-        this.diaChi = diaChi;
-    }
-
-    @Basic
-    @Column(name = "Ten")
-    public String getTen() {
-        return ten;
-    }
-
-    public void setTen(String ten) {
-        this.ten = ten;
-    }
-
-    @Basic
     @Column(name = "MoTa")
     public String getMoTa() {
         return moTa;
@@ -72,6 +54,15 @@ public class Luongchonhanvien {
 
     public void setMoTa(String moTa) {
         this.moTa = moTa;
+    }
+
+    @Basic
+    @Column(name ="Ngay")
+    @CreationTimestamp
+    public Timestamp getNgay() { return ngay; }
+
+    public void setNgay(Timestamp ngay) {
+        this.ngay = ngay;
     }
 
     @Override
@@ -84,8 +75,6 @@ public class Luongchonhanvien {
         if (nhanVien != that.nhanVien) return false;
         if (thang != null ? !thang.equals(that.thang) : that.thang != null) return false;
         if (nam != null ? !nam.equals(that.nam) : that.nam != null) return false;
-        if (diaChi != null ? !diaChi.equals(that.diaChi) : that.diaChi != null) return false;
-        if (ten != null ? !ten.equals(that.ten) : that.ten != null) return false;
         if (moTa != null ? !moTa.equals(that.moTa) : that.moTa != null) return false;
 
         return true;
@@ -96,8 +85,6 @@ public class Luongchonhanvien {
         int result = nhanVien;
         result = 31 * result + (thang != null ? thang.hashCode() : 0);
         result = 31 * result + (nam != null ? nam.hashCode() : 0);
-        result = 31 * result + (diaChi != null ? diaChi.hashCode() : 0);
-        result = 31 * result + (ten != null ? ten.hashCode() : 0);
         result = 31 * result + (moTa != null ? moTa.hashCode() : 0);
         return result;
     }

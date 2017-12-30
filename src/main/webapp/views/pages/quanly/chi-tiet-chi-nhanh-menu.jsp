@@ -9,12 +9,12 @@
                 <em class="fa fa-home"></em>
             </a></li>
             <li>
-                <a href="danh_sach_chi_nhanh.html"> Danh sách chi nhánh </a></li>
+                <a href="${pageContext.request.contextPath}/quanly/chinhanh/"> Danh sách chi nhánh </a></li>
             <li><a href="${pageContext.request.contextPath}/quanly/chinhanh/${branch.chiNhanhId}">Chi nhánh ${branch.ten}</a></li>
         </ol>
     </div><!--/.row-->
 
-    <form role="form" class="form-horizontal">
+    <form method="post" class="form-horizontal">
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -33,7 +33,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" data-toggle="modal" data-target="#modal-them-mon" class="btn btn-primary pull-right fix"><a href="${pageContext.request.contextPath}/quanly/chinhanh-menu/themmonan">Thêm món ăn vào menu</a></button>
+                        <button type="button" data-toggle="modal" data-target="#modal-them-mon" class="btn btn-primary pull-right fix"><a href="${pageContext.request.contextPath}/quanly/chinhanh-menu/${branch.chiNhanhId}/themmonan">Thêm món ăn vào menu</a></button>
                     </div>
                     <div class="panel-body">
                         <table class="table table-striped custab" id="food-search-header-bar">
@@ -59,7 +59,7 @@
                                      <a href="" class="btn btn-info">Xem</a>
                                  </td>
                                  <td width="5%">
-                                     <a href="" class="btn btn-danger">Xóa</a>
+                                     <a href="${pageContext.request.contextPath}/quanly/chinhanh-menu/${branch.chiNhanhId}/xoamonan/${item.pk.mon.monId}" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-danger">Xóa</a>
                                  </td>
                              </tr>
                             </c:forEach>

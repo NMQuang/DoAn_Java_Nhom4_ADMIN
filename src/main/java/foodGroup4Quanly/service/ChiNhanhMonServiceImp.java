@@ -30,4 +30,16 @@ public class ChiNhanhMonServiceImp implements ChiNhanhMonService{
 		return null;
 	}
 
+	@Override
+	public void save(Chinhanhmon chiNhanhMon) {
+
+		chiNhanhMonDAO.save(chiNhanhMon);
+	}
+
+	@Override
+	public void delete(int idChinhanh, int idMon) {
+
+		chiNhanhMonDAO.delete(idChinhanh, idMon);
+	}
+
 }

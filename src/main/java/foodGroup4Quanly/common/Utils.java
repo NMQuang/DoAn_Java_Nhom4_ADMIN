@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class Utils {
 
-	public static void saveImage(String hinhanh, MultipartFile file, ServletContext context, String directory) {
+	public static void saveImage(MultipartFile file, ServletContext context, String directory) {
 		try{
 	    		byte[] bytes = file.getBytes();
 

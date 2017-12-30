@@ -133,7 +133,7 @@ public class QuanlyChinhanhController {
 
 	    	model.addAttribute("tinhThanh", tinhThanhService.getAllTinhThanh());
 	    	model.addAttribute("chiNhanh", branchService.getInfoChiNhanh(idChiNhanh));
-	        return "quanly-chi-tiet-chi-nhanh";
+	        return "redirect:/quanly/chinhanh";
 	    }
 
 	/***
@@ -190,6 +190,7 @@ public class QuanlyChinhanhController {
 	    	if(result.hasErrors()){
 	    		model.addAttribute("tinhThanh", tinhThanhService.getAllTinhThanh());
 	    		return "quanly-them-chi-nhanh";
+//	    		return "redirect:/quanly/chinhanh/themchinhanh";
 	    	}
 	    	branchService.saveChiNhanh(chiNhanh);
 		return "redirect:/quanly/chinhanh";
@@ -221,7 +222,7 @@ public class QuanlyChinhanhController {
 	        return "quanly-them-mon-an";
 	    }
 
-	@RequestMapping(value = "/monan/themmonan", method = RequestMethod.POST)
+	@RequestMapping(value = "/chinhanh-menu/themmonan", method = RequestMethod.POST)
 	    public String postThemMonan(@RequestParam("hinhanh") MultipartFile file,@RequestParam String hinhanh_backup , @ModelAttribute("mon")   Mon mon, BindingResult result, Model model) {
 	    	if(!file.isEmpty()){
 //	    		try{
@@ -261,11 +262,11 @@ public class QuanlyChinhanhController {
 	    	monValidator.validate(mon, result);
 	    	if(result.hasErrors()){
 	    		model.addAttribute("ADanhmuc", danhMucService.getAllDanhMuc());
-	    		return "quanly-them-chi-nhanh";
+	    		return "redirect:/quanly/chinhanh/chinhanh";
 	    	}
 	    	mon.setActive(true);
 	    	mon.setSoLuongDaBan(0);
 	    	foodService.save(mon);
-	        return "redirect:/quanly/chinhanh/themmonan";
+	        return "redirect:/quanly/chinhanh/themchinhanh";
 	    }
 }

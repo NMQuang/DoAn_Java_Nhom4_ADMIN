@@ -35,7 +35,7 @@ public class ChiNhanhValidator implements Validator{
 			Chinhanh chiNhanh = (Chinhanh) cn;
 
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "ten", "NotEmpty");
-			if (chiNhanh.getTen().length() < 2 || chiNhanh.getTen().length() > 100) {
+			if (!chiNhanh.getTen().isEmpty() && (chiNhanh.getTen().length() < 2 || chiNhanh.getTen().length() > 100)) {
 				errors.rejectValue("ten", "Size.ten");
 			}
 //			if (userService.getUserByUsername(user.getUsername()) != null) {
@@ -43,14 +43,16 @@ public class ChiNhanhValidator implements Validator{
 //			}
 
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "diaChi", "NotEmpty");
-			if (chiNhanh.getDiaChi().length() < 2 || chiNhanh.getDiaChi().length() > 255) {
+			if (!chiNhanh.getDiaChi().isEmpty() && (chiNhanh.getDiaChi().length() < 2 || chiNhanh.getDiaChi().length() > 255)) {
 				errors.rejectValue("diaChi", "Size.diaChi");
 			}
 
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dienThoai", "NotEmpty");
-			if (chiNhanh.getDienThoai().length() < 9 || chiNhanh.getDienThoai().length() > 12) {
+			if (!chiNhanh.getDienThoai().isEmpty() && (chiNhanh.getDienThoai().length() < 9 || chiNhanh.getDienThoai().length() > 12)) {
 				errors.rejectValue("dienThoai", "Size.dienThoai");
 			}
+
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "hinhAnh", "NotEmpty");
 
 			if (chiNhanh.getTinhthanh() != null){
 				if (chiNhanhService.getInfoChiNhanh(chiNhanh.getTinhthanh().getTinhThanhId()) == null)

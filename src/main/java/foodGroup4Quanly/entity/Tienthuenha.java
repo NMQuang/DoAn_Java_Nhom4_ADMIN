@@ -12,6 +12,7 @@ public class Tienthuenha {
     private String ten;
     private String moTa;
     private Date ngayChi;
+    private int tien;
     private Chinhanh chinhanh;
 
     @Id
@@ -63,6 +64,12 @@ public class Tienthuenha {
     public void setNgayChi(Date ngayChi) {
         this.ngayChi = ngayChi;
     }
+
+    @Basic
+    @Column(name = "Tien")
+    public int getTien() { return this.tien; }
+
+    public void setTien(int tien) { this.tien = tien; }
 
     @Override
     public boolean equals(Object o) {

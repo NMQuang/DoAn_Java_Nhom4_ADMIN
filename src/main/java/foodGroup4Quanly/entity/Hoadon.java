@@ -9,6 +9,7 @@ import java.util.Set;
 public class Hoadon {
     private int hoaDonId;
     private Timestamp ngay;
+    private Timestamp ngayTraTien;
     private int tongTien;
     private int tinhTrangThanhToan;
     private String hinhThucMua;
@@ -43,6 +44,12 @@ public class Hoadon {
     public void setNgay(Timestamp ngay) {
         this.ngay = ngay;
     }
+
+    @Basic
+    @Column(name = "NgayTraTien")
+    public Timestamp getNgayTraTien() { return this.ngayTraTien; }
+
+    public void setNgayTraTien(Timestamp ngayTraTien) { this.ngayTraTien = ngayTraTien; }
 
     @Basic
     @Column(name = "TongTien")

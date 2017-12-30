@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import foodGroup4Quanly.common.ChiNhanhValidator;
 import foodGroup4Quanly.common.MonValidator;
+import foodGroup4Quanly.common.Utils;
 import foodGroup4Quanly.entity.Chinhanh;
 import foodGroup4Quanly.entity.Mon;
 import foodGroup4Quanly.service.BranchService;
@@ -33,6 +34,7 @@ import foodGroup4Quanly.service.TinhThanhService;
 public class QuanlyChinhanhController {
 
 	final String UPLOAD_DIRECTORY = "resources/images/chi-nhanh";
+	final String UPLOAD_DIRECTORY1 = "resources/images/mon-an";
 	@Autowired
 	public ServletContext context;
 
@@ -217,5 +219,53 @@ public class QuanlyChinhanhController {
 	    	model.addAttribute("ADanhmuc", danhMucService.getAllDanhMuc());
 	    	model.addAttribute("mon", new Mon());
 	        return "quanly-them-mon-an";
+	    }
+
+	@RequestMapping(value = "/monan/themmonan", method = RequestMethod.POST)
+	    public String postThemMonan(@RequestParam("hinhanh") MultipartFile file,@RequestParam String hinhanh_backup , @ModelAttribute("mon")   Mon mon, BindingResult result, Model model) {
+	    	if(!file.isEmpty()){
+//	    		try{
+//	    		byte[] bytes = file.getBytes();
+//
+//				// Creating the directory to store file
+//				String uploadPath = context.getRealPath("") + File.separator
+//						+ UPLOAD_DIRECTORY;
+//				File dir = new File(uploadPath);
+//
+//				if (!dir.exists())
+//					dir.mkdirs();
+//
+//				// Create the file on server
+//				File serverFile = new File(dir.getAbsolutePath()
+//						+ File.separator + file.getOriginalFilename());
+//				BufferedOutputStream stream = new BufferedOutputStream(
+//						new FileOutputStream(serverFile));
+//				stream.write(bytes);
+//				stream.close();
+//
+//				System.out.println("Server File Location="
+//						+ serverFile.getAbsolutePath());
+//				String filepath = "/" + UPLOAD_DIRECTORY + "/"
+//						+ file.getOriginalFilename();
+//				mon.setHinhAnh(file.getOriginalFilename());
+//	    		}catch(Exception e){
+//
+//	    		}
+	    		Utils.saveImage(hinhanh_backup, file, context, UPLOAD_DIRECTORY1);
+	    		mon.setHinhAnh(file.getOriginalFilename());
+	    	}
+	    	System.out.println(hinhanh_backup + "--" + mon.getHinhAnh());
+	    	if((hinhanh_backup != "" || hinhanh_backup != null) && mon.getHinhAnh() == null){
+	    		mon.setHinhAnh(hinhanh_backup);
+	    	}
+	    	monValidator.validate(mon, result);
+	    	if(result.hasErrors()){
+	    		model.addAttribute("ADanhmuc", danhMucService.getAllDanhMuc());
+	    		return "quanly-them-chi-nhanh";
+	    	}
+	    	mon.setActive(true);
+	    	mon.setSoLuongDaBan(0);
+	    	foodService.save(mon);
+	        return "redirect:/quanly/chinhanh/themmonan";
 	    }
 }

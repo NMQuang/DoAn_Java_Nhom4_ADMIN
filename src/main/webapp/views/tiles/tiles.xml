@@ -97,5 +97,15 @@
         <put-attribute name="title" value="Dashboard" />
         <put-attribute name="content" value="/views/pages/quanly/report-tong-don-hang-theo-loai.jsp" />
     </definition>
+    
+    <definition name="quanly-tong-chi-phi" extends="base-definition">
+        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="content" value="/views/pages/quanly/report-tong-chi-phi.jsp" />
+    </definition>
+    
+    <definition name="quanly-tong-chi-phi-chi-nhanh" extends="base-definition">
+        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="content" value="/views/pages/quanly/report-tong-chi-phi-chi-nhanh.jsp" />
+    </definition>
     <!-- /QUAN LY -->
 </tiles-definitions>

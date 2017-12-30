@@ -38,8 +38,11 @@
                 <li><a class="" href="<c:url value="/quanly/baocao/tongdonhangtheoloai"/>">
                     <span class="fa fa-arrow-right">&nbsp;</span> Đơn hàng theo loại
                 </a></li>
-                <li><a class="" href="#">
-                    <span class="fa fa-arrow-right">&nbsp;</span> Chi phí
+                <li><a class="" href="<c:url value="/quanly/baocao/tongchiphi"/>">
+                    <span class="fa fa-arrow-right">&nbsp;</span> Tổng chi phí
+                </a></li>
+                <li><a class="" href="<c:url value="/quanly/baocao/tongchiphichinhanh"/>">
+                    <span class="fa fa-arrow-right">&nbsp;</span> Chi phí chi nhánh
                 </a></li>
                 <li><a class="" href="#">
                     <span class="fa fa-arrow-right">&nbsp;</span> Món ăn

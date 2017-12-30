@@ -31,4 +31,13 @@ public class BaoCaoController {
 	public String getTongDonHangTheoLoai(){
 		return "quanly-tong-don-hang-theo-loai";
 	}
+	@RequestMapping("/tongchiphi")
+	public String getTongChiPhi(){
+		return "quanly-tong-chi-phi";
+	}
+	@RequestMapping("/tongchiphichinhanh")
+	public String getTongChiPhiChiNhanh(Model model){
+		model.addAttribute("AChiNhanh", chiNhanhService.getListChiNhanh());
+		return "quanly-tong-chi-phi-chi-nhanh";
+	}
 }

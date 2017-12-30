@@ -1,5 +1,7 @@
 package foodGroup4Quanly.controller.quanly;
 
+import java.util.List;
+
 import javax.servlet.ServletContext;
 import javax.validation.Valid;
 
@@ -17,9 +19,11 @@ import org.springframework.web.multipart.MultipartFile;
 import foodGroup4Quanly.common.ChiNhanhValidator;
 import foodGroup4Quanly.common.MonValidator;
 import foodGroup4Quanly.common.Utils;
+import foodGroup4Quanly.dto.BanDto;
 import foodGroup4Quanly.entity.Chinhanh;
 import foodGroup4Quanly.entity.Chinhanhmon;
 import foodGroup4Quanly.entity.Mon;
+import foodGroup4Quanly.service.BanService;
 import foodGroup4Quanly.service.BranchService;
 import foodGroup4Quanly.service.ChiNhanhMonService;
 import foodGroup4Quanly.service.DanhMucService;
@@ -55,6 +59,9 @@ public class QuanlyChinhanhController {
 
 	@Autowired
 	public FoodService foodService;
+
+	@Autowired
+	public BanService banService;
 
 	/***
 	 * get danh sách tất cả các chi nhánh
@@ -144,14 +151,6 @@ public class QuanlyChinhanhController {
 	}
 
 	/***
-	 * get thông tin chi tiết bàn của 1 chi nhánh
-	 */
-	@RequestMapping(value = "/chinhanh-ban/{idChinhanh}", method = RequestMethod.GET)
-	public String getChitietBanChinhanh(Model model, @PathVariable("idChinhanh") int idChinhanh) {
-		return "quanly-chi-tiet-chi-nhanh-ban";
-	}
-
-	/***
 	 * get thông tin chi tiết món của 1 chi nhánh
 	 */
 	@RequestMapping(value = "/chinhanh-menu/{idChinhanh}", method = RequestMethod.GET)
@@ -206,5 +205,17 @@ public class QuanlyChinhanhController {
 	public String updateChitietMonan(Model model, @PathVariable("idChinhanh") int idChinhanh) {
 
 		return "redirect:/quanly/chinhanh-menu/"+idChinhanh;
+	}
+
+
+	/***
+	 * get thông tin chi tiết bàn của 1 chi nhánh
+	 */
+	@RequestMapping(value = "/chinhanh-ban/{idChinhanh}", method = RequestMethod.GET)
+	public String getChitietBanChinhanh(Model model, @PathVariable("idChinhanh") int idChinhanh) {
+		model.addAttribute("table", banService.getListTableByChiNhanh(idChinhanh));
+		List<BanDto> list = banService.getListTableByChiNhanh(idChinhanh);
+		model.addAttribute("branch", branchService.getInfoChiNhanh(idChinhanh));
+		return "quanly-chi-tiet-chi-nhanh-ban";
 	}
 }

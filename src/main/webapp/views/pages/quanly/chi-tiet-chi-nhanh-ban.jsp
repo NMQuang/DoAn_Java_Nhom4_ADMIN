@@ -9,8 +9,8 @@
                 <em class="fa fa-home"></em>
             </a></li>
             <li>
-                <a href="danh_sach_chi_nhanh.html"> Danh sách chi nhánh </a></li>
-            <li>Chi nhánh 1</li>
+                <a href="${pageContext.request.contextPath}/quanly/chinhanh/"> Danh sách chi nhánh </a></li>
+            <li><a href="${pageContext.request.contextPath}/quanly/chinhanh/${branch.chiNhanhId}">Chi nhánh ${branch.ten}</a></li>
         </ol>
     </div><!--/.row-->
 
@@ -58,67 +58,36 @@
                             <thead>
                             <tr>
                                 <th width="5%" class="text-center red-text-table">ID</th>
-                                <th>Thông tin bàn</th>
+                                <th>Tên bàn</th>
+                                <th>Chi nhánh</th>
+                                <th>Tình trạng</th>
                                 <th width="5%"></th>
                                 <th width="5%"></th>
                             </tr>
                             </thead>
                             <tbody>
+                            <c:forEach items="${table }" var="item">
                             <tr>
-                                <td class="text-center red-text-table">1</td>
-                                <td>Thông tin bàn thứ nhất</td>
+                                <td class="text-center red-text-table">${item[0]}</td>
+                                <td>${item[1]}</td>
+                                <td>${item[3]}</td>
+                                <c:choose>
+								    <c:when test="${item[2]=='0'}">
+								      <td>Chưa đặt</td>
+								    </c:when>
+								    <c:otherwise>
+								      <td>Đã đặt</td>
+								    </c:otherwise>
+								</c:choose>
                                 <td>
-                                    <button type="button" class="btn btn-info" data-toggle="modal"
-                                            data-target="#modal-sua-ban" data-info="Thông tin bàn thứ nhất">Sửa</button>
+                                    <a href="#"></a><button type="button" class="btn btn-info" data-toggle="modal"
+                                            data-target="#modal-sua-ban" data-info="Thông tin bàn thứ nhất">Sửa</button></a>
                                 </td>
                                 <td>
                                     <a href="#" class="btn btn-danger">Xóa</a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="text-center red-text-table">1</td>
-                                <td>Thông tin bàn thứ hai</td>
-                                <td>
-                                    <button type="button" class="btn btn-info" data-toggle="modal"
-                                            data-target="#modal-sua-ban" data-info="Thông tin bàn thứ hai">Sửa</button>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn btn-danger">Xóa</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center red-text-table">1</td>
-                                <td>Thông tin bàn thứ ba</td>
-                                <td>
-                                    <button type="button" class="btn btn-info" data-toggle="modal"
-                                            data-target="#modal-sua-ban" data-info="Thông tin bàn thứ ba">Sửa</button>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn btn-danger">Xóa</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center red-text-table">1</td>
-                                <td>Thông tin bàn thứ tư</td>
-                                <td>
-                                    <buton type="button" class="btn btn-info" data-toggle="modal"
-                                           data-target="#modal-sua-ban" data-info="Thông tin bàn thứ tư">Sửa</buton>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn btn-danger">Xóa</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center red-text-table">1</td>
-                                <td>Thông tin bàn thứ năm</td>
-                                <td>
-                                    <button type="button" class="btn btn-info" data-toggle="modal"
-                                            data-target="#modal-sua-ban" data-info="Thông tin bàn thứ năm">Sửa</button>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn btn-danger">Xóa</a>
-                                </td>
-                            </tr>
+							</c:forEach>
                             </tbody>
                         </table>
                     </div>

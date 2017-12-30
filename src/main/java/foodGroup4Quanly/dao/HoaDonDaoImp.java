@@ -72,6 +72,17 @@ public class HoaDonDaoImp extends HibernateUtil implements HoaDonDao{
 	}
 
 
+	@Override
+	public long getCountTypeBill(Date begin, Date end, String loai) {
+		String hql = "select count(*) from Hoadon where ngay >= :begin and ngay < :end  and hinhThucMua = :hinhThucMua";
+		Query query = getSession().createQuery(hql);
+		query.setParameter("begin", begin);
+		query.setParameter("end", end);
+		query.setParameter("hinhThucMua", loai);
+		return (Long)query.uniqueResult();
+	}
+
+
 	
 
 	

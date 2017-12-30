@@ -92,5 +92,10 @@
         <put-attribute name="title" value="Dashboard" />
         <put-attribute name="content" value="/views/pages/quanly/report-tong-don-hang.jsp" />
     </definition>
+    
+    <definition name="quanly-tong-don-hang-theo-loai" extends="base-definition">
+        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="content" value="/views/pages/quanly/report-tong-don-hang-theo-loai.jsp" />
+    </definition>
     <!-- /QUAN LY -->
 </tiles-definitions>

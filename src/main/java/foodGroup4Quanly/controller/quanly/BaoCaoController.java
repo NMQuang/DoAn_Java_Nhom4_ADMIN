@@ -27,4 +27,8 @@ public class BaoCaoController {
 	public String getTongDonHang(){
 		return "quanly-tong-don-hang";
 	}
+	@RequestMapping("/tongdonhangtheoloai")
+	public String getTongDonHangTheoLoai(){
+		return "quanly-tong-don-hang-theo-loai";
+	}
 }

@@ -14,6 +14,7 @@ public class Luongchonhanvien {
     private String nam;
     private String moTa;
     private Timestamp ngay;
+    private int tien;
     private Nhanvien nhanvien;
 
     @Id
@@ -64,6 +65,12 @@ public class Luongchonhanvien {
     public void setNgay(Timestamp ngay) {
         this.ngay = ngay;
     }
+
+    @Basic
+    @Column(name = "Tien")
+    public int getTien() { return this.tien; }
+
+    public void setTien(int tien) { this.tien = tien; }
 
     @Override
     public boolean equals(Object o) {

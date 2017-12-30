@@ -32,8 +32,11 @@
                  <li><a class="" href="<c:url value="/quanly/baocao/tongdoanhthuchinhanh"/>">
                     <span class="fa fa-arrow-right">&nbsp;</span> Doanh thu chi nhánh
                 </a></li>
-                <li><a class="" href="#">
-                    <span class="fa fa-arrow-right">&nbsp;</span> Đơn hàng
+                <li><a class="" href="<c:url value="/quanly/baocao/tongdonhang"/>">
+                    <span class="fa fa-arrow-right">&nbsp;</span> Tổng đơn hàng
+                </a></li>
+                <li><a class="" href="<c:url value="/quanly/baocao/tongdonhangtheoloai"/>">
+                    <span class="fa fa-arrow-right">&nbsp;</span> Đơn hàng theo loại
                 </a></li>
                 <li><a class="" href="#">
                     <span class="fa fa-arrow-right">&nbsp;</span> Chi phí

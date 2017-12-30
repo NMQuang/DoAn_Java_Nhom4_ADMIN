@@ -30,6 +30,14 @@ public class HoaDonDaoImp extends HibernateUtil implements HoaDonDao{
 		return (Long)query.uniqueResult();
 	}
 
+	@Override
+	public long getCount(Date begin, Date end) {
+		String hql = "select count(*) from Hoadon where ngay >= :begin and ngay < :end";
+		Query query = getSession().createQuery(hql).setParameter("begin", begin);
+		query.setParameter("end", end);
+		return (long) query.uniqueResult();
+	}
+
 
 	@Override
 	public List<Hoadon> getListIn(Date begin, Date end, int chinhanh) {
@@ -63,6 +71,8 @@ public class HoaDonDaoImp extends HibernateUtil implements HoaDonDao{
 		return (Long)query.uniqueResult();
 	}
 
+
+	
 
 	
 	

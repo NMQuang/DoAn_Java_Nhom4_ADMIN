@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import foodGroup4Quanly.common.BanValidator;
 import foodGroup4Quanly.common.ChiNhanhValidator;
 import foodGroup4Quanly.common.MonValidator;
 import foodGroup4Quanly.common.Utils;
 import foodGroup4Quanly.dto.BanDto;
+import foodGroup4Quanly.entity.Ban;
 import foodGroup4Quanly.entity.Chinhanh;
 import foodGroup4Quanly.entity.Chinhanhmon;
 import foodGroup4Quanly.entity.Mon;
@@ -62,6 +64,9 @@ public class QuanlyChinhanhController {
 
 	@Autowired
 	public BanService banService;
+
+	@Autowired
+	public BanValidator banValidator;
 
 	/***
 	 * get danh sách tất cả các chi nhánh
@@ -217,5 +222,27 @@ public class QuanlyChinhanhController {
 		List<BanDto> list = banService.getListTableByChiNhanh(idChinhanh);
 		model.addAttribute("branch", branchService.getInfoChiNhanh(idChinhanh));
 		return "quanly-chi-tiet-chi-nhanh-ban";
+	}
+
+	@RequestMapping(value = "/chinhanh-ban/{idChinhanh}/themban", method = RequestMethod.GET)
+	public String getThemBan(Model model, @PathVariable("idChinhanh") int idChinhanh) {
+		model.addAttribute("chinhanh", branchService.getInfoChiNhanh(idChinhanh));
+		model.addAttribute("ban", new Ban());
+
+		return "quanly-them-ban";
+	}
+
+	@RequestMapping(value = "/chinhanh-ban/{idChinhanh}/themban", method = RequestMethod.POST)
+	public String postThemBan(@ModelAttribute("ban") Ban ban, BindingResult result, Model model, @PathVariable("idChinhanh") int idChinhanh) {
+
+		banValidator.validate(ban, result);
+		if (result.hasErrors()) {
+//			model.addAttribute("chinhanh", branchService.getListChiNhanh());
+			return "redirect:/quanly/chinhanh-ban/"+idChinhanh + "/themban";
+		}
+		ban.setChinhanh(branchService.getInfoChiNhanh(idChinhanh));
+		ban.setTinhTrang(0);
+		banService.saveBan(ban);
+		return "redirect:/quanly/chinhanh-ban/"+idChinhanh;
 	}
 }

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import foodGroup4Quanly.dao.BanDao;
 import foodGroup4Quanly.dto.BanDto;
+import foodGroup4Quanly.entity.Ban;
 
 @Component
 @Transactional
@@ -24,5 +25,15 @@ public class BanServiceImp implements BanService {
 			return list;
 		}
 		return null;
+	}
+
+	@Override
+	public Ban getInfoBan(int idBan) {
+		return banDao.getInfoBan(idBan);
+	}
+
+	@Override
+	public void saveBan(Ban ban) {
+		banDao.saveBan(ban);
 	}
 }

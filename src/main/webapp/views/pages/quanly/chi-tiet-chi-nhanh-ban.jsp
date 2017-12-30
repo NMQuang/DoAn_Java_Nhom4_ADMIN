@@ -33,9 +33,9 @@
                                 </div>
                             </div>
                         </div>
-                        <a class="btn btn-primary fix pull-right" data-toggle="modal" data-target="#modal-tao-ban">Thêm bàn mới</a>
+                        <a href="${pageContext.request.contextPath}/quanly/chinhanh-ban/${branch.chiNhanhId}/themban" class="btn btn-primary fix pull-right" >Thêm bàn mới</a>
 
-                        <div id="modal-tao-ban" class="modal fade" role="dialog">
+                        <!-- <div id="modal-tao-ban" class="modal fade" role="dialog">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -51,7 +51,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="panel-body">
                         <table class="table table-striped custab" id="table-search-header-bar">
@@ -80,18 +80,17 @@
 								    </c:otherwise>
 								</c:choose>
                                 <td>
-                                    <a href="#"></a><button type="button" class="btn btn-info" data-toggle="modal"
-                                            data-target="#modal-sua-ban" data-info="Thông tin bàn thứ nhất">Sửa</button></a>
+                                    <a href="${pageContext.request.contextPath}/quanly/chinhanh-ban/${branch.chiNhanhId}/suaban/${item[0]}" class="btn btn-info" >Sửa</a>
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-danger">Xóa</a>
+                                    <a href="${pageContext.request.contextPath}/quanly/chinhanh-ban/${branch.chiNhanhId}/xoaban/${item[0]}" class="btn btn-danger">Xóa</a>
                                 </td>
                             </tr>
 							</c:forEach>
                             </tbody>
                         </table>
                     </div>
-                    <div id="modal-sua-ban" class="modal fade" role="dialog">
+                    <%-- <div id="modal-sua-ban" class="modal fade" role="dialog">
                         <div class="modal-dialog">
                             <form>
                                 <div class="modal-content">
@@ -109,7 +108,7 @@
                                 </div>
                             </form>
                         </div>
-                    </div>
+                    </div> --%>
                 </div>
             </div>
         </div>

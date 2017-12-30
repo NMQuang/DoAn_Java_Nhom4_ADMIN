@@ -4,7 +4,7 @@
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 	<definition name="login-page" template="/views/tiles/layouts/Login.jsp"></definition>
-	
+
     <definition name="base-definition"
                 template="/views/tiles/layouts/defaultLayout.jsp">
         <put-attribute name="navigation" value="/views/tiles/template/navigation.jsp" />
@@ -41,6 +41,11 @@
     <definition name="quanly-them-chi-nhanh" extends="base-definition">
         <put-attribute name="title" value="Dashboard" />
         <put-attribute name="content" value="/views/pages/quanly/them-chi-nhanh.jsp" />
+    </definition>
+
+    <definition name="quanly-them-ban" extends="base-definition">
+        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="content" value="/views/pages/quanly/them-ban.jsp" />
     </definition>
 
     <definition name="quanly-list-danh-muc" extends="base-definition">

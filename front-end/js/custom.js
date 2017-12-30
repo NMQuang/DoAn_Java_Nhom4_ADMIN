@@ -126,7 +126,7 @@ $(document).ready(function () {
     })
 });
 
-//// Xử lý cho trang "tạo đơn hàng tại quán"
+/////////// ĐƠN HÀNG TẠI QUÁN /////////////
 //  Thêm món ăn vào danh sách món ăn được chọn bên phải
 $(document).ready(function() {
 
@@ -201,9 +201,9 @@ $(document).on('change', '.input-sl-mon-an', function () {
         }
     }
 });
-////
+/////////// END ĐƠN HÀNG TẠI QUÁN /////////////
 
-//// Xử lý cho trang "tạo đơn hàng mang về"
+/////////// ĐƠN HÀNG MANG VỀ /////////////
 $(document).on('change', '.input-sl-mon-an-dem-ve', function () {
 
     var value = $(this).val();
@@ -234,4 +234,28 @@ $(document).on('change', '.input-sl-mon-an-dem-ve', function () {
 $('.btn-remove-mon-an-mang-ve').click(function () {
     $(this).closest('tr').remove();
 });
+/////////// END ĐƠN HÀNG MANG VỀ /////////////
+
+/////////// DANH SÁCH ĐƠN HÀNG /////////////
+//// change select trang danh sách đơn hàng
+$(document).ready(function () {
+    $('.select-danh-sach-don-hang').hide();
+    $('#option-don-hang-online').show();
+    $('#select-danh-sach-don-hang').change(function () {
+        $('.select-danh-sach-don-hang').hide();
+        $('#'+$(this).val()).show();
+    });
+});
 ////
+
+//// tìm kiếm đơn hàng
+$('#input-tim-kiem-don-hang').keyup(function() {
+    var $rows = $('.table-don-hang tbody tr');
+    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+
+    $rows.show().filter(function() {
+        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+        return !~text.indexOf(val);
+    }).hide();
+});
+/////////// END DANH SÁCH ĐƠN HÀNG /////////////

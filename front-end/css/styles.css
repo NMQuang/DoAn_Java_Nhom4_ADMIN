@@ -1284,8 +1284,16 @@ p.back-link {
     font-size: 12px;
     text-transform: uppercase;
 }
+/*/////////////////////////////////////////////////////*/
+/*/////////////////////////////////////////////////////*/
+/*/////////// Phần đưọc thêm vào trong css ////////////*/
+/*/////////////////////////////////////////////////////*/
+/*/////////////////////////////////////////////////////*/
+select:disabled {
+    background: #eeeeee;
+}
 
-/*  Phần đưọc thêm vào trong css */
+
 a.fix, button.fix{
     margin-top: 3px;
     /*float: right !important;*/
@@ -1544,4 +1552,13 @@ a:hover, a:visited, a:link, a:active
     background: #eeeeee;
     color: red;
     font-weight: bold;
+}
+
+/*-----  Danh sách đơn hàng     -----*/
+/*  Lọc danh sách đơn hàng  */
+#input-tim-kiem-don-hang {
+    width: 300px;
+    height: 28px;
+    margin-top: 5px;
+    font-size: 14px;
 }

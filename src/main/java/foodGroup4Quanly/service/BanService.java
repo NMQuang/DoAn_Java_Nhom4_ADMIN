@@ -12,4 +12,6 @@ public interface BanService {
 	Ban getInfoBan(int idBan);
 
 	void saveBan(Ban ban);
+
+	void delete(int idBan);
 }

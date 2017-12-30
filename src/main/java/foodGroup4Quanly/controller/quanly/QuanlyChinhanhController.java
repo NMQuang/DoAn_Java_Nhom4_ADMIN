@@ -245,4 +245,16 @@ public class QuanlyChinhanhController {
 		banService.saveBan(ban);
 		return "redirect:/quanly/chinhanh-ban/"+idChinhanh;
 	}
+
+	@RequestMapping(value = "/chinhanh-ban/{idChinhanh}/xoaban/{idBan}", method = RequestMethod.GET)
+	public String xoaBan(Model model, @PathVariable("idChinhanh") int idChinhanh, @PathVariable("idBan") int idBan) {
+		banService.delete(idBan);
+		return "redirect:/quanly/chinhanh-ban/"+idChinhanh;
+	}
+
+	@RequestMapping(value = "/chinhanh-ban/{idChinhanh}", method = RequestMethod.POST)
+	public String updateChitietBan(Model model, @PathVariable("idChinhanh") int idChinhanh) {
+
+		return "redirect:/quanly/chinhanh-ban/"+idChinhanh;
+	}
 }

@@ -83,7 +83,7 @@
                                     <a href="${pageContext.request.contextPath}/quanly/chinhanh-ban/${branch.chiNhanhId}/suaban/${item[0]}" class="btn btn-info" >Sửa</a>
                                 </td>
                                 <td>
-                                    <a href="${pageContext.request.contextPath}/quanly/chinhanh-ban/${branch.chiNhanhId}/xoaban/${item[0]}" class="btn btn-danger">Xóa</a>
+                                    <a href="${pageContext.request.contextPath}/quanly/chinhanh-ban/${branch.chiNhanhId}/xoaban/${item[0]}" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa')">Xóa</a>
                                 </td>
                             </tr>
 							</c:forEach>

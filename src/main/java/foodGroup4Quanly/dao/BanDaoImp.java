@@ -43,4 +43,13 @@ public class BanDaoImp implements BanDao {
 		hibernateUtil.create(ban);
 	}
 
+	@Override
+	public void delete(int idBan) {
+		String hql = "delete from Ban where banId =:idBan";
+		Query query = hibernateUtil.getSession().createQuery(hql)
+				.setParameter("idBan", idBan);
+		query.executeUpdate();
+
+	}
+
 }

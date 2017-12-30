@@ -10,6 +10,7 @@ public class Chiphingay {
     private String ten;
     private String moTa;
     private Date ngay;
+    private int tien;
     private Chinhanh chinhanh;
 
     @Id
@@ -52,6 +53,12 @@ public class Chiphingay {
     public void setNgay(Date ngay) {
         this.ngay = ngay;
     }
+
+    @Basic
+    @Column(name = "Tien")
+    public int getTien() { return this.tien; }
+
+    public void setTien(int tien) { this.tien = tien; }
 
     @Override
     public boolean equals(Object o) {

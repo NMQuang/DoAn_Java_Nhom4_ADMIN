@@ -105,6 +105,7 @@ CREATE TABLE `chiphingay` (
   `MoTa` varchar(255) NOT NULL,
   `Ngay` date NOT NULL,
   `ChiNhanh` int(11) NOT NULL,
+  `Tien` decimal(10,0) NOT NULL,
   PRIMARY KEY (`ChiPhiNgayID`),
   KEY `fk_cpn_cn_idx` (`ChiNhanh`),
   CONSTRAINT `fk_cpn_cn` FOREIGN KEY (`ChiNhanh`) REFERENCES `chinhanh` (`ChiNhanhID`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -183,6 +184,7 @@ CREATE TABLE `hoadon` (
   `DiaChiGiao` varchar(450) DEFAULT NULL,
   `SDTNguoiNhan` varchar(45) DEFAULT NULL,
   `HoTenNguoiNhan` varchar(50) DEFAULT NULL,
+  `NgayTraTien` datetime DEFAULT NULL,
   PRIMARY KEY (`HoaDonID`),
   KEY `fk_hd_cn_idx` (`ChiNhanh`),
   KEY `fk_hd_ban_idx` (`Ban`),
@@ -228,6 +230,7 @@ CREATE TABLE `luongchonhanvien` (
   `Nam` varchar(4) NOT NULL,
   `MoTa` varchar(255) NOT NULL,
   `Ngay` datetime DEFAULT NULL,
+  `Tien` decimal(10,0) DEFAULT NULL,
   PRIMARY KEY (`NhanVien`,`Thang`,`Nam`),
   CONSTRAINT `fk_lcnv_nv` FOREIGN KEY (`NhanVien`) REFERENCES `nhanvien` (`NhanVienID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -324,6 +327,7 @@ CREATE TABLE `tienthuenha` (
   `MoTa` varchar(255) NOT NULL,
   `NgayChi` date NOT NULL,
   `ChiNhanh` int(11) NOT NULL,
+  `Tien` decimal(10,0) NOT NULL,
   PRIMARY KEY (`Thang`,`Nam`),
   KEY `fk_ttn_cn_idx` (`ChiNhanh`),
   CONSTRAINT `fk_ttn_cn` FOREIGN KEY (`ChiNhanh`) REFERENCES `chinhanh` (`ChiNhanhID`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -369,4 +373,4 @@ CREATE TABLE `trungtam` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-30  1:10:13
+-- Dump completed on 2017-12-31  0:04:02

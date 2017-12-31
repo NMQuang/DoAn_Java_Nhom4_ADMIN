@@ -14,7 +14,7 @@ public class HoaDonDaoImp extends HibernateUtil implements HoaDonDao{
 
 	@Override
 	public List<Hoadon> getListIn(Date begin, Date end) {
-		String hql = "from Hoadon where ngay >= :begin and ngay < :end";
+		String hql = "from Hoadon where ngayTraTien >= :begin and ngayTraTien < :end";
 		Query query = getSession().createQuery(hql).setParameter("begin", begin);
 		query.setParameter("end", end);
 		return query.list();
@@ -23,7 +23,7 @@ public class HoaDonDaoImp extends HibernateUtil implements HoaDonDao{
 
 	@Override
 	public long getSum(Date begin, Date end) {
-		String hql = "select COALESCE(sum(tongTien),0) from Hoadon where ngay >= :begin and ngay < :end";
+		String hql = "select COALESCE(sum(tongTien),0) from Hoadon where ngayTraTien >= :begin and ngayTraTien < :end";
 		Query query = getSession().createQuery(hql);
 		query.setParameter("begin", begin);
 		query.setParameter("end", end);
@@ -32,7 +32,7 @@ public class HoaDonDaoImp extends HibernateUtil implements HoaDonDao{
 
 	@Override
 	public long getCount(Date begin, Date end) {
-		String hql = "select count(*) from Hoadon where ngay >= :begin and ngay < :end";
+		String hql = "select count(*) from Hoadon where ngayTraTien >= :begin and ngayTraTien < :end";
 		Query query = getSession().createQuery(hql).setParameter("begin", begin);
 		query.setParameter("end", end);
 		return (long) query.uniqueResult();
@@ -41,7 +41,7 @@ public class HoaDonDaoImp extends HibernateUtil implements HoaDonDao{
 
 	@Override
 	public List<Hoadon> getListIn(Date begin, Date end, int chinhanh) {
-		String hql = "from Hoadon where ngay >= :begin and ngay < :end and chinhanh.chiNhanhId = :chinhanh";
+		String hql = "from Hoadon where ngayTraTien >= :begin and ngayTraTien < :end and chinhanh.chiNhanhId = :chinhanh";
 		Query query = getSession().createQuery(hql).setParameter("begin", begin);
 		query.setParameter("end", end);
 		query.setParameter("chinhanh", chinhanh);
@@ -51,7 +51,7 @@ public class HoaDonDaoImp extends HibernateUtil implements HoaDonDao{
 
 	@Override
 	public long getSum(Date begin, Date end, int chinhanh) {
-		String hql = "select COALESCE(sum(tongTien),0) from Hoadon where ngay >= :begin and ngay < :end and chinhanh.chiNhanhId = :chinhanh";
+		String hql = "select COALESCE(sum(tongTien),0) from Hoadon where ngayTraTien >= :begin and ngayTraTien < :end and chinhanh.chiNhanhId = :chinhanh";
 		Query query = getSession().createQuery(hql);
 		query.setParameter("begin", begin);
 		query.setParameter("end", end);
@@ -62,7 +62,7 @@ public class HoaDonDaoImp extends HibernateUtil implements HoaDonDao{
 
 	@Override
 	public long getCountTypeBill(Date begin, Date end, int chinhanh, String loai) {
-		String hql = "select count(*) from Hoadon where ngay >= :begin and ngay < :end and chinhanh.chiNhanhId = :chinhanh and hinhThucMua = :hinhThucMua";
+		String hql = "select count(*) from Hoadon where ngayTraTien >= :begin and ngayTraTien < :end and chinhanh.chiNhanhId = :chinhanh and hinhThucMua = :hinhThucMua";
 		Query query = getSession().createQuery(hql);
 		query.setParameter("begin", begin);
 		query.setParameter("end", end);
@@ -74,7 +74,7 @@ public class HoaDonDaoImp extends HibernateUtil implements HoaDonDao{
 
 	@Override
 	public long getCountTypeBill(Date begin, Date end, String loai) {
-		String hql = "select count(*) from Hoadon where ngay >= :begin and ngay < :end  and hinhThucMua = :hinhThucMua";
+		String hql = "select count(*) from Hoadon where ngayTraTien >= :begin and ngayTraTien < :end  and hinhThucMua = :hinhThucMua";
 		Query query = getSession().createQuery(hql);
 		query.setParameter("begin", begin);
 		query.setParameter("end", end);

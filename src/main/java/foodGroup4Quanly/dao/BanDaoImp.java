@@ -27,7 +27,7 @@ public class BanDaoImp implements BanDao {
 	@Override
 	public Ban getInfoBan(int idBan) {
 		Ban ban = new Ban();
-		String hql = "from Ban where banId =: idBan";
+		String hql = "from Ban where banId =:idBan";
 		Query query = hibernateUtil.getSession().createQuery(hql).setParameter("idBan", idBan);
 		if (query.list().isEmpty()) {
 			return null;

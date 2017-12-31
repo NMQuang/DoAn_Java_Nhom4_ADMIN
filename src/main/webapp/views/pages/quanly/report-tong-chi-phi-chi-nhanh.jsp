@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
-                <form class="form-horizontal" method="get" action="<c:url value="/report/tongdoanhchiphichinhanh" />">
+                <form class="form-horizontal" method="get" action="<c:url value="/report/tongchiphichinhanh" />">
                     <div class="row">
                         <div class="panel-body">
                         <c:if test="${param.error !=null}"><div id="fail" class="alert alert-danger">Có lỗi xảy ra với format dữ liệu</div></c:if>

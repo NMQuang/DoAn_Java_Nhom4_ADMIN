@@ -23,7 +23,7 @@ public class LuongChoNhanVienDaoImp extends HibernateUtil implements LuongChoNha
 
 	@Override
 	public long getSum(Date begin, Date end, int ChiNhanh) {
-		String hql = "select COALESCE(SUM(tien), 0) from Luongchonhanvien where ngay >= :begin and ngay < :end and chinhanh.chiNhanhId = :ChiNhanh";
+		String hql = "select COALESCE(SUM(tien), 0) from Luongchonhanvien where ngay >= :begin and ngay < :end and nhanvien.chinhanh.chiNhanhId = :ChiNhanh";
 		Query query = getSession().createQuery(hql);
 		query.setParameter("begin", begin);
 		query.setParameter("end", end);
@@ -36,6 +36,15 @@ public class LuongChoNhanVienDaoImp extends HibernateUtil implements LuongChoNha
 		String hql = "from Luongchonhanvien where ngay >= :begin and ngay < :end";
 		Query query = getSession().createQuery(hql).setParameter("begin", begin);
 		query.setParameter("end", end);
+		return query.list();
+	}
+
+	@Override
+	public List<Luongchonhanvien> getListIn(Date begin, Date end, int ChiNhanh) {
+		String hql = "from Luongchonhanvien where ngay >= :begin and ngay < :end and nhanvien.chinhanh.chiNhanhId = :ChiNhanh";
+		Query query = getSession().createQuery(hql).setParameter("begin", begin);
+		query.setParameter("end", end);
+		query.setParameter("ChiNhanh", ChiNhanh);
 		return query.list();
 	}
 

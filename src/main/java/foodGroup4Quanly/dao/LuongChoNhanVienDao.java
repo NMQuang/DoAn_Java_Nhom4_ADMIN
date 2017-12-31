@@ -9,4 +9,5 @@ public interface LuongChoNhanVienDao {
 	List<Luongchonhanvien> getListIn(Date begin, Date end);
 	long getSum(Date begin, Date end);
 	long getSum(Date begin, Date end, int ChiNhanh);
+	List<Luongchonhanvien> getListIn(Date begin, Date end, int ChiNhanh);
 }

@@ -39,4 +39,13 @@ public class TienThueNhaDaoImp extends HibernateUtil implements TienThueNhaDao{
 		return query.list();
 	}
 
+	@Override
+	public List<Tienthuenha> getListIn(Date begin, Date end, int ChiNhanh) {
+		String hql = "from Tienthuenha where ngayChi >= :begin and ngayChi < :end and chinhanh.chiNhanhId = :ChiNhanh";
+		Query query = getSession().createQuery(hql).setParameter("begin", begin);
+		query.setParameter("end", end);
+		query.setParameter("ChiNhanh", ChiNhanh);
+		return query.list();
+	}
+
 }

@@ -39,4 +39,13 @@ public class ChiPhiNgayDaoImp extends HibernateUtil implements ChiPhiNgayDao{
 		return query.list();
 	}
 
+	@Override
+	public List<Chiphingay> getListIn(Date begin, Date end, int ChiNhanh) {
+		String hql = "from Chiphingay where ngay >= :begin and ngay < :end and chinhanh.chiNhanhId = :ChiNhanh";
+		Query query = getSession().createQuery(hql).setParameter("begin", begin);
+		query.setParameter("end", end);
+		query.setParameter("ChiNhanh", ChiNhanh);
+		return query.list();
+	}
+
 }

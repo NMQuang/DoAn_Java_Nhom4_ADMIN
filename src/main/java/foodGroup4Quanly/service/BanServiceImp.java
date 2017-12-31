@@ -41,4 +41,9 @@ public class BanServiceImp implements BanService {
 	public void delete(int idBan) {
 		banDao.delete(idBan);
 	}
+
+	@Override
+	public void update(Ban b) {
+		banDao.update(b);
+	}
 }

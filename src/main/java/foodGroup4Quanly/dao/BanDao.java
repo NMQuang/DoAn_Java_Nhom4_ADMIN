@@ -14,4 +14,6 @@ public interface BanDao {
 	void saveBan(Ban ban);
 
 	void delete(int idBan);
+
+	void update(Ban b);
 }

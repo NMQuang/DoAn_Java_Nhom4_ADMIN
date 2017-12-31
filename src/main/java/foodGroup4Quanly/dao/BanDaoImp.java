@@ -52,4 +52,10 @@ public class BanDaoImp implements BanDao {
 
 	}
 
+	@Override
+	public void update(Ban b) {
+
+		hibernateUtil.update(b);
+	}
+
 }

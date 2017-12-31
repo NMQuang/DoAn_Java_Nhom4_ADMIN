@@ -47,8 +47,11 @@
                 <li><a class="" href="<c:url value="/quanly/baocao/tongsoluongmontrongthang"/>">
                     <span class="fa fa-arrow-right">&nbsp;</span> Món ăn
                 </a></li>
-                <li><a class="" href="#">
+                <li><a class="" href="<c:url value="/quanly/baocao/tongtien_donhang_khach"/>">
                     <span class="fa fa-arrow-right">&nbsp;</span> Khách hàng
+                </a></li>
+                <li><a class="" href="<c:url value="/quanly/baocao/thongkekhachmoi"/>">
+                    <span class="fa fa-arrow-right">&nbsp;</span> Lượng khách mới
                 </a></li>
             </ul>
         </li>

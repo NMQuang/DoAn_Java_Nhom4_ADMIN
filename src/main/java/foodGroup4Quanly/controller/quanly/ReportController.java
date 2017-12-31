@@ -1,5 +1,6 @@
 package foodGroup4Quanly.controller.quanly;
 
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ import foodGroup4Quanly.service.ChiNhanhService;
 import foodGroup4Quanly.service.ThongKeDoanhThuChiNhanhService;
 import foodGroup4Quanly.service.ThongKeDonHangService;
 import foodGroup4Quanly.service.ThongKeDonHangTheoLoaiService;
+import foodGroup4Quanly.service.ThongKeKhachHangService;
 import foodGroup4Quanly.service.ThongKeSoLuongMonService;
 import foodGroup4Quanly.service.ThongKeTongChiPhiChiNhanhService;
 import foodGroup4Quanly.service.ThongKeTongChiPhiService;
@@ -69,20 +71,25 @@ public class ReportController {
 	@Autowired
 	private ThongKeSoLuongMonService thongKeSoLuongMonService;
 	
+	@Autowired
+	private ThongKeKhachHangService thongKeKhachHangService;
+	
 	@RequestMapping("")
 	public void demo(@RequestParam(required=false) String type, HttpServletResponse response){
 		
 		List<Map<String, Object>> data = new ArrayList();
 		Map<String, Object> person = new HashMap<>();
-		person.put("ChiNhanh", "Tân phú");
-		person.put("Loai", "1");
-		person.put("Tien", 25000l);
+		person.put("time", new Timestamp(1514729050392l));
+		person.put("value", 25l);
 		data.add(person);
 		Map<String, Object> person1 = new HashMap<>();
-		person1.put("ChiNhanh", "Tân Bình");
-		person1.put("Loai", "2");
-		person1.put("Tien", 15000l);
+		person1.put("time", new Timestamp(1510709050392l));
+		person1.put("value", 150l);
 		data.add(person1);
+		Map<String, Object> person2 = new HashMap<>();
+		person2.put("time", new Timestamp(1510709050393l));
+		person2.put("value", 150l);
+		data.add(person2);
 		
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("title", "Xin chào");
@@ -90,7 +97,7 @@ public class ReportController {
 		JasperPrint jasperPrint;
 		try {
 			jasperPrint = JasperFillManager.fillReport(getClass().getClassLoader().getResourceAsStream("reports/Blank_A4.jasper"), parameters, datasource);
-			jasperExportUtils.export(type, response, jasperPrint);
+			jasperExportUtils.export("pdf", response, jasperPrint);
 		} catch (JRException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -720,6 +727,23 @@ public class ReportController {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	@RequestMapping("/thongkekhachmoi")
+	@ResponseBody
+	public void getLuongKhachMoi(@RequestParam(required=false) String format, HttpServletResponse response){
+		List<Map<String, Object>> data = new ArrayList<Map<String,Object>>();
+		data = thongKeKhachHangService.thongKeKhachTheoThoiGian();
+		
+		JRDataSource datasource = new JRBeanCollectionDataSource(data);
+		JasperPrint jasperPrint;
+		try {
+			jasperPrint = JasperFillManager.fillReport(getClass().getClassLoader().getResourceAsStream("reports/ThongKeLuongKhach.jasper"), null, datasource);
+			jasperExportUtils.export(format, response, jasperPrint);
+		} catch (JRException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	@ExceptionHandler(MyBadRequestException.class)
 	public String returnURL(MyBadRequestException ex){

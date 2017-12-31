@@ -46,4 +46,14 @@ public class BaoCaoController {
 		model.addAttribute("AChiNhanh", chiNhanhService.getListChiNhanh());
 		return "quanly-tong-so-luong-mon-trong-thang";
 	}
+	
+	@RequestMapping("/tongtien_donhang_khach")
+	public String getDonHangTongTienKhach(){
+		return "quanly-tong-tien-don-hang-khach";
+	}
+	
+	@RequestMapping("/thongkekhachmoi")
+	public String getLuongKhachMoi(){
+		return "quanly-luong-khach-moi";
+	}
 }

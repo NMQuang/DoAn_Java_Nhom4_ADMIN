@@ -9,8 +9,8 @@
                 <em class="fa fa-home"></em>
             </a></li>
             <li>
-                <a href="${pageContext.request.contextPath}/quanly/chinhanh"> Danh sách chi nhánh </a></li>
-            <li>Tạo bàn mơi</li>
+                <a href="${pageContext.request.contextPath}/quanly/chinhanh-ban/${chinhanh.chiNhanhId}"> Chi nhánh ${chinhanh.ten}</a></li>
+            <li>Tạo bàn mới</li>
         </ol>
     </div><!--/.row-->
 
@@ -44,6 +44,13 @@
 									<form:errors path="tinhTrang" cssClass="my_error"/>
 								</div>
 							</div>
+							<div class="form-group">
+                                <label class="col-sm-3 cn-label label-right">Chi nhánh</label>
+                                <div class="col-sm-9">
+                                    <form:input type="text" class="expanded-input" path="chinhanh.ten" placeholder="Tên"/>
+									<form:errors path="chinhanh.ten" cssClass="my_error"/>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

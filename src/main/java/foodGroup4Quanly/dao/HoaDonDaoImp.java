@@ -83,6 +83,27 @@ public class HoaDonDaoImp extends HibernateUtil implements HoaDonDao{
 	}
 
 
+	@Override
+	public long getSum(Date begin, Date end, String sdt) {
+		String hql = "select COALESCE(sum(tongTien),0) from Hoadon where ngayTraTien >= :begin and ngayTraTien < :end and khachhang.sdt = :sdt";
+		Query query = getSession().createQuery(hql);
+		query.setParameter("begin", begin);
+		query.setParameter("end", end);
+		query.setParameter("sdt", sdt);
+		return (Long)query.uniqueResult();
+	}
+
+
+	@Override
+	public long getCount(Date begin, Date end, String sdt) {
+		String hql = "select count(*) from Hoadon where ngayTraTien >= :begin and ngayTraTien < :end and khachhang.sdt = :sdt";
+		Query query = getSession().createQuery(hql).setParameter("begin", begin);
+		query.setParameter("end", end);
+		query.setParameter("sdt", sdt);
+		return (long) query.uniqueResult();
+	}
+
+
 	
 
 	

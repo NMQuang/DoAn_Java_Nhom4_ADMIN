@@ -30,7 +30,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import foodGroup4Quanly.common.JasperExportUtils;
 import foodGroup4Quanly.common.MyBadRequestException;
 import foodGroup4Quanly.entity.Chinhanh;
+import foodGroup4Quanly.entity.Khachhang;
 import foodGroup4Quanly.service.ChiNhanhService;
+import foodGroup4Quanly.service.KhachHangService;
 import foodGroup4Quanly.service.ThongKeDoanhThuChiNhanhService;
 import foodGroup4Quanly.service.ThongKeDonHangService;
 import foodGroup4Quanly.service.ThongKeDonHangTheoLoaiService;
@@ -49,6 +51,9 @@ public class ReportController {
 	
 	@Autowired
 	private ChiNhanhService chiNhanhService;
+	
+	@Autowired
+	private KhachHangService khachHangService;
 	
 	@Autowired
 	private ThongKeTongDoanhThuService thongKeTongDoanhThuService;
@@ -728,7 +733,54 @@ public class ReportController {
 		}
 		
 	}
-	
+	@RequestMapping("/tongdonhang_hoadon_khachhang")
+	@ResponseBody
+	public void getTongHoaDonTienKhachHang(@RequestParam(required=false) String format,  HttpServletResponse response,
+			@RequestParam String sdt , @RequestParam(required=false) @DateTimeFormat(pattern = "MM-yyyy") Date thang,
+			@RequestParam String type) throws MyBadRequestException{
+		List<Map<String, Object>> data = new ArrayList<Map<String,Object>>();
+		Map<String, Object> parameters = new HashMap<>();
+		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		
+		
+		Khachhang kh = khachHangService.get(sdt);
+		if(kh == null)
+			throw new MyBadRequestException("/quanly/baocao/tongtien_donhang_khach?notfound=");
+		parameters.put("name", kh.getTen());
+		parameters.put("sdt", kh.getSdt());
+		switch (type) {
+		case "option-all":{
+			data = thongKeKhachHangService.thongKeHoaDon_TienTheoFromBeginning(sdt);
+			parameters.put("type", "Từ lúc tạo thông tin");
+			break;
+		}
+		case "option-thang":{
+			if(thang == null)
+				throw new MyBadRequestException("/quanly/baocao/tongtien_donhang_khach?error=");
+			data = thongKeKhachHangService.thongKeHoaDon_TienTheoThang(thang, sdt);
+			Calendar c = Calendar.getInstance();
+			c.setTime(thang);
+			Date begin = c.getTime();
+			c.add(Calendar.DATE, c.getActualMaximum(Calendar.DAY_OF_MONTH) - 1);
+			System.out.println(c.getTime());
+			Date end = c.getTime();
+			parameters.put("type", "Tháng: " + dateFormat.format(begin) + " đến " + dateFormat.format(end));
+			break;
+		}
+		default:
+			throw new MyBadRequestException("/quanly/baocao/tongtien_donhang_khach?error=");
+		}
+		System.out.println(data.size());
+		JRDataSource datasource = new JRBeanCollectionDataSource(data);
+		JasperPrint jasperPrint;
+		try {
+			jasperPrint = JasperFillManager.fillReport(getClass().getClassLoader().getResourceAsStream("reports/ThongKeDonHang_TongTien_Khach.jasper"), parameters, datasource);
+			jasperExportUtils.export(format, response, jasperPrint);
+		} catch (JRException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	@RequestMapping("/thongkekhachmoi")
 	@ResponseBody
 	public void getLuongKhachMoi(@RequestParam(required=false) String format, HttpServletResponse response){

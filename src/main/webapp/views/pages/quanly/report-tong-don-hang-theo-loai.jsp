@@ -43,7 +43,7 @@
                                     <div class="form-group form-inline">
                                         <label class="control-label col-md-5">Chọn ngày:</label>
                                         <div class="input-group date" data-provide="datepicker">
-                                            <input id="id_ngay" name="ngay" type="text" class="form-control" style="border: 1px solid #cccccc;">
+                                            <input  id="id_ngay" name="ngay" type="text" class="form-control" style="border: 1px solid #cccccc;">
                                             <div class="input-group-addon">
                                                 <span class="fa fa-calendar"></span>
                                             </div>

@@ -14,4 +14,7 @@ public interface HoaDonDao {
 	long getSum(Date begin, Date end, int chinhanh);
 	long getCountTypeBill(Date begin, Date end, int chinhanh, String loai);
 	long getCountTypeBill(Date begin, Date end, String loai);
+	
+	long getSum(Date begin, Date end, String sdt);
+	long getCount(Date begin, Date end, String sdt);
 }

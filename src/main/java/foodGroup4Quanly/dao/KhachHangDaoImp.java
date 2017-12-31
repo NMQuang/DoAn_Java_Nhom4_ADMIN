@@ -32,4 +32,9 @@ public class KhachHangDaoImp extends HibernateUtil implements KhachHangDao{
 		return kq;
 	}
 
+	@Override
+	public Khachhang get(String sdt) {
+		return fetchById(sdt, Khachhang.class);
+	}
+
 }

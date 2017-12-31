@@ -40,4 +40,10 @@ public class BaoCaoController {
 		model.addAttribute("AChiNhanh", chiNhanhService.getListChiNhanh());
 		return "quanly-tong-chi-phi-chi-nhanh";
 	}
+	
+	@RequestMapping("/tongsoluongmontrongthang")
+	public String getTongSoLuongMonTrongThang(Model model){
+		model.addAttribute("AChiNhanh", chiNhanhService.getListChiNhanh());
+		return "quanly-tong-so-luong-mon-trong-thang";
+	}
 }

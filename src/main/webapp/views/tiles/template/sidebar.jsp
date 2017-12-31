@@ -44,7 +44,7 @@
                 <li><a class="" href="<c:url value="/quanly/baocao/tongchiphichinhanh"/>">
                     <span class="fa fa-arrow-right">&nbsp;</span> Chi phí chi nhánh
                 </a></li>
-                <li><a class="" href="#">
+                <li><a class="" href="<c:url value="/quanly/baocao/tongsoluongmontrongthang"/>">
                     <span class="fa fa-arrow-right">&nbsp;</span> Món ăn
                 </a></li>
                 <li><a class="" href="#">

@@ -33,6 +33,7 @@ import foodGroup4Quanly.service.ChiNhanhService;
 import foodGroup4Quanly.service.ThongKeDoanhThuChiNhanhService;
 import foodGroup4Quanly.service.ThongKeDonHangService;
 import foodGroup4Quanly.service.ThongKeDonHangTheoLoaiService;
+import foodGroup4Quanly.service.ThongKeSoLuongMonService;
 import foodGroup4Quanly.service.ThongKeTongChiPhiChiNhanhService;
 import foodGroup4Quanly.service.ThongKeTongChiPhiService;
 import foodGroup4Quanly.service.ThongKeTongDoanhThuService;
@@ -64,6 +65,9 @@ public class ReportController {
 	
 	@Autowired
 	private ThongKeTongChiPhiChiNhanhService thongKeTongChiPhiChiNhanhService;
+	
+	@Autowired
+	private ThongKeSoLuongMonService thongKeSoLuongMonService;
 	
 	@RequestMapping("")
 	public void demo(@RequestParam(required=false) String type, HttpServletResponse response){
@@ -672,6 +676,51 @@ public class ReportController {
 		}
 	}
 	
+	@RequestMapping("/tongsoluongmontrongthang")
+	@ResponseBody
+	public void getTongSoLuongMonBanTrongThang(HttpServletResponse response, @RequestParam(required = false) @DateTimeFormat(pattern = "MM-yyyy") Date thang, @RequestParam(defaultValue="-1") Integer chinhanh,
+			@RequestParam(required=true) String format) throws MyBadRequestException{
+		if(thang == null)
+			throw  new MyBadRequestException("/quanly/baocao/tongsoluongmontrongthang?error=");
+		Map<String, Object> parameters = new HashMap<>();
+		List<Map<String, Object>> data = new ArrayList<Map<String,Object>>();
+		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		
+		if(chinhanh == -1){// thong ke cho tong
+			data = thongKeSoLuongMonService.thongKeSoLuongMonTheoThang(thang);
+		}else{
+			Chinhanh cn = chiNhanhService.getInfoBranch(chinhanh);
+			
+			if(cn == null)
+				throw  new MyBadRequestException("/quanly/baocao/tongsoluongmontrongthang?error=");
+			parameters.put("title", cn.getTen());
+			data = thongKeSoLuongMonService.thongKeSoLuongMonTheoThang(thang, chinhanh);
+		}
+		Calendar c = Calendar.getInstance();
+		c.setTime(thang);
+		Date begin = c.getTime();
+		c.add(Calendar.DATE, c.getActualMaximum(Calendar.DAY_OF_MONTH) - 1);
+		System.out.println(c.getTime());
+		Date end = c.getTime();
+		parameters.put("type", "Tháng: " + dateFormat.format(begin) + " đến " + dateFormat.format(end));
+		
+		if(format.equals("png") || format.equals("xlsx"))
+			parameters.put(JRParameter.IS_IGNORE_PAGINATION, Boolean.TRUE);
+		
+		JRDataSource datasource = new JRBeanCollectionDataSource(data);
+		JasperPrint jasperPrint;
+		try {
+			if(chinhanh == -1)
+				jasperPrint = JasperFillManager.fillReport(getClass().getClassLoader().getResourceAsStream("reports/ThongKeLuongMonBan.jasper"), parameters, datasource);
+			else
+				jasperPrint = JasperFillManager.fillReport(getClass().getClassLoader().getResourceAsStream("reports/ThongKeLuongMonBanChiNhanh.jasper"), parameters, datasource);
+			jasperExportUtils.export(format, response, jasperPrint);
+		} catch (JRException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	@ExceptionHandler(MyBadRequestException.class)
 	public String returnURL(MyBadRequestException ex){
 		return "redirect:" + ex.getMessage();

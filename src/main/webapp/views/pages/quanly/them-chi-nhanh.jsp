@@ -81,7 +81,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <%-- <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -111,7 +111,7 @@
                                         <input class="expanded-input" id="table-info" name="table-info" placeholder="Thông tin bàn">
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-success">Xác nhận</button>
+                                        <button type="button" class="btn btn-success">Xác nhận</button>
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                     </div>
                                 </div>
@@ -199,7 +199,7 @@
                                         <input class="expanded-input" type="text" id="table-change-info">
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-success">Xác nhận</button>
+                                        <button type="button" class="btn btn-success">Xác nhận</button>
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                     </div>
                                 </div>
@@ -317,14 +317,14 @@
                                 </table>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-success">Thêm món ăn đã chọn</button>
+                                <button type="button" class="btn btn-success">Thêm món ăn đã chọn</button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --%>
 
         <div class="text-center">
             <button type="submit" class="btn btn-lg btn-primary">Tạo chi nhánh</button>

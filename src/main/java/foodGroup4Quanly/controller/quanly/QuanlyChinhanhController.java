@@ -1,8 +1,6 @@
 package foodGroup4Quanly.controller.quanly;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.validation.Valid;
@@ -18,10 +16,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import foodGroup4Quanly.common.BanValidator;
 import foodGroup4Quanly.common.ChiNhanhValidator;
 import foodGroup4Quanly.common.MonValidator;
+import foodGroup4Quanly.common.Utils;
+import foodGroup4Quanly.dto.BanDto;
+import foodGroup4Quanly.entity.Ban;
 import foodGroup4Quanly.entity.Chinhanh;
+import foodGroup4Quanly.entity.Chinhanhmon;
 import foodGroup4Quanly.entity.Mon;
+import foodGroup4Quanly.service.BanService;
 import foodGroup4Quanly.service.BranchService;
 import foodGroup4Quanly.service.ChiNhanhMonService;
 import foodGroup4Quanly.service.DanhMucService;
@@ -33,6 +37,7 @@ import foodGroup4Quanly.service.TinhThanhService;
 public class QuanlyChinhanhController {
 
 	final String UPLOAD_DIRECTORY = "resources/images/chi-nhanh";
+	final String UPLOAD_DIRECTORY1 = "resources/images/mon-an";
 	@Autowired
 	public ServletContext context;
 
@@ -56,9 +61,16 @@ public class QuanlyChinhanhController {
 
 	@Autowired
 	public FoodService foodService;
+
+	@Autowired
+	public BanService banService;
+
+	@Autowired
+	public BanValidator banValidator;
+
 	/***
 	 * get danh sách tất cả các chi nhánh
-	 * */
+	 */
 	@RequestMapping(value = "/chinhanh", method = RequestMethod.GET)
 	public String getListChinhanh(Model model) {
 		model.addAttribute("listChiNhanh", branchService.getListChiNhanh());
@@ -67,7 +79,7 @@ public class QuanlyChinhanhController {
 
 	/***
 	 * get thông tin chi tiết của 1 chi nhánh
-	 * */
+	 */
 	@RequestMapping(value = "/chinhanh/{idChinhanh}", method = RequestMethod.GET)
 	public String getChitietChinhanh(Model model, @PathVariable("idChinhanh") int idChinhanh) {
 
@@ -75,7 +87,7 @@ public class QuanlyChinhanhController {
 			return "quanly-list-chi-nhanh";
 		} else {
 			Chinhanh chiNhanh = branchService.getInfoChiNhanh(idChinhanh);
-			model.addAttribute("chiNhanh",chiNhanh);
+			model.addAttribute("chiNhanh", chiNhanh);
 			model.addAttribute("tinhThanh", tinhThanhService.getAllTinhThanh());
 		}
 		return "quanly-chi-tiet-chi-nhanh";
@@ -83,60 +95,35 @@ public class QuanlyChinhanhController {
 
 	/***
 	 * update 1 chi nhánh
-	 * */
+	 */
 	@RequestMapping(value = "/chinhanh/{idChinhanh}", method = RequestMethod.POST)
-	    public String updateChitietMonan(Model model, @PathVariable("idChinhanh") int idChiNhanh, @RequestParam("hinhanh") MultipartFile file, @ModelAttribute("chiNhanh") Chinhanh chiNhanh, BindingResult result) {
-	    	Chinhanh cn = branchService.getInfoChiNhanh(idChiNhanh);
-	    	if(!file.isEmpty()){
-	    		try{
-	    		byte[] bytes = file.getBytes();
+	public String updateChiNhanh(Model model, @PathVariable("idChinhanh") int idChiNhanh, @RequestParam("hinhanh") MultipartFile file, @ModelAttribute("chiNhanh") Chinhanh chiNhanh, BindingResult result) {
+		Chinhanh cn = branchService.getInfoChiNhanh(idChiNhanh);
+		if (!file.isEmpty()) {
+			Utils.saveImage(file, context, UPLOAD_DIRECTORY1);
+			cn.setHinhAnh(file.getOriginalFilename());
+		}
+		chiNhanh.setHinhAnh(cn.getHinhAnh());
+		chiNhanhValidator.validate(chiNhanh, result);
+		if (result.hasErrors()) {
+			model.addAttribute("tinhThanh", tinhThanhService.getAllTinhThanh());
+			model.addAttribute("chiNhanh", chiNhanh);
+			return "quanly-chi-tiet-chi-nhanh";
+		}
+		cn.setTen(chiNhanh.getTen());
+		cn.setDiaChi(chiNhanh.getDiaChi());
+		cn.setDienThoai(chiNhanh.getDienThoai());
+		cn.setTinhthanh(chiNhanh.getTinhthanh());
+		branchService.update(cn);
 
-				// Creating the directory to store file
-				String uploadPath = context.getRealPath("") + File.separator
-						+ UPLOAD_DIRECTORY;
-				File dir = new File(uploadPath);
-
-				if (!dir.exists()) {
-					dir.mkdirs();
-				}
-				// Create the file on server
-				File serverFile = new File(dir.getAbsolutePath()
-						+ File.separator + file.getOriginalFilename());
-				BufferedOutputStream stream = new BufferedOutputStream(
-						new FileOutputStream(serverFile));
-				stream.write(bytes);
-				stream.close();
-
-				System.out.println("Server File Location="
-						+ serverFile.getAbsolutePath());
-				String filepath = "/" + UPLOAD_DIRECTORY + "/"
-						+ file.getOriginalFilename();
-				cn.setHinhAnh(file.getOriginalFilename());
-	    		}catch(Exception e){
-
-	    		}
-	    	}
-	    	chiNhanh.setHinhAnh(cn.getHinhAnh());
-	    	chiNhanhValidator.validate(chiNhanh, result);
-	    	if(result.hasErrors()){
-	    		model.addAttribute("tinhThanh", tinhThanhService.getAllTinhThanh());
-	    		model.addAttribute("chiNhanh",chiNhanh);
-	    		return "quanly-chi-tiet-chi-nhanh";
-	    	}
-	    	cn.setTen(chiNhanh.getTen());
-	    	cn.setDiaChi(chiNhanh.getDiaChi());
-	    	cn.setDienThoai(chiNhanh.getDienThoai());
-	    	cn.setTinhthanh(chiNhanh.getTinhthanh());
-	    	branchService.update(cn);
-
-	    	model.addAttribute("tinhThanh", tinhThanhService.getAllTinhThanh());
-	    	model.addAttribute("chiNhanh", branchService.getInfoChiNhanh(idChiNhanh));
-	        return "quanly-chi-tiet-chi-nhanh";
-	    }
+		model.addAttribute("tinhThanh", tinhThanhService.getAllTinhThanh());
+		model.addAttribute("chiNhanh", branchService.getInfoChiNhanh(idChiNhanh));
+		return "redirect:/quanly/chinhanh";
+	}
 
 	/***
 	 * thêm 1 chi nhánh
-	 * */
+	 */
 	@RequestMapping(value = "chinhanh/themchinhanh", method = RequestMethod.GET)
 	public String getThemChinhanh(Model model) {
 		model.addAttribute("chiNhanh", new Chinhanh());
@@ -150,34 +137,9 @@ public class QuanlyChinhanhController {
 	@RequestMapping(value = "/chinhanh/themchinhanh", method = RequestMethod.POST)
 	public String postThemChinhanh(@RequestParam("hinhanh") MultipartFile file, @RequestParam String hinhanh_backup, @ModelAttribute("chiNhanh") @Valid  Chinhanh chiNhanh, BindingResult result, Model model) {
 		if(!file.isEmpty()){
-	    		try{
-	    		byte[] bytes = file.getBytes();
-
-				// Creating the directory to store file
-				String uploadPath = context.getRealPath("") + File.separator
-						+ UPLOAD_DIRECTORY;
-				File dir = new File(uploadPath);
-
-				if (!dir.exists())
-					dir.mkdirs();
-
-				// Create the file on server
-				File serverFile = new File(dir.getAbsolutePath()
-						+ File.separator + file.getOriginalFilename());
-				BufferedOutputStream stream = new BufferedOutputStream(
-						new FileOutputStream(serverFile));
-				stream.write(bytes);
-				stream.close();
-
-				System.out.println("Server File Location="
-						+ serverFile.getAbsolutePath());
-				String filepath = "/" + UPLOAD_DIRECTORY + "/"
-						+ file.getOriginalFilename();
-				chiNhanh.setHinhAnh(file.getOriginalFilename());
-	    		}catch(Exception e){
-
-	    		}
-	    	}
+			Utils.saveImage(file, context, UPLOAD_DIRECTORY);
+			chiNhanh.setHinhAnh(file.getOriginalFilename());
+		}
 
 		System.out.println(hinhanh_backup + "--" + chiNhanh.getHinhAnh());
 	    	if((hinhanh_backup != "" || hinhanh_backup != null) && chiNhanh.getHinhAnh() == null){
@@ -194,16 +156,8 @@ public class QuanlyChinhanhController {
 	}
 
 	/***
-	 * get thông tin chi tiết bàn của 1 chi nhánh
-	 * */
-	@RequestMapping(value = "/chinhanh-ban/{idChinhanh}", method = RequestMethod.GET)
-	public String getChitietBanChinhanh(Model model, @PathVariable("idChinhanh") int idChinhanh) {
-		return "quanly-chi-tiet-chi-nhanh-ban";
-	}
-
-	/***
 	 * get thông tin chi tiết món của 1 chi nhánh
-	 * */
+	 */
 	@RequestMapping(value = "/chinhanh-menu/{idChinhanh}", method = RequestMethod.GET)
 	public String getChitietMenuChinhanh(Model model, @PathVariable("idChinhanh") int idChinhanh) {
 
@@ -212,10 +166,95 @@ public class QuanlyChinhanhController {
 		return "quanly-chi-tiet-chi-nhanh-menu";
 	}
 
-	@RequestMapping(value = "/chinhanh-menu/themmonan", method = RequestMethod.GET)
-	    public String getThemMonan(Model model) {
-	    	model.addAttribute("ADanhmuc", danhMucService.getAllDanhMuc());
-	    	model.addAttribute("mon", new Mon());
-	        return "quanly-them-mon-an";
-	    }
+	@RequestMapping(value = "/chinhanh-menu/{idChinhanh}/themmonan", method = RequestMethod.GET)
+	public String getThemMonan(Model model, @PathVariable("idChinhanh") int idChinhanh) {
+		model.addAttribute("ADanhmuc", danhMucService.getAllDanhMuc());
+		model.addAttribute("mon", new Mon());
+
+		return "quanly-them-mon-an";
+	}
+
+	@RequestMapping(value = "/chinhanh-menu/{idChinhanh}/themmonan", method = RequestMethod.POST)
+	public String postThemMonan(@RequestParam("hinhanh") MultipartFile file, @RequestParam String hinhanh_backup, @ModelAttribute("mon") Mon mon, BindingResult result, Model model, @PathVariable("idChinhanh") int idChinhanh) {
+		if (!file.isEmpty()) {
+			Utils.saveImage(file, context, UPLOAD_DIRECTORY1);
+			mon.setHinhAnh(file.getOriginalFilename());
+		}
+		System.out.println(hinhanh_backup + "--" + mon.getHinhAnh());
+		if ((hinhanh_backup != "" || hinhanh_backup != null) && mon.getHinhAnh() == null) {
+			mon.setHinhAnh(hinhanh_backup);
+		}
+		monValidator.validate(mon, result);
+		if (result.hasErrors()) {
+			model.addAttribute("ADanhmuc", danhMucService.getAllDanhMuc());
+			return "redirect:/quanly/chinhanh-menu/"+idChinhanh + "/themmonan";
+		}
+		mon.setActive(true);
+		mon.setSoLuongDaBan(0);
+		foodService.save(mon);
+		Chinhanhmon chiNhanhMon = new Chinhanhmon();
+		chiNhanhMon.setMon(mon);
+		chiNhanhMon.setChinhanh(branchService.getInfoChiNhanh(idChinhanh));
+		chiNhanhMonService.save(chiNhanhMon);
+		return "redirect:/quanly/chinhanh-menu/"+idChinhanh;
+	}
+
+	@RequestMapping(value = "/chinhanh-menu/{idChinhanh}/xoamonan/{idMon}", method = RequestMethod.GET)
+	public String xoaMonan(Model model, @PathVariable("idChinhanh") int idChinhanh, @PathVariable("idMon") int idMon) {
+//		foodService.delete(idMon);
+		chiNhanhMonService.delete(idChinhanh, idMon);
+		return "redirect:/quanly/chinhanh-menu/"+idChinhanh;
+	}
+
+	@RequestMapping(value = "/chinhanh-menu/{idChinhanh}", method = RequestMethod.POST)
+	public String updateChitietMonan(Model model, @PathVariable("idChinhanh") int idChinhanh) {
+
+		return "redirect:/quanly/chinhanh-menu/"+idChinhanh;
+	}
+
+
+	/***
+	 * get thông tin chi tiết bàn của 1 chi nhánh
+	 */
+	@RequestMapping(value = "/chinhanh-ban/{idChinhanh}", method = RequestMethod.GET)
+	public String getChitietBanChinhanh(Model model, @PathVariable("idChinhanh") int idChinhanh) {
+		model.addAttribute("table", banService.getListTableByChiNhanh(idChinhanh));
+		List<BanDto> list = banService.getListTableByChiNhanh(idChinhanh);
+		model.addAttribute("branch", branchService.getInfoChiNhanh(idChinhanh));
+		return "quanly-chi-tiet-chi-nhanh-ban";
+	}
+
+	@RequestMapping(value = "/chinhanh-ban/{idChinhanh}/themban", method = RequestMethod.GET)
+	public String getThemBan(Model model, @PathVariable("idChinhanh") int idChinhanh) {
+		model.addAttribute("chinhanh", branchService.getInfoChiNhanh(idChinhanh));
+		model.addAttribute("ban", new Ban());
+
+		return "quanly-them-ban";
+	}
+
+	@RequestMapping(value = "/chinhanh-ban/{idChinhanh}/themban", method = RequestMethod.POST)
+	public String postThemBan(@ModelAttribute("ban") Ban ban, BindingResult result, Model model, @PathVariable("idChinhanh") int idChinhanh) {
+
+		banValidator.validate(ban, result);
+		if (result.hasErrors()) {
+//			model.addAttribute("chinhanh", branchService.getListChiNhanh());
+			return "redirect:/quanly/chinhanh-ban/"+idChinhanh + "/themban";
+		}
+		ban.setChinhanh(branchService.getInfoChiNhanh(idChinhanh));
+		ban.setTinhTrang(0);
+		banService.saveBan(ban);
+		return "redirect:/quanly/chinhanh-ban/"+idChinhanh;
+	}
+
+	@RequestMapping(value = "/chinhanh-ban/{idChinhanh}/xoaban/{idBan}", method = RequestMethod.GET)
+	public String xoaBan(Model model, @PathVariable("idChinhanh") int idChinhanh, @PathVariable("idBan") int idBan) {
+		banService.delete(idBan);
+		return "redirect:/quanly/chinhanh-ban/"+idChinhanh;
+	}
+
+	@RequestMapping(value = "/chinhanh-ban/{idChinhanh}", method = RequestMethod.POST)
+	public String updateChitietBan(Model model, @PathVariable("idChinhanh") int idChinhanh) {
+
+		return "redirect:/quanly/chinhanh-ban/"+idChinhanh;
+	}
 }

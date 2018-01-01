@@ -40,7 +40,7 @@
 							<div class="form-group">
 								<label class="col-sm-3 cn-label label-right" >Tình trạng</label>
 								<div class="col-lg-9">
-									<form:input type="text" class="expanded-input" path="tinhTrang" placeholder="Tên"/>
+									<form:input type="text" class="expanded-input" path="tinhTrang" placeholder="Tên" disabled="true"/>
 									<form:errors path="tinhTrang" cssClass="my_error"/>
 								</div>
 							</div>

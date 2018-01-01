@@ -209,7 +209,7 @@ public class QuanlyChinhanhController {
 	@RequestMapping(value = "/chinhanh-menu/{idChinhanh}", method = RequestMethod.POST)
 	public String updateChitietMonan(Model model, @PathVariable("idChinhanh") int idChinhanh) {
 
-		return "redirect:/quanly/chinhanh-menu/"+idChinhanh;
+		return "redirect:/quanly/chinhanh/";
 	}
 
 
@@ -252,9 +252,36 @@ public class QuanlyChinhanhController {
 		return "redirect:/quanly/chinhanh-ban/"+idChinhanh;
 	}
 
-	@RequestMapping(value = "/chinhanh-ban/{idChinhanh}", method = RequestMethod.POST)
-	public String updateChitietBan(Model model, @PathVariable("idChinhanh") int idChinhanh) {
+	@RequestMapping(value = "/chinhanh-ban/{idChinhanh}/suaban/{idBan}", method = RequestMethod.GET)
+	public String getChiTietBan(Model model, @PathVariable("idChinhanh") int idChinhanh, @PathVariable("idBan") int idBan, @ModelAttribute("ban") Ban ban) {
+		model.addAttribute("ban", banService.getInfoBan(idBan));
+		model.addAttribute("chinhanh", branchService.getInfoChiNhanh(idChinhanh));
+		return "quanly-chi-tiet-ban";
+	}
+
+	@RequestMapping(value = "/chinhanh-ban/{idChinhanh}/suaban/{idBan}", method = RequestMethod.POST)
+	public String updateBan(Model model, @PathVariable("idChinhanh") int idChinhanh, @PathVariable("idBan") int idBan, @ModelAttribute("ban") Ban ban, BindingResult result) {
+		Ban b = banService.getInfoBan(idBan);
+
+		if (result.hasErrors()) {
+			return "quanly-chi-tiet-ban";
+		}
+
+//		b.setChinhanh(ban.getChinhanh());
+		b.setTenBan(ban.getTenBan());
+		b.setTinhTrang(ban.getTinhTrang());
+//		Chinhanh cn = branchService.getInfoChiNhanh(idChinhanh);
+//		for (Ban bt : cn.getBans()) {
+//			if (bt.getBanId() == idBan) {
+				banService.update(b);
+//			}
+//		}
 
 		return "redirect:/quanly/chinhanh-ban/"+idChinhanh;
+	}
+
+	@RequestMapping(value = "/chinhanh-ban/{idChinhanh}", method = RequestMethod.POST)
+	public String updateChitietBan(Model model, @PathVariable("idChinhanh") int idChinhanh) {
+		return "redirect:/quanly/chinhanh/";
 	}
 }

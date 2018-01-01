@@ -48,6 +48,11 @@
         <put-attribute name="content" value="/views/pages/quanly/them-ban.jsp" />
     </definition>
 
+        <definition name="quanly-chi-tiet-ban" extends="base-definition">
+        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="content" value="/views/pages/quanly/chi-tiet-ban.jsp" />
+    </definition>
+
     <definition name="quanly-list-danh-muc" extends="base-definition">
         <put-attribute name="title" value="Dashboard" />
         <put-attribute name="content" value="/views/pages/quanly/list-danh-muc.jsp" />

@@ -65,7 +65,7 @@ public class Ban {
         return result;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "ChiNhanh", referencedColumnName = "ChiNhanhID", nullable = false)
     public Chinhanh getChinhanh() {
         return chinhanh;

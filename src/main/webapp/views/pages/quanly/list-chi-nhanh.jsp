@@ -29,8 +29,8 @@
             </thead>
             <c:forEach items="${listChiNhanh}" var="branch">
             <tr>
-                <td class="text-center red-text-table">1</td>
-                <td><a href="${pageContext.request.contextPath}/quanly/chinhanh/${branch.chiNhanhId}">${branch.ten}</a></td>
+                <td class="text-center red-text-table">${branch.chiNhanhId }</td>
+                <td><a href="${pageContext.request.contextPath}/quanly/chinhanh-daydu/${branch.chiNhanhId}">${branch.ten}</a></td>
                 <td>${branch.diaChi}</td>
                 <td>${branch.dienThoai}</td>
                 <td>${branch.tinhthanh.tenTinh}</td>

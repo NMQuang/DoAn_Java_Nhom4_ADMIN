@@ -10,7 +10,7 @@
             </a></li>
             <li>
                 <a href="${pageContext.request.contextPath}/quanly/chinhanh/"> Danh sách chi nhánh </a></li>
-            <li><a href="${pageContext.request.contextPath}/quanly/chinhanh/${branch.chiNhanhId}">Chi nhánh ${branch.ten}</a></li>
+            <li><a href="${pageContext.request.contextPath}/quanly/chinhanh-daydu/${branch.chiNhanhId}">Chi nhánh ${branch.ten}</a></li>
         </ol>
     </div><!--/.row-->
 

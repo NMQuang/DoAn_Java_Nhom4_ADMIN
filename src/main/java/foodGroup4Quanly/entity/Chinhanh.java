@@ -11,6 +11,7 @@ public class Chinhanh {
     private String diaChi;
     private String dienThoai;
     private String hinhAnh;
+    private Boolean active;
     private Set<AccountAdmin> accountAdmins;
     private Set<Ban> bans;
     private Tinhthanh tinhthanh;
@@ -70,6 +71,12 @@ public class Chinhanh {
     public void setHinhAnh(String hinhAnh) {
 	this.hinhAnh = hinhAnh;
     }
+
+    @Basic
+    @Column(name = "Active")
+    public boolean getActive() { return this.active; }
+
+    public void setActive(boolean active) { this.active = active; }
 
 @Override
     public boolean equals(Object o) {

@@ -9,6 +9,7 @@ public class Ban {
     private int banId;
     private String tenBan;
     private int tinhTrang;
+    private Boolean active;
     private Chinhanh chinhanh;
     private Set<Hoadon> hoadons;
 
@@ -42,6 +43,12 @@ public class Ban {
     public void setTinhTrang(int tinhTrang) {
         this.tinhTrang = tinhTrang;
     }
+
+    @Basic
+    @Column(name = "Active")
+    public boolean getActive() { return this.active; }
+
+    public void setActive(boolean active) { this.active = active; }
 
     @Override
     public boolean equals(Object o) {

@@ -48,6 +48,7 @@ CREATE TABLE `ban` (
   `ChiNhanh` int(11) NOT NULL,
   `TenBan` varchar(50) NOT NULL,
   `TinhTrang` int(11) NOT NULL,
+  `Active` bit(1) DEFAULT NULL,
   PRIMARY KEY (`BanID`),
   KEY `fk_ban_cn_idx` (`ChiNhanh`),
   CONSTRAINT `fk_ban_cn` FOREIGN KEY (`ChiNhanh`) REFERENCES `chinhanh` (`ChiNhanhID`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -68,6 +69,7 @@ CREATE TABLE `chinhanh` (
   `DienThoai` varchar(50) NOT NULL,
   `TinhThanh` int(11) NOT NULL,
   `hinhAnh` varchar(45) NOT NULL,
+  `Active` bit(1) DEFAULT NULL,
   PRIMARY KEY (`ChiNhanhID`),
   KEY `fk_cn_tt_idx` (`TinhThanh`),
   CONSTRAINT `fk_cn_tt` FOREIGN KEY (`TinhThanh`) REFERENCES `tinhthanh` (`TinhThanhID`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -103,7 +105,7 @@ CREATE TABLE `chiphingay` (
   `ChiPhiNgayID` int(11) NOT NULL AUTO_INCREMENT,
   `Ten` varchar(255) NOT NULL,
   `MoTa` varchar(255) NOT NULL,
-  `Ngay` date NOT NULL,
+  `Ngay` datetime NOT NULL,
   `ChiNhanh` int(11) NOT NULL,
   `Tien` decimal(10,0) NOT NULL,
   PRIMARY KEY (`ChiPhiNgayID`),
@@ -325,7 +327,7 @@ CREATE TABLE `tienthuenha` (
   `Nam` varchar(4) NOT NULL,
   `Ten` varchar(255) NOT NULL,
   `MoTa` varchar(255) NOT NULL,
-  `NgayChi` date NOT NULL,
+  `NgayChi` datetime NOT NULL,
   `ChiNhanh` int(11) NOT NULL,
   `Tien` decimal(10,0) NOT NULL,
   PRIMARY KEY (`Thang`,`Nam`),
@@ -373,4 +375,4 @@ CREATE TABLE `trungtam` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-31  0:04:02
+-- Dump completed on 2018-01-01 23:00:47

@@ -2,6 +2,7 @@ package foodGroup4Quanly.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "tienthuenha", schema = "java_foodsystem")
@@ -11,7 +12,7 @@ public class Tienthuenha {
     private String nam;
     private String ten;
     private String moTa;
-    private Date ngayChi;
+    private Timestamp ngayChi;
     private int tien;
     private Chinhanh chinhanh;
 
@@ -57,11 +58,11 @@ public class Tienthuenha {
 
     @Basic
     @Column(name = "NgayChi")
-    public Date getNgayChi() {
+    public Timestamp getNgayChi() {
         return ngayChi;
     }
 
-    public void setNgayChi(Date ngayChi) {
+    public void setNgayChi(Timestamp ngayChi) {
         this.ngayChi = ngayChi;
     }
 

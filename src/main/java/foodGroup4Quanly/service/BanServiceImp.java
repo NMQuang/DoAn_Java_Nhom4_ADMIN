@@ -46,4 +46,9 @@ public class BanServiceImp implements BanService {
 	public void update(Ban b) {
 		banDao.update(b);
 	}
+
+	@Override
+	public List<Ban> layDSBanByChiNhanh(int idChinhanh) {
+		return banDao.layDSBanByChiNhanh(idChinhanh);
+	}
 }

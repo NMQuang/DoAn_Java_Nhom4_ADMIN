@@ -49,7 +49,7 @@ $("#upload").change(function() {
 });
 ////////////////////////////////////
 //Khi thay đổi giá trị thì các error biến mất
-$('input, textarea').on('change keyup paste',function(){
+$('input, textarea, select').on('change keyup paste',function(){
 	$(this).siblings('.my_error').hide();
 })
 ////////////////////////////////////
@@ -89,6 +89,7 @@ $(function(){
 	})
 })
 ////////////////////////////////////
+//Thay doi khi nguoi dung muon xem giua active va chua active
 $(function(){
 	$('#type_mon').on('change', function(){
 		var path = window.location.pathname; 
@@ -135,7 +136,7 @@ $('[data-provide="datepicker-year"]').datepicker({
     "autoclose": true
 });
 
-//  thay đổi lựa chọn danh mục của tạo đơn hàng tại quá
+//  thay đổi lựa chọn danh mục của tạo đơn hàng tại quán
 $(document).ready(function () {
     $('.select-danh-muc').hide();
     $('#option-mon-an-nuong').show();
@@ -147,6 +148,24 @@ $(document).ready(function () {
 
 /////////// ĐƠN HÀNG TẠI QUÁN /////////////
 //  Thêm món ăn vào danh sách món ăn được chọn bên phải
+
+
+$(document).ready(function () {
+	$('#menu-ben-phai').attr("hidden", "true");
+	
+	$(".btn-dat-ban").on("click", function(){
+		$('#menu-ben-phai').removeAttr("hidden");
+		$.ajax({
+			url: ""
+		}).done(function(data){
+			console.log(data);
+		}).fail(function(jqXHR, textStatus, error){
+			console.log(textStatus);
+			console.log(error);
+			console.log(jqXHR);
+		})
+	})
+});
 $(document).ready(function() {
 
     $('.btn-them-mon-an').click(function () {

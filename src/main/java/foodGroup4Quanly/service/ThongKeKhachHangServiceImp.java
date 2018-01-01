@@ -64,7 +64,7 @@ public class ThongKeKhachHangServiceImp implements ThongKeKhachHangService{
 		Khachhang kh = khachHangDao.get(sdt);
 		Calendar c = Calendar.getInstance();
 		c.setTime(kh.getNgayTao());
-		c.set(Calendar.DAY_OF_MONTH, 0);
+		c.set(Calendar.DAY_OF_MONTH, 1);
 		
 		while(c.getTime().before(new Date())){
 			Map<String, Object> record = new HashMap<>();

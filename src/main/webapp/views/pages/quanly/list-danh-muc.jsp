@@ -2,6 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
+
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
         <ol class="breadcrumb">
@@ -29,6 +30,10 @@
     <div class="panel panel-info">
         <div class="panel-heading">
             Danh sách tất cả các danh mục
+            <select class="" id="type_mon" style="background-color: #30a5ff" name="type">
+                <option ${type.equals("current") ? 'selected' : ''} value="current">hiện hành</option>
+                <option ${type.equals('deleted') ? 'selected' : ''} value="deleted">đã xóa</option>
+            </select>
             <button type="button" class="btn btn-default pull-right fix"
                     data-toggle="modal" data-target="#modal-tao-danh-muc"><b>+</b> Thêm danh mục mới</button>
         </div>
@@ -49,19 +54,16 @@
                 <td class="text-center red-text-table">${danhmuc.danhMucId}</td>
                 <td>
                     <a href="#">${danhmuc.ten}</a>
-                    <c:if test="${!danhmuc.active}">
-                        <p><span class="error"><small>*Đã bị xóa</small></p>
-                    </c:if>
                 </td>
                 <td class="text-center">${danhmuc.mons.size()}</td>
                 <td>
                     <button class="btn btn-warning pull-right" type="button" data-toggle="modal" data-active-danh-muc-sua="${danhmuc.active}" data-ten-danh-muc-sua="${danhmuc.ten}" data-id-danh-muc-sua="${danhmuc.danhMucId}" data-target="#modal-sua-danh-muc">Sửa</button>
                 </td>
                 <td>
-                    <c:if test="${danhmuc.active}">
+                    <c:if test="${type.equals('current')}">
                         <a href="<c:url value="/quanly/danhmuc/delete/${danhmuc.danhMucId}"/>" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-danger pull-right" >Xóa</a>
                     </c:if>
-                    <c:if test="${!danhmuc.active}">
+                    <c:if test="${type.equals('deleted')}">
                         <a href="<c:url value="/quanly/danhmuc/active/${danhmuc.danhMucId}"/>" onclick="return confirm('Bạn có chắc chắn muốn hồi phục')" class="btn btn-success pull-right" >Thêm</a>
                     </c:if>
                 </td>

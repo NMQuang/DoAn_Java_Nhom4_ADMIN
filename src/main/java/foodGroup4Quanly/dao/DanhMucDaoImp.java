@@ -30,6 +30,13 @@ public class DanhMucDaoImp extends HibernateUtil implements DanhMucDao{
     }
 
     @Override
+    public List<Danhmuc> getAllDanhmuc(boolean active) {
+        String hql = "from Danhmuc DM where DM.active=:active";
+        Query query = getSession().createQuery(hql).setParameter("active", active);
+        return query.list();
+    }
+
+    @Override
     public void create(Danhmuc dm) {
         super.create(dm);
     }

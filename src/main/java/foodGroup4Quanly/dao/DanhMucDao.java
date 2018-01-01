@@ -10,6 +10,7 @@ import foodGroup4Quanly.entity.Mon;
 public interface DanhMucDao {
     List<Danhmuc> getAllDanhmucs();
     List<Danhmuc> getAllDanhmucDontcareActive();
+    List<Danhmuc> getAllDanhmuc(boolean active);
 
     void create(Danhmuc dm);
 

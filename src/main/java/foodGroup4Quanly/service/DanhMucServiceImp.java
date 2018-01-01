@@ -29,6 +29,11 @@ public class DanhMucServiceImp implements DanhMucService{
 	}
 
 	@Override
+	public List<Danhmuc> getAllDanhMuc(boolean active) {
+		return danhMucDao.getAllDanhmuc(active);
+	}
+
+	@Override
 	public Danhmuc get(int id) {
 		return ((HibernateUtil)danhMucDao).fetchById(id, Danhmuc.class);
 	}

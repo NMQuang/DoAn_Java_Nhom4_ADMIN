@@ -29,10 +29,21 @@ public class QuanlyDanhmucController {
     DanhmucValidator danhmucValidator;
 
     @RequestMapping(value = "/danhmuc", method = RequestMethod.GET)
-    public String getListDanhmuc(Model model) {
-        model.addAttribute("listDanhmuc", danhMucService.getAllDanhmucDontcareActive());
+    public String getListDanhmuc(Model model, @RequestParam(value = "type", required = false) String type) {
+
+        type = normalizeType(type);
+        List<Danhmuc> listDanhmuc;
+        if(type.equals("deleted")) {
+            listDanhmuc = danhMucService.getAllDanhMuc(false);
+        } else {
+            listDanhmuc = danhMucService.getAllDanhMuc(true);
+        }
+
+        model.addAttribute("type", type);
+        model.addAttribute("listDanhmuc", listDanhmuc);
         model.addAttribute("newDm", new Danhmuc());
         model.addAttribute("updateDm", new Danhmuc());
+
         return "quanly-list-danh-muc";
     }
 
@@ -40,11 +51,7 @@ public class QuanlyDanhmucController {
     public String getChitietDanhmuc(Model model,
                                     @PathVariable("idDanhmuc") int idDanhmuc,
                                     @RequestParam(value = "type", required = false) String type) {
-        if(type == null) {
-            type = "current";
-        } else {
-            type = type.equalsIgnoreCase("deleted") ? "deleted" : "current";
-        }
+        type = normalizeType(type);
 
         List<Mon> listMonByType;
         if(type.equals("deleted")) {
@@ -115,5 +122,15 @@ public class QuanlyDanhmucController {
 
         redirectAttributes.addFlashAttribute("activeDmSuccess", true);
         return "redirect:/quanly/danhmuc";
+    }
+
+    private String normalizeType(String rawType) {
+        String normalizeType = "";
+        if(rawType == null) {
+            normalizeType = "current";
+        } else {
+            normalizeType = rawType.equalsIgnoreCase("deleted") ? "deleted" : "current";
+        }
+        return normalizeType;
     }
 }

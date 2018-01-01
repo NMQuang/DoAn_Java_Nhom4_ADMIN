@@ -10,6 +10,7 @@ public interface DanhMucService {
 
 	List<Danhmuc> getAllDanhMuc();
 	List<Danhmuc> getAllDanhmucDontcareActive();
+	List<Danhmuc> getAllDanhMuc(boolean active);
 
 	Danhmuc get(int id);
 	void create(Danhmuc dm);

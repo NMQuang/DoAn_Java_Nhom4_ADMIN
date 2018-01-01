@@ -72,7 +72,7 @@ public class QuanlyChinhanhController {
 	 * get danh sách tất cả các chi nhánh
 	 */
 	@RequestMapping(value = "/chinhanh", method = RequestMethod.GET)
-	public String getListChinhanh(Model model, @RequestParam(required= false) Integer index) {
+	public String getListChinhanh(Model model, @RequestParam(required=false) String type, @RequestParam(required= false) Integer index) {
 
 		int begin;
 		int id = 1;
@@ -80,13 +80,14 @@ public class QuanlyChinhanhController {
 			begin = 0;
 		} else {
 			id = index;
-			begin = 12 * (id - 1);
+			begin = 3 * (id - 1);
 		}
 		int count = branchService.countBranch();
     		int pages = count / 3 + (count %3 == 0 ? 0 : 1);
 		model.addAttribute("listChiNhanh", branchService.getList(3, begin));
 		model.addAttribute("index", id);
     		model.addAttribute("pages", pages);
+    		model.addAttribute("type", type);
 		return "quanly-list-chi-nhanh";
 	}
 

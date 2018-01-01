@@ -32,17 +32,26 @@
                  <li><a class="" href="<c:url value="/quanly/baocao/tongdoanhthuchinhanh"/>">
                     <span class="fa fa-arrow-right">&nbsp;</span> Doanh thu chi nhánh
                 </a></li>
-                <li><a class="" href="#">
-                    <span class="fa fa-arrow-right">&nbsp;</span> Đơn hàng
+                <li><a class="" href="<c:url value="/quanly/baocao/tongdonhang"/>">
+                    <span class="fa fa-arrow-right">&nbsp;</span> Tổng đơn hàng
                 </a></li>
-                <li><a class="" href="#">
-                    <span class="fa fa-arrow-right">&nbsp;</span> Chi phí
+                <li><a class="" href="<c:url value="/quanly/baocao/tongdonhangtheoloai"/>">
+                    <span class="fa fa-arrow-right">&nbsp;</span> Đơn hàng theo loại
                 </a></li>
-                <li><a class="" href="#">
+                <li><a class="" href="<c:url value="/quanly/baocao/tongchiphi"/>">
+                    <span class="fa fa-arrow-right">&nbsp;</span> Tổng chi phí
+                </a></li>
+                <li><a class="" href="<c:url value="/quanly/baocao/tongchiphichinhanh"/>">
+                    <span class="fa fa-arrow-right">&nbsp;</span> Chi phí chi nhánh
+                </a></li>
+                <li><a class="" href="<c:url value="/quanly/baocao/tongsoluongmontrongthang"/>">
                     <span class="fa fa-arrow-right">&nbsp;</span> Món ăn
                 </a></li>
-                <li><a class="" href="#">
+                <li><a class="" href="<c:url value="/quanly/baocao/tongtien_donhang_khach"/>">
                     <span class="fa fa-arrow-right">&nbsp;</span> Khách hàng
+                </a></li>
+                <li><a class="" href="<c:url value="/quanly/baocao/thongkekhachmoi"/>">
+                    <span class="fa fa-arrow-right">&nbsp;</span> Lượng khách mới
                 </a></li>
             </ul>
         </li>

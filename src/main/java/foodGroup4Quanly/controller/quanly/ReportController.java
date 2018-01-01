@@ -79,38 +79,6 @@ public class ReportController {
 	@Autowired
 	private ThongKeKhachHangService thongKeKhachHangService;
 	
-	@RequestMapping("")
-	public void demo(@RequestParam(required=false) String type, HttpServletResponse response){
-		
-		List<Map<String, Object>> data = new ArrayList();
-		Map<String, Object> person = new HashMap<>();
-		person.put("time", new Timestamp(1514729050392l));
-		person.put("value", 25l);
-		data.add(person);
-		Map<String, Object> person1 = new HashMap<>();
-		person1.put("time", new Timestamp(1510709050392l));
-		person1.put("value", 150l);
-		data.add(person1);
-		Map<String, Object> person2 = new HashMap<>();
-		person2.put("time", new Timestamp(1510709050393l));
-		person2.put("value", 150l);
-		data.add(person2);
-		
-		Map<String, Object> parameters = new HashMap<>();
-		parameters.put("title", "Xin chào");
-		JRDataSource datasource = new JRBeanCollectionDataSource(data);
-		JasperPrint jasperPrint;
-		try {
-			jasperPrint = JasperFillManager.fillReport(getClass().getClassLoader().getResourceAsStream("reports/Blank_A4.jasper"), parameters, datasource);
-			jasperExportUtils.export("pdf", response, jasperPrint);
-		} catch (JRException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		
-		
-	}
 	
 	@RequestMapping("/tongdoanhthu")
 	@ResponseBody

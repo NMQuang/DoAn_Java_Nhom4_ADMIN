@@ -15,6 +15,11 @@ import foodGroup4Quanly.entity.Danhmuc;
 public class DanhMucDaoImp extends HibernateUtil implements DanhMucDao{
 
     @Override
+    public Danhmuc findById(int id) {
+        return super.fetchById(id, Danhmuc.class);
+    }
+
+    @Override
     public List<Danhmuc> getAllDanhmucs() {
         String hql = "from Danhmuc DM where DM.active=true";
         Query query = getSession().createQuery(hql);

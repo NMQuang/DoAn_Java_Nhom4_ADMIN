@@ -8,6 +8,8 @@ import foodGroup4Quanly.entity.Danhmuc;
 import foodGroup4Quanly.entity.Mon;
 
 public interface DanhMucDao {
+    Danhmuc findById(int id);
+
     List<Danhmuc> getAllDanhmucs();
     List<Danhmuc> getAllDanhmucDontcareActive();
     List<Danhmuc> getAllDanhmuc(boolean active);
@@ -15,8 +17,6 @@ public interface DanhMucDao {
     void create(Danhmuc dm);
 
     void setActiveDm(int idDanhmuc, boolean active);
-
-    List<Mon> getMonById(int idDanhmuc);
 
     List<Mon> getMonByIdDm(int idDanhmuc, boolean monIsActive);
 

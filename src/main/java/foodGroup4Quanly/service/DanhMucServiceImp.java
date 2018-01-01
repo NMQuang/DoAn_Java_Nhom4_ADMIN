@@ -2,6 +2,7 @@ package foodGroup4Quanly.service;
 
 import java.util.List;
 
+import foodGroup4Quanly.dao.FoodDAO;
 import foodGroup4Quanly.entity.Mon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,10 @@ public class DanhMucServiceImp implements DanhMucService{
 
 	@Autowired
 	private DanhMucDao danhMucDao;
+
+	@Autowired
+	private FoodDAO foodDAO;
+
 	@Override
 	public List<Danhmuc> getAllDanhMuc() {
 		//return ((HibernateUtil)danhMucDao).fetchAll("from Danhmuc where active is true");
@@ -45,6 +50,12 @@ public class DanhMucServiceImp implements DanhMucService{
 
 	@Override
 	public void deactiveDanhmuc(int idDanhmuc) {
+		Danhmuc danhmuc = danhMucDao.findById(idDanhmuc);
+		// Deactive tat ca mon trong danh muc
+		for(Mon mon: danhmuc.getMons()) {
+			foodDAO.delete(mon.getMonId());
+		}
+		// Deactive danh muc
 		danhMucDao.setActiveDm(idDanhmuc, false);
 	}
 

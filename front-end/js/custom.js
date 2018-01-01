@@ -259,3 +259,42 @@ $('#input-tim-kiem-don-hang').keyup(function() {
     }).hide();
 });
 /////////// END DANH SÁCH ĐƠN HÀNG /////////////
+
+/////////// TẠO ĐƠN HÀNG TRÊN TỔNG ĐÀI /////////////
+//// disable input khi không chọn checkbox với người nhận khác người gọi điện
+$('#checkbox-them-nguoi-nhan').click(function () {
+    var check = $(this).prop('checked');
+    console.log(check);
+    if (check) {
+        $('.input-nguoi-nhan').prop('disabled', false);
+    } else {
+        $('.input-nguoi-nhan').prop('disabled', true);
+    }
+});
+
+/////////// END TẠO ĐƠN HÀNG TRÊN TỔNG ĐÀI  /////////////
+
+/////////// DANH SÁCH ĐƠN HÀNG TRÊN TỔNG ĐÀI /////////////
+//// change select danh sách đơn hàng trên tổng đài
+$(document).ready(function () {
+    $('.select-danh-sach-don-hang-tong-dai').hide();
+    $('#option-don-hang-qua-dt-tong-dai').show();
+    $('#select-danh-sach-don-hang-tong-dai').change(function () {
+        $('.select-danh-sach-don-hang-tong-dai').hide();
+        $('#'+$(this).val()).show();
+    });
+});
+////
+
+//// tìm kiếm đơn hàng
+$('#input-tim-kiem-don-hang').keyup(function() {
+    var $rows = $('.table-don-hang tbody tr');
+    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+
+    $rows.show().filter(function() {
+        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+        return !~text.indexOf(val);
+    }).hide();
+});
+
+/////////// END DANH SÁCH ĐƠN HÀNG TRÊN TỔNG ĐÀI  /////////////

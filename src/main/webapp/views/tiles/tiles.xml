@@ -88,9 +88,49 @@
         <put-attribute name="content" value="/views/pages/quanly/them-mon-an-vao-danh-muc.jsp" />
     </definition>
 
-	<definition name="quanly-tong-danh-thu" extends="base-definition">
+	<definition name="quanly-tong-doanh-thu" extends="base-definition">
         <put-attribute name="title" value="Dashboard" />
-        <put-attribute name="content" value="/views/pages/quanly/tong-danh-thu.jsp" />
+        <put-attribute name="content" value="/views/pages/quanly/report-tong-doanh-thu.jsp" />
+    </definition>
+    
+    <definition name="quanly-tong-doanh-thu-chi-nhanh" extends="base-definition">
+        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="content" value="/views/pages/quanly/report-tong-doanh-thu-chi-nhanh.jsp" />
+    </definition>
+    
+    <definition name="quanly-tong-don-hang" extends="base-definition">
+        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="content" value="/views/pages/quanly/report-tong-don-hang.jsp" />
+    </definition>
+    
+    <definition name="quanly-tong-don-hang-theo-loai" extends="base-definition">
+        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="content" value="/views/pages/quanly/report-tong-don-hang-theo-loai.jsp" />
+    </definition>
+    
+    <definition name="quanly-tong-chi-phi" extends="base-definition">
+        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="content" value="/views/pages/quanly/report-tong-chi-phi.jsp" />
+    </definition>
+    
+    <definition name="quanly-tong-chi-phi-chi-nhanh" extends="base-definition">
+        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="content" value="/views/pages/quanly/report-tong-chi-phi-chi-nhanh.jsp" />
+    </definition>
+    
+     <definition name="quanly-tong-so-luong-mon-trong-thang" extends="base-definition">
+        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="content" value="/views/pages/quanly/report-tong-so-luong-mon-trong-thang.jsp" />
+    </definition>
+    
+     <definition name="quanly-tong-tien-don-hang-khach" extends="base-definition">
+        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="content" value="/views/pages/quanly/report-tong-tien-don-hang-khach.jsp" />
+    </definition>
+    
+     <definition name="quanly-luong-khach-moi" extends="base-definition">
+        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="content" value="/views/pages/quanly/report-luong-khach-moi.jsp" />
     </definition>
     <!-- /QUAN LY -->
 </tiles-definitions>

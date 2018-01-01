@@ -1547,7 +1547,9 @@ a:hover, a:visited, a:link, a:active
     margin-top: 5px;
     font-size: 14px;
 }
-
+.my_error{
+	color: red;
+}
 @media (min-width: 768px) {
     .modal-xl {
         width: 90%;

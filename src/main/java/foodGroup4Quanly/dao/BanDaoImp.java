@@ -58,4 +58,11 @@ public class BanDaoImp implements BanDao {
 		hibernateUtil.update(b);
 	}
 
+	@Override
+	public List<Ban> layDSBanByChiNhanh(int idChinhanh) {
+		String hql= "from Ban where chinhanh.chiNhanhId = :idChinhanh and active is true";
+		Query query = hibernateUtil.getSession().createQuery(hql).setParameter("idChinhanh", idChinhanh);
+		return query.list();
+	}
+
 }

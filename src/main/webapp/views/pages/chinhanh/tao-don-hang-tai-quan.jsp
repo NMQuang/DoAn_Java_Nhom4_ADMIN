@@ -1,4 +1,5 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
@@ -19,86 +20,18 @@
                     </div>
                     <div class="panel-body" style="height: 490px; overflow:auto;" >
                         <div class="row">
-                            <div class="col-md-2">
-                                <div class="btn-dat-ban">
-                                    <a href="#">
+                        <c:forEach items="${dsBan }" var="item">
+                         <div class="col-md-2">
+                                <div class="btn-dat-ban ${item.tinhTrang == 1 ? 'btn-dat-ban-occupied':'' }" data-id="${item.banId }">
+                                    <a href="javascript:">
                                         <img class="img-responsive"/>
-                                        <p>1</p>
+                                        <p>${item.tenBan }</p>
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-md-2">
-                                <div class="btn-dat-ban">
-                                    <a href="#" style="border: 0; background: white">
-                                        <img class="img-responsive"/>
-                                        <p>2</p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="btn-dat-ban">
-                                    <a href="#" style="border: 0; background: white">
-                                        <img class="img-responsive"/>
-                                        <p>3</p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="btn-dat-ban">
-                                    <a href="#" style="border: 0; background: white">
-                                        <img class="img-responsive"/>
-                                        <p>4</p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="btn-dat-ban">
-                                    <a href="#" style="border: 0; background: white">
-                                        <img class="img-responsive"/>
-                                        <p>5</p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="btn-dat-ban">
-                                    <a href="#" style="border: 0; background: white">
-                                        <img class="img-responsive"/>
-                                        <p>6</p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="btn-dat-ban">
-                                    <a href="#" style="border: 0; background: white">
-                                        <img class="img-responsive"/>
-                                        <p>7</p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="btn-dat-ban">
-                                    <a href="#" style="border: 0; background: white">
-                                        <img class="img-responsive"/>
-                                        <p>8</p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="btn-dat-ban">
-                                    <a href="#" style="border: 0; background: white">
-                                        <img class="img-responsive"/>
-                                        <p>9</p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="btn-dat-ban">
-                                    <a href="#" style="border: 0; background: white">
-                                        <img class="img-responsive"/>
-                                        <p>10</p>
-                                    </a>
-                                </div>
-                            </div>
+                        </c:forEach>
+                           
+                            
                         </div>
                     </div>
                 </div>
@@ -487,9 +420,9 @@
 
             <div class="col-lg-6">
                 <form class="form-horizontal">
-                    <div class="panel panel-default">
+                    <div class="panel panel-default" id="menu-ben-phai">
                         <div class="panel-heading">
-                            Bàn 001
+                            <span id="menu-ben-phai-ten-ban">Bàn 001</span>
                             <a class="btn btn-primary fix pull-right">Mở bàn</a>
                         </div>
                         <div class="panel-body" style="height: 436px;">

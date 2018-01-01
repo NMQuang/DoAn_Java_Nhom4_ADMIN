@@ -20,7 +20,7 @@ public class ChiNhanhTaoDonHangController {
     public String getTaoDonHangTaiQuan(Model model, @ModelAttribute("chinhanh") Chinhanh chinhanh) {
     	if(chinhanh == null)
     		return "/login";
-    	model.addAttribute("dsBan", banService.getListTableByChiNhanh(chinhanh.getChiNhanhId()));
+    	model.addAttribute("dsBan", banService.layDSBanByChiNhanh(chinhanh.getChiNhanhId()));
     	System.out.println(chinhanh.getChiNhanhId());
         return "chinhanh-tao-don-hang-tai-quan";
     }

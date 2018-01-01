@@ -10,4 +10,5 @@ public interface DanhMucDao {
     List<Danhmuc> getAllDanhmucs();
 
     void create(Danhmuc dm);
+    
 }

@@ -9,6 +9,8 @@ public interface BanService {
 
 	List<BanDto> getListTableByChiNhanh(int idChinhanh);
 
+	public List<Ban> layDSBanByChiNhanh(int idChinhanh);
+	
 	Ban getInfoBan(int idBan);
 
 	void saveBan(Ban ban);

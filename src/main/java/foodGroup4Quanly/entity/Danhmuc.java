@@ -7,7 +7,7 @@ import java.util.Set;
 public class Danhmuc {
     private int danhMucId;
     private String ten;
-    private Boolean active;
+    private boolean active;
     private Set<Mon> mons;
 
     @Id

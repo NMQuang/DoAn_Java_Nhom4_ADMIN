@@ -1538,6 +1538,26 @@ a:hover, a:visited, a:link, a:active
     color: red;
     font-weight: bold;
 }
+.modal input {
+    font-size: 14px;
+    color: #000000;
+}
+
+.modal label {
+    font-size: 15px;
+    color: #000000;
+}
+
+#input-search-table-header-bar, #input-search-food-header-bar, #input-modal-search-food {
+    margin-top: 4px;
+    height: 32px;
+}
+
+#btn-search-table-header-bar, #btn-search-food-header-bar, #btn-modal-search-food {
+    margin-top: 2px;
+    height: 32px;
+}
+
 
 /*-----  Danh sách đơn hàng     -----*/
 /*  Lọc danh sách đơn hàng  */

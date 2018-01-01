@@ -294,7 +294,27 @@ $(function () {
     });
 });
 
+$(function () {
+    if($('#modal-sua-danh-muc').attr('data-autoshow')) {
+        $(window).on('load',function(){
+            $('#modal-sua-danh-muc').modal('show');
+        });
+    }
+})
 
+
+$('#modal-sua-danh-muc').on('show.bs.modal', function (event) {
+	if(!($('#has-error-update').data('value'))) {
+        var button = $(event.relatedTarget);
+        var data = button.data('ten-danh-muc-sua');
+        var id = button.data('id-danh-muc-sua');
+        var active = button.data('active-danh-muc-sua');
+
+        $(this).find('#ten-danh-muc-sua').val(data);
+        $(this).find('#id-danh-muc-sua').val(id);
+        $(this).find('#active-danh-muc-sua').val(active);
+    }
+});
 
 
 

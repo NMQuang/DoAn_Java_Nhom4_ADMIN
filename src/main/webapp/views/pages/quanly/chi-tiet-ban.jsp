@@ -10,15 +10,9 @@
             </a></li>
             <li>
                 <a href="${pageContext.request.contextPath}/quanly/chinhanh-ban/${chinhanh.chiNhanhId}"> Chi nhánh ${chinhanh.ten}</a></li>
-            <li>Tạo bàn mới</li>
+            <li>Chỉnh sửa thông tin bàn</li>
         </ol>
     </div><!--/.row-->
-
-    <div class="row">
-        <div class="col-lg-12">
-            <h2>Tạo bàn mới</h2>
-        </div>
-    </div>
 
 
     <form:form method="post" modelAttribute="ban">
@@ -47,7 +41,8 @@
 							<div class="form-group">
                                 <label class="col-sm-3 cn-label label-right">Chi nhánh</label>
                                 <div class="col-sm-9">
-                                    <form:input type="text" class="expanded-input" path="chinhanh.ten" placeholder="Tên" disabled="true" value="${chinhanh.ten }"/>
+                                    <form:input type="text" class="expanded-input" path="chinhanh.ten" placeholder="Tên" disabled="true"/>
+									<form:errors path="chinhanh.ten" cssClass="my_error"/>
                                 </div>
                             </div>
                         </div>
@@ -57,7 +52,7 @@
         </div>
 
         <div class="text-center">
-            <button type="submit" class="btn btn-lg btn-primary">Tạo bàn</button>
+            <button type="submit" class="btn btn-lg btn-primary">Sửa bàn</button>
         </div>
         <br>
     </form:form>

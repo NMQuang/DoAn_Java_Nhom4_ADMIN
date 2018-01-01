@@ -18,4 +18,5 @@ public interface BranchService {
 	public int countBranch();
 
 	public List<Chinhanh> getList(int maxResult, int begin);
+
 }

@@ -26,25 +26,30 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
+                    	<div class="col-lg-3">
                         Thông tin chi nhánh
+                        </div>
+                        <a href="${pageContext.request.contextPath}/quanly/chinhanh/themchinhanh"  class="btn btn-primary pull-right fix">Thêm chi nhánh</a>
                     </div>
+
                     <div class="panel-body">
                         <div class="col-lg-5">
                             <div class="form-group">
 
 								<img src="<c:url value="${chiNhanh.hinhAnh == null ? 'http://via.placeholder.com/350x220' : '/resources/images/chi-nhanh/'+= chiNhanh.hinhAnh} " />" id="img-upload" class="img-mon-an" width="350px" height="220px"/>
 								<div class="col-lg-5 cn-label label-right">
-									<input type="file" accept="image/*" name="hinhanh" id="upload"/>
+									<input type="file" accept="image/*" name="hinhanh" id="upload" disabled="true"/>
 									<input type="text" value="${chiNhanh.hinhAnh }" hidden name="hinhanh_backup"/>
 									<form:errors path="hinhAnh" cssClass="my_error"/>
 								</div>
 							</div>
+
                         </div>
                         <div class="col-lg-7">
                             <div class="form-group">
 								<label class="col-sm-3 cn-label label-right" >Tên </label>
 								<div class="col-lg-9">
-									<form:input type="text" class="expanded-input" path="ten" placeholder="Tên"/>
+									<form:input type="text" class="expanded-input" path="ten" placeholder="Tên" disabled="true"/>
 									<form:errors path="ten" cssClass="my_error"/>
 								</div>
 							</div>
@@ -52,7 +57,7 @@
 							<div class="form-group">
 								<label class="col-sm-3 cn-label label-right">Địa chỉ</label>
 								<div class="col-sm-9">
-									<form:textarea class="expanded-input" path="diaChi" placeholder="Địa chỉ" rows="3" style="resize: none"></form:textarea>
+									<form:textarea class="expanded-input" path="diaChi" placeholder="Địa chỉ" rows="3" style="resize: none" disabled="true"></form:textarea>
 									<form:errors path="diaChi" cssClass="my_error"/>
 								</div>
 							</div>
@@ -60,7 +65,7 @@
 							<div class="form-group">
 								<label class="col-sm-3 cn-label label-right">Điện thoại</label>
 								<div class="col-sm-9">
-									<form:input class="expanded-input" path="dienThoai" placeholder="Điện thoại" rows="3" style="resize: none"/>
+									<form:input class="expanded-input" path="dienThoai" placeholder="Điện thoại" rows="3" style="resize: none" disabled="true"/>
 									<form:errors path="dienThoai" cssClass="my_error"/>
 								</div>
 							</div>
@@ -68,7 +73,7 @@
 							<div class="form-group">
 								<label class="col-sm-3 cn-label label-right" for="description">Tỉnh thành</label>
 								<div class="col-lg-5">
-									<form:select id="tinhthanh" class="expanded-input" path="tinhthanh.tinhThanhId">
+									<form:select id="tinhthanh" class="expanded-input" path="tinhthanh.tinhThanhId"  disabled="true">
 										<form:option value="-1" label="--------- Select --------"></form:option>
 										<form:options items="${tinhThanh}" itemValue="tinhThanhId" itemLabel="tenTinh"/>
 									</form:select>
@@ -129,10 +134,10 @@
 								    </c:otherwise>
 								</c:choose>
                                 <td>
-                                    <a href="${pageContext.request.contextPath}/quanly/chinhanh-ban/${branch.chiNhanhId}/suaban/${item[0]}" class="btn btn-info" >Sửa</a>
+                                    <a href="${pageContext.request.contextPath}/quanly/chinhanh-ban/${branch.chiNhanhId}/suaban/${item[0]}" class="btn btn-info" disabled="true">Sửa</a>
                                 </td>
                                 <td>
-                                    <a href="${pageContext.request.contextPath}/quanly/chinhanh-ban/${branch.chiNhanhId}/xoaban/${item[0]}" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa')">Xóa</a>
+                                    <a href="${pageContext.request.contextPath}/quanly/chinhanh-ban/${branch.chiNhanhId}/xoaban/${item[0]}" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa')" disabled="true">Xóa</a>
                                 </td>
                             </tr>
 							</c:forEach>
@@ -188,10 +193,10 @@
 				                </td>
                                  <td width="5%">
                                      <!-- <a href="" class="btn btn-info">Xem</a> -->
-                                     <a href="#" data-toggle="modal" data-target="#modal-sua-gia" class="btn btn-info">Sửa giá</a>
+                                     <a href="#" data-toggle="modal" data-target="#modal-sua-gia" class="btn btn-info" disabled="true">Sửa giá</a>
                                  </td>
                                  <td width="5%">
-                                     <a href="${pageContext.request.contextPath}/quanly/chinhanh-menu/${branch.chiNhanhId}/xoamonan/${item.pk.mon.monId}" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-danger">Xóa</a>
+                                     <a href="${pageContext.request.contextPath}/quanly/chinhanh-menu/${branch.chiNhanhId}/xoamonan/${item.pk.mon.monId}" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-danger" disabled="true">Xóa</a>
                                  </td>
                              </tr>
                             </c:forEach>

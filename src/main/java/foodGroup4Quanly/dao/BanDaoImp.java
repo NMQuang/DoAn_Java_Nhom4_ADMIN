@@ -19,7 +19,8 @@ public class BanDaoImp implements BanDao {
 
 	@Override
 	public List<BanDto> getListTableByChiNhanh(int idChinhanh) {
-		String hql = "select ban.banId, ban.tenBan, ban.tinhTrang, chinhanh.ten from Ban ban join ban.chinhanh chinhanh where chinhanh.chiNhanhId =:idChinhanh";
+		String hql = "select ban.banId, ban.tenBan, ban.tinhTrang, chinhanh.ten from Ban ban "
+				+ "join ban.chinhanh chinhanh where chinhanh.chiNhanhId =:idChinhanh and ban.active is true";
 		Query query = hibernateUtil.getSession().createQuery(hql).setParameter("idChinhanh", idChinhanh);
 		return query.list();
 	}
@@ -45,7 +46,7 @@ public class BanDaoImp implements BanDao {
 
 	@Override
 	public void delete(int idBan) {
-		String hql = "delete from Ban where banId =:idBan";
+		String hql = "update Ban set active = false where banId =:idBan";
 		Query query = hibernateUtil.getSession().createQuery(hql)
 				.setParameter("idBan", idBan);
 		query.executeUpdate();

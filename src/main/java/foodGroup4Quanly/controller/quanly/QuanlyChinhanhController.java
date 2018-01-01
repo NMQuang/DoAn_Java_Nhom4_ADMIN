@@ -275,6 +275,7 @@ public class QuanlyChinhanhController {
 		}
 		ban.setChinhanh(branchService.getInfoChiNhanh(idChinhanh));
 		ban.setTinhTrang(0);
+		ban.setActive(true);
 		banService.saveBan(ban);
 		return "redirect:/quanly/chinhanh-ban/"+idChinhanh;
 	}

@@ -22,7 +22,9 @@ public class HibernateUtil implements Serializable {
 	public Session getSession(){
 		return sessionFactory.getCurrentSession();
 	}
-
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 	public <T> Serializable create(final T entity) {
 	return sessionFactory.getCurrentSession().save(entity);
 	}

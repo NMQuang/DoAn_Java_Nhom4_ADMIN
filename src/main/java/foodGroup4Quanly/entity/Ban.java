@@ -9,6 +9,7 @@ public class Ban {
     private int banId;
     private String tenBan;
     private int tinhTrang;
+    private Boolean active;
     private Chinhanh chinhanh;
     private Set<Hoadon> hoadons;
 
@@ -43,6 +44,12 @@ public class Ban {
         this.tinhTrang = tinhTrang;
     }
 
+    @Basic
+    @Column(name = "Active")
+    public boolean getActive() { return this.active; }
+
+    public void setActive(boolean active) { this.active = active; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -65,7 +72,7 @@ public class Ban {
         return result;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "ChiNhanh", referencedColumnName = "ChiNhanhID", nullable = false)
     public Chinhanh getChinhanh() {
         return chinhanh;

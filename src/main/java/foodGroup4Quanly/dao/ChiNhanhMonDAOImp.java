@@ -19,5 +19,28 @@ public class ChiNhanhMonDAOImp extends HibernateUtil implements ChiNhanhMonDAO {
 		return q.list();
 	}
 
+	@Override
+	public List<Chinhanhmon> getListChiNhanhMonByChiNhanh(int idChiNhanh) {
+		String hql = "from Chinhanhmon where pk.chinhanh.chiNhanhId = :idChiNhanh";
+		Query q = getSession().createQuery(hql).setParameter("idChiNhanh", idChiNhanh);
+		return q.list();
+	}
+
+	@Override
+	public void save(Chinhanhmon chiNhanhMon) {
+
+		getSession().save(chiNhanhMon);
+
+	}
+
+	@Override
+	public void delete(int idChinhanh, int idMon) {
+		String hql = "delete from Chinhanhmon where pk.chinhanh.chiNhanhId = :idChinhanh and pk.mon.monId = :idMon";
+		Query query = getSession().createQuery(hql)
+				.setParameter("idChinhanh", idChinhanh)
+				.setParameter("idMon", idMon);
+		query.executeUpdate();
+	}
+
 
 }

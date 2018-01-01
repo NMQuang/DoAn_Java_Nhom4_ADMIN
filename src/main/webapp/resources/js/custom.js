@@ -104,6 +104,195 @@ $(function () {
         });
 	}
 })
+/////////////////////////////////////
+//  Change option
+$(document).ready(function () {
+    $('.option-thong-ke').hide();
+    $('#option-ngay').show();
+    $('#option-thong-ke').change(function () {
+        $('.option-thong-ke').hide();
+        $('#'+$(this).val()).show();
+    })
+});
+
+$('[data-provide="datepicker"]').datepicker({
+    format: 'dd-mm-yyyy',
+    endDate: new Date(),
+    "autoclose": true
+});
+
+$('[data-provide="datepicker-month"]').datepicker({
+    format: 'mm-yyyy',
+    minViewMode: 1,
+    endDate: new Date(),
+    "autoclose": true
+});
+
+$('[data-provide="datepicker-year"]').datepicker({
+    format: 'yyyy',
+    minViewMode: 2,
+    endDate: new Date(),
+    "autoclose": true
+});
+
+//  thay đổi lựa chọn danh mục của tạo đơn hàng tại quá
+$(document).ready(function () {
+    $('.select-danh-muc').hide();
+    $('#option-mon-an-nuong').show();
+    $('#select-danh-muc').change(function () {
+        $('.select-danh-muc').hide();
+        $('#'+$(this).val()).show();
+    })
+});
+
+/////////// ĐƠN HÀNG TẠI QUÁN /////////////
+//  Thêm món ăn vào danh sách món ăn được chọn bên phải
+$(document).ready(function() {
+
+    $('.btn-them-mon-an').click(function () {
+
+        var text = $(this).attr('name');
+        var id = $(this).attr('id-sp');
+        var price = $(this).attr('price');
+        var found = false;
+
+        if ($('li.ds-mon-an-da-chon').length !== 0) {
+
+            $('li.ds-mon-an-da-chon').each(function (i) {
+
+                if ($(this).attr('id-chon-mon') === id) {
+                    found = true;
+                    return;
+                }
+            })
+        }
+
+        if (text.length && found===false) {
+
+            var labelTenMonAn = $('<p class="li-p-ten-mon-an"></p>');
+            labelTenMonAn.append(text);
+            var divTenMonAn = $('<div class="col-md-6"></div>');
+            divTenMonAn.append(labelTenMonAn);
+
+            var inputSoluong = $('<input type="number" class="input-sl-mon-an" value="1" price/>');
+            inputSoluong.attr({id: id, price: price});
+
+            var inputTongTien = $('<input class="input-gia-mon-an" type="text" price>');
+            inputTongTien.attr({value: price, price: price});
+
+            var btnXoa = $('<a href="#" class="btn-remove"><i class="fa fa-times" aria-hidden="true"></i></a>');
+
+            var divFormInline = $('<div class="form-inline"></div>');
+            divFormInline.append('<p class="li-p-ds-mon-an">Số lượng: </p>');
+            divFormInline.append(inputSoluong);
+            divFormInline.append('<p class="li-p-ds-mon-an t">Tổng tiền: </p>');
+            divFormInline.append(inputTongTien);
+            divFormInline.append(btnXoa);
+
+            var myLi = $('<li id-chon-mon class="ds-mon-an-da-chon"/>');
+            myLi.attr({'id-chon-mon': id});
+            myLi.append(divTenMonAn);
+            myLi.append(divFormInline);
+
+            $('ul#danh-sach-mon-an-da-chon').append(myLi);
+        }
+    });
+});
+
+//  Nút xóa món ăn khỏi danh sách món ăn được chọn bên phải
+$(document).on('click', 'a.btn-remove', function () {
+    $(this).closest('li').remove();
+});
+
+//  Giới hạn số lượng món ăn được chọn bên phải, tính tiền và hiển thị lên tổng tiền
+$(document).on('change', '.input-sl-mon-an', function () {
+    var value = $(this).val();
+    var price = $(this).attr('price');
+    var myLi = $(this).closest('li');
+    console.log(myLi);
+    if ((value !== '') && (value.indexOf('.') === -1)) {
+        if (value < 1 || value > 50) {
+            $(this).val(Math.max(Math.min(value, 50), 1));
+        }   else {
+            var totalPrice = value * price;
+            console.log(totalPrice);
+            $(myLi).find('.input-gia-mon-an').attr({value: totalPrice});
+        }
+    }
+});
+/////////// END ĐƠN HÀNG TẠI QUÁN /////////////
+
+/////////// ĐƠN HÀNG MANG VỀ /////////////
+$(document).on('change', '.input-sl-mon-an-dem-ve', function () {
+
+    var value = $(this).val();
+
+    if ((value !== '') && (value.indexOf('.') === -1)) {
+
+        if (value < 1 || value > 50) {
+
+            $(this).val(Math.max(Math.min(value, 50), 1));
+        }   else {
+
+            var price = $(this).attr('price');
+            var parent = $(this).closest('tr');
+            var totalPrice = value * price;
+            $(parent).find('.input-gia-mon-an').attr({value: totalPrice});
+
+            var TongTien = 0;
+            $('.input-gia-mon-an').each(function (i) {
+
+                TongTien += parseInt($(this).val());
+            })
+
+            $('#tong-tien-don-hang-mang-ve').attr({value: TongTien});
+        }
+    }
+});
+
+$('.btn-remove-mon-an-mang-ve').click(function () {
+    $(this).closest('tr').remove();
+});
+/////////// END ĐƠN HÀNG MANG VỀ /////////////
+
+/////////// DANH SÁCH ĐƠN HÀNG /////////////
+//// change select trang danh sách đơn hàng
+$(document).ready(function () {
+    $('.select-danh-sach-don-hang').hide();
+    $('#option-don-hang-online').show();
+    $('#select-danh-sach-don-hang').change(function () {
+        $('.select-danh-sach-don-hang').hide();
+        $('#'+$(this).val()).show();
+    });
+});
+////
+
+//// tìm kiếm đơn hàng
+$('#input-tim-kiem-don-hang').keyup(function() {
+    var $rows = $('.table-don-hang tbody tr');
+    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+
+    $rows.show().filter(function() {
+        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+        return !~text.indexOf(val);
+    }).hide();
+});
+/////////// END DANH SÁCH ĐƠN HÀNG /////////////
+
+$(document).ready(function() {
+    $('[id^=detail-]').hide();
+    $('.toggle').click(function() {
+        $input = $( this );
+        $target = $('#'+$input.attr('data-toggle'));
+        $target.slideToggle();
+    });
+});
+
+$(function () {
+    $("div[id*='list-mon-an-']").on('click', '.list-group .list-group-item', function () {
+        $(this).toggleClass('active');
+    });
+});
 
 $(function () {
     if($('#modal-sua-danh-muc').attr('data-autoshow')) {

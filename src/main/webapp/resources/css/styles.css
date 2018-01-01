@@ -1423,4 +1423,133 @@ a:hover, a:visited, a:link, a:active
     margin-bottom: 10px;
 }
 
+.btn-dat-ban img {
+    content: url("../images/wooden-table.png");
+}
+
+.btn-dat-ban p {
+    font-size: 18px;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #555555;
+}
+
+.select-danh-muc li, .list-mon-an-da-chon li {
+    line-height: 32px;
+    vertical-align: middle;
+    list-style-type: none;
+    margin-left: -30px;
+    border-bottom: 1px solid #dfdfdf;
+    color: #555555;
+}
+
+.select-danh-muc li:last-child, .list-mon-an-da-chon li:last-child {
+    border: 0px;
+}
+
+.select-danh-muc li>button, .list-mon-an-da-chon li>button {
+    margin-top: 5px;
+}
+
+.fa-times {
+    color: orangered;
+}
+
+.input-sl-mon-an, .input-gia-mon-an {
+    height: 28px;
+    text-align: right;
+    margin-top: 5px;
+    margin-right: 10px;
+}
+
+.input-sl-mon-an {
+    width: 50px;
+}
+
+.input-gia-mon-an {
+    width: 70px;
+}
+
+.gia-mon-an {
+    margin-right: 20px;
+}
+
+.li-p-ds-mon-an, .li-p-ten-mon-an {
+    display: inline-block;
+    margin-top: 9px;
+}
+
+#table-don-hang-tai-quan {
+    font-size: 14px;
+    width: 100%;
+}
+
+#table-don-hang-tai-quan thead {
+    background: #30a5ff;
+    color: white;
+}
+
+#table-don-hang-tai-quan tbody {
+    display:block;
+    height:250px;
+    overflow:auto;
+}
+
+#table-don-hang-tai-quan thead, #table-don-hang-tai-quan tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;/* even columns width , fix width of table too*/
+}
+
+#table-don-hang-tai-quan td, #table-don-hang-tai-quan th {
+    border: 1px solid #30a5ff;
+    border-top: 0px;
+    padding: 8px;
+}
+
+#table-don-hang-tai-quan>thead>tr>th {
+    text-align: center;
+}
+
+#table-don-hang-tai-quan>tbody>tr>td {
+    font-weight: normal;
+}
+
+#table-don-hang-tai-quan tr:nth-child(even) {
+    background-color: #eeeeee;
+}
+
+/*  Đơn hàng mang về*/
+.input-sl-mon-an-dem-ve {
+    text-align: right;
+}
+
+#table-don-hang-mang-ve input[type="text"]:disabled, #tong-tien-don-hang-mang-ve {
+    text-align: right;
+    border: 1px solid #A9A9A9;
+    background: #eeeeee;
+    color: red;
+    font-weight: bold;
+}
+
+/*-----  Danh sách đơn hàng     -----*/
+/*  Lọc danh sách đơn hàng  */
+#input-tim-kiem-don-hang {
+    width: 300px;
+    height: 28px;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    .modal-xl {
+        width: 90%;
+        max-width:1200px;
+    }
+}
+
+
 

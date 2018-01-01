@@ -78,6 +78,25 @@ public class QuanlyChinhanhController {
 	}
 
 	/***
+	 * get thông tin đầy đủ của 1 chi nhánh
+	 */
+	@RequestMapping(value = "/chinhanh-daydu/{idChinhanh}", method = RequestMethod.GET)
+	public String getThongTinChinhanh(Model model, @PathVariable("idChinhanh") int idChinhanh) {
+
+		if (idChinhanh < 0 || idChinhanh > 100) {
+			return "quanly-list-chi-nhanh";
+		} else {
+			Chinhanh chiNhanh = branchService.getInfoChiNhanh(idChinhanh);
+			model.addAttribute("chiNhanh", chiNhanh);
+			model.addAttribute("tinhThanh", tinhThanhService.getAllTinhThanh());
+			model.addAttribute("menu", chiNhanhMonService.getListChiNhanhMonByChiNhanh(idChinhanh));
+			model.addAttribute("branch", branchService.getInfoChiNhanh(idChinhanh));
+			model.addAttribute("table", banService.getListTableByChiNhanh(idChinhanh));
+		}
+		return "quanly-thong-tin-day-du-chi-nhanh";
+	}
+
+	/***
 	 * get thông tin chi tiết của 1 chi nhánh
 	 */
 	@RequestMapping(value = "/chinhanh/{idChinhanh}", method = RequestMethod.GET)

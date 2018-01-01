@@ -10,7 +10,7 @@
             </a></li>
             <li>
                 <a href="${pageContext.request.contextPath}/quanly/chinhanh/"> Danh sách chi nhánh </a></li>
-            <li><a href="${pageContext.request.contextPath}/quanly/chinhanh/${branch.chiNhanhId}">Chi nhánh ${branch.ten}</a></li>
+            <li><a href="${pageContext.request.contextPath}/quanly/chinhanh-daydu/${branch.chiNhanhId}">Chi nhánh ${branch.ten}</a></li>
         </ol>
     </div><!--/.row-->
 
@@ -49,12 +49,15 @@
                             <tbody>
                             <c:forEach items="${menu}" var="item">
                              <tr>
-                                 <td class="text-center red-text-table">1</td>
+                                 <td class="text-center red-text-table">${item.pk.mon.monId }</td>
 
                                  <td>${item.pk.mon.danhmuc.ten}</td>
                                  <td>${item.pk.mon.ten}</td>
                                  <td>${item.gia}</td>
                                  <td>${item.pk.mon.donViTinh}</td>
+                                 <td width="5%">
+				                    <a href="<c:url value="/quanly/monan/${item.pk.mon.monId }"/>" class="btn btn-info">Xem</a>
+				                </td>
                                  <td width="5%">
                                      <!-- <a href="" class="btn btn-info">Xem</a> -->
                                      <a href="#" data-toggle="modal" data-target="#modal-sua-gia" class="btn btn-info">Sửa giá</a>

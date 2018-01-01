@@ -24,7 +24,12 @@
     </c:if>
     <c:if test="${not empty activeDmSuccess}">
         <div class="alert alert-success notify">
-            <strong><spring:message code="danhmuc.delete.activesuccess"/></strong>
+            <strong><spring:message code="danhmuc.active.success"/></strong>
+        </div>
+    </c:if>
+    <c:if test="${not empty updateDmSuccess}">
+        <div class="alert alert-success notify">
+            <strong><spring:message code="danhmuc.update.success"/></strong>
         </div>
     </c:if>
     <div class="panel panel-info">
@@ -82,7 +87,7 @@
                         <h4 class="modal-title">Thêm danh mục mới</h4>
                     </div>
                     <div class="modal-body">
-                        <form:form method="post" action="/quanly/danhmuc" modelAttribute="newDm" class="form-horizontal" role="form">
+                        <form:form method="post" action="/quanly/danhmuc/create" modelAttribute="themDm" class="form-horizontal" role="form">
                             <div class="form-group">
                                 <label class="col-lg-3" for="ten-danh-muc" style="margin-top: 2px">Tên danh mục:</label>
                                 <div class="col-lg-9">
@@ -101,7 +106,7 @@
                 </div>
             </div>
         </div>
-
+        <div id="has-error-update" data-value="${hasErrorUpdateDm}"></div>
         <div class="modal fade" id="modal-sua-danh-muc" data-autoshow="${hasErrorUpdateDm}" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -110,23 +115,23 @@
                         <h4 class="modal-title">Sửa thông tin danh mục</h4>
                     </div>
                     <div class="modal-body">
-                        <c:out value="${updateDm.danhMucId}"/>
-                        <form action="<c:url value="/quanly/danhmuc/update"/>" method="post" class="form-horizontal" role="form">
+                        <form:form action="/quanly/danhmuc/update" modelAttribute="suaDm" method="post" class="form-horizontal" role="form">
                             <div class="form-group">
                                 <label class="col-lg-3 control-label" for="ten-danh-muc-sua">Tên danh mục:</label>
                                 <div class="col-lg-9">
-                                    <input name="updateDm.ten" value="${updateDm.ten}" type="text" class="expanded-input" id="ten-danh-muc-sua"/>
-                                    <form:errors path="ten" cssClass="error"/>
+                                    <form:input path="newten" type="text" class="expanded-input" id="ten-danh-muc-sua"/>
+                                    <form:errors path="newten" cssClass="error"/>
+                                    <form:errors path="idDm" cssClass="error"/>
                                 </div>
                             </div>
-                            <input type="hidden" name="updateDm.danhMucId" value="${updateDm.danhMucId}" id="id-danh-muc-sua"/>
+                            <form:hidden path="idDm" id="id-danh-muc-sua"/>
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <button type="button" class="btn btn-default pull-right" style="margin-left: 20px" data-dismiss="modal">Đóng</button>
                                     <button type="submit" class="btn btn-warning pull-right">Sửa thông tin</button>
                                 </div>
                             </div>
-                        </form>
+                        </form:form>
                     </div>
                 </div>
             </div>

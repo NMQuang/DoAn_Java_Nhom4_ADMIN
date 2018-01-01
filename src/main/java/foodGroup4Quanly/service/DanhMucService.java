@@ -21,4 +21,6 @@ public interface DanhMucService {
     List<Mon> getMonActiveByIdDm(int idDanhmuc);
 
 	List<Mon> getMonDeactiveByIdDm(int idDanhmuc);
+
+	void doiTenDm(String ten, int id);
 }

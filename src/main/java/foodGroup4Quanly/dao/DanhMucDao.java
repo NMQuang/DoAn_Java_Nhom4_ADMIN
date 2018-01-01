@@ -16,5 +16,9 @@ public interface DanhMucDao {
 
     void setActiveDm(int idDanhmuc, boolean active);
 
+    List<Mon> getMonById(int idDanhmuc);
+
     List<Mon> getMonByIdDm(int idDanhmuc, boolean monIsActive);
+
+    void suaTenDm(String ten, int id);
 }

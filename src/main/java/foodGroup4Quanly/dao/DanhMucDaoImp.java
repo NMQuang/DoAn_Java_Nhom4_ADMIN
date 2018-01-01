@@ -57,4 +57,11 @@ public class DanhMucDaoImp extends HibernateUtil implements DanhMucDao{
 
         return query.list();
     }
+
+    @Override
+    public void suaTenDm(String ten, int id) {
+        String hql = "update Danhmuc set ten = :ten where id = :id";
+        Query query = getSession().createQuery(hql).setParameter("ten", ten).setParameter("id", id);
+        query.executeUpdate();
+    }
 }

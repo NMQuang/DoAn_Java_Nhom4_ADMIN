@@ -1,6 +1,9 @@
 package foodGroup4Quanly.controller.quanly;
 
-import foodGroup4Quanly.common.DanhmucValidator;
+import foodGroup4Quanly.common.SuaDanhmucValidator;
+import foodGroup4Quanly.common.ThemDanhmucValidator;
+import foodGroup4Quanly.dto.SuaDanhMucDto;
+import foodGroup4Quanly.dto.ThemDanhMucDto;
 import foodGroup4Quanly.entity.Danhmuc;
 import foodGroup4Quanly.entity.Mon;
 import foodGroup4Quanly.service.DanhMucService;
@@ -11,11 +14,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -26,7 +24,10 @@ public class QuanlyDanhmucController {
     DanhMucService danhMucService;
 
     @Autowired
-    DanhmucValidator danhmucValidator;
+    ThemDanhmucValidator themDanhmucValidator;
+
+    @Autowired
+    SuaDanhmucValidator suaDanhmucValidator;
 
     @RequestMapping(value = "/danhmuc", method = RequestMethod.GET)
     public String getListDanhmuc(Model model, @RequestParam(value = "type", required = false) String type) {
@@ -41,8 +42,8 @@ public class QuanlyDanhmucController {
 
         model.addAttribute("type", type);
         model.addAttribute("listDanhmuc", listDanhmuc);
-        model.addAttribute("newDm", new Danhmuc());
-        model.addAttribute("updateDm", new Danhmuc());
+        model.addAttribute("themDm", new ThemDanhMucDto());
+        model.addAttribute("suaDm", new SuaDanhMucDto());
 
         return "quanly-list-danh-muc";
     }
@@ -65,20 +66,22 @@ public class QuanlyDanhmucController {
         return "quanly-chi-tiet-danh-muc";
     }
 
-    @RequestMapping(value = "/danhmuc", method = RequestMethod.POST)
+    @RequestMapping(value = "/danhmuc/create", method = RequestMethod.POST)
     public String postThemDanhmuc(Model model,
-                                  @ModelAttribute(value = "newDm") Danhmuc newDm,
+                                  @ModelAttribute(value = "themDm") ThemDanhMucDto themDm,
                                   BindingResult bindingResult,
                                   RedirectAttributes redirectAttributes) {
-        danhmucValidator.validate(newDm, bindingResult);
+        themDanhmucValidator.validate(themDm, bindingResult);
         if(bindingResult.hasErrors()) {
-            model.addAttribute("updateDm", new Danhmuc());
+            model.addAttribute("suaDm", new SuaDanhMucDto());
             model.addAttribute("listDanhmuc", danhMucService.getAllDanhmucDontcareActive());
             model.addAttribute("hasErrorCreateDm", true);
             return "quanly-list-danh-muc";
         }
-        newDm.setActive(true);
-        danhMucService.create(newDm);
+        Danhmuc danhmuc = new Danhmuc();
+        danhmuc.setTen(themDm.getTen());
+        danhmuc.setActive(true);
+        danhMucService.create(danhmuc);
         redirectAttributes.addFlashAttribute("createDmSuccess", true);
 
         return "redirect:/quanly/danhmuc/";
@@ -96,20 +99,18 @@ public class QuanlyDanhmucController {
 
     @RequestMapping(value = "/danhmuc/update", method = RequestMethod.POST)
     public String postUpdateDanhmuc(Model model,
-                                   @ModelAttribute(value = "updateDm") Danhmuc updateDm,
+                                   @ModelAttribute(value = "suaDm") SuaDanhMucDto suaDm,
                                    BindingResult result,
                                    RedirectAttributes redirectAttributes) {
-        updateDm.setActive(true);
-        System.out.println("id danh muc " + updateDm.getDanhMucId());
-        danhmucValidator.validate(updateDm, result);
-        System.out.println(updateDm.getActive());
+
+        suaDanhmucValidator.validate(suaDm, result);
         if(result.hasErrors()) {
-            System.out.println(result.getAllErrors().get(0).toString());
-            model.addAttribute("newDm", new Danhmuc());
+            model.addAttribute("themDm", new ThemDanhMucDto());
             model.addAttribute("listDanhmuc", danhMucService.getAllDanhmucDontcareActive());
             model.addAttribute("hasErrorUpdateDm", true);
             return "quanly-list-danh-muc";
         }
+        danhMucService.doiTenDm(suaDm.getNewten(), suaDm.getIdDm());
         redirectAttributes.addFlashAttribute("updateDmSuccess", true);
         return "redirect:/quanly/danhmuc";
     }

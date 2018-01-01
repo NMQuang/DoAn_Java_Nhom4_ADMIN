@@ -63,5 +63,10 @@ public class DanhMucServiceImp implements DanhMucService{
 		return danhMucDao.getMonByIdDm(idDanhmuc, false);
 	}
 
+	@Override
+	public void doiTenDm(String ten, int id) {
+		danhMucDao.suaTenDm(ten, id);
+	}
+
 
 }

@@ -1421,10 +1421,14 @@ a:hover, a:visited, a:link, a:active
 
 .btn-dat-ban {
     margin-bottom: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .btn-dat-ban img {
     content: url("../images/wooden-table.png");
+}
+.btn-dat-ban-occupied img {
+    content: url("../images/wooden-table-occupied.png");
 }
 
 .btn-dat-ban p {

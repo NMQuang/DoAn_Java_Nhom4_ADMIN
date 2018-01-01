@@ -16,4 +16,8 @@ public interface BranchDao {
 	public Chinhanh getInfoChiNhanh(int idChinhanh);
 
 	public void update(Chinhanh chiNhanh);
+
+	public int countBrand();
+
+	public List<Chinhanh> getList(int maxResult, int begin);
 }

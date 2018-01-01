@@ -48,4 +48,14 @@ public class BranchServiceImp implements BranchService {
 		branchDao.update(chiNhanh);
 	}
 
+	@Override
+	public int countBranch() {
+		return branchDao.countBrand();
+	}
+
+	@Override
+	public List<Chinhanh> getList(int maxResult, int begin) {
+		return branchDao.getList(maxResult, begin);
+	}
+
 }

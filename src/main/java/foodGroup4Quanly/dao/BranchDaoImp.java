@@ -46,4 +46,19 @@ public class BranchDaoImp implements BranchDao {
 
 		hibernateUtil.update(chiNhanh);
 	}
+
+	@Override
+	public int countBrand() {
+		Query query = hibernateUtil.getSession().createQuery("select count(*) from Chinhanh");
+	    	int count = ((Long) query.uniqueResult()).intValue();
+	    	return count;
+	}
+
+	@Override
+	public List<Chinhanh> getList(int maxResult, int begin) {
+		 String hql = "from Chinhanh";
+	         Query query = hibernateUtil.getSession().createQuery(hql);
+	         query.setFirstResult(begin).setMaxResults(maxResult);
+	         return query.list();
+	}
 }

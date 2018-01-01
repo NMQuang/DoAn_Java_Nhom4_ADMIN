@@ -61,4 +61,5 @@ public class BranchDaoImp implements BranchDao {
 	         query.setFirstResult(begin).setMaxResults(maxResult);
 	         return query.list();
 	}
+
 }

@@ -20,4 +20,6 @@ public interface BranchDao {
 	public int countBrand();
 
 	public List<Chinhanh> getList(int maxResult, int begin);
+
+
 }

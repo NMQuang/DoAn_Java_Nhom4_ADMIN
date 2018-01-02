@@ -17,4 +17,6 @@ public interface HoaDonDao {
 	
 	long getSum(Date begin, Date end, String sdt);
 	long getCount(Date begin, Date end, String sdt);
+	
+	Hoadon getTheLastBillByTableStillCooking(int idBan);
 }

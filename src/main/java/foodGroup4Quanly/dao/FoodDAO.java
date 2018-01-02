@@ -9,6 +9,6 @@ public interface FoodDAO {
    void save(Mon mon);
    void delete(int id);
    int getCountFood(boolean active);
-List<Mon> getList(int maxResult, int begin, boolean active);
-void active(int idMonan);
+	List<Mon> getList(int maxResult, int begin, boolean active);
+	void active(int idMonan);
 }

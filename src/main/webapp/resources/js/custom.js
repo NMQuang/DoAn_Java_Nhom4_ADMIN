@@ -1,3 +1,5 @@
+var globalURL = "http://localhost:8080/foodGroup4_QuanLy/"
+
 $('#calendar').datepicker({
 		});
 
@@ -139,7 +141,7 @@ $('[data-provide="datepicker-year"]').datepicker({
 //  thay đổi lựa chọn danh mục của tạo đơn hàng tại quán
 $(document).ready(function () {
     $('.select-danh-muc').hide();
-    $('#option-mon-an-nuong').show();
+    $("#" + $("#select-danh-muc option:first-child").val()).show();
     $('#select-danh-muc').change(function () {
         $('.select-danh-muc').hide();
         $('#'+$(this).val()).show();
@@ -149,23 +151,160 @@ $(document).ready(function () {
 /////////// ĐƠN HÀNG TẠI QUÁN /////////////
 //  Thêm món ăn vào danh sách món ăn được chọn bên phải
 
-
+var banid;
 $(document).ready(function () {
 	$('#menu-ben-phai').attr("hidden", "true");
 	
 	$(".btn-dat-ban").on("click", function(){
 		$('#menu-ben-phai').removeAttr("hidden");
+		$("#table-don-hang-tai-quan tbody").empty();//danh sach mon ben phai
+		$("#menu-ben-phai-tong-tien").val(0)
+		banid = $(this).attr("data-id");
 		$.ajax({
-			url: ""
+			url: globalURL +"chinhanh/api/ban/" + banid,
+			type: 'GET'
 		}).done(function(data){
 			console.log(data);
+			$("#menu-ben-phai-ten-ban").text("Bàn " + data.tenBan)
+			if(data.tinhTrang == 0){
+				$("#status-ban").val("Trống")
+				$("#btn-mo-ban").text("Mở bàn")
+				$("#btn-chon-mon").attr("disabled", true)
+				$("#btn-thanh-toan").attr("disabled", true)
+			}
+			else{
+				$("#status-ban").val("Có khách")
+				$("#btn-mo-ban").text("Hủy bàn")
+				$("#btn-chon-mon").removeAttr("disabled")
+				$("#btn-thanh-toan").removeAttr("disabled")
+				getBillByTable(banid) //lay hoa don
+			}
+				
+		}).fail(function(jqXHR, textStatus, error){
+			console.log(textStatus);
+			console.log(error);
+			console.log(jqXHR);
+		})
+		
+	})
+	$("#btn-mo-ban").on("click", function(){
+		if($(this).text() == "Hủy bàn"){
+			if(confirm("Bạn có chắc chắn muốn hủy")){
+				console.log("Hủy bàn")
+				console.log(banid)
+				$.ajax({
+					url: globalURL +"chinhanh/api/hoadon/cancelled-on-table/"+ banid,
+					type: 'DELETE'
+				}).done(function(data){
+					$("#status-ban").val("Trống")
+					$("#btn-mo-ban").text("Mở bàn")
+					$("#btn-chon-mon").attr("disabled", true)
+					$("#btn-thanh-toan").attr("disabled", true)
+					$(".btn-dat-ban[data-id="+ banid + "]").removeClass("btn-dat-ban-occupied")
+					$("#menu-ben-phai-tong-tien").val(0)
+					$("#table-don-hang-tai-quan tbody").empty();
+				}).fail(function(jqXHR, textStatus, error){
+					console.log(textStatus);
+					console.log(error);
+					console.log(jqXHR);
+					alert("Có lỗi xảy ra")
+					window.location.reload();
+				})
+			}
+		}else
+			if($(this).text() == "Mở bàn"){
+				$.ajax({
+					url: globalURL +"chinhanh/api/hoadon/created-on-table",
+					type: 'POST',
+					data: {idBan : banid}
+				}).done(function(data){
+					$("#btn-mo-ban").text("Hủy bàn")
+					$("#status-ban").val("Có khách")
+					$("#btn-chon-mon").removeAttr("disabled")
+					$("#btn-thanh-toan").removeAttr("disabled")
+					$(".btn-dat-ban[data-id="+ banid + "]").addClass("btn-dat-ban-occupied")
+				}).fail(function(jqXHR, textStatus, error){
+					console.log(textStatus);
+					console.log(error);
+					console.log(jqXHR);
+					alert("Có lỗi xảy ra")
+					window.location.reload();
+				})
+			}
+	})
+	
+	//khi tat modal chon mon
+	$('#modal-dat-hang-tai-quan').on('hide.bs.modal', function (e) {
+		$("#table-don-hang-tai-quan tbody").empty();
+		var listChiTiet = [];
+		var tongtien = 0;
+		$("#danh-sach-mon-an-da-chon li").each(function( index, element ) {
+			var id = $(element).attr("id-chon-mon");
+			var ten = $(element).find(".li-p-ten-mon-an").text();
+			var sl = $(element).find(".input-sl-mon-an").val();
+			var gia = $(element).find(".input-gia-mon-an").val();
+			console.log(ten + sl + gia)
+			tongtien += parseInt(gia);
+			listChiTiet.push({id: id, sl : sl, tong: gia})
+			$("#table-don-hang-tai-quan tbody").append(' <tr><td data-id = "'+id+'"width="60%" style="padding-left: 10px">'+ ten +'</td><td width="20%" class="text-center">' + sl +'</td><td width="20%" class="text-right" style="padding-right: 10px">' + gia +'</td></tr>')
+		})
+		$("#menu-ben-phai-tong-tien").val(tongtien)
+		$.ajax({
+			url: globalURL +"chinhanh/api/hoadon/updateBillDetailsByTable/" + banid,
+			type: 'POST',
+			contentType: 'application/json',
+			data : JSON.stringify(listChiTiet)
+		}).done(function(data){
+			//console.log(data.chitiethoadons);
+			
 		}).fail(function(jqXHR, textStatus, error){
 			console.log(textStatus);
 			console.log(error);
 			console.log(jqXHR);
 		})
 	})
+	
+	//khi bat modal chon mon len
+	$('#modal-dat-hang-tai-quan').on('show.bs.modal', function (e) {
+		$("#danh-sach-mon-an-da-chon").empty();
+		$("#table-don-hang-tai-quan tbody tr").each(function( index, element ) {
+			var id = $(element).find("td:nth-child(1)").attr("data-id");
+			var ten = $(element).find("td:nth-child(1)").text();
+			var sl = $(element).find("td:nth-child(2)").text();
+			var gia = $(element).find("td:nth-child(3)").text();
+			console.log(id + ten + sl + gia)
+			$("#danh-sach-mon-an-da-chon").append('<li id-chon-mon="' + id +'" class="ds-mon-an-da-chon"><div class="col-md-6"><p class="li-p-ten-mon-an"> ' + ten +'</p></div><div class="form-inline"><p class="li-p-ds-mon-an">Số lượng: </p><input type="number" class="input-sl-mon-an" value="' + sl + '" price=" '+ gia/sl +'"><p class="li-p-ds-mon-an t">Tổng tiền: </p><input class="input-gia-mon-an" readonly="" type="text"  value=" ' + gia +'"><a href="#" class="btn-remove"><i class="fa fa-times" aria-hidden="true"></i></a></div></li>')
+		})
+	})
+	
+	//khi nhan nut thanh toan
+	
 });
+function getBillByTable(idBan){
+	$.ajax({
+		url: globalURL +"chinhanh/api/hoadon/getBillByTable/" + banid,
+		type: 'GET'
+	}).done(function(data){
+		//console.log(data.chitiethoadons);
+		$("#table-don-hang-tai-quan tbody").empty();
+		$("#menu-ben-phai-tong-tien").val(0)
+		var tongtien = 0;
+		$(data.chitiethoadons).each(function( index, element ) {
+			console.log(element)
+			var id = element.pk.mon.monId;
+			var ten = element.pk.mon.ten;
+			var sl = element.soLuong;
+			var gia = element.tongTien;
+			tongtien += gia;
+			$("#table-don-hang-tai-quan tbody").append(' <tr><td data-id = "'+id+'" width="60%" style="padding-left: 10px">'+ ten +'</td><td width="20%" class="text-center">' + sl +'</td><td width="20%" class="text-right" style="padding-right: 10px">' + gia +'</td></tr>')
+		})
+		$("#menu-ben-phai-tong-tien").val(tongtien)
+	}).fail(function(jqXHR, textStatus, error){
+		console.log(textStatus);
+		console.log(error);
+		console.log(jqXHR);
+	})
+}
 $(document).ready(function() {
 
     $('.btn-them-mon-an').click(function () {
@@ -196,8 +335,8 @@ $(document).ready(function() {
             var inputSoluong = $('<input type="number" class="input-sl-mon-an" value="1" price/>');
             inputSoluong.attr({id: id, price: price});
 
-            var inputTongTien = $('<input class="input-gia-mon-an" type="text" price>');
-            inputTongTien.attr({value: price, price: price});
+            var inputTongTien = $('<input class="input-gia-mon-an" readonly type="text">');
+            inputTongTien.attr({value: price});
 
             var btnXoa = $('<a href="#" class="btn-remove"><i class="fa fa-times" aria-hidden="true"></i></a>');
 
@@ -232,6 +371,8 @@ $(document).on('change', '.input-sl-mon-an', function () {
     if ((value !== '') && (value.indexOf('.') === -1)) {
         if (value < 1 || value > 50) {
             $(this).val(Math.max(Math.min(value, 50), 1));
+            var totalPrice = Math.max(Math.min(value, 50), 1) * price;
+            $(myLi).find('.input-gia-mon-an').attr({value: totalPrice});
         }   else {
             var totalPrice = value * price;
             console.log(totalPrice);
@@ -271,6 +412,13 @@ $(document).on('change', '.input-sl-mon-an-dem-ve', function () {
 
 $('.btn-remove-mon-an-mang-ve').click(function () {
     $(this).closest('tr').remove();
+    var TongTien = 0;
+    $('.input-gia-mon-an').each(function (i) {
+
+        TongTien += parseInt($(this).val());
+    })
+
+    $('#tong-tien-don-hang-mang-ve').attr({value: TongTien});
 });
 /////////// END ĐƠN HÀNG MANG VỀ /////////////
 

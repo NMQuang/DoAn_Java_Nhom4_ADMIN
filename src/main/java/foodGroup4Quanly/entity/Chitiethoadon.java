@@ -2,6 +2,11 @@ package foodGroup4Quanly.entity;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "chitiethoadon", schema = "java_foodsystem")
 @AssociationOverrides({
@@ -23,6 +28,7 @@ public class Chitiethoadon {
         this.pk = pk;
     }
 
+    @JsonIgnore
     @Transient
     public Hoadon getHoadon() {
         return getPk().getHoadon();
@@ -31,7 +37,7 @@ public class Chitiethoadon {
     public void setHoadon(Hoadon hoadon) {
         getPk().setHoadon(hoadon);
     }
-
+    @JsonIgnore
     @Transient
     public Mon getMon() {
         return getPk().getMon();

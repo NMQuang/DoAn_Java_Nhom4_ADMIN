@@ -50,349 +50,34 @@
                                     <label class="control-label col-md-3" style="margin-top: 6px">Danh mục:</label>
                                     <select id="select-danh-muc" class="form-control expanded-input"
                                             style="border: 1px solid #cccccc; width: 150px;">
-                                        <option value="option-mon-an-nuong">Nướng</option>
-                                        <option value="option-mon-an-xao">Xào</option>
-                                        <option value="option-mon-an-chien">Chiên</option>
-                                        <option value="option-mon-an-luoc">Luộc</option>
+                                            <c:forEach items="${dsDM }" var="item">
+                                            	 <option value="danhmuc-${item.danhMucId }">${item.ten }</option>
+                                            </c:forEach>
+                                       
                                     </select>
                                 </div>
                                 <div class="well" style="height: 415px;">
                                     <div style="position: relative">
                                         <div style="height: 380px; overflow:auto;">
-                                            <div class="select-danh-muc" id="option-mon-an-nuong">
-                                                <ul>
-                                                    <li>
-                                                        Gà nướng nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right btn-them-mon-an"
-                                                                id-sp="001" name="Gà nướng nguyên con"
-                                                                price="80000">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Lạc đà nướng nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right btn-them-mon-an"
-                                                                id-sp="002" name="Lạc đà nướng nguyên con"
-                                                                price="100000">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Chim cút nướng nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right btn-them-mon-an"
-                                                                id-sp="003" name="Chim cút nướng nguyên con"
-                                                                price="110000">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Chó nướng nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Mèo nướng nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Cá nướng nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Vịt nướng nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Trâu nướng nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Bò nướng nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Heo nướng nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Trâu nướng nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Bò nướng nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Heo nướng nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="select-danh-muc" id="option-mon-an-xao">
-                                                <ul>
-                                                    <li>
-                                                        Gà xào nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Lạc đà xào nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Chim cút xào nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Chó xào nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Mèo xào nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Cá xào nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Vịt xào nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Trâu xào nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Bò xào nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Heo xào nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Trâu xào nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Bò xào nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Heo xào nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="select-danh-muc" id="option-mon-an-chien">
-                                                <ul>
-                                                    <li>
-                                                        Gà chiên nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Lạc đà chiên nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Chim cút chiên nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Chó chiên nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Mèo chiên nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Cá chiên nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Vịt chiên nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Trâu chiên nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Bò chiên nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Heo chiên nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Trâu chiên nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Bò chiên nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Heo chiên nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="select-danh-muc" id="option-mon-an-luoc">
-                                                <ul>
-                                                    <li>
-                                                        Gà luộc nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Lạc đà luộc nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Chim cút luộc nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Chó luộc nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Mèo luộc nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Cá luộc nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Vịt luộc nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Trâu luộc nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Bò luộc nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Heo luộc nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Trâu luộc nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Bò luộc nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        Heo luộc nguyên con
-                                                        <button type="button"
-                                                                class="btn btn-info btn-xs pull-right">Chọn
-                                                        </button>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                        <c:forEach items="${dsDM }" var="dm">
+                                        	 <div class="select-danh-muc" id="danhmuc-${dm.danhMucId  }">
+                                        	  <ul>
+                                        	<c:forEach items="${dsCnMon}" var="cnm">
+                                        	<c:if test="${cnm.pk.mon.danhmuc.danhMucId ==  dm.danhMucId }">
+                                        	<li>
+                                                 ${cnm.pk.mon.ten }
+                                                    <button type="button"
+                                                            class="btn btn-info btn-xs pull-right btn-them-mon-an"
+                                                            id-sp="${cnm.pk.mon.monId }" name="${cnm.pk.mon.ten }"
+                                                            price="${cnm.gia }">Chọn
+                                                    </button>
+                                                </li>
+                                        	</c:if>
+                                        		
+                                        	</c:forEach>
+                                        	</ul>
+                                        	</div>
+                                        </c:forEach>
                                         </div>
                                     </div>
                                 </div>
@@ -422,20 +107,20 @@
                 <form class="form-horizontal">
                     <div class="panel panel-default" id="menu-ben-phai">
                         <div class="panel-heading">
-                            <span id="menu-ben-phai-ten-ban">Bàn 001</span>
-                            <a class="btn btn-primary fix pull-right">Mở bàn</a>
+                            <span id="menu-ben-phai-ten-ban"></span>
+                            <a class="btn btn-primary fix pull-right" id="btn-mo-ban">Mở bàn</a>
                         </div>
                         <div class="panel-body" style="height: 436px;">
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-md-offset-1">Tình trạng </label>
                                 <div class="col-md-5">
-                                    <input class="form-control expanded-input">
+                                    <input class="form-control expanded-input" id="status-ban" readonly="readonly">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-md-offset-1">Tổng tiền </label>
                                 <div class="col-md-5">
-                                    <input class="form-control expanded-input">
+                                    <input class="form-control expanded-input" id="menu-ben-phai-tong-tien" readonly="readonly">
                                 </div>
                             </div>
                             <table id="table-don-hang-tai-quan">
@@ -447,52 +132,13 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td width="60%" style="padding-left: 10px">Vịt quay xào não bò</td>
-                                    <td width="20%" class="text-center">2</td>
-                                    <td width="20%" class="text-right" style="padding-right: 10px">500000</td>
-                                </tr>
-                                <tr>
-                                    <td width="60%" style="padding-left: 10px">Đầu trâu trộn tương ớt</td>
-                                    <td width="20%" class="text-center">1</td>
-                                    <td width="20%" class="text-right" style="padding-right: 10px">800000</td>
-                                </tr>
-                                <tr>
-                                    <td width="60%" style="padding-left: 10px">Cầy tơ bảy món</td>
-                                    <td width="20%" class="text-center">1</td>
-                                    <td width="20%" class="text-right" style="padding-right: 10px">1500000</td>
-                                </tr>
-                                <tr>
-                                    <td width="60%" style="padding-left: 10px">Vịt quay xào não bò</td>
-                                    <td width="20%" class="text-center">2</td>
-                                    <td width="20%" class="text-right" style="padding-right: 10px">500000</td>
-                                </tr>
-                                <tr>
-                                    <td width="60%" style="padding-left: 10px">Vịt quay xào não bò</td>
-                                    <td width="20%" class="text-center">2</td>
-                                    <td width="20%" class="text-right" style="padding-right: 10px">500000</td>
-                                </tr>
-                                <tr>
-                                    <td width="60%" style="padding-left: 10px">Đầu trâu trộn tương ớt</td>
-                                    <td width="20%" class="text-center">1</td>
-                                    <td width="20%" class="text-right" style="padding-right: 10px">800000</td>
-                                </tr>
-                                <tr>
-                                    <td width="60%" style="padding-left: 10px">Cầy tơ bảy món</td>
-                                    <td width="20%" class="text-center">1</td>
-                                    <td width="20%" class="text-right" style="padding-right: 10px">1500000</td>
-                                </tr>
-                                <tr>
-                                    <td width="60%" style="padding-left: 10px">Vịt quay xào não bò</td>
-                                    <td width="20%" class="text-center">2</td>
-                                    <td width="20%" class="text-right" style="padding-right: 10px">500000</td>
-                                </tr>
+                                
                                 </tbody>
                             </table>
                         </div>
                         <div class="panel-footer text-center">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-dat-hang-tai-quan">Chọn món</button>
-                            <button type="submit" class="btn btn-primary">Thanh toán</button>
+                            <button id="btn-chon-mon" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-dat-hang-tai-quan">Chọn món</button>
+                            <button id="btn-thanh-toan" type="button" class="btn btn-primary">Thanh toán</button>
                         </div>
                     </div>
                 </form>

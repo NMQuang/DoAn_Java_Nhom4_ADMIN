@@ -2,6 +2,9 @@ package foodGroup4Quanly.entity;
 
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 
 @Embeddable
@@ -18,7 +21,7 @@ public class ChiTietHoaDonId implements Serializable {
     public void setMon(Mon mon) {
         this.mon = mon;
     }
-
+    @JsonIgnore
     @ManyToOne
     public Hoadon getHoadon() {
 

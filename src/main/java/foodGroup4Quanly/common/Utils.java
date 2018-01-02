@@ -3,6 +3,9 @@ package foodGroup4Quanly.common;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletContext;
 
@@ -37,5 +40,11 @@ public class Utils {
 		}catch(Exception e){
 
     		}
+	}
+
+	public static Date parseDate(String str, String format) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat(format);
+		Date date = sdf.parse(str);
+		return date;
 	}
 }

@@ -1,5 +1,7 @@
 package foodGroup4Quanly.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
 
 import java.sql.Date;
@@ -48,6 +50,7 @@ public class Chiphingay {
 
     @Basic
     @Column(name = "Ngay")
+    @CreationTimestamp
     public Timestamp getNgay() {
         return ngay;
     }

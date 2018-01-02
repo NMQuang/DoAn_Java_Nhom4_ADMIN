@@ -335,8 +335,37 @@ $('#modal-sua-danh-muc').on('show.bs.modal', function (event) {
     }
 });
 
+//////////////////////////////////
+// CHON NGAY CHI PHI NGAY ////////
+$('#chon-ngay-cp-ngay').datepicker({
+    format: 'dd-mm-yyyy',
+    endDate: new Date(),
+    "autoclose": true
+});
 
+$('#chon-ngay-cp-ngay').datepicker().on('changeDate', function(ev){
+    console.log(ev.format());
+});
 
+function dateToString(date) {
+    var dd = date.getDate();
+    var mm = date.getMonth()+1; //January is 0!
+
+    var yyyy = date.getFullYear();
+    if(dd<10){
+        dd='0'+dd;
+    }
+    if(mm<10){
+        mm='0'+mm;
+    }
+    return dd+'-'+mm+'-'+yyyy;
+}
+
+if($('#dateFindCpNgay').val() != "") {
+    $('#chon-ngay-cp-ngay>input').val(dateToString(new Date($('#dateFindCpNgay').val())));
+} else {
+    $('#chon-ngay-cp-ngay>input').val(dateToString(new Date()));
+}
 
 
 

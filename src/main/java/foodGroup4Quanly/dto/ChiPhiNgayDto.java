@@ -8,12 +8,28 @@ public class ChiPhiNgayDto {
     private String mota;
     private Integer tien;
 
+    public ChiPhiNgayDto() {
+
+    }
+
+    public ChiPhiNgayDto(Chiphingay chiphingay) {
+        this.ten = chiphingay.getTen();
+        this.mota = chiphingay.getMoTa();
+        this.tien = chiphingay.getTien();
+    }
+
     public Chiphingay getChiPhiNgay() {
         Chiphingay chiphingay = new Chiphingay();
+        chiphingay = this.tranferChiPhiNgay(chiphingay);
+        chiphingay.setChinhanh(Utils.getChinhanhHienTai());
+        return chiphingay;
+    }
+
+    public Chiphingay tranferChiPhiNgay(Chiphingay chiphingay) {
         chiphingay.setTen(this.ten);
         chiphingay.setMoTa(this.mota);
         chiphingay.setTien(this.tien);
-        chiphingay.setChinhanh(Utils.getChinhanhHienTai());
+
         return chiphingay;
     }
 

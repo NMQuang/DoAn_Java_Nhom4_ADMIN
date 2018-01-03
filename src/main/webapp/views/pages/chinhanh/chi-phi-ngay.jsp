@@ -59,7 +59,7 @@
                             <td class="text-center"><fmt:formatDate value="${chiPhiNgay.ngay}" pattern="dd/MM/yyyy HH:mm:ss"/></td>
                             <td class="text-center">${chiPhiNgay.tien}</td>
                             <td width="5%">
-                                <a class="btn btn-warning" data-toggle="modal" data-target="#modal-sua-chi-phi-ngay">Sửa</a>
+                                <a href="<c:url value="/chinhanh/chiphi/ngay/update/${chiPhiNgay.chiPhiNgayId}"/>" class="btn btn-warning">Sửa</a>
                             </td>
                             <td width="5%">
                                 <a class="btn btn-danger">Xóa</a>

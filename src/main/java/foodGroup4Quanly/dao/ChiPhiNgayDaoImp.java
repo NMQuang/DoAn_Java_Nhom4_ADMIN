@@ -61,4 +61,14 @@ public class ChiPhiNgayDaoImp extends HibernateUtil implements ChiPhiNgayDao{
 		super.create(chiphingay);
 	}
 
+	@Override
+	public Chiphingay getById(int id) {
+		return super.fetchById(id, Chiphingay.class);
+	}
+
+	@Override
+	public void update(Chiphingay chiphingay) {
+		super.update(chiphingay);
+	}
+
 }

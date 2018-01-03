@@ -9,17 +9,19 @@
                 <em class="fa fa-home"></em>
             </a></li>
             <li><a href="<c:url value="/chinhanh/chiphi/ngay"/>">Chi phí theo ngày</a></li>
-            <li>Tạo chi phí theo ngày</li>
+            <li>${type == "update" ? "Update chi phí ngày" : "Tạo chi phí theo ngày"}</li>
         </ol>
     </div><!--/.row-->
 
+    <c:set var="action" value="${type == 'update' ? '/chinhanh/chiphi/ngay/update' : '/chinhanh/chiphi/ngay/create'}"/>
     <div class="row">
         <div class="col-md-12">
-            <form:form action="/chinhanh/chiphi/ngay/create" method="post" modelAttribute="chiPhiNgay" class="form-horizontal">
+            <form:form action="${action}" method="post" modelAttribute="chiPhiNgay" class="form-horizontal">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         Tạo chi phí theo ngày
                     </div>
+                    <input type="hidden" name="id" value="${id}"/>
                     <div class="panel-body">
                         <div class="form-group">
                             <label class="control-label col-md-3" for="ten-chi-phi">Tên chi phí</label>
@@ -44,7 +46,14 @@
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-success btn-lg center-block" type="submit">Tạo chi phí mới</button>
+                <c:choose>
+                    <c:when test="${type == 'update'}">
+                        <button class="btn btn-warning btn-lg center-block" type="submit">Cập nhật</button>
+                    </c:when>
+                    <c:otherwise>
+                        <button class="btn btn-primary btn-lg center-block" type="submit">Tạo chi phí mới</button>
+                    </c:otherwise>
+                </c:choose>
                 <hr>
             </form:form>
         </div>

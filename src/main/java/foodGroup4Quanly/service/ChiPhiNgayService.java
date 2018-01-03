@@ -9,4 +9,9 @@ public interface ChiPhiNgayService {
     List<Chiphingay> getChiPhiNgayInDate(Date date);
 
     void create(Chiphingay chiphingay);
+
+    Chiphingay getById(int id);
+
+    void update(Chiphingay chiphingay);
+
 }

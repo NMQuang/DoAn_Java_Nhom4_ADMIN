@@ -25,4 +25,14 @@ public class ChiPhiNgayServiceImp implements ChiPhiNgayService {
     public void create(Chiphingay chiphingay) {
         chiPhiNgayDao.create(chiphingay);
     }
+
+    @Override
+    public Chiphingay getById(int id) {
+        return chiPhiNgayDao.getById(id);
+    }
+
+    @Override
+    public void update(Chiphingay chiphingay) {
+        chiPhiNgayDao.update(chiphingay);
+    }
 }

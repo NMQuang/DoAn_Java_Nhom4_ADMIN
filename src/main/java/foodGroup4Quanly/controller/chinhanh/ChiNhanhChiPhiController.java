@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.util.Calendar;
@@ -45,7 +42,7 @@ public class ChiNhanhChiPhiController {
         return "chinhanh-them-chi-phi-ngay";
     }
 
-    @RequestMapping(value = "ngay/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/ngay/create", method = RequestMethod.POST)
     public String postThemChiPhiNgay(Model model,
                                      @ModelAttribute("chiPhiNgay") ChiPhiNgayDto chiPhiNgayDto,
                                      BindingResult bindingResult) {
@@ -56,6 +53,34 @@ public class ChiNhanhChiPhiController {
         Chiphingay chiphingay = chiPhiNgayDto.getChiPhiNgay();
         chiPhiNgayService.create(chiphingay);
         return "redirect:/chinhanh/chiphi/ngay/create";
+    }
+
+    @RequestMapping(value = "/ngay/update/{id}", method = RequestMethod.GET)
+    public String getUpdateChiPhiNgay(Model model,
+                                      @PathVariable("id")int id) {
+        ChiPhiNgayDto chiPhiNgayDto = new ChiPhiNgayDto(chiPhiNgayService.getById(id));
+        model.addAttribute("chiPhiNgay", chiPhiNgayDto);
+        model.addAttribute("id", id);
+        model.addAttribute("type", "update");
+        return "chinhanh-them-chi-phi-ngay";
+    }
+
+    @RequestMapping(value = "/ngay/update", method = RequestMethod.POST)
+    public String postUpdateChiPhiNgay(Model model,
+                                       @RequestParam("id") int id,
+                                       @ModelAttribute("chiPhiNgay") ChiPhiNgayDto chiPhiNgayDto,
+                                       BindingResult bindingResult) {
+        chiPhiNgayValidator.validate(chiPhiNgayDto, bindingResult);
+        if(bindingResult.hasErrors()) {
+            model.addAttribute("id", id);
+            model.addAttribute("type", "update");
+            return "chinhanh-them-chi-phi-ngay";
+        }
+        Chiphingay chiphingay = chiPhiNgayService.getById(id);
+        chiphingay = chiPhiNgayDto.tranferChiPhiNgay(chiphingay);
+        chiPhiNgayService.update(chiphingay);
+
+        return "redirect:/chinhanh/chiphi/ngay/update/" + id;
     }
 
     @RequestMapping(value = "/thang")

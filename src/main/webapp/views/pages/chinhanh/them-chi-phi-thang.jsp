@@ -3,6 +3,7 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 
 <!-- Dung cho jquery -->
+<c:out value="${tienThueNha.thoiGian}"/>
 <input type="hidden" id="dateChosenThemCpThang" value="${tienThueNha.thoiGian}"/>
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
@@ -12,22 +13,25 @@
                 <em class="fa fa-home"></em>
             </a></li>
             <li><a href="<c:url value="/chinhanh/chiphi/thang"/>">Chi phí theo tháng</a></li>
-            <li>Tạo chi phí theo tháng</li>
+            <li>${type == 'update' ? 'Cập nhật chi phí tháng' : 'Tạo chi phí theo tháng'}</li>
         </ol>
     </div><!--/.row-->
 
+    <c:set var="action" value="${type=='update' ? '/chinhanh/chiphi/thang/update' : '/chinhanh/chiphi/thang/create'}"/>
     <div class="row">
         <div class="col-md-12">
-            <form:form action="/chinhanh/chiphi/thang/create" method="post" modelAttribute="tienThueNha" class="form-horizontal">
+            <form:form action="${action}" method="post" modelAttribute="tienThueNha" class="form-horizontal">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         Tạo chi phí tháng
                     </div>
+                    <input type="hidden" name="thang" value="${thang}"/>
+                    <input type="hidden" name="nam" value="${nam}"/>
                     <div class="panel-body">
                         <div class="form-group">
                             <label class="control-label col-md-3">Chọn tháng</label>
                             <div class="col-md-6">
-                                <div class="input-group date" id="chon-thang-them-cp-thang" style="width:160px">
+                                <div class="input-group date ${tienThueNha.update == true ? 'disabledbutton' : ''}" id="chon-thang-them-cp-thang" style="width:160px">
                                     <form:input path="thoiGian" type="text" class="form-control" style="border: 1px solid #cccccc;"/>
                                     <div class="input-group-addon">
                                         <span class="fa fa-calendar"></span>
@@ -59,7 +63,12 @@
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-success btn-lg center-block" type="submit">Tạo chi phí mới</button>
+                <c:if test="${type == 'update'}">
+                    <button class="btn btn-warning btn-lg center-block" type="submit">Cập nhật</button>
+                </c:if>
+                <c:if test="${type != 'update'}">
+                    <button class="btn btn-success btn-lg center-block" type="submit">Tạo chi phí mới</button>
+                </c:if>
                 <hr>
             </form:form>
 

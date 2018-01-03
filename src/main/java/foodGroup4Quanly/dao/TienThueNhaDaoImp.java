@@ -68,4 +68,9 @@ public class TienThueNhaDaoImp extends HibernateUtil implements TienThueNhaDao{
 		super.create(tienthuenha);
 	}
 
+	@Override
+	public void update(Tienthuenha tienthuenha) {
+		super.update(tienthuenha);
+	}
+
 }

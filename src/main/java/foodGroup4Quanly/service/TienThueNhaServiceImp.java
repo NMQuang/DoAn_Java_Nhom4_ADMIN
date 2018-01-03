@@ -30,4 +30,9 @@ public class TienThueNhaServiceImp implements TienThueNhaService {
     public void create(Tienthuenha tienthuenha) {
         tienThueNhaDao.create(tienthuenha);
     }
+
+    @Override
+    public void update(Tienthuenha tienthuenha) {
+        tienThueNhaDao.update(tienthuenha);
+    }
 }

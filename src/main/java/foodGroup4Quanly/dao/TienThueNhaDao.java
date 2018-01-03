@@ -17,4 +17,7 @@ public interface TienThueNhaDao {
     Tienthuenha getById(TienthuenhaPK pk);
 
     void create(Tienthuenha tienthuenha);
+
+    void update(Tienthuenha tienthuenha);
+    
 }

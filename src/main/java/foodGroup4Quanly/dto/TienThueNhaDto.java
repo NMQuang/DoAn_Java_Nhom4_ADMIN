@@ -12,6 +12,26 @@ public class TienThueNhaDto {
     private String ten;
     private String mota;
     private Integer tien;
+    private Boolean isUpdate = false;
+
+    public Boolean getUpdate() {
+        return isUpdate;
+    }
+
+    public void setUpdate(Boolean update) {
+        isUpdate = update;
+    }
+
+    public TienThueNhaDto() {
+
+    }
+
+    public TienThueNhaDto(Tienthuenha tienthuenha) {
+        this.thoiGian = tienthuenha.getThang()+'-'+tienthuenha.getNam();
+        this.ten = tienthuenha.getTen();
+        this.mota = tienthuenha.getMoTa();
+        this.tien = tienthuenha.getTien();
+    }
 
     public Tienthuenha getTienThueNha() {
         // not valid
@@ -31,6 +51,14 @@ public class TienThueNhaDto {
         tienthuenha.setNgayChi(new Timestamp(Calendar.getInstance().getTimeInMillis()));
         tienthuenha.setTien(this.tien);
         tienthuenha.setChinhanh(Utils.getChinhanhHienTai());
+
+        return tienthuenha;
+    }
+
+    public Tienthuenha updateTienThueNha(Tienthuenha tienthuenha) {
+        tienthuenha.setTen(this.ten);
+        tienthuenha.setMoTa(this.mota);
+        tienthuenha.setTien(this.tien);
 
         return tienthuenha;
     }

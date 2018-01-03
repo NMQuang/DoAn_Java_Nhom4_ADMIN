@@ -10,4 +10,6 @@ public interface TienThueNhaService {
     Tienthuenha getById(TienthuenhaPK pk);
 
     void create(Tienthuenha tienthuenha);
+
+    void update(Tienthuenha tienthuenha);
 }

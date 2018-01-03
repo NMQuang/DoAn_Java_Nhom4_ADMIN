@@ -63,10 +63,10 @@
                             <td class="text-center"><fmt:formatDate value="${tienThueNha.ngayChi}" pattern="dd/MM/yyyy"/></td>
                             <td class="text-center">${tienThueNha.tien} VNĐ</td>
                             <td>
-                                <a class="btn btn-warning">Sửa</a>
+                                <a href="<c:url value="/chinhanh/chiphi/thang/update?month=${tienThueNha.thang}&year=${tienThueNha.nam}"/>" class="btn btn-warning">Sửa</a>
                             </td>
                             <td>
-                                <a class="btn btn-danger">Xóa</a>
+                                <%--<a class="btn btn-danger">Xóa</a>--%>
                             </td>
                         </tr>
                         </c:forEach>

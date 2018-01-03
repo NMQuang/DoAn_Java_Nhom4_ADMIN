@@ -8,6 +8,7 @@ import foodGroup4Quanly.dto.ChiPhiNgayDto;
 import foodGroup4Quanly.dto.TienThueNhaDto;
 import foodGroup4Quanly.entity.Chiphingay;
 import foodGroup4Quanly.entity.Tienthuenha;
+import foodGroup4Quanly.entity.TienthuenhaPK;
 import foodGroup4Quanly.service.ChiPhiNgayService;
 import foodGroup4Quanly.service.TienThueNhaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,7 +89,7 @@ public class ChiNhanhChiPhiController {
             return "chinhanh-them-chi-phi-ngay";
         }
         Chiphingay chiphingay = chiPhiNgayService.getById(id);
-        chiphingay = chiPhiNgayDto.tranferChiPhiNgay(chiphingay);
+        chiphingay = chiPhiNgayDto.tranferDataToChiPhiNgay(chiphingay);
         chiPhiNgayService.update(chiphingay);
 
         return "redirect:/chinhanh/chiphi/ngay/update/" + id;
@@ -134,6 +135,43 @@ public class ChiNhanhChiPhiController {
 
         model.addAttribute("tienThueNha", new TienThueNhaDto());
         return "chinhanh-them-chi-phi-thang";
+    }
+
+    @RequestMapping(value = "/thang/update", method = RequestMethod.GET)
+    public String getUpdateChiPhiThang(Model model,
+                                       @RequestParam("month") String month,
+                                       @RequestParam("year") String year) {
+        Tienthuenha tienthuenha = tienThueNhaService.getById(new TienthuenhaPK(month, year));
+        TienThueNhaDto tienThueNhaDto = new TienThueNhaDto(tienthuenha);
+        tienThueNhaDto.setUpdate(true);
+
+        model.addAttribute("tienThueNha", tienThueNhaDto);
+        model.addAttribute("thang", tienthuenha.getThang());
+        model.addAttribute("nam", tienthuenha.getNam());
+        model.addAttribute("type", "update");
+
+        return "chinhanh-them-chi-phi-thang";
+    }
+
+    @RequestMapping(value = "/thang/update", method = RequestMethod.POST)
+    public String postUpdateChiPhiThang(Model model,
+                                        @ModelAttribute("tienThueNha")TienThueNhaDto tienThueNhaDto,
+                                        @RequestParam("thang") String thang,
+                                        @RequestParam("nam") String nam,
+                                        BindingResult bindingResult) {
+        tienThueNhaDto.setUpdate(true);
+        tienThueNhaValidator.validate(tienThueNhaDto, bindingResult);
+        if(bindingResult.hasErrors()) {
+            model.addAttribute("type", "update");
+            return "chinhanh-them-chi-phi-thang";
+        }
+
+        Tienthuenha tienthuenha = tienThueNhaService.getById(new TienthuenhaPK(thang, nam));
+        tienthuenha = tienThueNhaDto.updateTienThueNha(tienthuenha);
+        tienThueNhaService.update(tienthuenha);
+
+        model.addAttribute("tienThueNha", tienThueNhaDto);
+        return "redirect:/chinhanh/chiphi/thang/update" + "?month=" + thang + "&year=" + nam;
     }
 
     @RequestMapping(value = "luongnhanvien")

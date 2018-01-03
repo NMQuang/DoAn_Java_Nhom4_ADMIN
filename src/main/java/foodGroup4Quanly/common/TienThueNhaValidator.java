@@ -11,8 +11,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -36,19 +34,22 @@ public class TienThueNhaValidator implements Validator {
             ValidationUtils.rejectIfEmptyOrWhitespace(errors,"ten", "NotEmpty");
             ValidationUtils.rejectIfEmptyOrWhitespace(errors,"mota", "NotEmpty");
 
-            Date date = Utils.parseDate(tienThueNhaDto.getThoiGian(), "MM-yyyy");
-            if(date == null) {
-                errors.rejectValue("thoiGian", "chiphithang.thoiGian.invalid");
-            } else {
-                Calendar cal = Utils.convertDateToCalendar(date);
-                String strMonth = String.format("%02d", cal.get(Calendar.MONTH) + 1);
-                String strYear = String.format("%04d", cal.get(Calendar.YEAR));
+            if(!tienThueNhaDto.getUpdate()) {
 
-                System.out.println("strMOnth:" + strMonth + "\n" + "strYear:" + strYear);
-                Tienthuenha tienthuenha = tienThueNhaService.getById(new TienthuenhaPK(strMonth, strYear));
-                if(tienthuenha != null) {
-                    System.out.println(tienthuenha.getThang() + " " + tienthuenha.getNam());
-                    errors.rejectValue("thoiGian", "chiphithang.thoiGian.dumplicate");
+                Date date = Utils.parseDate(tienThueNhaDto.getThoiGian(), "MM-yyyy");
+                if (date == null) {
+                    errors.rejectValue("thoiGian", "chiphithang.thoiGian.invalid");
+                } else {
+                    Calendar cal = Utils.convertDateToCalendar(date);
+                    String strMonth = String.format("%02d", cal.get(Calendar.MONTH) + 1);
+                    String strYear = String.format("%04d", cal.get(Calendar.YEAR));
+
+                    System.out.println("strMOnth:" + strMonth + "\n" + "strYear:" + strYear);
+                    Tienthuenha tienthuenha = tienThueNhaService.getById(new TienthuenhaPK(strMonth, strYear));
+                    if (tienthuenha != null) {
+                        System.out.println(tienthuenha.getThang() + " " + tienthuenha.getNam());
+                        errors.rejectValue("thoiGian", "chiphithang.thoiGian.dumplicate");
+                    }
                 }
             }
 

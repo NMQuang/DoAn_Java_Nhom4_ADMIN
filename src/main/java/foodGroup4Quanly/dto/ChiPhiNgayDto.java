@@ -20,12 +20,12 @@ public class ChiPhiNgayDto {
 
     public Chiphingay getChiPhiNgay() {
         Chiphingay chiphingay = new Chiphingay();
-        chiphingay = this.tranferChiPhiNgay(chiphingay);
+        chiphingay = this.tranferDataToChiPhiNgay(chiphingay);
         chiphingay.setChinhanh(Utils.getChinhanhHienTai());
         return chiphingay;
     }
 
-    public Chiphingay tranferChiPhiNgay(Chiphingay chiphingay) {
+    public Chiphingay tranferDataToChiPhiNgay(Chiphingay chiphingay) {
         chiphingay.setTen(this.ten);
         chiphingay.setMoTa(this.mota);
         chiphingay.setTien(this.tien);

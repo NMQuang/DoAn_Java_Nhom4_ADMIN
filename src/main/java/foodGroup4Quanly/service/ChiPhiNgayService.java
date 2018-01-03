@@ -14,4 +14,5 @@ public interface ChiPhiNgayService {
 
     void update(Chiphingay chiphingay);
 
+    void deleteById(int id);
 }

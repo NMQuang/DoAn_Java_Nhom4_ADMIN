@@ -35,4 +35,9 @@ public class ChiPhiNgayServiceImp implements ChiPhiNgayService {
     public void update(Chiphingay chiphingay) {
         chiPhiNgayDao.update(chiphingay);
     }
+
+    @Override
+    public void deleteById(int id) {
+        chiPhiNgayDao.deleteById(id);
+    }
 }

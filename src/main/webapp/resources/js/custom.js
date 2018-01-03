@@ -385,5 +385,22 @@ $(function () {
     $('#chon-ngay-cp-ngay').datepicker('update', dateUse);
 });
 
+// XOA CHI PHI NGAY
+$(document).ready(function () {
+    $('.xoa-chi-phi-ngay').click(function (e) {
+        if(confirm("Bạn có chắc muốn xóa ?")) {
+            const idDelete = $(this).data('id');
+
+            var form = $('<form method="post" action="/chinhanh/chiphi/ngay/delete"></form>');
+            var input = $('<input type="hidden" name="id"/>');
+            input.attr('value', idDelete);
+            form.append(input);
+
+            $('body').append(form);
+            form.submit();
+        }
+    });
+});
+
 
 

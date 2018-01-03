@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
@@ -81,6 +83,14 @@ public class ChiNhanhChiPhiController {
         chiPhiNgayService.update(chiphingay);
 
         return "redirect:/chinhanh/chiphi/ngay/update/" + id;
+    }
+
+    @RequestMapping(value = "/ngay/delete", method = RequestMethod.POST)
+    public String postDeleteChiPhiNgay(HttpServletRequest request, @RequestParam("id") int id) {
+        chiPhiNgayService.deleteById(id);
+
+        String referer = request.getHeader("Referer");
+        return "redirect:"+ referer;
     }
 
     @RequestMapping(value = "/thang")

@@ -19,4 +19,6 @@ public interface ChiPhiNgayDao {
     Chiphingay getById(int id);
 
     void update(Chiphingay chiphingay);
+
+	void deleteById(int id);
 }

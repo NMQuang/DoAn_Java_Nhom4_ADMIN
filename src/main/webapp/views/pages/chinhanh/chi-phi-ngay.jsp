@@ -62,7 +62,7 @@
                                 <a href="<c:url value="/chinhanh/chiphi/ngay/update/${chiPhiNgay.chiPhiNgayId}"/>" class="btn btn-warning">Sửa</a>
                             </td>
                             <td width="5%">
-                                <a class="btn btn-danger">Xóa</a>
+                                <a data-id="${chiPhiNgay.chiPhiNgayId}" class="btn btn-danger xoa-chi-phi-ngay">Xóa</a>
                             </td>
                         </tr>
                         </c:forEach>

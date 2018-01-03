@@ -71,4 +71,9 @@ public class ChiPhiNgayDaoImp extends HibernateUtil implements ChiPhiNgayDao{
 		super.update(chiphingay);
 	}
 
+	@Override
+	public void deleteById(int id) {
+		super.delete(id, Chiphingay.class);
+	}
+
 }

@@ -4,7 +4,9 @@ import foodGroup4Quanly.common.ChiPhiNgayValidator;
 import foodGroup4Quanly.common.Utils;
 import foodGroup4Quanly.dto.ChiPhiNgayDto;
 import foodGroup4Quanly.entity.Chiphingay;
+import foodGroup4Quanly.entity.Tienthuenha;
 import foodGroup4Quanly.service.ChiPhiNgayService;
+import foodGroup4Quanly.service.TienThueNhaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,18 +24,19 @@ import java.util.List;
 @RequestMapping(value = "/chinhanh/chiphi")
 public class ChiNhanhChiPhiController {
 
-    private static final String formatDate = "dd-MM-yyyy";
-
     @Autowired
     ChiPhiNgayValidator chiPhiNgayValidator;
 
     @Autowired
     ChiPhiNgayService chiPhiNgayService;
 
+    @Autowired
+    TienThueNhaService tienThueNhaService;
+
     @RequestMapping(value = "/ngay", method = RequestMethod.GET)
     public String getChiPhiNgay(Model model, @RequestParam(value = "date", required = false) String strDate) {
-        Date date = convertStringToDate(strDate);
-        List<Chiphingay> listChiPhiNgay = chiPhiNgayService.getChiPhiNgayInDate(date);
+        Calendar calDate = convertStringToDate(strDate, "dd-MM-yyyy");
+        List<Chiphingay> listChiPhiNgay = chiPhiNgayService.getChiPhiNgayInDate(calDate.getTime());
         model.addAttribute("listChiPhiNgay", listChiPhiNgay);
         return "chinhanh-chi-phi-ngay";
     }
@@ -93,9 +96,20 @@ public class ChiNhanhChiPhiController {
         return "redirect:"+ referer;
     }
 
-    @RequestMapping(value = "/thang")
-    public String getChiPhiThang() {
+    @RequestMapping(value = "/thang", method = RequestMethod.GET)
+    public String getChiPhiThang(Model model, @RequestParam(value = "year", required = false) String strYear) {
+        Calendar calDate = convertStringToDate(strYear, "yyyy");
+
+        List<Tienthuenha> listTienThueNha = tienThueNhaService.getTienThueNhaOfYear(calDate.get(Calendar.YEAR));
+
+        model.addAttribute("listTienThueNha", listTienThueNha);
+
         return "chinhanh-chi-phi-thang";
+    }
+
+    @RequestMapping(value = "/thang/create", method = RequestMethod.GET)
+    public String getCreateChiPhiThang() {
+        return "chinhanh-them-chi-phi-thang";
     }
 
     @RequestMapping(value = "luongnhanvien")
@@ -103,7 +117,7 @@ public class ChiNhanhChiPhiController {
         return "chinhanh-luong-nhan-vien";
     }
 
-    private Date convertStringToDate(String strDate) {
+    private Calendar convertStringToDate(String strDate, String formatDate) {
         Date date;
         if(strDate != null) {
             try {
@@ -115,6 +129,8 @@ public class ChiNhanhChiPhiController {
         }  else {
             date = Calendar.getInstance().getTime();
         }
-        return date;
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        return cal;
     }
 }

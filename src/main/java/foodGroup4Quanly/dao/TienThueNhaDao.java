@@ -10,4 +10,6 @@ public interface TienThueNhaDao {
 	long getSum(Date begin, Date end);
 	long getSum(Date begin, Date end, int ChiNhanh);
 	List<Tienthuenha> getListIn(Date begin, Date end, int ChiNhanh);
+
+    List<Tienthuenha> getTienThueNhaOfYear(int year);
 }

@@ -338,53 +338,58 @@ $('#modal-sua-danh-muc').on('show.bs.modal', function (event) {
 //////////////////////////////////
 // CHON NGAY TINH CHI PHI NGAY ////////
 $(function () {
-    $('#chon-ngay-cp-ngay').datepicker({
-        format: 'dd-mm-yyyy',
-        endDate: new Date(),
-        "autoclose": true
-    });
+    try {
+        $('#chon-ngay-cp-ngay').datepicker({
+            format: 'dd-mm-yyyy',
+            endDate: new Date(),
+            "autoclose": true
+        });
 
-    $('#chon-ngay-cp-ngay').datepicker().on('changeDate', function(ev){
-        var newUrl = '/chinhanh/chiphi/ngay?date='+ev.format();
-        console.log(newUrl);
-        window.location.replace(newUrl);
-    });
+        $('#chon-ngay-cp-ngay').datepicker().on('changeDate', function (ev) {
+            var newUrl = '/chinhanh/chiphi/ngay?date=' + ev.format();
+            console.log(newUrl);
+            window.location.replace(newUrl);
+        });
 
-    function dateToString(date) {
-        var dd = date.getDate();
-        var mm = date.getMonth()+1; //January is 0!
+        function dateToString(date) {
+            var dd = date.getDate();
+            var mm = date.getMonth() + 1; //January is 0!
 
-        var yyyy = date.getFullYear();
+            var yyyy = date.getFullYear();
 
-        return joinDate(dd, mm, yyyy);
-    }
-
-    function joinDate(dd, mm, yyyy) {
-        if(dd<10){
-            dd='0'+dd;
+            return joinDate(dd, mm, yyyy);
         }
-        if(mm<10){
-            mm='0'+mm;
+
+        function joinDate(dd, mm, yyyy) {
+            if (dd < 10) {
+                dd = '0' + dd;
+            }
+            if (mm < 10) {
+                mm = '0' + mm;
+            }
+            return dd + '-' + mm + '-' + yyyy;
         }
-        return dd+'-'+mm+'-'+yyyy;
-    }
 
-    function stringToDate(strDate) {
-        var strDateParts = strDate.split('-');
-        return new Date(strDateParts[1]+'-'+strDateParts[0]+'-'+strDateParts[2]);
-    }
+        function stringToDate(strDate) {
+            var strDateParts = strDate.split('-');
+            return new Date(strDateParts[1] + '-' + strDateParts[0] + '-' + strDateParts[2]);
+        }
 
-    var dateUse;
-    if($('#dateFindCpNgay').val() != "") {
-        dateUse = new Date(stringToDate($('#dateFindCpNgay').val()));
-    } else {
-        // Chỗ này vầy mới chạy đúng
-        dateUse = stringToDate(dateToString(new Date()));
-    }
+        var dateUse;
+        if ($('#dateFindCpNgay').val() != "") {
+            dateUse = new Date(stringToDate($('#dateFindCpNgay').val()));
+        } else {
+            // Chỗ này vầy mới chạy đúng
+            dateUse = stringToDate(dateToString(new Date()));
+        }
 
-    $('#chon-ngay-cp-ngay').datepicker('update', dateUse);
+        $('#chon-ngay-cp-ngay').datepicker('update', dateUse);
+    } catch(e) {
+
+    }
 });
 
+////////////////////////////////////////////
 // XOA CHI PHI NGAY
 $(document).ready(function () {
     $('.xoa-chi-phi-ngay').click(function (e) {
@@ -400,6 +405,32 @@ $(document).ready(function () {
             form.submit();
         }
     });
+});
+
+///////////////////////////////////////////
+// CHON CHI NGAY CHI PHI THANG
+$(function () {
+    $('#chon-ngay-cp-thang').datepicker({
+        format: 'yyyy',
+        minViewMode: 2,
+        endDate: new Date(),
+        "autoclose": true
+    });
+
+    $('#chon-ngay-cp-thang').datepicker().on('changeDate', function(ev){
+        var newUrl = '/chinhanh/chiphi/thang?year='+ev.format();
+        window.location.replace(newUrl);
+    });
+
+    var yearUse;
+    if($('#dateFindCpThang').val() != "") {
+        yearUse = $('#dateFindCpThang').val();
+    } else {
+        var currentDate = new Date();
+        yearUse = currentDate.getFullYear().toString(10);
+    }
+
+    $('#chon-ngay-cp-thang').datepicker('update', yearUse);
 });
 
 

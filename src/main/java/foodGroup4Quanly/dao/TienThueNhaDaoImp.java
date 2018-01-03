@@ -48,4 +48,13 @@ public class TienThueNhaDaoImp extends HibernateUtil implements TienThueNhaDao{
 		return query.list();
 	}
 
+	@Override
+	public List<Tienthuenha> getTienThueNhaOfYear(int year) {
+		//language=HQL
+		String hql = "from Tienthuenha  where year(ngayChi)=:year";
+		Query query = getSession().createQuery(hql).setParameter("year", year);
+
+		return query.list();
+	}
+
 }

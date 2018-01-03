@@ -8,6 +8,15 @@ public class TienthuenhaPK implements Serializable {
     private String thang;
     private String nam;
 
+    public TienthuenhaPK() {
+
+    }
+
+    public TienthuenhaPK(String thang, String nam) {
+        this.thang = thang;
+        this.nam = nam;
+    }
+
     @Column(name = "Thang")
     @Id
     public String getThang() {

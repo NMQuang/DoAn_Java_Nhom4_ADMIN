@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.servlet.ServletContext;
@@ -44,9 +45,14 @@ public class Utils {
     		}
 	}
 
-	public static Date parseDate(String str, String format) throws ParseException {
+	public static Date parseDate(String str, String format) {
 		SimpleDateFormat sdf = new SimpleDateFormat(format);
-		Date date = sdf.parse(str);
+		Date date = null;
+		try {
+			date = sdf.parse(str);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		return date;
 	}
 
@@ -58,4 +64,11 @@ public class Utils {
 		}
 		return null;
 	}
+
+	public static Calendar convertDateToCalendar(Date date) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		return cal;
+	}
+
 }

@@ -412,5 +412,45 @@ $(function () {
     $('#chon-ngay-cp-thang').datepicker('update', yearUse);
 });
 
+///////////////////////////////////////////////
+// Chọn tháng thêm chi phí tháng
+$(function () {
+    $('#chon-thang-them-cp-thang').datepicker({
+        format: 'mm-yyyy',
+        minViewMode: 1,
+        endDate: new Date(),
+        "autoclose": true
+    });
+
+    var yearUse;
+    if($('#dateChosenThemCpThang').val() != "") {
+        yearUse = $('#dateChosenThemCpThang').val();
+    } else {
+        var currentDate = new Date();
+        yearUse = currentDate.getFullYear().toString(10);
+    }
+
+    $('#chon-thang-them-cp-thang').datepicker('update', yearUse);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

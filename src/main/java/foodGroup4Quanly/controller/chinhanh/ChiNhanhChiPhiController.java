@@ -1,8 +1,11 @@
 package foodGroup4Quanly.controller.chinhanh;
 
 import foodGroup4Quanly.common.ChiPhiNgayValidator;
+import foodGroup4Quanly.common.TienThueNhaValidator;
 import foodGroup4Quanly.common.Utils;
+import foodGroup4Quanly.dao.TienThueNhaDao;
 import foodGroup4Quanly.dto.ChiPhiNgayDto;
+import foodGroup4Quanly.dto.TienThueNhaDto;
 import foodGroup4Quanly.entity.Chiphingay;
 import foodGroup4Quanly.entity.Tienthuenha;
 import foodGroup4Quanly.service.ChiPhiNgayService;
@@ -32,6 +35,9 @@ public class ChiNhanhChiPhiController {
 
     @Autowired
     TienThueNhaService tienThueNhaService;
+
+    @Autowired
+    TienThueNhaValidator tienThueNhaValidator;
 
     @RequestMapping(value = "/ngay", method = RequestMethod.GET)
     public String getChiPhiNgay(Model model, @RequestParam(value = "date", required = false) String strDate) {
@@ -108,7 +114,23 @@ public class ChiNhanhChiPhiController {
     }
 
     @RequestMapping(value = "/thang/create", method = RequestMethod.GET)
-    public String getCreateChiPhiThang() {
+    public String getCreateChiPhiThang(Model model) {
+        model.addAttribute("tienThueNha", new TienThueNhaDto());
+        return "chinhanh-them-chi-phi-thang";
+    }
+
+    @RequestMapping(value = "/thang/create", method = RequestMethod.POST)
+    public String postCreateChiPhiThang(Model model,
+                                        @ModelAttribute("tienThueNha")TienThueNhaDto tienThueNhaDto,
+                                        BindingResult bindingResult) {
+        tienThueNhaValidator.validate(tienThueNhaDto, bindingResult);
+        if(bindingResult.hasErrors()) {
+            return "chinhanh-them-chi-phi-thang";
+        }
+        Tienthuenha tienthuenha = tienThueNhaDto.getTienThueNha();
+        tienThueNhaService.create(tienthuenha);
+
+        model.addAttribute("tienThueNha", new TienThueNhaDto());
         return "chinhanh-them-chi-phi-thang";
     }
 
@@ -118,19 +140,14 @@ public class ChiNhanhChiPhiController {
     }
 
     private Calendar convertStringToDate(String strDate, String formatDate) {
-        Date date;
-        if(strDate != null) {
-            try {
-                date = Utils.parseDate(strDate, formatDate);
-            } catch (ParseException e) {
-                e.printStackTrace();
-                date = Calendar.getInstance().getTime();
-            }
-        }  else {
-            date = Calendar.getInstance().getTime();
-        }
         Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
+        if(strDate != null) {
+            Date date = Utils.parseDate(strDate, formatDate);
+            if(date != null) {
+                cal.setTime(date);
+            }
+        }
+
         return cal;
     }
 }

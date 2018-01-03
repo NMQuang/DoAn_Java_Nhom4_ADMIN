@@ -23,18 +23,18 @@ public class ChiPhiNgayValidator implements Validator {
 
             if(chiPhiNgayDto.getTen() != null) {
                 if(chiPhiNgayDto.getTen().length() < 3 || chiPhiNgayDto.getTen().length() > 255) {
-                    errors.rejectValue("ten", "chinhanh.ten.invalid");
+                    errors.rejectValue("ten", "chiphingay.ten.invalid");
                 }
             }
 
             if(chiPhiNgayDto.getMota() != null) {
                 if(chiPhiNgayDto.getMota().length() < 3 || chiPhiNgayDto.getMota().length() > 255) {
-                    errors.rejectValue("mota", "chinhanh.mota.invalid");
+                    errors.rejectValue("mota", "chiphingay.mota.invalid");
                 }
             }
 
             if(chiPhiNgayDto.getTien() == null || chiPhiNgayDto.getTien() <= 0) {
-                errors.rejectValue("tien", "chinhanh.tien.invalid");
+                errors.rejectValue("tien", "chiphingay.tien.invalid");
             }
         } catch (Exception e) {
             e.printStackTrace();

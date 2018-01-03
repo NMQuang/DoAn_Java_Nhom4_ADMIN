@@ -20,4 +20,9 @@ public class ChiPhiNgayServiceImp implements ChiPhiNgayService {
     public List<Chiphingay> getChiPhiNgayInDate(Date date) {
         return chiPhiNgayDao.getChiPhiNgayInDate(date);
     }
+
+    @Override
+    public void create(Chiphingay chiphingay) {
+        chiPhiNgayDao.create(chiphingay);
+    }
 }

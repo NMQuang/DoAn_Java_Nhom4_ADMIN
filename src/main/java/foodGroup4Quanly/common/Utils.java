@@ -9,6 +9,8 @@ import java.util.Date;
 
 import javax.servlet.ServletContext;
 
+import foodGroup4Quanly.entity.Chinhanh;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.multipart.MultipartFile;
 
 public class Utils {
@@ -46,5 +48,14 @@ public class Utils {
 		SimpleDateFormat sdf = new SimpleDateFormat(format);
 		Date date = sdf.parse(str);
 		return date;
+	}
+
+	public static Chinhanh getChinhanhHienTai() {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(principal instanceof AccountAdminUserDetails){
+			Chinhanh cn = ((AccountAdminUserDetails)principal).getAccountAdmin().getChinhanh();
+			return cn;
+		}
+		return null;
 	}
 }

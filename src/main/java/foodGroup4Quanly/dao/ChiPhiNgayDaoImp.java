@@ -56,4 +56,9 @@ public class ChiPhiNgayDaoImp extends HibernateUtil implements ChiPhiNgayDao{
 		return query.list();
 	}
 
+	@Override
+	public void create(Chiphingay chiphingay) {
+		super.create(chiphingay);
+	}
+
 }

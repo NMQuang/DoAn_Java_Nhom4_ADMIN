@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface ChiPhiNgayService {
     List<Chiphingay> getChiPhiNgayInDate(Date date);
+
+    void create(Chiphingay chiphingay);
 }

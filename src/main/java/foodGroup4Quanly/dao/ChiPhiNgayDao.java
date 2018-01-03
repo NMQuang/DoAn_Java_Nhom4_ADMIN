@@ -13,4 +13,6 @@ public interface ChiPhiNgayDao {
 	List<Chiphingay> getListIn(Date begin, Date end, int ChiNhanh);
 
 	List<Chiphingay> getChiPhiNgayInDate(Date date);
+
+    void create(Chiphingay chiphingay);
 }

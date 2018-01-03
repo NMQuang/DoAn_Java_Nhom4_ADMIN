@@ -338,7 +338,7 @@ $('#modal-sua-danh-muc').on('show.bs.modal', function (event) {
 //////////////////////////////////
 // CHON NGAY TINH CHI PHI NGAY ////////
 $(function () {
-    try {
+    if($('#chon-ngay-cp-ngay').val() != undefined) {
         $('#chon-ngay-cp-ngay').datepicker({
             format: 'dd-mm-yyyy',
             endDate: new Date(),
@@ -351,41 +351,20 @@ $(function () {
             window.location.replace(newUrl);
         });
 
-        function dateToString(date) {
-            var dd = date.getDate();
-            var mm = date.getMonth() + 1; //January is 0!
-
-            var yyyy = date.getFullYear();
-
-            return joinDate(dd, mm, yyyy);
+        function convertStrDate(date) {
+            var dateParts = date.split('-');
+            return dateParts[1] + '-' + dateParts[0] + '-' + dateParts[2];
         }
 
-        function joinDate(dd, mm, yyyy) {
-            if (dd < 10) {
-                dd = '0' + dd;
-            }
-            if (mm < 10) {
-                mm = '0' + mm;
-            }
-            return dd + '-' + mm + '-' + yyyy;
-        }
-
-        function stringToDate(strDate) {
-            var strDateParts = strDate.split('-');
-            return new Date(strDateParts[1] + '-' + strDateParts[0] + '-' + strDateParts[2]);
-        }
-
-        var dateUse;
+        var strDateUse;
         if ($('#dateFindCpNgay').val() != "") {
-            dateUse = new Date(stringToDate($('#dateFindCpNgay').val()));
+            strDateUse = convertStrDate($('#dateFindCpNgay').val());
         } else {
-            // Chỗ này vầy mới chạy đúng
-            dateUse = stringToDate(dateToString(new Date()));
+            var currentDate = new Date();
+            strDateUse = (currentDate.getMonth() + 1) + '-' + currentDate.getDay() + '-' + currentDate.getFullYear();
         }
-
-        $('#chon-ngay-cp-ngay').datepicker('update', dateUse);
-    } catch(e) {
-
+        console.log(strDateUse);
+        $('#chon-ngay-cp-ngay').datepicker('update', new Date(strDateUse));
     }
 });
 

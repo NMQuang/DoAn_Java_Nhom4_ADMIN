@@ -17,7 +17,7 @@ public class TienThueNhaServiceImp implements TienThueNhaService {
     TienThueNhaDao tienThueNhaDao;
 
     @Override
-    public List<Tienthuenha> getTienThueNhaOfYear(int year) {
+    public List<Tienthuenha> getTienThueNhaOfYear(String year) {
         return tienThueNhaDao.getTienThueNhaOfYear(year);
     }
 

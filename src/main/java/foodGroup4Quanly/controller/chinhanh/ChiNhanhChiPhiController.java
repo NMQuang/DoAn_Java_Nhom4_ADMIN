@@ -104,9 +104,11 @@ public class ChiNhanhChiPhiController {
 
     @RequestMapping(value = "/thang", method = RequestMethod.GET)
     public String getChiPhiThang(Model model, @RequestParam(value = "year", required = false) String strYear) {
-        Calendar calDate = convertStringToDate(strYear, "yyyy");
+        if(strYear == null) {
+            strYear = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+        }
 
-        List<Tienthuenha> listTienThueNha = tienThueNhaService.getTienThueNhaOfYear(calDate.get(Calendar.YEAR));
+        List<Tienthuenha> listTienThueNha = tienThueNhaService.getTienThueNhaOfYear(strYear);
 
         model.addAttribute("listTienThueNha", listTienThueNha);
 

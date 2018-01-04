@@ -1,5 +1,7 @@
 package foodGroup4Quanly.controller.chinhanh;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
@@ -86,6 +88,7 @@ public class ChiNhanhDonHangController {
 				banService.update(ban);
 			}
 			hoadon.setTinhTrangThanhToan(TinhTrangThanhToan.DA_THANH_TOAN);
+			hoadon.setNgayTraTien(new Timestamp(new Date().getTime()));
 			hoadonService.update(hoadon);
 		}
 			

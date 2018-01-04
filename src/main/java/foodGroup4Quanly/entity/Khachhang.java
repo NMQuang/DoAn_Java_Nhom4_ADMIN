@@ -1,6 +1,9 @@
 package foodGroup4Quanly.entity;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.sql.Date;
 import java.util.Set;
 
@@ -101,6 +104,7 @@ public class Khachhang {
         return result;
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "khachhang")
     public Set<Hoadon> getHoadons() {
         return hoadons;

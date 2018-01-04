@@ -4,4 +4,5 @@ import foodGroup4Quanly.entity.Khachhang;
 
 public interface KhachHangService {
 	Khachhang get(String sdt);
+	void create(Khachhang kh);
 }

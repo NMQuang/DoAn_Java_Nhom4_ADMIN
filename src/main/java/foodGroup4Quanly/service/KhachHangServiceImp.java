@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import foodGroup4Quanly.dao.KhachHangDao;
+import foodGroup4Quanly.dao.KhachHangDaoImp;
 import foodGroup4Quanly.entity.Khachhang;
 
 @Component
@@ -12,11 +13,15 @@ import foodGroup4Quanly.entity.Khachhang;
 public class KhachHangServiceImp implements KhachHangService{
 
 	@Autowired
-	private KhachHangDao KhachHangDao;
+	private KhachHangDao khachHangDao;
 	@Override
 	public Khachhang get(String sdt) {
 		// TODO Auto-generated method stub
-		return KhachHangDao.get(sdt);
+		return khachHangDao.get(sdt);
+	}
+	@Override
+	public void create(Khachhang kh) {
+		((KhachHangDaoImp)khachHangDao).create(kh);
 	}
 
 }

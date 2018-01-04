@@ -8,4 +8,5 @@ public interface HoadonService {
 	Hoadon getTheLastBillByTableStillCooking(int idBan);
 	void delete(Hoadon hoadon);
 	void update(Hoadon hoadon);
+	Hoadon getBillById(int id);
 }

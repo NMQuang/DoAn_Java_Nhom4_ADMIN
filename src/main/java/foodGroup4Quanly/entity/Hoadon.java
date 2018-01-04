@@ -188,7 +188,7 @@ public class Hoadon {
         return result;
     }
 
-    @OneToMany(mappedBy = "pk.hoadon", orphanRemoval=true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "pk.hoadon", orphanRemoval=true)
     @Cascade({CascadeType.ALL})
     public Set<Chitiethoadon> getChitiethoadons() {
         return chitiethoadons;
@@ -200,7 +200,7 @@ public class Hoadon {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "KhachHang", referencedColumnName = "SDT", nullable = false)
+    @JoinColumn(name = "KhachHang", referencedColumnName = "SDT", nullable = true)
     public Khachhang getKhachhang() {
         return khachhang;
     }
@@ -222,7 +222,7 @@ public class Hoadon {
     
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "Ban", referencedColumnName = "BanID", nullable = false)
+    @JoinColumn(name = "Ban", referencedColumnName = "BanID", nullable = true)
     public Ban getBan() {
         return ban;
     }
@@ -233,7 +233,7 @@ public class Hoadon {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "NguoiGiaoHang", referencedColumnName = "NhanVienID", nullable = false)
+    @JoinColumn(name = "NguoiGiaoHang", referencedColumnName = "NhanVienID", nullable = true)
     public Nhanvien getNhanvien() {
         return nhanvien;
     }

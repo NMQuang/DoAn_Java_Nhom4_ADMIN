@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import foodGroup4Quanly.common.state.HinhThucMua;
 import foodGroup4Quanly.common.state.HinhThucThanhToan;
 import foodGroup4Quanly.common.state.TinhTrangGiaoHang;
+import foodGroup4Quanly.common.state.TinhTrangThanhToan;
 import foodGroup4Quanly.entity.Ban;
 import foodGroup4Quanly.entity.Chinhanh;
 import foodGroup4Quanly.entity.Chitiethoadon;
@@ -30,6 +31,7 @@ import foodGroup4Quanly.entity.Nhanvien;
 import foodGroup4Quanly.pojo.ChiTietHoaDonCustom;
 import foodGroup4Quanly.pojo.DonHangDemVe;
 import foodGroup4Quanly.service.BanService;
+import foodGroup4Quanly.service.ChiTietHoaDonService;
 import foodGroup4Quanly.service.FoodService;
 import foodGroup4Quanly.service.HoadonService;
 
@@ -46,6 +48,9 @@ public class HoaDonApi {
 	@Autowired
 	private FoodService foodService;
 	
+	@Autowired
+	private ChiTietHoaDonService chiTietHoaDonService;
+	
 	@RequestMapping(value="/created-on-table", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity taoHoaDon(@RequestParam int idBan, @ModelAttribute("chinhanh") Chinhanh chinhanh, @ModelAttribute("nhanvien") Nhanvien nhanvien){
 		Ban b = banService.getInfoBan(idBan);
@@ -60,6 +65,7 @@ public class HoaDonApi {
 		hoadon.setNgay(new Timestamp(new Date().getTime()));
 		hoadon.setHinhThucThanhToan(HinhThucThanhToan.TIEN_MAT_KHI_NHAN_HANG);
 		hoadon.setTongTien(0);
+		hoadon.setTinhTrangThanhToan(TinhTrangThanhToan.CHUA_THANH_TOAN);
 		hoadon.setTinhTrangGiaoHang(TinhTrangGiaoHang.DANG_CHE_BIEN);
 		hoadon.setNhanvien(nhanvien);
 		hoadonService.create(hoadon);
@@ -82,8 +88,12 @@ public class HoaDonApi {
 	@RequestMapping(value = "/getBillByTable/{idBan}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity getBillByTable(@PathVariable int idBan){
 		Hoadon hd = hoadonService.getTheLastBillByTableStillCooking(idBan);
-		if(hd !=null)
+		if(hd !=null){
+			List<Chitiethoadon> cthdlist = chiTietHoaDonService.getByIDHoaDon(hd.getHoaDonId());
+			hd.setChitiethoadons(new HashSet<Chitiethoadon>(cthdlist));
 			return new ResponseEntity<Hoadon> (hd, HttpStatus.OK);
+		}
+			
 		return new ResponseEntity(HttpStatus.BAD_REQUEST);
 	}
 	
@@ -139,6 +149,7 @@ public class HoaDonApi {
 		hd.setHinhThucThanhToan(HinhThucThanhToan.TIEN_MAT_KHI_NHAN_HANG);
 		hd.setTinhTrangGiaoHang(TinhTrangGiaoHang.DANG_CHE_BIEN);
 		hd.setNhanvien(nhanvien);
+		hd.setHoTenNguoiNhan(donHangDemVe.getTen_nguoi_nhan());
 		hoadonService.create(hd);
 		return new ResponseEntity(HttpStatus.OK);
 	}

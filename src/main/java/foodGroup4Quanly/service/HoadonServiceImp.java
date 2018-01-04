@@ -36,6 +36,11 @@ public class HoadonServiceImp implements HoadonService {
 		((HoaDonDaoImp)hoadonDAO).update(hoadon);
 	}
 
+	@Override
+	public Hoadon getBillById(int id) {
+		return ((HoaDonDaoImp)hoadonDAO).fetchById(id, Hoadon.class);
+	}
+
 
 
 

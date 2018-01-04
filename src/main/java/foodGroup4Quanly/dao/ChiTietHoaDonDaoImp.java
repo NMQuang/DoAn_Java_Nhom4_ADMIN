@@ -1,11 +1,13 @@
 package foodGroup4Quanly.dao;
 
 import java.util.Date;
+import java.util.List;
 
 import org.hibernate.Query;
 import org.springframework.stereotype.Component;
 
 import foodGroup4Quanly.config.HibernateUtil;
+import foodGroup4Quanly.entity.Chitiethoadon;
 
 @Component
 public class ChiTietHoaDonDaoImp extends HibernateUtil implements ChiTietHoaDonDao{
@@ -27,6 +29,14 @@ public class ChiTietHoaDonDaoImp extends HibernateUtil implements ChiTietHoaDonD
 		query.setParameter("end", end);
 		query.setParameter("ChiNhanh", ChiNhanh);
 		return (long) query.uniqueResult();
+	}
+
+	@Override
+	public List<Chitiethoadon> getByIDHoaDon(int idHoaDon) {
+		String hql = "from Chitiethoadon where pk.hoadon.hoaDonId = :idHoaDon";
+		Query query = getSession().createQuery(hql);
+		query.setParameter("idHoaDon", idHoaDon);
+		return query.list();
 	}
 	
 }

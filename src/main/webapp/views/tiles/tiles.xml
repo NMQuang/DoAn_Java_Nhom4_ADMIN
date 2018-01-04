@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE tiles-definitions PUBLIC
         "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
@@ -147,54 +147,59 @@
 
      <definition name="quanly-luong-khach-moi" extends="quanly-definition">
         <put-attribute name="title" value="Dashboard" />
-        <put-attribute name="content" value="/views/pages/quanly/report-luong-khach-moi.jsp" />
+        <put-attribute name="content" value="/views/pages/quanly/thanh-toan-don-hang.jsp" />
     </definition>
     <!-- /QUAN LY -->
 
     <!-- CHI NHANH -->
     <definition name="chinhanh-tao-don-hang-tai-quan" extends="chinhanh-definition">
-        <put-attribute name="title" value="T?o ??n h�ng t?i qu�n" />
+        <put-attribute name="title" value="Tạo đơn hàng tại quán" />
         <put-attribute name="content" value="/views/pages/chinhanh/tao-don-hang-tai-quan.jsp" />
     </definition>
 
     <definition name="chinhanh-tao-don-hang-mang-ve" extends="chinhanh-definition">
-        <put-attribute name="title" value="T?o ??n h�ng mang v?" />
+        <put-attribute name="title" value="Tạo đơn hàng mang về" />
         <put-attribute name="content" value="/views/pages/chinhanh/tao-don-hang-mang-ve.jsp" />
     </definition>
 
     <definition name="chinhanh-danh-sach-don-hang" extends="chinhanh-definition">
-        <put-attribute name="title" value="Danh s�ch ??n h�ng" />
+        <put-attribute name="title" value="Danh sách đơn hàng" />
         <put-attribute name="content" value="/views/pages/chinhanh/danh-sach-don-hang.jsp" />
     </definition>
 
     <definition name="chinhanh-chi-tiet-don-hang" extends="chinhanh-definition">
-        <put-attribute name="title" value="Chi ti?t ??n h�ng" />
+        <put-attribute name="title" value="Chi tiết đơn hàng" />
         <put-attribute name="content" value="/views/pages/chinhanh/chi-tiet-don-hang.jsp" />
     </definition>
 
     <definition name="chinhanh-chi-phi-ngay" extends="chinhanh-definition">
-        <put-attribute name="title" value="Chi ph� ng�y" />
+        <put-attribute name="title" value="Chi phí ngày" />
         <put-attribute name="content" value="/views/pages/chinhanh/chi-phi-ngay.jsp" />
     </definition>
 
     <definition name="chinhanh-them-chi-phi-ngay" extends="chinhanh-definition">
-        <put-attribute name="title" value=" Th�m chi ph� ng�y" />
+        <put-attribute name="title" value=" Thêm chi phí ngày" />
         <put-attribute name="content" value="/views/pages/chinhanh/them-chi-phi-ngay.jsp" />
     </definition>
 
     <definition name="chinhanh-chi-phi-thang" extends="chinhanh-definition">
-        <put-attribute name="title" value="Chi ph� th�ng" />
+        <put-attribute name="title" value="Chi phí tháng" />
         <put-attribute name="content" value="/views/pages/chinhanh/chi-phi-thang.jsp" />
     </definition>
 
     <definition name="chinhanh-them-chi-phi-thang" extends="chinhanh-definition">
-        <put-attribute name="title" value=" Th�m chi ph� th�ng" />
+        <put-attribute name="title" value=" Thêm chi phí tháng" />
         <put-attribute name="content" value="/views/pages/chinhanh/them-chi-phi-thang.jsp" />
     </definition>
 
     <definition name="chinhanh-luong-nhan-vien" extends="chinhanh-definition">
-        <put-attribute name="title" value="L??ng nh�n vi�n" />
+        <put-attribute name="title" value="Lương nhân viên" />
         <put-attribute name="content" value="/views/pages/chinhanh/luong-nhan-vien.jsp" />
+    </definition>
+    
+    <definition name="chinhanh-thanh-toan-don-hang" extends="chinhanh-definition">
+        <put-attribute name="title" value="Thanh toán đơn hàng" />
+        <put-attribute name="content" value="/views/pages/chinhanh/thanh-toan-don-hang.jsp" />
     </definition>
     <!-- CHI NHANH -->
 </tiles-definitions>

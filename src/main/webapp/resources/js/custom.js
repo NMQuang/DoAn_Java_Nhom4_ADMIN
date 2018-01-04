@@ -1,4 +1,4 @@
-var globalURL = "http://localhost:8080/foodGroup4_QuanLy/"
+var globalURL = "http://localhost:8080/foodGroup4_Quanly/"
 
 $('#calendar').datepicker({
 		});
@@ -380,6 +380,23 @@ $(document).on('change', '.input-sl-mon-an', function () {
         }
     }
 });
+
+$("#btn-thanh-toan").on("click", function(){
+	if($("#table-don-hang-tai-quan tbody tr").length == 0){
+		return alert("Không có gì để tính tiền")
+	}
+	
+	$.ajax({
+		url: globalURL +"chinhanh/api/hoadon/getBillByTable/" + banid,
+		type: 'GET'
+	}).done(function(data){
+		window.location.href = globalURL + "chinhanh/thanhtoandonhang/" + data.hoaDonId;
+	}).fail(function(jqXHR, textStatus, error){
+		console.log(textStatus);
+		console.log(error);
+		console.log(jqXHR);
+	})
+})
 /////////// END ĐƠN HÀNG TẠI QUÁN /////////////
 
 /////////// ĐƠN HÀNG MANG VỀ /////////////
@@ -485,6 +502,8 @@ $('#btn-mang-ve-tao-don-hang').on("click", function(){
 		})
 	
 })
+
+
 /////////// END ĐƠN HÀNG MANG VỀ /////////////
 
 /////////// DANH SÁCH ĐƠN HÀNG /////////////
@@ -647,7 +666,37 @@ $(function () {
 });
 
 
-
+/////////////////////////////////////////////////////////////////
+//Thanh toan
+$(function () {
+	var x_timer;
+    $("#sdt_khach").on('change paste keyup', function(e) {
+    	$("#ten-khach-hang").removeAttr("readonly")
+        clearTimeout(x_timer);
+        var user_name = $(this).val();
+        x_timer = setTimeout(function() {
+            check_username_ajax(user_name);
+        }, 1000);
+    });
+    function check_username_ajax(username) {
+    	 
+    	if($('#sdt_khach').val().trim().length == 0) return;
+		$.ajax({
+			url: globalURL +"chinhanh/api/khachhang?sdt=" + $('#sdt_khach').val(),
+			type: 'GET',
+			timeout: 10000,
+			contentType: 'application/json',
+		}).done(function(data) {
+			console.log(data);
+			$("#ten-khach-hang").val(data.ten)
+			$("#ten-khach-hang").attr("readonly", true)
+		}).fail(function(jqXHR, textStatus, error) {
+			console.log(textStatus);
+			console.log(error);
+			console.log(jqXHR);
+		});
+    }
+})
 
 
 

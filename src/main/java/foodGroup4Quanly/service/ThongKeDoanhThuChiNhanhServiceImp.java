@@ -57,12 +57,12 @@ public class ThongKeDoanhThuChiNhanhServiceImp implements
 			}
 			case HinhThucMua.TAI_CHO: {
 				long previous = (long) kq.get(hour).get("taicho");
-				kq.get(hour).put("mangve", previous + 1);
+				kq.get(hour).put("taicho", previous + 1);
 				break;
 			}
 			case HinhThucMua.TONG_DAI: {
 				long previous = (long) kq.get(hour).get("tongdai");
-				kq.get(hour).put("mangve", previous + 1);
+				kq.get(hour).put("tongdai", previous + 1);
 				break;
 			}
 			}
@@ -115,12 +115,12 @@ public class ThongKeDoanhThuChiNhanhServiceImp implements
 			}
 			case HinhThucMua.TAI_CHO: {
 				long previous = (long) kq.get(index).get("taicho");
-				kq.get(index).put("mangve", previous + 1);
+				kq.get(index).put("taicho", previous + 1);
 				break;
 			}
 			case HinhThucMua.TONG_DAI: {
 				long previous = (long) kq.get(index).get("tongdai");
-				kq.get(index).put("mangve", previous + 1);
+				kq.get(index).put("tongdai", previous + 1);
 				break;
 			}
 			}
@@ -167,12 +167,12 @@ public class ThongKeDoanhThuChiNhanhServiceImp implements
 			}
 			case HinhThucMua.TAI_CHO: {
 				long previous = (long) kq.get(index).get("taicho");
-				kq.get(index).put("mangve", previous + 1);
+				kq.get(index).put("taicho", previous + 1);
 				break;
 			}
 			case HinhThucMua.TONG_DAI: {
 				long previous = (long) kq.get(index).get("tongdai");
-				kq.get(index).put("mangve", previous + 1);
+				kq.get(index).put("tongdai", previous + 1);
 				break;
 			}
 			}

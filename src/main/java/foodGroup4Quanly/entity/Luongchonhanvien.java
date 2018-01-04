@@ -96,9 +96,8 @@ public class Luongchonhanvien {
         return result;
     }
 
-    @OneToOne
-    @JoinColumn(name = "NhanVien", referencedColumnName = "NhanVienID",
-            nullable = false, insertable = false, updatable = false)
+    @ManyToOne
+    @JoinColumn(name = "NhanVien", referencedColumnName = "NhanVienID", nullable = false, insertable = false, updatable = false)
     public Nhanvien getNhanvien() {
         return nhanvien;
     }

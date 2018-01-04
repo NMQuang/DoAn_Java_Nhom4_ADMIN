@@ -48,4 +48,32 @@ public class ChiPhiNgayDaoImp extends HibernateUtil implements ChiPhiNgayDao{
 		return query.list();
 	}
 
+	@Override
+	public List<Chiphingay> getChiPhiNgayInDate(Date date) {
+		//language=HQL
+		String hql = "from Chiphingay where (day(ngay)=day(:date) and month(ngay)=month(:date) and year(ngay)=year(:date))";
+		Query query = getSession().createQuery(hql).setParameter("date", date);
+		return query.list();
+	}
+
+	@Override
+	public void create(Chiphingay chiphingay) {
+		super.create(chiphingay);
+	}
+
+	@Override
+	public Chiphingay getById(int id) {
+		return super.fetchById(id, Chiphingay.class);
+	}
+
+	@Override
+	public void update(Chiphingay chiphingay) {
+		super.update(chiphingay);
+	}
+
+	@Override
+	public void deleteById(int id) {
+		super.delete(id, Chiphingay.class);
+	}
+
 }

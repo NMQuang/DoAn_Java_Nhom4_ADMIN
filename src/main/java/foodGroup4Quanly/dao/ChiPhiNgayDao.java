@@ -11,4 +11,14 @@ public interface ChiPhiNgayDao {
 	long getSum(Date begin, Date end);
 	long getSum(Date begin, Date end, int ChiNhanh);
 	List<Chiphingay> getListIn(Date begin, Date end, int ChiNhanh);
+
+	List<Chiphingay> getChiPhiNgayInDate(Date date);
+
+    void create(Chiphingay chiphingay);
+
+    Chiphingay getById(int id);
+
+    void update(Chiphingay chiphingay);
+
+	void deleteById(int id);
 }

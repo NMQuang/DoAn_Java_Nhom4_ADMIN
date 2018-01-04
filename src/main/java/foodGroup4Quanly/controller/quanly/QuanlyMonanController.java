@@ -201,6 +201,7 @@ public class QuanlyMonanController {
     @RequestMapping(value = "/monan/active/{idMonan}", method = RequestMethod.GET)
     public String activeMonAn(Model model, @PathVariable("idMonan") int idMonan) {
     	foodService.active(idMonan);
+    	//cần phải active lại danh mục đó
         return "redirect:/quanly/monan?type=deleted";
     }
 }

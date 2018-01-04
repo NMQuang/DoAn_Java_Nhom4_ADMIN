@@ -3,6 +3,7 @@ package foodGroup4Quanly.dao;
 import java.util.Date;
 import java.util.List;
 
+import foodGroup4Quanly.entity.TienthuenhaPK;
 import org.hibernate.Query;
 import org.springframework.stereotype.Component;
 
@@ -46,6 +47,30 @@ public class TienThueNhaDaoImp extends HibernateUtil implements TienThueNhaDao{
 		query.setParameter("end", end);
 		query.setParameter("ChiNhanh", ChiNhanh);
 		return query.list();
+	}
+
+	@Override
+	public List<Tienthuenha> getTienThueNhaOfYear(String year) {
+		//language=HQL
+		String hql = "from Tienthuenha  where nam=:year";
+		Query query = getSession().createQuery(hql).setParameter("year", year);
+
+		return query.list();
+	}
+
+	@Override
+	public Tienthuenha getById(TienthuenhaPK pk) {
+		return super.fetchById(pk, Tienthuenha.class);
+	}
+
+	@Override
+	public void create(Tienthuenha tienthuenha) {
+		super.create(tienthuenha);
+	}
+
+	@Override
+	public void update(Tienthuenha tienthuenha) {
+		super.update(tienthuenha);
 	}
 
 }

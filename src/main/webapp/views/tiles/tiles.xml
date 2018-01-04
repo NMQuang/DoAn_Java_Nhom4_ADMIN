@@ -177,9 +177,19 @@
         <put-attribute name="content" value="/views/pages/chinhanh/chi-phi-ngay.jsp" />
     </definition>
 
+    <definition name="chinhanh-them-chi-phi-ngay" extends="chinhanh-definition">
+        <put-attribute name="title" value=" Thêm chi phí ngày" />
+        <put-attribute name="content" value="/views/pages/chinhanh/them-chi-phi-ngay.jsp" />
+    </definition>
+
     <definition name="chinhanh-chi-phi-thang" extends="chinhanh-definition">
         <put-attribute name="title" value="Chi phí tháng" />
         <put-attribute name="content" value="/views/pages/chinhanh/chi-phi-thang.jsp" />
+    </definition>
+
+    <definition name="chinhanh-them-chi-phi-thang" extends="chinhanh-definition">
+        <put-attribute name="title" value=" Thêm chi phí tháng" />
+        <put-attribute name="content" value="/views/pages/chinhanh/them-chi-phi-thang.jsp" />
     </definition>
 
     <definition name="chinhanh-luong-nhan-vien" extends="chinhanh-definition">

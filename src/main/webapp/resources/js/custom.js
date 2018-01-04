@@ -49,7 +49,7 @@ $("#upload").change(function() {
 });
 ////////////////////////////////////
 //Khi thay đổi giá trị thì các error biến mất
-$('input, textarea').on('change keyup paste',function(){
+$('input, textarea, select').on('change keyup paste',function(){
 	$(this).siblings('.my_error').hide();
 })
 ////////////////////////////////////
@@ -89,6 +89,7 @@ $(function(){
 	})
 })
 ////////////////////////////////////
+//Thay doi khi nguoi dung muon xem giua active va chua active
 $(function(){
 	$('#type_mon').on('change', function(){
 		var path = window.location.pathname; 
@@ -135,7 +136,7 @@ $('[data-provide="datepicker-year"]').datepicker({
     "autoclose": true
 });
 
-//  thay đổi lựa chọn danh mục của tạo đơn hàng tại quá
+//  thay đổi lựa chọn danh mục của tạo đơn hàng tại quán
 $(document).ready(function () {
     $('.select-danh-muc').hide();
     $('#option-mon-an-nuong').show();
@@ -147,6 +148,24 @@ $(document).ready(function () {
 
 /////////// ĐƠN HÀNG TẠI QUÁN /////////////
 //  Thêm món ăn vào danh sách món ăn được chọn bên phải
+
+
+$(document).ready(function () {
+	$('#menu-ben-phai').attr("hidden", "true");
+	
+	$(".btn-dat-ban").on("click", function(){
+		$('#menu-ben-phai').removeAttr("hidden");
+		$.ajax({
+			url: ""
+		}).done(function(data){
+			console.log(data);
+		}).fail(function(jqXHR, textStatus, error){
+			console.log(textStatus);
+			console.log(error);
+			console.log(jqXHR);
+		})
+	})
+});
 $(document).ready(function() {
 
     $('.btn-them-mon-an').click(function () {
@@ -293,6 +312,140 @@ $(function () {
         $(this).toggleClass('active');
     });
 });
+
+$(function () {
+    if($('#modal-sua-danh-muc').attr('data-autoshow')) {
+        $(window).on('load',function(){
+            $('#modal-sua-danh-muc').modal('show');
+        });
+    }
+})
+
+
+$('#modal-sua-danh-muc').on('show.bs.modal', function (event) {
+	if(!($('#has-error-update').data('value'))) {
+        var button = $(event.relatedTarget);
+        var data = button.data('ten-danh-muc-sua');
+        var id = button.data('id-danh-muc-sua');
+        var active = button.data('active-danh-muc-sua');
+
+        $(this).find('#ten-danh-muc-sua').val(data);
+        $(this).find('#id-danh-muc-sua').val(id);
+        $(this).find('#active-danh-muc-sua').val(active);
+    }
+});
+
+//////////////////////////////////
+// CHON NGAY TINH CHI PHI NGAY ////////
+$(function () {
+    if($('#chon-ngay-cp-ngay').val() != undefined) {
+        $('#chon-ngay-cp-ngay').datepicker({
+            format: 'dd-mm-yyyy',
+            endDate: new Date(),
+            "autoclose": true
+        });
+
+        $('#chon-ngay-cp-ngay').datepicker().on('changeDate', function (ev) {
+            var newUrl = '/chinhanh/chiphi/ngay?date=' + ev.format();
+            console.log(newUrl);
+            window.location.replace(newUrl);
+        });
+
+        function convertStrDate(date) {
+            var dateParts = date.split('-');
+            return dateParts[1] + '-' + dateParts[0] + '-' + dateParts[2];
+        }
+
+        var strDateUse;
+        if ($('#dateFindCpNgay').val() != "") {
+            strDateUse = convertStrDate($('#dateFindCpNgay').val());
+        } else {
+            var currentDate = new Date();
+            strDateUse = (currentDate.getMonth() + 1) + '-' + currentDate.getDay() + '-' + currentDate.getFullYear();
+        }
+        console.log(strDateUse);
+        $('#chon-ngay-cp-ngay').datepicker('update', new Date(strDateUse));
+    }
+});
+
+////////////////////////////////////////////
+// XOA CHI PHI NGAY
+$(document).ready(function () {
+    $('.xoa-chi-phi-ngay').click(function (e) {
+        if(confirm("Bạn có chắc muốn xóa ?")) {
+            const idDelete = $(this).data('id');
+
+            var form = $('<form method="post" action="/chinhanh/chiphi/ngay/delete"></form>');
+            var input = $('<input type="hidden" name="id"/>');
+            input.attr('value', idDelete);
+            form.append(input);
+
+            $('body').append(form);
+            form.submit();
+        }
+    });
+});
+
+///////////////////////////////////////////
+// CHON CHI NGAY CHI PHI THANG
+$(function () {
+    $('#chon-ngay-cp-thang').datepicker({
+        format: 'yyyy',
+        minViewMode: 2,
+        endDate: new Date(),
+        "autoclose": true
+    });
+
+    $('#chon-ngay-cp-thang').datepicker().on('changeDate', function(ev){
+        var newUrl = '/chinhanh/chiphi/thang?year='+ev.format();
+        window.location.replace(newUrl);
+    });
+
+    var yearUse;
+    if($('#dateFindCpThang').val() != "") {
+        yearUse = $('#dateFindCpThang').val();
+    } else {
+        var currentDate = new Date();
+        yearUse = currentDate.getFullYear().toString(10);
+    }
+
+    $('#chon-ngay-cp-thang').datepicker('update', yearUse);
+});
+
+///////////////////////////////////////////////
+// Chọn tháng thêm chi phí tháng
+$(function () {
+    $('#chon-thang-them-cp-thang').datepicker({
+        format: 'mm-yyyy',
+        minViewMode: 1,
+        endDate: new Date(),
+        "autoclose": true
+    });
+
+    var yearUse;
+    if($('#dateChosenThemCpThang').val() != "") {
+        yearUse = $('#dateChosenThemCpThang').val();
+    } else {
+        var currentDate = new Date();
+        yearUse = currentDate.getFullYear().toString(10);
+    }
+
+    $('#chon-thang-them-cp-thang').datepicker('update', yearUse);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -60,7 +60,7 @@
 				                </td>
                                  <td width="5%">
                                      <!-- <a href="" class="btn btn-info">Xem</a> -->
-                                     <a href="#" data-toggle="modal" data-target="#modal-sua-gia" class="btn btn-info">Sửa giá</a>
+                                     <a href="${pageContext.request.contextPath}/quanly/chinhanh-menu/${branch.chiNhanhId}/suamonan/${item.pk.mon.monId}" class="btn btn-info">Sửa</a>
                                  </td>
                                  <td width="5%">
                                      <a href="${pageContext.request.contextPath}/quanly/chinhanh-menu/${branch.chiNhanhId}/xoamonan/${item.pk.mon.monId}" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-danger">Xóa</a>

@@ -18,4 +18,6 @@ public interface ChiNhanhMonDAO {
 	int countMonByChiNhanh(int idChiNhanh);
 
 	List<Chinhanhmon> getListChiNhanhMonPageByChiNhanh(int idChiNhanh, int maxResult, int begin);
+
+	void updateGia(int idChinhanh, int idMon, int gia);
 }

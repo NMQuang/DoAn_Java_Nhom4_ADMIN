@@ -45,6 +45,11 @@
         <put-attribute name="content" value="/views/pages/quanly/chi-tiet-chi-nhanh.jsp" />
     </definition>
 
+    <definition name="quanly-sua-chi-nhanh-mon-an" extends="quanly-definition">
+        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="content" value="/views/pages/quanly/chi-tiet-chi-nhanh-mon-an.jsp" />
+    </definition>
+
         <definition name="quanly-chi-tiet-chi-nhanh-menu" extends="quanly-definition">
         <put-attribute name="title" value="Dashboard" />
         <put-attribute name="content" value="/views/pages/quanly/chi-tiet-chi-nhanh-menu.jsp" />

@@ -79,7 +79,7 @@ $(function(){
 //Phân trang
 $(function(){
 	$('#pagination-demo').twbsPagination({
-        totalPages: $('#pagination-demo').attr('data-pages'),
+        totalPages: $('#pagination-demo').attr('data-pages') >= 1 ? $('#pagination-demo').attr('data-pages') :1,
         visiblePages: 7,
         startPage: parseInt($('#pagination-demo').attr('data-index')),
         initiateStartPageClick: false,

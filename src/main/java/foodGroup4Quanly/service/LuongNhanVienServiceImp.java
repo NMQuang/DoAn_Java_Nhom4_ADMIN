@@ -18,7 +18,8 @@ public class LuongNhanVienServiceImp implements LuongNhanVienService {
 
     @Override
     public List<TongLuongNhanVienTheoThangDto> getTongLuongTheoThang(String strYear, int idChiNhanh) {
-        List<TongLuongNhanVienTheoThangDto> listTongLuong = new ArrayList<>();
-        luongChoNhanVienDao.
+        List<TongLuongNhanVienTheoThangDto> listTongLuong =
+                luongChoNhanVienDao.getListTongLuongTheoThang(strYear, idChiNhanh);
+        return listTongLuong;
     }
 }

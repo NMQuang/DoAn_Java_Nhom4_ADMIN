@@ -3,6 +3,7 @@ package foodGroup4Quanly.dao;
 import java.util.Date;
 import java.util.List;
 
+import foodGroup4Quanly.dto.TongLuongNhanVienTheoThangDto;
 import org.hibernate.Query;
 import org.springframework.stereotype.Component;
 
@@ -48,9 +49,13 @@ public class LuongChoNhanVienDaoImp extends HibernateUtil implements LuongChoNha
 		return query.list();
 	}
 
-	public void get(String year, int idChiNhanh) {
+	@Override
+	public List<TongLuongNhanVienTheoThangDto> getListTongLuongTheoThang(String year, int idChiNhanh) {
 		//language=HQL
 		String hql = "select new foodGroup4Quanly.dto.TongLuongNhanVienTheoThangDto (L.thang, L.nam,  L.ngay, sum(L.tien)) from Luongchonhanvien L where (L.nam=:year and L.nhanvien.chinhanh.id=:idChiNhanh) group by L.thang";
+		Query query = this.getSession().createQuery(hql).setParameter("year", year).setParameter("idChiNhanh", idChiNhanh);
+
+		return query.list();
 	}
 
 }

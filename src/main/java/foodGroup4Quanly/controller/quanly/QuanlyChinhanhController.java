@@ -37,8 +37,8 @@ import foodGroup4Quanly.service.TinhThanhService;
 @RequestMapping("/quanly")
 public class QuanlyChinhanhController {
 
-	final String UPLOAD_DIRECTORY = "resources/images/chi-nhanh";
-	final String UPLOAD_DIRECTORY1 = "resources/images/mon-an";
+	final String UPLOAD_DIRECTORY = "C:/resources/images/chi-nhanh";
+	final String UPLOAD_DIRECTORY1 = "C:/resources/images/mon-an";
 	@Autowired
 	public ServletContext context;
 
@@ -137,7 +137,7 @@ public class QuanlyChinhanhController {
 	public String updateChiNhanh(Model model, @PathVariable("idChinhanh") int idChiNhanh, @RequestParam("hinhanh") MultipartFile file, @ModelAttribute("chiNhanh") Chinhanh chiNhanh, BindingResult result) {
 		Chinhanh cn = branchService.getInfoChiNhanh(idChiNhanh);
 		if (!file.isEmpty()) {
-			Utils.saveImage(file, context, UPLOAD_DIRECTORY1);
+			Utils.saveImage(file, context, UPLOAD_DIRECTORY);
 			cn.setHinhAnh(file.getOriginalFilename());
 		}
 		chiNhanh.setHinhAnh(cn.getHinhAnh());
@@ -188,6 +188,7 @@ public class QuanlyChinhanhController {
 	    		model.addAttribute("tinhThanh", tinhThanhService.getAllTinhThanh());
 	    		return "quanly-them-chi-nhanh";
 	    	}
+	    	chiNhanh.setActive(true);
 	    	branchService.saveChiNhanh(chiNhanh);
 		return "redirect:/quanly/chinhanh";
 	}

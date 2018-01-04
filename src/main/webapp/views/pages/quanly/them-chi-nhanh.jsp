@@ -32,7 +32,7 @@
                         <div class="col-lg-5">
                             <div class="form-group">
 
-								<img src="<c:url value="${chiNhanh.hinhAnh == null ? 'http://via.placeholder.com/350x220' : '/resources/images/mon-an/'+= mon.hinhAnh} " />" id="img-upload" class="img-mon-an" width="350px" height="220px"/>
+								<img src="<c:url value="${chiNhanh.hinhAnh == null ? 'http://via.placeholder.com/350x220' : '/global_resources/images/chi-nhanh/'+= chiNhanh.hinhAnh} " />" id="img-upload" class="img-mon-an" width="350px" height="220px"/>
 								<div class="col-lg-5 cn-label label-right">
 									<input type="file" accept="image/*" name="hinhanh" id="upload"/>
 									<input type="text" value="${chiNhanh.hinhAnh }" hidden name="hinhanh_backup"/>

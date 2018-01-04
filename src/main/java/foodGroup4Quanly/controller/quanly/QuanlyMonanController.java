@@ -30,7 +30,7 @@ import foodGroup4Quanly.service.FoodService;
 @RequestMapping("/quanly")
 public class QuanlyMonanController {
 
-	final String UPLOAD_DIRECTORY = "resources/images/mon-an";
+	final String UPLOAD_DIRECTORY = "C:/resources/images/mon-an";
 	@Autowired
 	ServletContext context;
 	
@@ -90,10 +90,8 @@ public class QuanlyMonanController {
     	if(!file.isEmpty()){
     		try{
     		byte[] bytes = file.getBytes();
-
 			// Creating the directory to store file
-			String uploadPath = context.getRealPath("") + File.separator
-					+ UPLOAD_DIRECTORY;
+			String uploadPath = UPLOAD_DIRECTORY;
 			File dir = new File(uploadPath);
 
 			if (!dir.exists())
@@ -109,17 +107,18 @@ public class QuanlyMonanController {
 
 			System.out.println("Server File Location="
 					+ serverFile.getAbsolutePath());
-			String filepath = "/" + UPLOAD_DIRECTORY + "/"
+			String filepath = UPLOAD_DIRECTORY + "/"
 					+ file.getOriginalFilename();
 			m.setHinhAnh(file.getOriginalFilename());
     		}catch(Exception e){
-    			
+    			e.printStackTrace();
     		}
     	}
     	mon.setHinhAnh(m.getHinhAnh());
     	monValidator.validate(mon, result);
     	if(result.hasErrors()){
     		model.addAttribute("ADanhmuc", danhMucService.getAllDanhMuc());
+    		model.addAttribute("listchinhanh", chiNhanhMonService.getListChiNhanhMonByMon(idMonan));
     		return "quanly-chi-tiet-mon-an";
     	}
     	m.setDanhmuc(mon.getDanhmuc());
@@ -151,32 +150,30 @@ public class QuanlyMonanController {
     public String postThemMonan(@RequestParam("hinhanh") MultipartFile file,@RequestParam String hinhanh_backup , @ModelAttribute("mon")   Mon mon, BindingResult result, Model model) {
     	if(!file.isEmpty()){
     		try{
-    		byte[] bytes = file.getBytes();
+        		byte[] bytes = file.getBytes();
+        		System.out.println("HI");
+    			// Creating the directory to store file
+    			String uploadPath = UPLOAD_DIRECTORY;
+    			File dir = new File(uploadPath);
 
-			// Creating the directory to store file
-			String uploadPath = context.getRealPath("") + File.separator
-					+ UPLOAD_DIRECTORY;
-			File dir = new File(uploadPath);
+    			if (!dir.exists())
+    				dir.mkdirs();
 
-			if (!dir.exists())
-				dir.mkdirs();
+    			// Create the file on server
+    			File serverFile = new File(dir.getAbsolutePath()
+    					+ File.separator + file.getOriginalFilename());
+    			BufferedOutputStream stream = new BufferedOutputStream(
+    					new FileOutputStream(serverFile));
+    			stream.write(bytes);
+    			stream.close();
 
-			// Create the file on server
-			File serverFile = new File(dir.getAbsolutePath()
-					+ File.separator + file.getOriginalFilename());
-			BufferedOutputStream stream = new BufferedOutputStream(
-					new FileOutputStream(serverFile));
-			stream.write(bytes);
-			stream.close();
-
-			System.out.println("Server File Location="
-					+ serverFile.getAbsolutePath());
-			String filepath = "/" + UPLOAD_DIRECTORY + "/"
-					+ file.getOriginalFilename();
-			mon.setHinhAnh(file.getOriginalFilename());
-    		}catch(Exception e){
+    			System.out.println("Server File Location="
+    					+ serverFile.getAbsolutePath());
     			
-    		}
+    			mon.setHinhAnh(file.getOriginalFilename());
+        		}catch(Exception e){
+        			e.printStackTrace();
+        		}
     	}
     	System.out.println(hinhanh_backup + "--" + mon.getHinhAnh());
     	if((hinhanh_backup != "" || hinhanh_backup != null) && mon.getHinhAnh() == null){

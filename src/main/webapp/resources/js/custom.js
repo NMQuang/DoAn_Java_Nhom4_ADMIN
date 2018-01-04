@@ -1,4 +1,4 @@
-var globalURL = "http://localhost:8080/foodGroup4_Quanly/"
+var globalURL = "http://localhost:8080/foodGroup4_QuanLy/"
 
 $('#calendar').datepicker({
 		});

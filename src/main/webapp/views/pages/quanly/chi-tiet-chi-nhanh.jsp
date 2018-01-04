@@ -24,7 +24,7 @@
                     <div class="panel-body">
                         <div class="col-lg-5">
                             <div class="col-lg-4">
-                                <img src="<c:url value="${chiNhanh.hinhAnh == null ? 'http://via.placeholder.com/350x220' : '/resources/images/chi-nhanh/'+= chiNhanh.hinhAnh} " />" id="img-upload" class="img-mon-an" width="350px" height="220px"/>
+                                <img src="<c:url value="${chiNhanh.hinhAnh == null ? 'http://via.placeholder.com/350x220' : '/global_resources/images/chi-nhanh/'+= chiNhanh.hinhAnh} " />" id="img-upload" class="img-mon-an" width="350px" height="220px"/>
                         <div class="">
                             <input type="file" accept="image/*" name="hinhanh" id="upload"/>
                             <form:errors path="hinhAnh" cssClass="my_error"/>

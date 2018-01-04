@@ -20,7 +20,7 @@
 
                 <form:form method="post" modelAttribute="mon" enctype="multipart/form-data">
                     <div class="col-lg-4">
-                        <img src="<c:url value="${mon.pk.mon.hinhAnh == null ? 'http://via.placeholder.com/350x220' : '/resources/images/mon-an/'+= mon.pk.mon.hinhAnh} " />" id="img-upload" class="img-mon-an" width="350px" height="220px"/>
+                        <img src="<c:url value="${mon.pk.mon.hinhAnh == null ? 'http://via.placeholder.com/350x220' : '/global_resources/images/mon-an/'+= mon.pk.mon.hinhAnh} " />" id="img-upload" class="img-mon-an" width="350px" height="220px"/>
                         <div class="">
                             <input type="file" accept="image/*" name="hinhanh" id="upload" disabled="true"/>
                             <form:errors path="pk.mon.hinhAnh" cssClass="my_error"/>

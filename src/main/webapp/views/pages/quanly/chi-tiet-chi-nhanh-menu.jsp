@@ -69,6 +69,9 @@
                             </c:forEach>
                             </tbody>
                         </table>
+                        <div style="text-align: center">
+				        <ul id="pagination-demo" data-index="${index }" data-pages="${pages }" class="pagination-md" ></ul>
+				        </div>
                     </div>
                 </div>
                 <!-- <div class="modal fade" id="modal-sua-gia" role="dialog">

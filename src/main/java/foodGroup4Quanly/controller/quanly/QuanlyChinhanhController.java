@@ -192,9 +192,22 @@ public class QuanlyChinhanhController {
 	 * get thông tin chi tiết món của 1 chi nhánh
 	 */
 	@RequestMapping(value = "/chinhanh-menu/{idChinhanh}", method = RequestMethod.GET)
-	public String getChitietMenuChinhanh(Model model, @PathVariable("idChinhanh") int idChinhanh) {
+	public String getChitietMenuChinhanh(Model model, @PathVariable("idChinhanh") int idChinhanh, @RequestParam(required=false) String type, @RequestParam(required= false) Integer index) {
 
-		model.addAttribute("menu", chiNhanhMonService.getListChiNhanhMonByChiNhanh(idChinhanh));
+		int begin;
+		int id = 1;
+		if (index == null || index < 1) {
+			begin = 0;
+		} else {
+			id = index;
+			begin = 3 * (id - 1);
+		}
+		int count = chiNhanhMonService.countMonByChiNhanh(idChinhanh);
+    		int pages = count / 3 + (count %3 == 0 ? 0 : 1);
+		model.addAttribute("index", id);
+    		model.addAttribute("pages", pages);
+    		model.addAttribute("type", type);
+		model.addAttribute("menu", chiNhanhMonService.getListChiNhanhMonPageByChiNhanh(idChinhanh,3,begin));
 		model.addAttribute("branch", branchService.getInfoChiNhanh(idChinhanh));
 		return "quanly-chi-tiet-chi-nhanh-menu";
 	}

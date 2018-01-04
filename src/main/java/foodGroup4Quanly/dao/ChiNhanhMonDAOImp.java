@@ -42,5 +42,21 @@ public class ChiNhanhMonDAOImp extends HibernateUtil implements ChiNhanhMonDAO {
 		query.executeUpdate();
 	}
 
+	@Override
+	public int countMonByChiNhanh(int idChiNhanh) {
+		Query query = getSession().createQuery("select count(*)  from Chinhanhmon where pk.chinhanh.chiNhanhId = :idChiNhanh")
+				.setParameter("idChiNhanh", idChiNhanh);
+	    	int count = ((Long) query.uniqueResult()).intValue();
+	    	return count;
+	}
+
+	@Override
+	public List<Chinhanhmon> getListChiNhanhMonPageByChiNhanh(int idChiNhanh, int maxResult, int begin) {
+		String hql = "from Chinhanhmon where pk.chinhanh.chiNhanhId = :idChiNhanh";
+	         Query query = getSession().createQuery(hql).setParameter("idChiNhanh", idChiNhanh);
+	         query.setFirstResult(begin).setMaxResults(maxResult);
+	         return query.list();
+	}
+
 
 }

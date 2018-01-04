@@ -42,4 +42,18 @@ public class ChiNhanhMonServiceImp implements ChiNhanhMonService{
 		chiNhanhMonDAO.delete(idChinhanh, idMon);
 	}
 
+	@Override
+	public int countMonByChiNhanh(int idChiNhanh) {
+		int count = chiNhanhMonDAO.countMonByChiNhanh(idChiNhanh);
+		if (count <= 0) {
+			return 0;
+		}
+		return count;
+	}
+
+	@Override
+	public List<Chinhanhmon> getListChiNhanhMonPageByChiNhanh(int idChiNhanh, int maxResult, int begin) {
+		return chiNhanhMonDAO.getListChiNhanhMonPageByChiNhanh(idChiNhanh, maxResult, begin);
+	}
+
 }

@@ -1,6 +1,13 @@
 package foodGroup4Quanly.entity;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.junit.Ignore;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.sql.Timestamp;
 import java.util.Set;
 
@@ -181,7 +188,8 @@ public class Hoadon {
         return result;
     }
 
-    @OneToMany(mappedBy = "pk.hoadon")
+    @OneToMany(mappedBy = "pk.hoadon", orphanRemoval=true)
+    @Cascade({CascadeType.ALL})
     public Set<Chitiethoadon> getChitiethoadons() {
         return chitiethoadons;
     }
@@ -190,8 +198,9 @@ public class Hoadon {
         this.chitiethoadons = chitiethoadons;
     }
 
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "KhachHang", referencedColumnName = "SDT")
+    @JoinColumn(name = "KhachHang", referencedColumnName = "SDT", nullable = true)
     public Khachhang getKhachhang() {
         return khachhang;
     }
@@ -200,6 +209,7 @@ public class Hoadon {
         this.khachhang = khachhang;
     }
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "ChiNhanh", referencedColumnName = "ChiNhanhID", nullable = false)
     public Chinhanh getChinhanh() {
@@ -209,9 +219,10 @@ public class Hoadon {
     public void setChinhanh(Chinhanh chinhanh) {
         this.chinhanh = chinhanh;
     }
-
+    
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "Ban", referencedColumnName = "BanID")
+    @JoinColumn(name = "Ban", referencedColumnName = "BanID", nullable = true)
     public Ban getBan() {
         return ban;
     }
@@ -220,8 +231,9 @@ public class Hoadon {
         this.ban = ban;
     }
 
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "NguoiGiaoHang", referencedColumnName = "NhanVienID", nullable = false)
+    @JoinColumn(name = "NguoiGiaoHang", referencedColumnName = "NhanVienID", nullable = true)
     public Nhanvien getNhanvien() {
         return nhanvien;
     }

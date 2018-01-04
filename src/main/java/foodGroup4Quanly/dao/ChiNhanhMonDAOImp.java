@@ -19,9 +19,10 @@ public class ChiNhanhMonDAOImp extends HibernateUtil implements ChiNhanhMonDAO {
 		return q.list();
 	}
 
+	//sua them dk true
 	@Override
 	public List<Chinhanhmon> getListChiNhanhMonByChiNhanh(int idChiNhanh) {
-		String hql = "from Chinhanhmon where pk.chinhanh.chiNhanhId = :idChiNhanh";
+		String hql = "from Chinhanhmon where pk.chinhanh.chiNhanhId = :idChiNhanh and pk.mon.active is true";
 		Query q = getSession().createQuery(hql).setParameter("idChiNhanh", idChiNhanh);
 		return q.list();
 	}

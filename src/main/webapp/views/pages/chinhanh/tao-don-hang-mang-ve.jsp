@@ -1,4 +1,5 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
@@ -31,56 +32,6 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td class="text-center red-text-table">1</td>
-                                <td>Đồ rán</td>
-                                <td>Gà rán nguyên con</td>
-                                <td><input class="input-sl-mon-an-dem-ve" value="1" price="80000" type="number" style="width: 90px"></td>
-                                <td><input class="input-gia-mon-an" value="80000" type="text" style="width: 110px" disabled></td>
-                                <td width="5%">
-                                    <a class="btn btn-danger btn-remove-mon-an-mang-ve">Xóa</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center red-text-table">1</td>
-                                <td>Đồ rán</td>
-                                <td>Gà rán nguyên con</td>
-                                <td><input class="input-sl-mon-an-dem-ve" value="1" price="90000" type="number" style="width: 90px"></td>
-                                <td><input class="input-gia-mon-an" value="90000" type="text" style="width: 110px" disabled></td>
-                                <td width="5%">
-                                    <a class="btn btn-danger btn-remove-mon-an-mang-ve">Xóa</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center red-text-table">1</td>
-                                <td>Đồ rán</td>
-                                <td>Gà rán nguyên con</td>
-                                <td><input class="input-sl-mon-an-dem-ve" value="1" price="180000" type="number" style="width: 90px"></td>
-                                <td><input class="input-gia-mon-an" value="180000" type="text" style="width: 110px" disabled></td>
-                                <td width="5%">
-                                    <a class="btn btn-danger btn-remove-mon-an-mang-ve">Xóa</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center red-text-table">1</td>
-                                <td>Đồ rán</td>
-                                <td>Gà rán nguyên con</td>
-                                <td><input class="input-sl-mon-an-dem-ve" value="1" price="150000" type="number" style="width: 90px"></td>
-                                <td><input class="input-gia-mon-an" value="150000" type="text" style="width: 110px" disabled></td>
-                                <td width="5%">
-                                    <a class="btn btn-danger btn-remove-mon-an-mang-ve">Xóa</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center red-text-table">1</td>
-                                <td>Đồ rán</td>
-                                <td>Gà rán nguyên con</td>
-                                <td><input class="input-sl-mon-an-dem-ve" value="1" price="120000" type="number" style="width: 90px"></td>
-                                <td><input class="input-gia-mon-an" value="120000" type="text" style="width: 110px" disabled></td>
-                                <td width="5%">
-                                    <a class="btn btn-danger btn-remove-mon-an-mang-ve">Xóa</a>
-                                </td>
-                            </tr>
                             </tbody>
                         </table>
                         <div class="form-group" style="margin-top: 12px">
@@ -88,7 +39,7 @@
                             <div class="col-md-3">
                                 <input id="tong-tien-don-hang-mang-ve" type="text" class="form-control expanded-input" disabled/>
                             </div>
-                            <button type="submit" class="btn btn-primary pull-right" style="margin-right: 15px">Thanh toán</button>
+                            <button type="button" class="btn btn-primary pull-right" style="margin-right: 15px" id="btn-mang-ve-tao-don-hang">Tạo đơn hàng</button>
                         </div>
                     </form>
                 </div>
@@ -114,67 +65,32 @@
                     </div>
                     <div class="modal-body">
                         <ul class="list-group">
-                            <li class="list-group-item">
-                                <div class="row toggle" id="dropdown-detail-1" data-toggle="list-mon-an-1">
+                        	<c:forEach items="${dsDM}" var="dm">
+                        		<li class="list-group-item">
+                                <div class="row toggle" id="dropdown-detail-1" data-toggle="list-mon-an-${dm.danhMucId }">
                                     <div class="col-xs-10">
-                                        <strong>Đồ xào</strong>
+                                        <strong>${dm.ten }</strong>
                                     </div>
                                     <div class="col-xs-2"><i class="fa fa-chevron-down pull-right"></i></div>
                                 </div>
-                                <div id="list-mon-an-1" class="collapse">
+                                <div id="list-mon-an-${dm.danhMucId }" class="collapse">
                                     <hr>
                                     <div class="container">
                                         <ul class="list-group ul-search-mon-an">
-                                            <li class="list-group-item col-lg-8">Gà xào nguyên con</li>
-                                            <li class="list-group-item col-lg-8">Vịt xào nguyên con</li>
-                                            <li class="list-group-item col-lg-8">Heo xào nguyên con</li>
-                                            <li class="list-group-item col-lg-8">Bò xào nguyên con</li>
+                                        <c:forEach items="${dsCnMon }" var="cnm">
+                                        	<c:if test="${cnm.pk.mon.danhmuc.danhMucId == dm.danhMucId }">
+                                        		<li  class="list-group-item col-lg-8 mon-item" data-id="${cnm.mon.monId }" data-price="${cnm.gia }">${cnm.mon.ten }</li>
+                                        	</c:if>
+                                        </c:forEach>
                                         </ul>
                                     </div>
                                 </div>
                             </li>
-                            <li class="list-group-item">
-                                <div class="row toggle" id="dropdown-detail-2" data-toggle="list-mon-an-2">
-                                    <div class="col-xs-10">
-                                        <strong>Đồ chiên</strong>
-                                    </div>
-                                    <div class="col-xs-2"><i class="fa fa-chevron-down pull-right"></i></div>
-                                </div>
-                                <div id="list-mon-an-2" class="collapse">
-                                    <hr>
-                                    <div class="container">
-                                        <ul class="list-group ul-search-mon-an">
-                                            <li class="list-group-item col-lg-8">Gà chiên nguyên con</li>
-                                            <li class="list-group-item col-lg-8">Vịt chiên nguyên con</li>
-                                            <li class="list-group-item col-lg-8">Heo chiên nguyên con</li>
-                                            <li class="list-group-item col-lg-8">Bò chiên nguyên con</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="row toggle" id="dropdown-detail-3" data-toggle="list-mon-an-3">
-                                    <div class="col-xs-10">
-                                        <strong>Đồ nướng</strong>
-                                    </div>
-                                    <div class="col-xs-2"><i class="fa fa-chevron-down pull-right"></i></div>
-                                </div>
-                                <div id="list-mon-an-3" class="collapse">
-                                    <hr>
-                                    <div class="container">
-                                        <ul class="list-group ul-search-mon-an">
-                                            <li class="list-group-item col-lg-8">Gà nướng nguyên con</li>
-                                            <li class="list-group-item col-lg-8">Vịt nướng nguyên con</li>
-                                            <li class="list-group-item col-lg-8">Heo nướng nguyên con</li>
-                                            <li class="list-group-item col-lg-8">Bò nướng nguyên con</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </li>
+                        	</c:forEach>
                         </ul>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Thêm món ăn đã chọn</button>
+                        <button type="button" class="btn btn-success" id="btn-mang-ve-them-mon-da-chon">Thêm món ăn đã chọn</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
                     </div>
                 </div>

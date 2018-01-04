@@ -58,5 +58,15 @@ public class ChiNhanhMonDAOImp extends HibernateUtil implements ChiNhanhMonDAO {
 	         return query.list();
 	}
 
+	@Override
+	public void updateGia(int idChinhanh, int idMon, int gia) {
+		String hql = "update Chinhanhmon m set m.gia =:gia where m.pk.mon.monId=:idMon and m.pk.chinhanh.chiNhanhId=:idChinhanh";
+		Query query = getSession().createQuery(hql)
+				.setParameter("gia", gia)
+				.setParameter("idMon", idMon)
+				.setParameter("idChinhanh", idChinhanh);
+		query.executeUpdate();
+	}
+
 
 }

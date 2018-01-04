@@ -56,4 +56,9 @@ public class ChiNhanhMonServiceImp implements ChiNhanhMonService{
 		return chiNhanhMonDAO.getListChiNhanhMonPageByChiNhanh(idChiNhanh, maxResult, begin);
 	}
 
+	@Override
+	public void updateGia(int idChinhanh, int idMon, int gia) {
+		chiNhanhMonDAO.updateGia(idChinhanh, idMon, gia);
+	}
+
 }

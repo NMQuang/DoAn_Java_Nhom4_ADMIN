@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import foodGroup4Quanly.common.BanValidator;
 import foodGroup4Quanly.common.ChiNhanhValidator;
 import foodGroup4Quanly.common.MonValidator;
+import foodGroup4Quanly.common.PriceValidator;
 import foodGroup4Quanly.common.Utils;
 import foodGroup4Quanly.dto.BanDto;
 import foodGroup4Quanly.entity.Ban;
@@ -67,6 +68,9 @@ public class QuanlyChinhanhController {
 
 	@Autowired
 	public BanValidator banValidator;
+
+	@Autowired
+	public PriceValidator priceValidator;
 
 	/***
 	 * get danh sách tất cả các chi nhánh
@@ -243,6 +247,33 @@ public class QuanlyChinhanhController {
 		chiNhanhMon.setChinhanh(branchService.getInfoChiNhanh(idChinhanh));
 		chiNhanhMonService.save(chiNhanhMon);
 		return "redirect:/quanly/chinhanh-menu/"+idChinhanh;
+	}
+
+	@RequestMapping(value = "/chinhanh-menu/{idChinhanh}/suamonan/{idMon}", method = RequestMethod.GET)
+	public String suaMonan(Model model, @PathVariable("idChinhanh") int idChinhanh, @PathVariable("idMon") int idMon) {
+		List<Chinhanhmon> mons = chiNhanhMonService.getListChiNhanhMonByChiNhanh(idChinhanh);
+		Chinhanhmon mon = new Chinhanhmon();
+
+		for (Chinhanhmon monItem : mons) {
+			if (idMon == monItem.getMon().getMonId()) {
+				mon = monItem;
+			}
+		}
+
+		model.addAttribute("mon", mon);
+		return "quanly-sua-chi-nhanh-mon-an";
+	}
+
+	@RequestMapping(value = "/chinhanh-menu/{idChinhanh}/suamonan/{idMon}", method = RequestMethod.POST)
+	public String suaMonan(@ModelAttribute("mon") Chinhanhmon mons, BindingResult result, Model model, @PathVariable("idChinhanh") int idChinhanh, @PathVariable("idMon") int idMon) {
+
+		priceValidator.validate(mons, result);
+		if (result.hasErrors()) {
+			return "redirect:/quanly/chinhanh-menu/"+idChinhanh+"/suamonan/"+idMon;
+		}
+		chiNhanhMonService.updateGia(idChinhanh, idMon, mons.getGia());
+		return "redirect:/quanly/chinhanh-menu/"+idChinhanh;
+
 	}
 
 	@RequestMapping(value = "/chinhanh-menu/{idChinhanh}/xoamonan/{idMon}", method = RequestMethod.GET)

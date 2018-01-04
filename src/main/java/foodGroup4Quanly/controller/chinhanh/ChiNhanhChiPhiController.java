@@ -6,10 +6,12 @@ import foodGroup4Quanly.common.Utils;
 import foodGroup4Quanly.dao.TienThueNhaDao;
 import foodGroup4Quanly.dto.ChiPhiNgayDto;
 import foodGroup4Quanly.dto.TienThueNhaDto;
+import foodGroup4Quanly.dto.TongLuongNhanVienTheoThangDto;
 import foodGroup4Quanly.entity.Chiphingay;
 import foodGroup4Quanly.entity.Tienthuenha;
 import foodGroup4Quanly.entity.TienthuenhaPK;
 import foodGroup4Quanly.service.ChiPhiNgayService;
+import foodGroup4Quanly.service.LuongNhanVienService;
 import foodGroup4Quanly.service.TienThueNhaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -36,6 +39,9 @@ public class ChiNhanhChiPhiController {
 
     @Autowired
     TienThueNhaService tienThueNhaService;
+
+    @Autowired
+    LuongNhanVienService luongNhanVienService;
 
     @Autowired
     TienThueNhaValidator tienThueNhaValidator;
@@ -175,7 +181,15 @@ public class ChiNhanhChiPhiController {
     }
 
     @RequestMapping(value = "luongnhanvien")
-    public String getChiLuongNhanVien() {
+    public String getChiLuongNhanVien(Model model,
+                                      @RequestParam("year") String strYear) {
+        if(strYear == null) {
+            strYear = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+        }
+
+        List<TongLuongNhanVienTheoThangDto> listTongLuongTheoThang =
+                luongNhanVienService.getTongLuongTheoThang(strYear, Utils.getChinhanhHienTai().getChiNhanhId());
+
         return "chinhanh-luong-nhan-vien";
     }
 

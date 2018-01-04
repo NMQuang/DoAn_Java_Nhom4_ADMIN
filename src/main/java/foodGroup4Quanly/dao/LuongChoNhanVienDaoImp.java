@@ -48,4 +48,9 @@ public class LuongChoNhanVienDaoImp extends HibernateUtil implements LuongChoNha
 		return query.list();
 	}
 
+	public void get(String year, int idChiNhanh) {
+		//language=HQL
+		String hql = "select new foodGroup4Quanly.dto.TongLuongNhanVienTheoThangDto (L.thang, L.nam,  L.ngay, sum(L.tien)) from Luongchonhanvien L where (L.nam=:year and L.nhanvien.chinhanh.id=:idChiNhanh) group by L.thang";
+	}
+
 }

@@ -4,7 +4,6 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
-import org.junit.Ignore;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

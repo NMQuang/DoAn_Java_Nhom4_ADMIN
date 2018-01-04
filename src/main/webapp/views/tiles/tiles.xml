@@ -24,6 +24,12 @@
         <put-attribute name="content" value="" />
     </definition>
 
+    <definition name="tongdai-definition" extends="base-definition">
+        <put-attribute name="navigation" value="/views/tiles/template/navigation.jsp" />
+        <put-attribute name="sidebar" value="/views/tiles/template/sidebar-tongdai.jsp" />
+        <put-attribute name="content" value="" />
+    </definition>
+
     <!-- QUAN LY -->
     <definition name="quanly-index" extends="quanly-definition">
         <put-attribute name="title" value="Dashboard" />
@@ -207,6 +213,23 @@
         <put-attribute name="content" value="/views/pages/chinhanh/thanh-toan-don-hang.jsp" />
     </definition>
     <!-- CHI NHANH -->
+
+    <!-- TONG DAI -->
+    <definition name="tongdai-chi-tiet-don-hang" extends="tongdai-definition">
+        <put-attribute name="title" value="Chi tiết đơn hàng" />
+        <put-attribute name="content" value="/views/pages/tongdai/chi-tiet-don-hang.jsp" />
+    </definition>
+
+    <definition name="tongdai-danh-sach-don-hang" extends="tongdai-definition">
+        <put-attribute name="title" value="Danh sách đơn hàng" />
+        <put-attribute name="content" value="/views/pages/tongdai/danh-sach-don-hang.jsp" />
+    </definition>
+
+    <definition name="tongdai-tao-don-hang-dien-thoai" extends="tongdai-definition">
+        <put-attribute name="title" value="Đơn hàng đặt bằng điện thoại" />
+        <put-attribute name="content" value="/views/pages/tongdai/tao-don-hang-dien-thoai.jsp" />
+    </definition>
+    <!-- /TONG DAI -->
 </tiles-definitions>
 
 

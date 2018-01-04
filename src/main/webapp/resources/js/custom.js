@@ -410,7 +410,8 @@ $(document).on('change', '.input-sl-mon-an-dem-ve', function () {
     }
 });
 
-$('.btn-remove-mon-an-mang-ve').click(function () {
+$(document).on("click", '.btn-remove-mon-an-mang-ve', function () {
+    var id = $(this).closest('tr').find('td:nth-child(1)').text()
     $(this).closest('tr').remove();
     var TongTien = 0;
     $('.input-gia-mon-an').each(function (i) {
@@ -419,7 +420,71 @@ $('.btn-remove-mon-an-mang-ve').click(function () {
     })
 
     $('#tong-tien-don-hang-mang-ve').attr({value: TongTien});
+    $('.mon-item').each(function(index, element){
+    	if($(element).attr('data-id') == id)
+    		$(element).removeClass('active');
+    })
 });
+
+$('#btn-mang-ve-them-mon-da-chon').on("click", function(){
+	$('.mon-item.active').each(function(index, element){
+		var id = $(element).attr('data-id')
+		var price = $(element).attr('data-price');
+		var name = $(element).text()
+		console.log(id + price + name)
+		if(!checkContainMonMangVe(id)){
+			$('#table-don-hang-mang-ve tbody').append('<tr><td class="text-center red-text-table">'+ id +'</td><td>Đồ rán</td><td>' + name + '</td><td><input class="input-sl-mon-an-dem-ve" value="1" price="'+ price + '" type="number" style="width: 90px"></td><td><input class="input-gia-mon-an" value="'+ price + '" type="text" style="width: 110px" disabled=""></td><td width="5%"><a class="btn btn-danger btn-remove-mon-an-mang-ve">Xóa</a></td></tr>')
+		}
+	})
+	var TongTien = 0;
+    $('.input-gia-mon-an').each(function (i) {
+
+        TongTien += parseInt($(this).val());
+    })
+
+    $('#tong-tien-don-hang-mang-ve').attr({value: TongTien});
+})
+function checkContainMonMangVe(id){
+	var check = false;
+	$('#table-don-hang-mang-ve tbody tr').each(function(index, element){
+		if($(element).find('td:nth-child(1)').text() == id)
+			check =  true;
+	})
+	return check;
+}
+
+$('#btn-mang-ve-tao-don-hang').on("click", function(){
+	if($('#table-don-hang-mang-ve tbody tr').length == 0)
+		return alert("Vui lòng chọn món cho đơn hàng")
+		
+	var ten_nguoi_nhan = prompt("Nhập tên người nhận");
+	var listChiTiet = [];
+		$("#table-don-hang-mang-ve tbody tr").each(function( index, element ) {
+			var id = $(element).find('td:nth-child(1)').text();
+			var sl = $(element).find('td:nth-child(4) input').val();
+			var gia = $(element).find('td:nth-child(5) input').val();
+			console.log(id+ sl + gia)
+			listChiTiet.push({id: id, sl : sl, tong: gia})
+		})
+		$.ajax({
+			url: globalURL +"chinhanh/api/hoadon/createBillGetAway",
+			type: 'POST',
+			contentType: 'application/json',
+			data : JSON.stringify({
+				ten_nguoi_nhan: ten_nguoi_nhan,
+				listChiTiet : listChiTiet
+			})
+		}).done(function(data){
+			alert("Tạo đơn hàng thành công")
+			window.location.reload();
+		}).fail(function(jqXHR, textStatus, error){
+			console.log(textStatus);
+			console.log(error);
+			console.log(jqXHR);
+			alert("Có lỗi xảy ra")
+		})
+	
+})
 /////////// END ĐƠN HÀNG MANG VỀ /////////////
 
 /////////// DANH SÁCH ĐƠN HÀNG /////////////

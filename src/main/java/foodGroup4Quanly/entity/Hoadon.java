@@ -211,7 +211,7 @@ public class Hoadon {
     
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "Ban", referencedColumnName = "BanID", nullable = false)
+    @JoinColumn(name = "Ban", referencedColumnName = "BanID", nullable = true)
     public Ban getBan() {
         return ban;
     }

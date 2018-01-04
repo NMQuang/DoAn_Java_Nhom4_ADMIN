@@ -28,6 +28,7 @@ import foodGroup4Quanly.entity.Hoadon;
 import foodGroup4Quanly.entity.Mon;
 import foodGroup4Quanly.entity.Nhanvien;
 import foodGroup4Quanly.pojo.ChiTietHoaDonCustom;
+import foodGroup4Quanly.pojo.DonHangDemVe;
 import foodGroup4Quanly.service.BanService;
 import foodGroup4Quanly.service.FoodService;
 import foodGroup4Quanly.service.HoadonService;
@@ -93,18 +94,52 @@ public class HoaDonApi {
 		if(hd == null)
 			return new ResponseEntity(HttpStatus.BAD_REQUEST);
 		Set<Chitiethoadon> chitiethoadons = new HashSet<Chitiethoadon>();
+		int tongtien = 0;
 		for(ChiTietHoaDonCustom cth : dsChiTiet){
 			System.out.println(cth.getTong());
 			Chitiethoadon cthd = new Chitiethoadon();
 			cthd.setSoLuong(cth.getSl());
 			cthd.setTongTien(cth.getTong());
+			tongtien += cth.getTong();
 			Mon mon = foodService.getFood(cth.getId());
 			cthd.setMon(mon);
 			chitiethoadons.add(cthd);
 			cthd.setHoadon(hd);
 		}
+		hd.setTongTien(tongtien);
 		hd.setChitiethoadons(chitiethoadons);
 		hoadonService.update(hd);
+		return new ResponseEntity(HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/createBillGetAway", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity createBillGetAway(@RequestBody DonHangDemVe donHangDemVe, @ModelAttribute("chinhanh") Chinhanh chinhanh, @ModelAttribute("nhanvien") Nhanvien nhanvien){
+		List<ChiTietHoaDonCustom> dsChiTiet = donHangDemVe.getListChiTiet();
+		System.out.println(dsChiTiet.size());
+		Hoadon hd = new Hoadon();
+
+		Set<Chitiethoadon> chitiethoadons = new HashSet<Chitiethoadon>();
+		int tongtien = 0;
+		for(ChiTietHoaDonCustom cth : dsChiTiet){
+			System.out.println(cth.getTong());
+			Chitiethoadon cthd = new Chitiethoadon();
+			cthd.setSoLuong(cth.getSl());
+			cthd.setTongTien(cth.getTong());
+			tongtien += cth.getTong();
+			Mon mon = foodService.getFood(cth.getId());
+			cthd.setMon(mon);
+			chitiethoadons.add(cthd);
+			cthd.setHoadon(hd);
+		}
+		hd.setTongTien(tongtien);
+		hd.setChitiethoadons(chitiethoadons);
+		hd.setChinhanh(chinhanh);
+		hd.setHinhThucMua(HinhThucMua.MANG_VE);
+		hd.setNgay(new Timestamp(new Date().getTime()));
+		hd.setHinhThucThanhToan(HinhThucThanhToan.TIEN_MAT_KHI_NHAN_HANG);
+		hd.setTinhTrangGiaoHang(TinhTrangGiaoHang.DANG_CHE_BIEN);
+		hd.setNhanvien(nhanvien);
+		hoadonService.create(hd);
 		return new ResponseEntity(HttpStatus.OK);
 	}
 }

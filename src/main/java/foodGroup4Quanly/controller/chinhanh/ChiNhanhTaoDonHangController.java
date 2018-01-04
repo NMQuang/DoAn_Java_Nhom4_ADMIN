@@ -25,6 +25,7 @@ public class ChiNhanhTaoDonHangController {
 	
 	@Autowired
 	private ChiNhanhMonService chiNhanhMonService;
+	
     @RequestMapping(value = "/taiquan")
     public String getTaoDonHangTaiQuan(Model model, @ModelAttribute("chinhanh") Chinhanh chinhanh) {
     	if(chinhanh == null)
@@ -37,7 +38,9 @@ public class ChiNhanhTaoDonHangController {
     }
 
     @RequestMapping(value = "/mangve")
-    public String getTaoDonHangMangVe(Model model) {
+    public String getTaoDonHangMangVe(Model model, @ModelAttribute("chinhanh") Chinhanh chinhanh) {
+    	model.addAttribute("dsDM", danhMucService.getAllDanhMuc(true));
+    	model.addAttribute("dsCnMon", chiNhanhMonService.getListChiNhanhMonByChiNhanh(chinhanh.getChiNhanhId()));
         return "chinhanh-tao-don-hang-mang-ve";
     }
 

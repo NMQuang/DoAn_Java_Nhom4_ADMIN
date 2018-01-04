@@ -52,7 +52,7 @@ CREATE TABLE `ban` (
   PRIMARY KEY (`BanID`),
   KEY `fk_ban_cn_idx` (`ChiNhanh`),
   CONSTRAINT `fk_ban_cn` FOREIGN KEY (`ChiNhanh`) REFERENCES `chinhanh` (`ChiNhanhID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -111,7 +111,7 @@ CREATE TABLE `chiphingay` (
   PRIMARY KEY (`ChiPhiNgayID`),
   KEY `fk_cpn_cn_idx` (`ChiNhanh`),
   CONSTRAINT `fk_cpn_cn` FOREIGN KEY (`ChiNhanh`) REFERENCES `chinhanh` (`ChiNhanhID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,7 +160,7 @@ CREATE TABLE `danhmuc` (
   `Ten` varchar(50) NOT NULL,
   `Active` bit(1) NOT NULL,
   PRIMARY KEY (`DanhMucID`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -172,13 +172,13 @@ DROP TABLE IF EXISTS `hoadon`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `hoadon` (
   `HoaDonID` int(11) NOT NULL AUTO_INCREMENT,
-  `KhachHang` varchar(20) NOT NULL,
+  `KhachHang` varchar(20) DEFAULT NULL,
   `Ngay` datetime NOT NULL,
   `ChiNhanh` int(11) NOT NULL,
   `TongTien` decimal(10,0) NOT NULL,
   `TinhTrangThanhToan` int(11) NOT NULL,
   `HinhThucMua` varchar(50) NOT NULL,
-  `TinhTrangGiaoHang` int(11) NOT NULL,
+  `TinhTrangGiaoHang` int(11) DEFAULT NULL,
   `Ban` int(11) DEFAULT NULL,
   `ThoiGianGiaoDuKien` datetime DEFAULT NULL,
   `HinhThucThanhToan` varchar(50) NOT NULL,
@@ -299,7 +299,7 @@ CREATE TABLE `nhanvien` (
   KEY `fk_nv_cn_idx` (`ChiNhanh`),
   CONSTRAINT `fk_nv_cn` FOREIGN KEY (`ChiNhanh`) REFERENCES `chinhanh` (`ChiNhanhID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_nv_cv` FOREIGN KEY (`ChucVu`) REFERENCES `chucvu` (`ChucVuID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -375,4 +375,4 @@ CREATE TABLE `trungtam` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-01 23:00:47
+-- Dump completed on 2018-01-04 17:18:59

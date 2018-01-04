@@ -25,6 +25,7 @@ public class Hoadon {
     private String hinhThucThanhToan;
     private String diaChiGiao;
     private String sdtNguoiNhan;
+    private String hoTenNguoiNhan;
     private Set<Chitiethoadon> chitiethoadons;
     private Khachhang khachhang;
     private Chinhanh chinhanh;
@@ -138,6 +139,12 @@ public class Hoadon {
         this.sdtNguoiNhan = sdtNguoiNhan;
     }
 
+    @Basic
+    @Column(name = "HoTenNguoiNhan")
+    public String getHoTenNguoiNhan() { return this.hoTenNguoiNhan; }
+
+    public void setHoTenNguoiNhan(String hoTenNguoiNhan) { this.hoTenNguoiNhan = hoTenNguoiNhan; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -158,6 +165,8 @@ public class Hoadon {
         if (diaChiGiao != null ? !diaChiGiao.equals(hoadon.diaChiGiao) : hoadon.diaChiGiao != null) return false;
         if (sdtNguoiNhan != null ? !sdtNguoiNhan.equals(hoadon.sdtNguoiNhan) : hoadon.sdtNguoiNhan != null)
             return false;
+        if (hoTenNguoiNhan != null ? !hoTenNguoiNhan.equals(hoadon.hoTenNguoiNhan) : hoadon.hoTenNguoiNhan != null)
+            return false;
 
         return true;
     }
@@ -174,6 +183,8 @@ public class Hoadon {
         result = 31 * result + (hinhThucThanhToan != null ? hinhThucThanhToan.hashCode() : 0);
         result = 31 * result + (diaChiGiao != null ? diaChiGiao.hashCode() : 0);
         result = 31 * result + (sdtNguoiNhan != null ? sdtNguoiNhan.hashCode() : 0);
+        result = 31 * result + (hoTenNguoiNhan != null ? hoTenNguoiNhan.hashCode() : 0);
+
         return result;
     }
 
@@ -189,7 +200,7 @@ public class Hoadon {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "KhachHang", referencedColumnName = "SDT", nullable = true)
+    @JoinColumn(name = "KhachHang", referencedColumnName = "SDT", nullable = false)
     public Khachhang getKhachhang() {
         return khachhang;
     }
@@ -211,7 +222,7 @@ public class Hoadon {
     
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "Ban", referencedColumnName = "BanID", nullable = true)
+    @JoinColumn(name = "Ban", referencedColumnName = "BanID", nullable = false)
     public Ban getBan() {
         return ban;
     }

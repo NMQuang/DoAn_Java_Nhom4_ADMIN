@@ -9,6 +9,16 @@ public class LuongchonhanvienPK implements Serializable {
     private String thang;
     private String nam;
 
+    public LuongchonhanvienPK() {
+
+    }
+
+    public LuongchonhanvienPK(int nhanVien, String thang, String nam) {
+        this.nhanVien = nhanVien;
+        this.thang = thang;
+        this.nam = nam;
+    }
+
     @Column(name = "NhanVien")
     @Id
     public int getNhanVien() {

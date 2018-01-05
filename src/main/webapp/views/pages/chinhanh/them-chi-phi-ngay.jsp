@@ -9,7 +9,7 @@
                 <em class="fa fa-home"></em>
             </a></li>
             <li><a href="<c:url value="/chinhanh/chiphi/ngay"/>">Chi phí theo ngày</a></li>
-            <li>${type == "update" ? "Update chi phí ngày" : "Tạo chi phí theo ngày"}</li>
+            <li>${type == "update" ? "Cập nhật chi phí ngày" : "Tạo chi phí theo ngày"}</li>
         </ol>
     </div><!--/.row-->
 

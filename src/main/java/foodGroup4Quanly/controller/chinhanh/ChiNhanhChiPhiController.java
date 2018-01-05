@@ -1,15 +1,17 @@
 package foodGroup4Quanly.controller.chinhanh;
 
 import foodGroup4Quanly.common.ChiPhiNgayValidator;
+import foodGroup4Quanly.common.DanhSachLuongValidator;
 import foodGroup4Quanly.common.TienThueNhaValidator;
 import foodGroup4Quanly.common.Utils;
 import foodGroup4Quanly.dao.TienThueNhaDao;
-import foodGroup4Quanly.dto.ChiPhiNgayDto;
-import foodGroup4Quanly.dto.TienThueNhaDto;
+import foodGroup4Quanly.dto.*;
 import foodGroup4Quanly.entity.Chiphingay;
+import foodGroup4Quanly.entity.Luongchonhanvien;
 import foodGroup4Quanly.entity.Tienthuenha;
 import foodGroup4Quanly.entity.TienthuenhaPK;
 import foodGroup4Quanly.service.ChiPhiNgayService;
+import foodGroup4Quanly.service.LuongNhanVienService;
 import foodGroup4Quanly.service.TienThueNhaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -36,6 +39,12 @@ public class ChiNhanhChiPhiController {
 
     @Autowired
     TienThueNhaService tienThueNhaService;
+
+    @Autowired
+    LuongNhanVienService luongNhanVienService;
+
+    @Autowired
+    DanhSachLuongValidator danhSachLuongValidator;
 
     @Autowired
     TienThueNhaValidator tienThueNhaValidator;
@@ -174,9 +183,79 @@ public class ChiNhanhChiPhiController {
         return "redirect:/chinhanh/chiphi/thang/update" + "?month=" + thang + "&year=" + nam;
     }
 
-    @RequestMapping(value = "luongnhanvien")
-    public String getChiLuongNhanVien() {
+    @RequestMapping(value = "/luongnhanvien", method = RequestMethod.GET)
+    public String getChiLuongNhanVien(Model model,
+                                      @RequestParam(value = "year", required = false) String strYear) {
+        if(strYear == null) {
+            strYear = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+        }
+
+        List<TongLuongNhanVienTheoThangDto> listTongLuongTheoThang =
+                luongNhanVienService.getTongLuongTheoThang(strYear, Utils.getChinhanhHienTai().getChiNhanhId());
+        model.addAttribute("listTongLuongTheoThang", listTongLuongTheoThang);
         return "chinhanh-luong-nhan-vien";
+    }
+
+    @RequestMapping(value = "/luongnhanvien/create", method = RequestMethod.GET)
+    public String getThemLuongNhanVien(Model model) {
+        DanhSachLuongNhanVienDto danhSachLuongNhanVien
+                = new DanhSachLuongNhanVienDto(Utils.getChinhanhHienTai().getNhanviens());
+        model.addAttribute("danhSachLuongNv", danhSachLuongNhanVien);
+
+        return "chinhanh-them-luong-nhan-vien";
+    }
+
+    @RequestMapping(value = "/luongnhanvien/create", method = RequestMethod.POST)
+    public String postThemLuongNhanVien(Model model,
+                                        @ModelAttribute(value = "danhSachLuongNv")
+                                                DanhSachLuongNhanVienDto danhSachLuongNhanVien,
+                                        BindingResult bindingResult) {
+        danhSachLuongValidator.validate(danhSachLuongNhanVien, bindingResult);
+        System.out.println(danhSachLuongNhanVien.getThoiGian());
+        if(bindingResult.hasErrors()) {
+            return "chinhanh-them-luong-nhan-vien";
+        }
+
+        luongNhanVienService.saveDsLuongNhanVien(danhSachLuongNhanVien);
+
+        DanhSachLuongNhanVienDto danhSachLuongNhanVienNew
+                = new DanhSachLuongNhanVienDto(Utils.getChinhanhHienTai().getNhanviens());
+        model.addAttribute("danhSachLuongNv", danhSachLuongNhanVienNew);
+        return "chinhanh-them-luong-nhan-vien";
+    }
+
+    @RequestMapping(value = "/luongnhanvien/update", method = RequestMethod.GET)
+    public String getUpdateLuongNhanVien(Model model,
+                                       @RequestParam("month") String month,
+                                       @RequestParam("year") String year) {
+        List<Luongchonhanvien> listLuongNv =
+                luongNhanVienService.getListLuong(month, year, Utils.getChinhanhHienTai().getChiNhanhId());
+
+        DanhSachLuongNhanVienDto danhSachLuongNhanVien
+                = new DanhSachLuongNhanVienDto(listLuongNv);
+        model.addAttribute("danhSachLuongNv", danhSachLuongNhanVien);
+        model.addAttribute("type", "update");
+
+        return "chinhanh-them-luong-nhan-vien";
+    }
+
+    @RequestMapping(value = "/luongnhanvien/update", method = RequestMethod.POST)
+    public String postUpdateLuongNhanVien(Model model,
+                                          @ModelAttribute(value = "danhSachLuongNv")
+                                                  DanhSachLuongNhanVienDto danhSachLuongNhanVien,
+                                          @RequestParam("thang") String thang,
+                                          @RequestParam("nam") String nam,
+                                          BindingResult bindingResult) {
+        danhSachLuongNhanVien.setUpdate(true);
+        danhSachLuongValidator.validate(danhSachLuongNhanVien, bindingResult);
+        if(bindingResult.hasErrors()) {
+            model.addAttribute("type", "update");
+            return "chinhanh-them-luong-nhan-vien";
+        }
+
+        luongNhanVienService.updateDsLuongNhanVien(danhSachLuongNhanVien);
+
+        return "redirect:/chinhanh/chiphi/luongnhanvien/update?month="+thang+"&year="+nam;
     }
 
     private Calendar convertStringToDate(String strDate, String formatDate) {

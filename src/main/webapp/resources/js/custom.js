@@ -811,15 +811,15 @@ $(function(){
 			alert("Có lỗi xảy ra")
 		})
 	})
+});
 	
 	
-})
 $(function(){
 	if($("#option-don-hang-can-duyet").length != 0){
 		getDonHangCanXacNhan();
 	    setInterval(function(){getDonHangCanXacNhan()}, 10000)	;
-	}
 	
+	}
 	function getDonHangCanXacNhan(){
 		$.ajax({
 			url: globalURL +"tongdai/api/hoadon/lay-don-hang-can-confirm",
@@ -846,8 +846,53 @@ $(function(){
 	}
 })
 
+///////////////////////////////////////////
+// CHON NAM SHOW LUONG NHAN VIEN
+$(function () {
+    $('#chon-nam-luong-nv').datepicker({
+        format: 'yyyy',
+        minViewMode: 2,
+        endDate: new Date(),
+        "autoclose": true
+    });
+
+    $('#chon-nam-luong-nv').datepicker().on('changeDate', function(ev){
+        var newUrl = '/chinhanh/chiphi/luongnhanvien?year='+ev.format();
+        window.location.replace(newUrl);
+    });
+
+    var yearUse;
+    if($('#dateLuongNv').val() != "") {
+        yearUse = $('#dateLuongNv').val();
+    } else {
+        var currentDate = new Date();
+        yearUse = currentDate.getFullYear().toString(10);
+    }
+
+    $('#chon-nam-luong-nv').datepicker('update', yearUse);
+});
+
+///////////////////////////////////////////
+// CHON THANG THEM NHAN VIEN
+$(function () {
+    $('#chon-thang-them-luong-nv').datepicker({
+        format: 'mm-yyyy',
+        minViewMode: 1,
+        endDate: new Date(),
+        "autoclose": true
+    });
+    var yearUse;
+    if($('#dateChonThangThemLuong').val() != "") {
+        yearUse = $('#dateChonThangThemLuong').val();
+    } else {
+        var currentDate = new Date();
+        yearUse = currentDate.getFullYear().toString(10);
+    }
+    $('#chon-thang-them-luong-nv').datepicker('update', yearUse);
+});
+
 $('#time-picker').timepicker({
-	timeFormat: 'HH:mm ',
+    timeFormat: 'HH:mm ',
     interval: 15,
     minTime: '6:00',
     maxTime: '22:00',
@@ -856,10 +901,6 @@ $('#time-picker').timepicker({
     dropdown: true,
     scrollbar: true
 });
-
-
-
-
 
 
 

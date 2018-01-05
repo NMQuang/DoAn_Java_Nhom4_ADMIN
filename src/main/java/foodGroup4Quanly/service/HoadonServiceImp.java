@@ -47,6 +47,10 @@ public class HoadonServiceImp implements HoadonService {
 	public List<Hoadon> getListHoaDonTaiQuan(int maxResult, int begin) {
 		return hoadonDAO.getListHoaDonTaiQuan(maxResult, begin);
 	}
+	@Override
+	public List<Hoadon> notConfirm() {
+		return hoadonDAO.notConfirm();
+	}
 
 	@Override
 	public List<Hoadon> getListHoaDonTongDai(int maxResult, int begin) {
@@ -62,6 +66,8 @@ public class HoadonServiceImp implements HoadonService {
 	public int countTongDai() {
 		return hoadonDAO.countTongDai();
 	}
+
+   
 
 	@Override
 	public int countMangVe() {

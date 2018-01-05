@@ -811,6 +811,39 @@ $(function(){
 			alert("Có lỗi xảy ra")
 		})
 	})
+	
+	
+})
+$(function(){
+	if($("#option-don-hang-can-duyet").length != 0){
+		getDonHangCanXacNhan();
+	    setInterval(function(){getDonHangCanXacNhan()}, 10000)	;
+	}
+	
+	function getDonHangCanXacNhan(){
+		$.ajax({
+			url: globalURL +"tongdai/api/hoadon/lay-don-hang-can-confirm",
+			type: 'GET',
+			contentType: 'application/json'
+		}).done(function(data){
+			console.log(data)
+			$("#option-don-hang-can-duyet tbody").empty();
+			$(data).each(function(index, element){
+				$("#option-don-hang-can-duyet tbody").append('<tr><td class="text-center red-text-table">' + element.hoaDonId + ' </td><td class="text-center">' + element.sdtNguoiNhan + '</td><td>'+ element.hoTenNguoiNhan +'</td><td class="text-center"><span class="_single_price" price="' + element.tongTien +'">'+ element.tongTien +'</span></td><td class="text-center">' + 'Đang xử lý' + '</td><td><a href="'+globalURL
+						+ 'tongdai/chi-tiet-don-hang-need-confirm/' + element.hoaDonId+'" class="btn btn-info">Xem</a></td></tr>')
+			})
+			$('._single_price').each(function(index, element){
+				var price = $(element).attr('price');
+				price = Number(parseFloat(price)).toLocaleString();
+				$(element).text(price)
+			})
+		}).fail(function(jqXHR, textStatus, error){
+			console.log(textStatus);
+			console.log(error);
+			console.log(jqXHR);
+			alert("Có lỗi xảy ra")
+		})
+	}
 })
 
 

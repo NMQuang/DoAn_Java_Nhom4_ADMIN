@@ -69,7 +69,7 @@ public class HoaDonApi {
 		hoadon.setHinhThucThanhToan(HinhThucThanhToan.TIEN_MAT_KHI_NHAN_HANG);
 		hoadon.setTongTien(0);
 		hoadon.setTinhTrangThanhToan(TinhTrangThanhToan.CHUA_THANH_TOAN);
-		hoadon.setTinhTrangGiaoHang(TinhTrangGiaoHang.DANG_CHE_BIEN);
+		hoadon.setTinhTrangGiaoHang(TinhTrangGiaoHang.CHO_CHE_BIEN);
 		hoadon.setNhanvien(nhanvien);
 		hoadonService.create(hoadon);
 		b.setTinhTrang(1);

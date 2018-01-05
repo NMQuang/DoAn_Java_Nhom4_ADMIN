@@ -25,4 +25,6 @@ public interface HoaDonDao {
 	int countTongDai();
 	int countTaiQuan();
 	int countMangVe();
+	
+	List<Hoadon> notConfirm();
 }

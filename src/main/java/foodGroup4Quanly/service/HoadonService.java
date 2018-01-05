@@ -18,4 +18,5 @@ public interface HoadonService {
 	int countTongDai();
 	int countMangVe();
 	int countTaiQuan();
+	public List<Hoadon> notConfirm();
 }

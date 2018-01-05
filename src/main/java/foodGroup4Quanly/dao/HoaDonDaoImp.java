@@ -132,6 +132,16 @@ public class HoaDonDaoImp extends HibernateUtil implements HoaDonDao{
 		else
 			return null;
 	}
+	@Override
+	public List<Hoadon> notConfirm() {
+		String hql = "from Hoadon where tinhTrangGiaoHang = :chua_confirm";
+		Query query = getSession().createQuery(hql);
+		query.setParameter("chua_confirm", TinhTrangGiaoHang.DANG_XU_LY);
+		return query.list();
+	}
+
+
+	
 
 	@Override
 	public List<Hoadon> getListHoaDonMangVe(int maxResult, int begin) {

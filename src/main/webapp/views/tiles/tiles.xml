@@ -229,6 +229,16 @@
         <put-attribute name="title" value="Đơn hàng đặt bằng điện thoại" />
         <put-attribute name="content" value="/views/pages/tongdai/tao-don-hang-dien-thoai.jsp" />
     </definition>
+    
+    <definition name="tongdai-duyet-don-hang" extends="tongdai-definition">
+        <put-attribute name="title" value="Duyệt đơn hàng" />
+        <put-attribute name="content" value="/views/pages/tongdai/don-hang-can-duyet.jsp" />
+    </definition>
+    
+    <definition name="tongdai-chi-tiet-don-hang-can-xac-nhan" extends="tongdai-definition">
+        <put-attribute name="title" value="Chi tiết đơn hàng" />
+        <put-attribute name="content" value="/views/pages/tongdai/chi-tiet-don-hang-need-confirm.jsp" />
+    </definition>
     <!-- /TONG DAI -->
 </tiles-definitions>
 

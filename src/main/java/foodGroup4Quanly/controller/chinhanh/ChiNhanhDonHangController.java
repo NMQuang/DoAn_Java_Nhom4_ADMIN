@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import foodGroup4Quanly.common.JasperExportUtils;
 import foodGroup4Quanly.common.MyBadRequestException;
+import foodGroup4Quanly.common.state.TinhTrangGiaoHang;
 import foodGroup4Quanly.common.state.TinhTrangThanhToan;
 import foodGroup4Quanly.entity.Ban;
 import foodGroup4Quanly.entity.Chitiethoadon;
@@ -142,6 +143,7 @@ public class ChiNhanhDonHangController {
 				banService.update(ban);
 			}
 			hoadon.setTinhTrangThanhToan(TinhTrangThanhToan.DA_THANH_TOAN);
+			hoadon.setTinhTrangGiaoHang(TinhTrangGiaoHang.DA_GIAO_HANG);
 			hoadon.setNgayTraTien(new Timestamp(new Date().getTime()));
 			hoadonService.update(hoadon);
 		}
@@ -183,6 +185,7 @@ public class ChiNhanhDonHangController {
 		Map<String, Object> parameters = new HashMap<>();
 		List<Map<String, Object>> data = new ArrayList<Map<String,Object>>();
 		Hoadon hoadon = hoadonService.getBillById(idHoaDon);
+		hoadon.setTinhTrangGiaoHang(TinhTrangGiaoHang.DANG_CHE_BIEN);
 		if(hoadon == null || hoadon.getTinhTrangThanhToan() == TinhTrangThanhToan.DA_THANH_TOAN){
 			throw new MyBadRequestException("redirect:/chinhanh/taodonhang/taiquan");
 		}

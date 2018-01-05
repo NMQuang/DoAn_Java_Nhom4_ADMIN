@@ -55,6 +55,17 @@
                 </a></li>
             </ul>
         </li>
-        <li><a href="login.html"><em class="fa fa-power-off">&nbsp;</em> Đăng xuất </a></li>
+        <li><a href="#" onclick="postLogout()"><em class="fa fa-power-off">&nbsp;</em> Đăng xuất </a></li>
     </ul>
 </div><!--/.sidebar-->
+ <script>
+                    function postLogout() {
+                        var formLogout = document.createElement("form");
+                        formLogout.setAttribute("method", "post");
+                        formLogout.setAttribute("action", "<c:url value="/logout"/>");
+
+
+                        document.body.appendChild(formLogout);
+                        formLogout.submit();
+                    }
+                </script>

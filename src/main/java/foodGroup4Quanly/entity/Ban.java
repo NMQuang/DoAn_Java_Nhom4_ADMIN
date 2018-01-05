@@ -1,6 +1,9 @@
 package foodGroup4Quanly.entity;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Set;
 
 @Entity
@@ -71,7 +74,8 @@ public class Ban {
         result = 31 * result + tinhTrang;
         return result;
     }
-
+    
+    @JsonIgnore
     @ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "ChiNhanh", referencedColumnName = "ChiNhanhID", nullable = false)
     public Chinhanh getChinhanh() {
@@ -82,6 +86,7 @@ public class Ban {
         this.chinhanh = chinhanh;
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "ban")
     public Set<Hoadon> getHoadons() {
         return hoadons;

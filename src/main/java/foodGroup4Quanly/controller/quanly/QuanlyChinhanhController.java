@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import foodGroup4Quanly.common.BanValidator;
 import foodGroup4Quanly.common.ChiNhanhValidator;
 import foodGroup4Quanly.common.MonValidator;
+import foodGroup4Quanly.common.PriceValidator;
 import foodGroup4Quanly.common.Utils;
 import foodGroup4Quanly.dto.BanDto;
 import foodGroup4Quanly.entity.Ban;
@@ -36,8 +37,8 @@ import foodGroup4Quanly.service.TinhThanhService;
 @RequestMapping("/quanly")
 public class QuanlyChinhanhController {
 
-	final String UPLOAD_DIRECTORY = "resources/images/chi-nhanh";
-	final String UPLOAD_DIRECTORY1 = "resources/images/mon-an";
+	final String UPLOAD_DIRECTORY = "C:/resources/images/chi-nhanh";
+	final String UPLOAD_DIRECTORY1 = "C:/resources/images/mon-an";
 	@Autowired
 	public ServletContext context;
 
@@ -67,6 +68,9 @@ public class QuanlyChinhanhController {
 
 	@Autowired
 	public BanValidator banValidator;
+
+	@Autowired
+	public PriceValidator priceValidator;
 
 	/***
 	 * get danh sách tất cả các chi nhánh
@@ -133,7 +137,7 @@ public class QuanlyChinhanhController {
 	public String updateChiNhanh(Model model, @PathVariable("idChinhanh") int idChiNhanh, @RequestParam("hinhanh") MultipartFile file, @ModelAttribute("chiNhanh") Chinhanh chiNhanh, BindingResult result) {
 		Chinhanh cn = branchService.getInfoChiNhanh(idChiNhanh);
 		if (!file.isEmpty()) {
-			Utils.saveImage(file, context, UPLOAD_DIRECTORY1);
+			Utils.saveImage(file, context, UPLOAD_DIRECTORY);
 			cn.setHinhAnh(file.getOriginalFilename());
 		}
 		chiNhanh.setHinhAnh(cn.getHinhAnh());
@@ -184,6 +188,7 @@ public class QuanlyChinhanhController {
 	    		model.addAttribute("tinhThanh", tinhThanhService.getAllTinhThanh());
 	    		return "quanly-them-chi-nhanh";
 	    	}
+	    	chiNhanh.setActive(true);
 	    	branchService.saveChiNhanh(chiNhanh);
 		return "redirect:/quanly/chinhanh";
 	}
@@ -192,9 +197,22 @@ public class QuanlyChinhanhController {
 	 * get thông tin chi tiết món của 1 chi nhánh
 	 */
 	@RequestMapping(value = "/chinhanh-menu/{idChinhanh}", method = RequestMethod.GET)
-	public String getChitietMenuChinhanh(Model model, @PathVariable("idChinhanh") int idChinhanh) {
+	public String getChitietMenuChinhanh(Model model, @PathVariable("idChinhanh") int idChinhanh, @RequestParam(required=false) String type, @RequestParam(required= false) Integer index) {
 
-		model.addAttribute("menu", chiNhanhMonService.getListChiNhanhMonByChiNhanh(idChinhanh));
+		int begin;
+		int id = 1;
+		if (index == null || index < 1) {
+			begin = 0;
+		} else {
+			id = index;
+			begin = 3 * (id - 1);
+		}
+		int count = chiNhanhMonService.countMonByChiNhanh(idChinhanh);
+    		int pages = count / 3 + (count %3 == 0 ? 0 : 1);
+		model.addAttribute("index", id);
+    		model.addAttribute("pages", pages);
+    		model.addAttribute("type", type);
+		model.addAttribute("menu", chiNhanhMonService.getListChiNhanhMonPageByChiNhanh(idChinhanh,3,begin));
 		model.addAttribute("branch", branchService.getInfoChiNhanh(idChinhanh));
 		return "quanly-chi-tiet-chi-nhanh-menu";
 	}
@@ -230,6 +248,33 @@ public class QuanlyChinhanhController {
 		chiNhanhMon.setChinhanh(branchService.getInfoChiNhanh(idChinhanh));
 		chiNhanhMonService.save(chiNhanhMon);
 		return "redirect:/quanly/chinhanh-menu/"+idChinhanh;
+	}
+
+	@RequestMapping(value = "/chinhanh-menu/{idChinhanh}/suamonan/{idMon}", method = RequestMethod.GET)
+	public String suaMonan(Model model, @PathVariable("idChinhanh") int idChinhanh, @PathVariable("idMon") int idMon) {
+		List<Chinhanhmon> mons = chiNhanhMonService.getListChiNhanhMonByChiNhanh(idChinhanh);
+		Chinhanhmon mon = new Chinhanhmon();
+
+		for (Chinhanhmon monItem : mons) {
+			if (idMon == monItem.getMon().getMonId()) {
+				mon = monItem;
+			}
+		}
+
+		model.addAttribute("mon", mon);
+		return "quanly-sua-chi-nhanh-mon-an";
+	}
+
+	@RequestMapping(value = "/chinhanh-menu/{idChinhanh}/suamonan/{idMon}", method = RequestMethod.POST)
+	public String suaMonan(@ModelAttribute("mon") Chinhanhmon mons, BindingResult result, Model model, @PathVariable("idChinhanh") int idChinhanh, @PathVariable("idMon") int idMon) {
+
+		priceValidator.validate(mons, result);
+		if (result.hasErrors()) {
+			return "redirect:/quanly/chinhanh-menu/"+idChinhanh+"/suamonan/"+idMon;
+		}
+		chiNhanhMonService.updateGia(idChinhanh, idMon, mons.getGia());
+		return "redirect:/quanly/chinhanh-menu/"+idChinhanh;
+
 	}
 
 	@RequestMapping(value = "/chinhanh-menu/{idChinhanh}/xoamonan/{idMon}", method = RequestMethod.GET)

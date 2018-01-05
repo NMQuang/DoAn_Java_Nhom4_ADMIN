@@ -21,8 +21,7 @@ public class Utils {
 	    		byte[] bytes = file.getBytes();
 
 				// Creating the directory to store file
-				String uploadPath = context.getRealPath("") + File.separator
-						+ directory;
+				String uploadPath = directory;
 				File dir = new File(uploadPath);
 
 				if (!dir.exists())

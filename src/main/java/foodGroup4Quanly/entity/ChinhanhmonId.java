@@ -3,6 +3,9 @@ package foodGroup4Quanly.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 
 @Embeddable
@@ -28,6 +31,7 @@ public class ChinhanhmonId implements Serializable {
         this.mon = mon;
     }
 
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     public Chinhanh getChinhanh() {
 

@@ -1,3 +1,5 @@
+var globalURL = "http://localhost:8080/foodGroup4_QuanLy/"
+
 $('#calendar').datepicker({
 		});
 
@@ -77,7 +79,7 @@ $(function(){
 //Phân trang
 $(function(){
 	$('#pagination-demo').twbsPagination({
-        totalPages: $('#pagination-demo').attr('data-pages'),
+        totalPages: $('#pagination-demo').attr('data-pages') >= 1 ? $('#pagination-demo').attr('data-pages') :1,
         visiblePages: 7,
         startPage: parseInt($('#pagination-demo').attr('data-index')),
         initiateStartPageClick: false,
@@ -139,7 +141,7 @@ $('[data-provide="datepicker-year"]').datepicker({
 //  thay đổi lựa chọn danh mục của tạo đơn hàng tại quán
 $(document).ready(function () {
     $('.select-danh-muc').hide();
-    $('#option-mon-an-nuong').show();
+    $("#" + $("#select-danh-muc option:first-child").val()).show();
     $('#select-danh-muc').change(function () {
         $('.select-danh-muc').hide();
         $('#'+$(this).val()).show();
@@ -149,23 +151,164 @@ $(document).ready(function () {
 /////////// ĐƠN HÀNG TẠI QUÁN /////////////
 //  Thêm món ăn vào danh sách món ăn được chọn bên phải
 
-
+var banid;
 $(document).ready(function () {
 	$('#menu-ben-phai').attr("hidden", "true");
 	
 	$(".btn-dat-ban").on("click", function(){
 		$('#menu-ben-phai').removeAttr("hidden");
+		$("#table-don-hang-tai-quan tbody").empty();//danh sach mon ben phai
+		$("#menu-ben-phai-tong-tien").val(0)
+		banid = $(this).attr("data-id");
 		$.ajax({
-			url: ""
+			url: globalURL +"chinhanh/api/ban/" + banid,
+			type: 'GET'
 		}).done(function(data){
 			console.log(data);
+			$("#menu-ben-phai-ten-ban").text("Bàn " + data.tenBan)
+			if(data.tinhTrang == 0){
+				$("#status-ban").val("Trống")
+				$("#btn-mo-ban").text("Mở bàn")
+				$("#btn-chon-mon").attr("disabled", true)
+				$("#btn-thanh-toan").attr("disabled", true)
+				$("#btn-chuyen-xuong-bep").attr("disabled", true)
+			}
+			else{
+				$("#status-ban").val("Có khách")
+				$("#btn-mo-ban").text("Hủy bàn")
+				$("#btn-chon-mon").removeAttr("disabled")
+				$("#btn-thanh-toan").removeAttr("disabled")
+				$("#btn-chuyen-xuong-bep").removeAttr("disabled")
+				getBillByTable(banid) //lay hoa don
+			}
+				
+		}).fail(function(jqXHR, textStatus, error){
+			console.log(textStatus);
+			console.log(error);
+			console.log(jqXHR);
+		})
+		
+	})
+	$("#btn-mo-ban").on("click", function(){
+		if($(this).text() == "Hủy bàn"){
+			if(confirm("Bạn có chắc chắn muốn hủy")){
+				console.log("Hủy bàn")
+				console.log(banid)
+				$.ajax({
+					url: globalURL +"chinhanh/api/hoadon/cancelled-on-table/"+ banid,
+					type: 'DELETE'
+				}).done(function(data){
+					$("#status-ban").val("Trống")
+					$("#btn-mo-ban").text("Mở bàn")
+					$("#btn-chon-mon").attr("disabled", true)
+					$("#btn-thanh-toan").attr("disabled", true)
+					$("#btn-chuyen-xuong-bep").attr("disabled", true)
+					$(".btn-dat-ban[data-id="+ banid + "]").removeClass("btn-dat-ban-occupied")
+					$("#menu-ben-phai-tong-tien").val(0)
+					$("#table-don-hang-tai-quan tbody").empty();
+				}).fail(function(jqXHR, textStatus, error){
+					console.log(textStatus);
+					console.log(error);
+					console.log(jqXHR);
+					alert("Có lỗi xảy ra")
+					window.location.reload();
+				})
+			}
+		}else
+			if($(this).text() == "Mở bàn"){
+				$.ajax({
+					url: globalURL +"chinhanh/api/hoadon/created-on-table",
+					type: 'POST',
+					data: {idBan : banid}
+				}).done(function(data){
+					$("#btn-mo-ban").text("Hủy bàn")
+					$("#status-ban").val("Có khách")
+					$("#btn-chon-mon").removeAttr("disabled")
+					$("#btn-thanh-toan").removeAttr("disabled")
+					$("#btn-chuyen-xuong-bep").removeAttr("disabled")
+					$(".btn-dat-ban[data-id="+ banid + "]").addClass("btn-dat-ban-occupied")
+				}).fail(function(jqXHR, textStatus, error){
+					console.log(textStatus);
+					console.log(error);
+					console.log(jqXHR);
+					alert("Có lỗi xảy ra")
+					window.location.reload();
+				})
+			}
+	})
+	
+	//khi tat modal chon mon
+	$('#modal-dat-hang-tai-quan').on('hide.bs.modal', function (e) {
+		$("#table-don-hang-tai-quan tbody").empty();
+		var listChiTiet = [];
+		var tongtien = 0;
+		$("#danh-sach-mon-an-da-chon li").each(function( index, element ) {
+			var id = $(element).attr("id-chon-mon");
+			var ten = $(element).find(".li-p-ten-mon-an").text();
+			var sl = $(element).find(".input-sl-mon-an").val();
+			var gia = $(element).find(".input-gia-mon-an").val();
+			console.log(ten + sl + gia)
+			tongtien += parseInt(gia);
+			listChiTiet.push({id: id, sl : sl, tong: gia})
+			$("#table-don-hang-tai-quan tbody").append(' <tr><td data-id = "'+id+'"width="60%" style="padding-left: 10px">'+ ten +'</td><td width="20%" class="text-center">' + sl +'</td><td width="20%" class="text-right" style="padding-right: 10px">' + gia +'</td></tr>')
+		})
+		$("#menu-ben-phai-tong-tien").val(tongtien)
+		$.ajax({
+			url: globalURL +"chinhanh/api/hoadon/updateBillDetailsByTable/" + banid,
+			type: 'POST',
+			contentType: 'application/json',
+			data : JSON.stringify(listChiTiet)
+		}).done(function(data){
+			//console.log(data.chitiethoadons);
+			
 		}).fail(function(jqXHR, textStatus, error){
 			console.log(textStatus);
 			console.log(error);
 			console.log(jqXHR);
 		})
 	})
+	
+	//khi bat modal chon mon len
+	$('#modal-dat-hang-tai-quan').on('show.bs.modal', function (e) {
+		$("#danh-sach-mon-an-da-chon").empty();
+		$("#table-don-hang-tai-quan tbody tr").each(function( index, element ) {
+			var id = $(element).find("td:nth-child(1)").attr("data-id");
+			var ten = $(element).find("td:nth-child(1)").text();
+			var sl = $(element).find("td:nth-child(2)").text();
+			var gia = $(element).find("td:nth-child(3)").text();
+			console.log(id + ten + sl + gia)
+			$("#danh-sach-mon-an-da-chon").append('<li id-chon-mon="' + id +'" class="ds-mon-an-da-chon"><div class="col-md-6"><p class="li-p-ten-mon-an"> ' + ten +'</p></div><div class="form-inline"><p class="li-p-ds-mon-an">Số lượng: </p><input type="number" class="input-sl-mon-an" value="' + sl + '" price=" '+ gia/sl +'"><p class="li-p-ds-mon-an t">Tổng tiền: </p><input class="input-gia-mon-an" readonly="" type="text"  value=" ' + gia +'"><a href="#" class="btn-remove"><i class="fa fa-times" aria-hidden="true"></i></a></div></li>')
+		})
+	})
+	
+	//khi nhan nut thanh toan
+	
 });
+function getBillByTable(idBan){
+	$.ajax({
+		url: globalURL +"chinhanh/api/hoadon/getBillByTable/" + banid,
+		type: 'GET'
+	}).done(function(data){
+		//console.log(data.chitiethoadons);
+		$("#table-don-hang-tai-quan tbody").empty();
+		$("#menu-ben-phai-tong-tien").val(0)
+		var tongtien = 0;
+		$(data.chitiethoadons).each(function( index, element ) {
+			console.log(element)
+			var id = element.pk.mon.monId;
+			var ten = element.pk.mon.ten;
+			var sl = element.soLuong;
+			var gia = element.tongTien;
+			tongtien += gia;
+			$("#table-don-hang-tai-quan tbody").append(' <tr><td data-id = "'+id+'" width="60%" style="padding-left: 10px">'+ ten +'</td><td width="20%" class="text-center">' + sl +'</td><td width="20%" class="text-right" style="padding-right: 10px">' + gia +'</td></tr>')
+		})
+		$("#menu-ben-phai-tong-tien").val(tongtien)
+	}).fail(function(jqXHR, textStatus, error){
+		console.log(textStatus);
+		console.log(error);
+		console.log(jqXHR);
+	})
+}
 $(document).ready(function() {
 
     $('.btn-them-mon-an').click(function () {
@@ -196,8 +339,8 @@ $(document).ready(function() {
             var inputSoluong = $('<input type="number" class="input-sl-mon-an" value="1" price/>');
             inputSoluong.attr({id: id, price: price});
 
-            var inputTongTien = $('<input class="input-gia-mon-an" type="text" price>');
-            inputTongTien.attr({value: price, price: price});
+            var inputTongTien = $('<input class="input-gia-mon-an" readonly type="text">');
+            inputTongTien.attr({value: price});
 
             var btnXoa = $('<a href="#" class="btn-remove"><i class="fa fa-times" aria-hidden="true"></i></a>');
 
@@ -232,6 +375,8 @@ $(document).on('change', '.input-sl-mon-an', function () {
     if ((value !== '') && (value.indexOf('.') === -1)) {
         if (value < 1 || value > 50) {
             $(this).val(Math.max(Math.min(value, 50), 1));
+            var totalPrice = Math.max(Math.min(value, 50), 1) * price;
+            $(myLi).find('.input-gia-mon-an').attr({value: totalPrice});
         }   else {
             var totalPrice = value * price;
             console.log(totalPrice);
@@ -239,6 +384,40 @@ $(document).on('change', '.input-sl-mon-an', function () {
         }
     }
 });
+
+$("#btn-thanh-toan").on("click", function(){
+	if($("#table-don-hang-tai-quan tbody tr").length == 0){
+		return alert("Không có gì để tính tiền")
+	}
+	
+	$.ajax({
+		url: globalURL +"chinhanh/api/hoadon/getBillByTable/" + banid,
+		type: 'GET'
+	}).done(function(data){
+		window.location.href = globalURL + "chinhanh/thanhtoandonhang/" + data.hoaDonId;
+	}).fail(function(jqXHR, textStatus, error){
+		console.log(textStatus);
+		console.log(error);
+		console.log(jqXHR);
+	})
+})
+
+$("#btn-chuyen-xuong-bep").on("click", function(){
+	if($("#table-don-hang-tai-quan tbody tr").length == 0){
+		return alert("Không có gì để chế biến.")
+	}
+	
+	$.ajax({
+		url: globalURL +"chinhanh/api/hoadon/getBillByTable/" + banid,
+		type: 'GET'
+	}).done(function(data){
+		window.open( globalURL + "chinhanh/chuyendonhangxuongbep/" + data.hoaDonId, '_blank');
+	}).fail(function(jqXHR, textStatus, error){
+		console.log(textStatus);
+		console.log(error);
+		console.log(jqXHR);
+	})
+})
 /////////// END ĐƠN HÀNG TẠI QUÁN /////////////
 
 /////////// ĐƠN HÀNG MANG VỀ /////////////
@@ -269,9 +448,85 @@ $(document).on('change', '.input-sl-mon-an-dem-ve', function () {
     }
 });
 
-$('.btn-remove-mon-an-mang-ve').click(function () {
+$(document).on("click", '.btn-remove-mon-an-mang-ve', function () {
+    var id = $(this).closest('tr').find('td:nth-child(1)').text()
     $(this).closest('tr').remove();
+    var TongTien = 0;
+    $('.input-gia-mon-an').each(function (i) {
+
+        TongTien += parseInt($(this).val());
+    })
+
+    $('#tong-tien-don-hang-mang-ve').attr({value: TongTien});
+    $('.mon-item').each(function(index, element){
+    	if($(element).attr('data-id') == id)
+    		$(element).removeClass('active');
+    })
 });
+
+$('#btn-mang-ve-them-mon-da-chon').on("click", function(){
+	$('.mon-item.active').each(function(index, element){
+		var id = $(element).attr('data-id')
+		var price = $(element).attr('data-price');
+		var name = $(element).text()
+		console.log(id + price + name)
+		if(!checkContainMonMangVe(id)){
+			$('#table-don-hang-mang-ve tbody').append('<tr><td class="text-center red-text-table">'+ id +'</td><td>Đồ rán</td><td>' + name + '</td><td><input class="input-sl-mon-an-dem-ve" value="1" price="'+ price + '" type="number" style="width: 90px"></td><td><input class="input-gia-mon-an" value="'+ price + '" type="text" style="width: 110px" disabled=""></td><td width="5%"><a class="btn btn-danger btn-remove-mon-an-mang-ve">Xóa</a></td></tr>')
+		}
+	})
+	var TongTien = 0;
+    $('.input-gia-mon-an').each(function (i) {
+
+        TongTien += parseInt($(this).val());
+    })
+
+    $('#tong-tien-don-hang-mang-ve').attr({value: TongTien});
+})
+function checkContainMonMangVe(id){
+	var check = false;
+	$('#table-don-hang-mang-ve tbody tr').each(function(index, element){
+		if($(element).find('td:nth-child(1)').text() == id)
+			check =  true;
+	})
+	return check;
+}
+
+$('#btn-mang-ve-tao-don-hang').on("click", function(){
+	if($('#table-don-hang-mang-ve tbody tr').length == 0)
+		return alert("Vui lòng chọn món cho đơn hàng")
+		
+	var ten_nguoi_nhan = prompt("Nhập tên người nhận");
+	var listChiTiet = [];
+		$("#table-don-hang-mang-ve tbody tr").each(function( index, element ) {
+			var id = $(element).find('td:nth-child(1)').text();
+			var sl = $(element).find('td:nth-child(4) input').val();
+			var gia = $(element).find('td:nth-child(5) input').val();
+			console.log(id+ sl + gia)
+			listChiTiet.push({id: id, sl : sl, tong: gia})
+		})
+		$.ajax({
+			url: globalURL +"chinhanh/api/hoadon/createBillGetAway",
+			type: 'POST',
+			contentType: 'application/json',
+			data : JSON.stringify({
+				ten_nguoi_nhan: ten_nguoi_nhan,
+				listChiTiet : listChiTiet
+			})
+		}).done(function(data){
+			alert("Tạo đơn hàng thành công")
+			console.log(data)
+			window.open( globalURL + "chinhanh/chuyendonhangxuongbep/" + data.id, '_blank');
+			window.location.reload();
+		}).fail(function(jqXHR, textStatus, error){
+			console.log(textStatus);
+			console.log(error);
+			console.log(jqXHR);
+			alert("Có lỗi xảy ra")
+		})
+	
+})
+
+
 /////////// END ĐƠN HÀNG MANG VỀ /////////////
 
 /////////// DANH SÁCH ĐƠN HÀNG /////////////
@@ -434,8 +689,129 @@ $(function () {
 });
 
 
+/////////////////////////////////////////////////////////////////
+//Thanh toan
+$(function () {
+	var x_timer;
+    $("#sdt_khach").on('change paste keyup', function(e) {
+    	$("#ten-khach-hang").removeAttr("readonly")
+        clearTimeout(x_timer);
+        var user_name = $(this).val();
+        x_timer = setTimeout(function() {
+            check_username_ajax(user_name);
+        }, 1000);
+    });
+    function check_username_ajax(username) {
+    	 
+    	if($('#sdt_khach').val().trim().length == 0) return;
+		$.ajax({
+			url: globalURL +"api/khachhang?sdt=" + $('#sdt_khach').val(),
+			type: 'GET',
+			timeout: 10000,
+			contentType: 'application/json',
+		}).done(function(data) {
+			console.log(data);
+			$("#ten-khach-hang").val(data.ten)
+			$("#ten-khach-hang").attr("readonly", true).trigger('change');
+		}).fail(function(jqXHR, textStatus, error) {
+			console.log(textStatus);
+			console.log(error);
+			console.log(jqXHR);
+		});
+    }
+})
 
-
+/////////////////////////////////////////////////////////////
+//TONG DAI
+$(function(){
+	$("#checkbox-them-nguoi-nhan").change(function() {
+	    if(this.checked) {
+	    	$("#sdt_nguoi_nhan").removeAttr("readonly")
+	    	$("#ho_ten_nguoi_nhan").removeAttr("readonly")
+	    }else{
+	    	$("#sdt_nguoi_nhan").attr("readonly", true)
+	    	$("#ho_ten_nguoi_nhan").attr("readonly", true)
+	    	$("#sdt_nguoi_nhan").val($("#sdt_khach").val())
+	    	$("#ho_ten_nguoi_nhan").val($("#ten-khach-hang").val())
+	    }
+	});
+	
+	$("#sdt_khach").on('change paste keyup', function(){
+		if(!$("#checkbox-them-nguoi-nhan").is(':checked'))
+			$("#sdt_nguoi_nhan").val($("#sdt_khach").val())
+	})
+	$("#ten-khach-hang").on('change paste keyup', function(){
+		if(!$("#checkbox-them-nguoi-nhan").is(':checked'))
+			$("#ho_ten_nguoi_nhan").val($("#ten-khach-hang").val())
+	})
+	
+	$("#tong-dai-select-chi-nhanh").on("change", function(){
+		var chinhanh = $(this).find('option:selected').val();
+		$.ajax({
+			url: globalURL + "api/chinhanhmon/"+ chinhanh,
+			type: 'GET',
+			timeout: 10000,
+			contentType: 'application/json',
+		}).done(function(data) {
+			console.log(data);
+			$(".danh-muc-item").empty();
+			$("#table-don-hang-mang-ve tbody").empty();
+			$('#tong-tien-don-hang-mang-ve').val(0)
+			$(data).each(function(index, element){
+				$("#list-mon-" + element.mon.danhmuc.danhMucId).append('<li  class="list-group-item col-lg-8 mon-item" data-id="'+ element.mon.monId+'" data-price="'+ element.gia+'">'+ element.mon.ten+'</li>')
+			})
+		}).fail(function(jqXHR, textStatus, error) {
+			console.log(textStatus);
+			console.log(error);
+			console.log(jqXHR);
+		});
+	})
+	
+	$("#tong-dai-btn-tao-don-hang").on("click", function(){
+		var ten_khach_hang = $('#ten-khach-hang').val();
+		var sdt_khach = $("#sdt_khach").val();
+		var sdt_nguoi_nhan = $("#sdt_nguoi_nhan").val();
+		var ho_ten_nguoi_nhan = $("#ho_ten_nguoi_nhan").val();
+		var dia_chi_nhan = $("#dia_chi_nhan").val();
+		var id_Chinhanh = $("#tong-dai-select-chi-nhanh").val();
+		var listChiTiet = [];
+		$("#table-don-hang-mang-ve tbody tr").each(function( index, element ) {
+			var id = $(element).find('td:nth-child(1)').text();
+			var sl = $(element).find('td:nth-child(4) input').val();
+			var gia = $(element).find('td:nth-child(5) input').val();
+			console.log(id+ sl + gia)
+			listChiTiet.push({id: id, sl : sl, tong: gia})
+		})
+		if(ten_khach_hang == ""|| sdt_khach == "" || sdt_nguoi_nhan == "" || ho_ten_nguoi_nhan == ""
+			|| dia_chi_nhan == "" || id_Chinhanh == "")
+			return alert("Vui lòng nhập đủ các trường")
+		if(listChiTiet.length == 0)
+			return alert("Vui lòng chọn ít nhất 1 món")
+			
+		$.ajax({
+			url: globalURL +"tongdai/api/hoadon/create",
+			type: 'POST',
+			contentType: 'application/json',
+			data : JSON.stringify({
+				ten_khach_hang: ten_khach_hang,
+				sdt_khach : sdt_khach,
+				sdt_nguoi_nhan : sdt_nguoi_nhan,
+				ho_ten_nguoi_nhan : ho_ten_nguoi_nhan,
+				dia_chi_nhan : dia_chi_nhan,
+				id_Chinhanh : id_Chinhanh,
+				listChiTiet : listChiTiet
+			})
+		}).done(function(data){
+			alert("Tạo đơn hàng thành công")
+			window.location.reload();
+		}).fail(function(jqXHR, textStatus, error){
+			console.log(textStatus);
+			console.log(error);
+			console.log(jqXHR);
+			alert("Có lỗi xảy ra")
+		})
+	})
+})
 
 
 

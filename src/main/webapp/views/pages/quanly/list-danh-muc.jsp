@@ -87,7 +87,8 @@
                         <h4 class="modal-title">Thêm danh mục mới</h4>
                     </div>
                     <div class="modal-body">
-                        <form:form method="post" action="/quanly/danhmuc/create" modelAttribute="themDm" class="form-horizontal" role="form">
+                    <c:url var="post_url"  value="/quanly/danhmuc/create" />
+                        <form:form method="post" action="${post_url }" modelAttribute="themDm" class="form-horizontal" role="form">
                             <div class="form-group">
                                 <label class="col-lg-3" for="ten-danh-muc" style="margin-top: 2px">Tên danh mục:</label>
                                 <div class="col-lg-9">
@@ -115,7 +116,8 @@
                         <h4 class="modal-title">Sửa thông tin danh mục</h4>
                     </div>
                     <div class="modal-body">
-                        <form:form action="/quanly/danhmuc/update" modelAttribute="suaDm" method="post" class="form-horizontal" role="form">
+                     <c:url var="post_url_update"  value="/quanly/danhmuc/update" />
+                        <form:form action="${post_url_update }" modelAttribute="suaDm" method="post" class="form-horizontal" role="form">
                             <div class="form-group">
                                 <label class="col-lg-3 control-label" for="ten-danh-muc-sua">Tên danh mục:</label>
                                 <div class="col-lg-9">

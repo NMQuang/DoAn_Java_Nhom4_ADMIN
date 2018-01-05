@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.springframework.stereotype.Component;
 
+import foodGroup4Quanly.common.state.TinhTrangGiaoHang;
 import foodGroup4Quanly.config.HibernateUtil;
 import foodGroup4Quanly.entity.Hoadon;
 
@@ -101,6 +102,20 @@ public class HoaDonDaoImp extends HibernateUtil implements HoaDonDao{
 		query.setParameter("end", end);
 		query.setParameter("sdt", sdt);
 		return (long) query.uniqueResult();
+	}
+
+
+	@Override
+	public Hoadon getTheLastBillByTableStillCooking(int idBan) {
+		String hql = "from Hoadon where tinhTrangGiaoHang =  :dang_che_bien and ban.banId = :idBan order by hoaDonId DESC";
+		Query query = getSession().createQuery(hql);
+		query.setParameter("dang_che_bien", TinhTrangGiaoHang.DANG_CHE_BIEN);
+		query.setParameter("idBan", idBan);
+		List dshd = query.setFirstResult(0).setMaxResults(1).list();
+		if(dshd.size() > 0)
+			return (Hoadon) dshd.get(0);
+		else
+			return null;
 	}
 
 

@@ -1,6 +1,9 @@
 package foodGroup4Quanly.entity;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 
 @Entity
@@ -13,6 +16,7 @@ public class Chinhanhmon implements Serializable {
     private ChinhanhmonId pk = new ChinhanhmonId();
     private int gia;
 
+    @JsonIgnore
     @EmbeddedId
     public ChinhanhmonId getPk() {
         return pk;
@@ -22,6 +26,7 @@ public class Chinhanhmon implements Serializable {
         this.pk = pk;
     }
 
+    @JsonIgnore
     @Transient
     public Chinhanh getChinhanh() {
         return getPk().getChinhanh();

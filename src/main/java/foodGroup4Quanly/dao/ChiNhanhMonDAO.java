@@ -14,4 +14,10 @@ public interface ChiNhanhMonDAO {
 	void save(Chinhanhmon chiNhanhMon);
 
 	void delete(int idChinhanh, int idMon);
+
+	int countMonByChiNhanh(int idChiNhanh);
+
+	List<Chinhanhmon> getListChiNhanhMonPageByChiNhanh(int idChiNhanh, int maxResult, int begin);
+
+	void updateGia(int idChinhanh, int idMon, int gia);
 }

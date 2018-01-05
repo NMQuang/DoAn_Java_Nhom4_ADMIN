@@ -1,9 +1,13 @@
 package foodGroup4Quanly.controller.tongdai;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,12 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ibm.icu.util.Calendar;
+
 import foodGroup4Quanly.common.state.HinhThucMua;
 import foodGroup4Quanly.common.state.TinhTrangGiaoHang;
 import foodGroup4Quanly.entity.Chinhanh;
 import foodGroup4Quanly.entity.Chitiethoadon;
 import foodGroup4Quanly.entity.Hoadon;
-import foodGroup4Quanly.entity.Mon;
 import foodGroup4Quanly.service.ChiNhanhMonService;
 import foodGroup4Quanly.service.ChiNhanhService;
 import foodGroup4Quanly.service.ChiTietHoaDonService;
@@ -48,10 +53,34 @@ public class TongDaiController {
     	if(hoadon != null){
 	    	List<Chitiethoadon> cthdlist = chiTietHoaDonService.getByIDHoaDon(hoadon.getHoaDonId());
 	    	hoadon.setChitiethoadons(new HashSet<Chitiethoadon>(cthdlist));
+	    	if(hoadon.getThoiGianGiaoDuKien() != null){
+	    		SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+	    		Date d = new Date(hoadon.getThoiGianGiaoDuKien().getTime());
+	    		model.addAttribute("thoi_gian", format.format(d));
+	    	}
     	}
     	model.addAttribute("hoadon",hoadon );
         return "tongdai-chi-tiet-don-hang";
     }
+    @RequestMapping(value = "/hoadon/chi-tiet-don-hang/{idHoaDon}", method = RequestMethod.POST)
+    public String updateChiTietDonHang(Model model, @PathVariable int idHoaDon, @RequestParam int tinh_trang_don_hang, @RequestParam(required = false) @DateTimeFormat(pattern ="HH:mm") Date thoi_gian_giao) {
+    	Hoadon hoadon = hoadonService.getBillById(idHoaDon);
+    	if(hoadon != null){
+	    	hoadon.setTinhTrangGiaoHang(tinh_trang_don_hang);
+	    	if(thoi_gian_giao != null){
+	    		Calendar c = Calendar.getInstance();
+	    		c.setTime(new Date());
+	    		Calendar c1 = Calendar.getInstance();
+	    		c1.setTime(thoi_gian_giao);
+	    		c.set(Calendar.HOUR_OF_DAY, c1.get(Calendar.HOUR_OF_DAY));
+	    		c.set(Calendar.MINUTE, c1.get(Calendar.MINUTE));
+	    		hoadon.setThoiGianGiaoDuKien(new Timestamp(c.getTimeInMillis()));
+	    	}
+    	}
+    	hoadonService.update(hoadon);
+        return "redirect:/tongdai/hoadon/chi-tiet-don-hang/" + hoadon.getHoaDonId();
+    }
+    
     @RequestMapping(value = "/hoadon/xoa/{idHoaDon}")
     public String xoa(Model model, @PathVariable int idHoaDon) {
     	Hoadon hoadon = hoadonService.getBillById(idHoaDon);

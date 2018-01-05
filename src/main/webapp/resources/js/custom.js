@@ -846,6 +846,17 @@ $(function(){
 	}
 })
 
+$('#time-picker').timepicker({
+	timeFormat: 'HH:mm ',
+    interval: 15,
+    minTime: '6:00',
+    maxTime: '22:00',
+    startTime: '6:00',
+    dynamic: false,
+    dropdown: true,
+    scrollbar: true
+});
+
 
 
 

@@ -84,11 +84,11 @@ public class QuanlyChinhanhController {
 			begin = 0;
 		} else {
 			id = index;
-			begin = 3 * (id - 1);
+			begin = 10 * (id - 1);
 		}
 		int count = branchService.countBranch();
-    		int pages = count / 3 + (count %3 == 0 ? 0 : 1);
-		model.addAttribute("listChiNhanh", branchService.getList(3, begin));
+    		int pages = count / 10 + (count %10 == 0 ? 0 : 1);
+		model.addAttribute("listChiNhanh", branchService.getList(10, begin));
 		model.addAttribute("index", id);
     		model.addAttribute("pages", pages);
     		model.addAttribute("type", type);
@@ -205,14 +205,14 @@ public class QuanlyChinhanhController {
 			begin = 0;
 		} else {
 			id = index;
-			begin = 3 * (id - 1);
+			begin = 10 * (id - 1);
 		}
 		int count = chiNhanhMonService.countMonByChiNhanh(idChinhanh);
-    		int pages = count / 3 + (count %3 == 0 ? 0 : 1);
+    		int pages = count / 10 + (count %10 == 0 ? 0 : 1);
 		model.addAttribute("index", id);
     		model.addAttribute("pages", pages);
     		model.addAttribute("type", type);
-		model.addAttribute("menu", chiNhanhMonService.getListChiNhanhMonPageByChiNhanh(idChinhanh,3,begin));
+		model.addAttribute("menu", chiNhanhMonService.getListChiNhanhMonPageByChiNhanh(idChinhanh,10,begin));
 		model.addAttribute("branch", branchService.getInfoChiNhanh(idChinhanh));
 		return "quanly-chi-tiet-chi-nhanh-menu";
 	}

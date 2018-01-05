@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.springframework.stereotype.Component;
 
+import foodGroup4Quanly.common.state.HinhThucMua;
 import foodGroup4Quanly.common.state.TinhTrangGiaoHang;
 import foodGroup4Quanly.config.HibernateUtil;
 import foodGroup4Quanly.entity.Hoadon;
@@ -20,7 +21,7 @@ public class HoaDonDaoImp extends HibernateUtil implements HoaDonDao{
 		query.setParameter("end", end);
 		return query.list();
 	}
-	
+
 
 	@Override
 	public long getSum(Date begin, Date end) {
@@ -120,6 +121,18 @@ public class HoaDonDaoImp extends HibernateUtil implements HoaDonDao{
 
 
 	@Override
+	public List<Hoadon> getListHoaDonTaiQuan(int maxResult, int begin) {
+		String hql = "from Hoadon where tinhTrangGiaoHang <>:dang_xu_ly and hinhThucMua =:tai_cho order by hoaDonId ASC";
+		Query query = getSession().createQuery(hql);
+		query.setParameter("dang_xu_ly", TinhTrangGiaoHang.DANG_XU_LY);
+		query.setParameter("tai_cho", HinhThucMua.TAI_CHO);
+		List dshd = query.setFirstResult(begin).setMaxResults(maxResult).list();
+		if(dshd.size() > 0)
+			return dshd;
+		else
+			return null;
+	}
+	@Override
 	public List<Hoadon> notConfirm() {
 		String hql = "from Hoadon where tinhTrangGiaoHang = :chua_confirm";
 		Query query = getSession().createQuery(hql);
@@ -152,7 +165,67 @@ public class HoaDonDaoImp extends HibernateUtil implements HoaDonDao{
 
 	
 
-	
-	
+	@Override
+	public List<Hoadon> getListHoaDonMangVe(int maxResult, int begin) {
+		String hql = "from Hoadon where tinhTrangGiaoHang <>:dang_xu_ly and hinhThucMua =:mang_ve order by hoaDonId ASC";
+		Query query = getSession().createQuery(hql);
+		query.setParameter("dang_xu_ly", TinhTrangGiaoHang.DANG_XU_LY);
+		query.setParameter("mang_ve", HinhThucMua.MANG_VE);
+		List dshd = query.setFirstResult(begin).setMaxResults(maxResult).list();
+		if(dshd.size() > 0)
+			return dshd;
+		else
+			return null;
+	}
+
+
+	@Override
+	public List<Hoadon> getListHoaDonTongDai(int maxResult, int begin) {
+		String hql = "from Hoadon where tinhTrangGiaoHang <>:dang_xu_ly and hinhThucMua =:tong_dai order by hoaDonId ASC";
+		Query query = getSession().createQuery(hql);
+		query.setParameter("dang_xu_ly", TinhTrangGiaoHang.DANG_XU_LY);
+		query.setParameter("tong_dai", HinhThucMua.TONG_DAI);
+		List dshd = query.setFirstResult(begin).setMaxResults(maxResult).list();
+		if(dshd.size() > 0)
+			return dshd;
+		else
+			return null;
+	}
+
+
+	@Override
+	public int countTongDai() {
+		Query query = getSession().createQuery("select count(*)  from Hoadon where tinhTrangGiaoHang <>:dang_xu_ly and hinhThucMua =:tong_dai")
+				.setParameter("dang_xu_ly", TinhTrangGiaoHang.DANG_XU_LY)
+				.setParameter("tong_dai", HinhThucMua.TONG_DAI);
+	    	int count = ((Long) query.uniqueResult()).intValue();
+	    	return count;
+	}
+
+
+	@Override
+	public int countTaiQuan() {
+		Query query = getSession().createQuery("select count(*)  from Hoadon where tinhTrangGiaoHang <>:dang_xu_ly and hinhThucMua =:tai_cho")
+				.setParameter("dang_xu_ly", TinhTrangGiaoHang.DANG_XU_LY)
+				.setParameter("tai_cho", HinhThucMua.TAI_CHO);
+	    	int count = ((Long) query.uniqueResult()).intValue();
+	    	return count;
+	}
+
+
+	@Override
+	public int countMangVe() {
+		Query query = getSession().createQuery("select count(*)  from Hoadon where tinhTrangGiaoHang <>:dang_xu_ly and hinhThucMua =:mang_ve")
+				.setParameter("dang_xu_ly", TinhTrangGiaoHang.DANG_XU_LY)
+				.setParameter("mang_ve", HinhThucMua.MANG_VE);
+	    	int count = ((Long) query.uniqueResult()).intValue();
+	    	return count;
+	}
+
+
+
+
+
+
 
 }

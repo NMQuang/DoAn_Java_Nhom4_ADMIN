@@ -682,14 +682,14 @@ $(function () {
     	 
     	if($('#sdt_khach').val().trim().length == 0) return;
 		$.ajax({
-			url: globalURL +"chinhanh/api/khachhang?sdt=" + $('#sdt_khach').val(),
+			url: globalURL +"api/khachhang?sdt=" + $('#sdt_khach').val(),
 			type: 'GET',
 			timeout: 10000,
 			contentType: 'application/json',
 		}).done(function(data) {
 			console.log(data);
 			$("#ten-khach-hang").val(data.ten)
-			$("#ten-khach-hang").attr("readonly", true)
+			$("#ten-khach-hang").attr("readonly", true).trigger('change');
 		}).fail(function(jqXHR, textStatus, error) {
 			console.log(textStatus);
 			console.log(error);
@@ -698,6 +698,97 @@ $(function () {
     }
 })
 
+/////////////////////////////////////////////////////////////
+//TONG DAI
+$(function(){
+	$("#checkbox-them-nguoi-nhan").change(function() {
+	    if(this.checked) {
+	    	$("#sdt_nguoi_nhan").removeAttr("readonly")
+	    	$("#ho_ten_nguoi_nhan").removeAttr("readonly")
+	    }else{
+	    	$("#sdt_nguoi_nhan").attr("readonly", true)
+	    	$("#ho_ten_nguoi_nhan").attr("readonly", true)
+	    	$("#sdt_nguoi_nhan").val($("#sdt_khach").val())
+	    	$("#ho_ten_nguoi_nhan").val($("#ten-khach-hang").val())
+	    }
+	});
+	
+	$("#sdt_khach").on('change paste keyup', function(){
+		if(!$("#checkbox-them-nguoi-nhan").is(':checked'))
+			$("#sdt_nguoi_nhan").val($("#sdt_khach").val())
+	})
+	$("#ten-khach-hang").on('change paste keyup', function(){
+		if(!$("#checkbox-them-nguoi-nhan").is(':checked'))
+			$("#ho_ten_nguoi_nhan").val($("#ten-khach-hang").val())
+	})
+	
+	$("#tong-dai-select-chi-nhanh").on("change", function(){
+		var chinhanh = $(this).find('option:selected').val();
+		$.ajax({
+			url: globalURL + "api/chinhanhmon/"+ chinhanh,
+			type: 'GET',
+			timeout: 10000,
+			contentType: 'application/json',
+		}).done(function(data) {
+			console.log(data);
+			$(".danh-muc-item").empty();
+			$("#table-don-hang-mang-ve tbody").empty();
+			$('#tong-tien-don-hang-mang-ve').val(0)
+			$(data).each(function(index, element){
+				$("#list-mon-" + element.mon.danhmuc.danhMucId).append('<li  class="list-group-item col-lg-8 mon-item" data-id="'+ element.mon.monId+'" data-price="'+ element.gia+'">'+ element.mon.ten+'</li>')
+			})
+		}).fail(function(jqXHR, textStatus, error) {
+			console.log(textStatus);
+			console.log(error);
+			console.log(jqXHR);
+		});
+	})
+	
+	$("#tong-dai-btn-tao-don-hang").on("click", function(){
+		var ten_khach_hang = $('#ten-khach-hang').val();
+		var sdt_khach = $("#sdt_khach").val();
+		var sdt_nguoi_nhan = $("#sdt_nguoi_nhan").val();
+		var ho_ten_nguoi_nhan = $("#ho_ten_nguoi_nhan").val();
+		var dia_chi_nhan = $("#dia_chi_nhan").val();
+		var id_Chinhanh = $("#tong-dai-select-chi-nhanh").val();
+		var listChiTiet = [];
+		$("#table-don-hang-mang-ve tbody tr").each(function( index, element ) {
+			var id = $(element).find('td:nth-child(1)').text();
+			var sl = $(element).find('td:nth-child(4) input').val();
+			var gia = $(element).find('td:nth-child(5) input').val();
+			console.log(id+ sl + gia)
+			listChiTiet.push({id: id, sl : sl, tong: gia})
+		})
+		if(ten_khach_hang == ""|| sdt_khach == "" || sdt_nguoi_nhan == "" || ho_ten_nguoi_nhan == ""
+			|| dia_chi_nhan == "" || id_Chinhanh == "")
+			return alert("Vui lòng nhập đủ các trường")
+		if(listChiTiet.length == 0)
+			return alert("Vui lòng chọn ít nhất 1 món")
+			
+		$.ajax({
+			url: globalURL +"tongdai/api/hoadon/create",
+			type: 'POST',
+			contentType: 'application/json',
+			data : JSON.stringify({
+				ten_khach_hang: ten_khach_hang,
+				sdt_khach : sdt_khach,
+				sdt_nguoi_nhan : sdt_nguoi_nhan,
+				ho_ten_nguoi_nhan : ho_ten_nguoi_nhan,
+				dia_chi_nhan : dia_chi_nhan,
+				id_Chinhanh : id_Chinhanh,
+				listChiTiet : listChiTiet
+			})
+		}).done(function(data){
+			alert("Tạo đơn hàng thành công")
+			window.location.reload();
+		}).fail(function(jqXHR, textStatus, error){
+			console.log(textStatus);
+			console.log(error);
+			console.log(jqXHR);
+			alert("Có lỗi xảy ra")
+		})
+	})
+})
 
 
 

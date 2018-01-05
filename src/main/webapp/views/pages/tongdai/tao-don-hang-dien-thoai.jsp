@@ -1,4 +1,5 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
@@ -27,21 +28,21 @@
                             <div class="form-group" style="margin-top: 12px;">
                                 <label class="control-label col-md-3">Số điện thoại người gọi</label>
                                 <div class="col-md-3">
-                                    <input class="form-control expanded-input">
+                                    <input class="form-control expanded-input" id="sdt_khach" required="required">
                                 </div>
                                 <label class="control-label col-md-3">Số điện thoại người nhận</label>
                                 <div class="col-md-3">
-                                    <input class="form-control expanded-input input-nguoi-nhan" disabled>
+                                    <input class="form-control expanded-input input-nguoi-nhan" id="sdt_nguoi_nhan" readonly="readonly" required="required">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3">Họ và tên người gọi</label>
                                 <div class="col-md-3">
-                                    <input class="form-control expanded-input">
+                                    <input class="form-control expanded-input" id="ten-khach-hang">
                                 </div>
                                 <label class="control-label col-md-3">Họ và tên người nhận</label>
                                 <div class="col-md-3">
-                                    <input class="form-control expanded-input input-nguoi-nhan" disabled>
+                                    <input class="form-control expanded-input input-nguoi-nhan" id="ho_ten_nguoi_nhan" readonly="readonly" required="required">
                                 </div>
                             </div>
                         </div>
@@ -49,32 +50,16 @@
                             <div class="form-group">
                                 <label class="control-label col-md-3">Địa chỉ nhận</label>
                                 <div class="col-md-5">
-                                    <textarea class="form-control expanded-input" rows="4"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3">Tỉnh thành</label>
-                                <div class="col-md-5">
-                                    <input class="form-control expanded-input">
+                                    <textarea class="form-control expanded-input" rows="4" id="dia_chi_nhan" required="required"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3">Chi nhánh</label>
                                 <div class="col-md-5">
-                                    <select class="expanded-input">
-                                        <option>Chi nhánh 1</option>
-                                        <option>Chi nhánh 2</option>
-                                        <option>Chi nhánh 3</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3">Hình thức thanh toán</label>
-                                <div class="col-md-5">
-                                    <select class="expanded-input">
-                                        <option>Thanh toán 1</option>
-                                        <option>Thanh toán 2</option>
-                                        <option>Thanh toán 3</option>
+                                    <select class="expanded-input" name="chi_nhanh" id="tong-dai-select-chi-nhanh">
+                                       <c:forEach items="${dsChiNhanh}" var="item">
+                                       		<option value="${item.chiNhanhId }">${item.ten }</option>
+                                       </c:forEach>
                                     </select>
                                 </div>
                             </div>
@@ -100,56 +85,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td class="text-center red-text-table">1</td>
-                                    <td>Đồ rán</td>
-                                    <td>Gà rán nguyên con</td>
-                                    <td><input class="input-sl-mon-an-dem-ve" value="1" price="80000" type="number" style="width: 90px"></td>
-                                    <td><input class="input-gia-mon-an" value="80000" type="text" style="width: 110px" disabled></td>
-                                    <td width="5%">
-                                        <a class="btn btn-danger btn-remove-mon-an-mang-ve">Xóa</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center red-text-table">1</td>
-                                    <td>Đồ rán</td>
-                                    <td>Gà rán nguyên con</td>
-                                    <td><input class="input-sl-mon-an-dem-ve" value="1" price="90000" type="number" style="width: 90px"></td>
-                                    <td><input class="input-gia-mon-an" value="90000" type="text" style="width: 110px" disabled></td>
-                                    <td width="5%">
-                                        <a class="btn btn-danger btn-remove-mon-an-mang-ve">Xóa</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center red-text-table">1</td>
-                                    <td>Đồ rán</td>
-                                    <td>Gà rán nguyên con</td>
-                                    <td><input class="input-sl-mon-an-dem-ve" value="1" price="180000" type="number" style="width: 90px"></td>
-                                    <td><input class="input-gia-mon-an" value="180000" type="text" style="width: 110px" disabled></td>
-                                    <td width="5%">
-                                        <a class="btn btn-danger btn-remove-mon-an-mang-ve">Xóa</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center red-text-table">1</td>
-                                    <td>Đồ rán</td>
-                                    <td>Gà rán nguyên con</td>
-                                    <td><input class="input-sl-mon-an-dem-ve" value="1" price="150000" type="number" style="width: 90px"></td>
-                                    <td><input class="input-gia-mon-an" value="150000" type="text" style="width: 110px" disabled></td>
-                                    <td width="5%">
-                                        <a class="btn btn-danger btn-remove-mon-an-mang-ve">Xóa</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center red-text-table">1</td>
-                                    <td>Đồ rán</td>
-                                    <td>Gà rán nguyên con</td>
-                                    <td><input class="input-sl-mon-an-dem-ve" value="1" price="120000" type="number" style="width: 90px"></td>
-                                    <td><input class="input-gia-mon-an" value="120000" type="text" style="width: 110px" disabled></td>
-                                    <td width="5%">
-                                        <a class="btn btn-danger btn-remove-mon-an-mang-ve">Xóa</a>
-                                    </td>
-                                </tr>
+                               
                                 </tbody>
                             </table>
                             <div class="form-group" style="margin-top: 12px">
@@ -161,7 +97,7 @@
                         </form>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-success btn-lg center-block">Tạo đơn hàng</button>
+                <button type="button" id="tong-dai-btn-tao-don-hang" class="btn btn-success btn-lg center-block">Tạo đơn hàng</button>
                 <hr>
             </form>
         </div>
@@ -185,67 +121,32 @@
                     </div>
                     <div class="modal-body">
                         <ul class="list-group">
-                            <li class="list-group-item">
-                                <div class="row toggle" id="dropdown-detail-1" data-toggle="list-mon-an-1">
+                        	<c:forEach items="${dsDM}" var="dm">
+                        		<li class="list-group-item">
+                                <div class="row toggle" id="dropdown-detail-1" data-toggle="list-mon-an-${dm.danhMucId }">
                                     <div class="col-xs-10">
-                                        <strong>Đồ xào</strong>
+                                        <strong>${dm.ten }</strong>
                                     </div>
                                     <div class="col-xs-2"><i class="fa fa-chevron-down pull-right"></i></div>
                                 </div>
-                                <div id="list-mon-an-1" class="collapse">
+                                <div id="list-mon-an-${dm.danhMucId }" class="collapse" >
                                     <hr>
                                     <div class="container">
-                                        <ul class="list-group ul-search-mon-an">
-                                            <li class="list-group-item col-lg-8">Gà xào nguyên con</li>
-                                            <li class="list-group-item col-lg-8">Vịt xào nguyên con</li>
-                                            <li class="list-group-item col-lg-8">Heo xào nguyên con</li>
-                                            <li class="list-group-item col-lg-8">Bò xào nguyên con</li>
+                                        <ul class="list-group ul-search-mon-an danh-muc-item" id="list-mon-${dm.danhMucId }" data-iddm="${dm.danhMucId }">
+                                        <c:forEach items="${dsCnMon }" var="cnm">
+                                        	<c:if test="${cnm.pk.mon.danhmuc.danhMucId == dm.danhMucId }">
+                                        		<li  class="list-group-item col-lg-8 mon-item" data-id="${cnm.mon.monId }" data-price="${cnm.gia }">${cnm.mon.ten }</li>
+                                        	</c:if>
+                                        </c:forEach>
                                         </ul>
                                     </div>
                                 </div>
                             </li>
-                            <li class="list-group-item">
-                                <div class="row toggle" id="dropdown-detail-2" data-toggle="list-mon-an-2">
-                                    <div class="col-xs-10">
-                                        <strong>Đồ chiên</strong>
-                                    </div>
-                                    <div class="col-xs-2"><i class="fa fa-chevron-down pull-right"></i></div>
-                                </div>
-                                <div id="list-mon-an-2" class="collapse">
-                                    <hr>
-                                    <div class="container">
-                                        <ul class="list-group ul-search-mon-an">
-                                            <li class="list-group-item col-lg-8">Gà chiên nguyên con</li>
-                                            <li class="list-group-item col-lg-8">Vịt chiên nguyên con</li>
-                                            <li class="list-group-item col-lg-8">Heo chiên nguyên con</li>
-                                            <li class="list-group-item col-lg-8">Bò chiên nguyên con</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="row toggle" id="dropdown-detail-3" data-toggle="list-mon-an-3">
-                                    <div class="col-xs-10">
-                                        <strong>Đồ nướng</strong>
-                                    </div>
-                                    <div class="col-xs-2"><i class="fa fa-chevron-down pull-right"></i></div>
-                                </div>
-                                <div id="list-mon-an-3" class="collapse">
-                                    <hr>
-                                    <div class="container">
-                                        <ul class="list-group ul-search-mon-an">
-                                            <li class="list-group-item col-lg-8">Gà nướng nguyên con</li>
-                                            <li class="list-group-item col-lg-8">Vịt nướng nguyên con</li>
-                                            <li class="list-group-item col-lg-8">Heo nướng nguyên con</li>
-                                            <li class="list-group-item col-lg-8">Bò nướng nguyên con</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </li>
+                        	</c:forEach>
                         </ul>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Thêm món ăn đã chọn</button>
+                        <button type="button" class="btn btn-success" id="btn-mang-ve-them-mon-da-chon">Thêm món ăn đã chọn</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
                     </div>
                 </div>

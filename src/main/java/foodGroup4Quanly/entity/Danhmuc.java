@@ -1,5 +1,8 @@
 package foodGroup4Quanly.entity;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Set;
 
 @Entity
@@ -61,6 +64,7 @@ public class Danhmuc {
         return result;
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "danhmuc", fetch = FetchType.EAGER)
     public Set<Mon> getMons() {
         return mons;

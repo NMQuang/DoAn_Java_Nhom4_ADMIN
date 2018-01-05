@@ -1,4 +1,4 @@
-package foodGroup4Quanly.controller.chinhanh.api;
+package foodGroup4Quanly.controller.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +12,7 @@ import foodGroup4Quanly.entity.Khachhang;
 import foodGroup4Quanly.service.KhachHangService;
 
 @RestController
-@RequestMapping("/chinhanh/api/khachhang")
+@RequestMapping("/api/khachhang")
 public class KhachHangApi {
 
 	@Autowired

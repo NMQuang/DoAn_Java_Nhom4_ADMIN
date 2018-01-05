@@ -21,7 +21,7 @@ public class MutualController {
 			case "QUANLY":
 				return "redirect:/quanly";
 			case "TONGDAI":
-				return "redirect:/tongdai";
+				return "redirect:/tongdai/tao-don-hang-dien-thoai";
 			case "CHINHANH":
 				return "redirect:/chinhanh/taodonhang/taiquan";
 			}

@@ -137,7 +137,6 @@ public class Mon {
     public void setChitiethoadons(Set<Chitiethoadon> chitiethoadons) {
         this.chitiethoadons = chitiethoadons;
     }
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "DanhMuc", referencedColumnName = "DanhMucID", nullable = false)
     public Danhmuc getDanhmuc() {

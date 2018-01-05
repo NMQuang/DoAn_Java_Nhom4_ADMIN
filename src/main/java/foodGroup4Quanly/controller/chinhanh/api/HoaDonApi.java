@@ -123,7 +123,7 @@ public class HoaDonApi {
 	}
 	
 	@RequestMapping(value = "/createBillGetAway", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity createBillGetAway(@RequestBody DonHangDemVe donHangDemVe, @ModelAttribute("chinhanh") Chinhanh chinhanh, @ModelAttribute("nhanvien") Nhanvien nhanvien){
+	public ResponseEntity createBillGetAway(@RequestBody DonHangDemVe donHangDemVe, @ModelAttribute("chinhanh") Chinhanh chinhanh){
 		List<ChiTietHoaDonCustom> dsChiTiet = donHangDemVe.getListChiTiet();
 		System.out.println(dsChiTiet.size());
 		Hoadon hd = new Hoadon();
@@ -148,7 +148,6 @@ public class HoaDonApi {
 		hd.setNgay(new Timestamp(new Date().getTime()));
 		hd.setHinhThucThanhToan(HinhThucThanhToan.TIEN_MAT_KHI_NHAN_HANG);
 		hd.setTinhTrangGiaoHang(TinhTrangGiaoHang.DANG_CHE_BIEN);
-		hd.setNhanvien(nhanvien);
 		hd.setHoTenNguoiNhan(donHangDemVe.getTen_nguoi_nhan());
 		hoadonService.create(hd);
 		return new ResponseEntity(HttpStatus.OK);

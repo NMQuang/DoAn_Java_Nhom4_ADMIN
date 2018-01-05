@@ -839,6 +839,26 @@ $(function () {
     $('#chon-nam-luong-nv').datepicker('update', yearUse);
 });
 
+///////////////////////////////////////////
+// CHON THANG THEM NHAN VIEN
+$(function () {
+    $('#chon-thang-them-luong-nv').datepicker({
+        format: 'mm-yyyy',
+        minViewMode: 1,
+        endDate: new Date(),
+        "autoclose": true
+    });
+    var yearUse;
+    if($('#dateChonThangThemLuong').val() != "") {
+        yearUse = $('#dateChonThangThemLuong').val();
+    } else {
+        var currentDate = new Date();
+        yearUse = currentDate.getFullYear().toString(10);
+    }
+    $('#chon-thang-them-luong-nv').datepicker('update', yearUse);
+});
+
+
 
 
 

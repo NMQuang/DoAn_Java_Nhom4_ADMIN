@@ -207,6 +207,11 @@
         <put-attribute name="title" value="Lương nhân viên" />
         <put-attribute name="content" value="/views/pages/chinhanh/luong-nhan-vien.jsp" />
     </definition>
+
+    <definition name="chinhanh-them-luong-nhan-vien" extends="chinhanh-definition">
+        <put-attribute name="title" value="Thêm lương nhân viên" />
+        <put-attribute name="content" value="/views/pages/chinhanh/them-luong-nhan-vien.jsp" />
+    </definition>
     
     <definition name="chinhanh-thanh-toan-don-hang" extends="chinhanh-definition">
         <put-attribute name="title" value="Thanh toán đơn hàng" />

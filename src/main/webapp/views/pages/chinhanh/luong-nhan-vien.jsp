@@ -34,7 +34,7 @@
                             </div>
                         </div>
                         <div class="col-md-2">
-                            <a href="<c:url value="/chinhanh/chiphi/thang/create"/>" class="btn btn-primary fix pull-right">Thêm lương nhân viên</a>
+                            <a href="<c:url value="/chinhanh/chiphi/luongnhanvien/create"/>" class="btn btn-primary fix pull-right">Thêm lương nhân viên</a>
                         </div>
                     </div>
                 </div>

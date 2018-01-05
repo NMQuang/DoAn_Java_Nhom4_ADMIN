@@ -157,7 +157,7 @@ public class Chinhanh {
         this.hoadons = hoadons;
     }
 
-    @OneToMany(mappedBy = "chinhanh")
+    @OneToMany(mappedBy = "chinhanh", fetch = FetchType.EAGER)
     public Set<Nhanvien> getNhanviens() {
         return nhanviens;
     }

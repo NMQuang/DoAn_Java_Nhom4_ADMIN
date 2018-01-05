@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import foodGroup4Quanly.dto.TongLuongNhanVienTheoThangDto;
+import foodGroup4Quanly.entity.LuongchonhanvienPK;
 import org.hibernate.Query;
 import org.springframework.stereotype.Component;
 
@@ -57,5 +58,23 @@ public class LuongChoNhanVienDaoImp extends HibernateUtil implements LuongChoNha
 
 		return query.list();
 	}
+
+	@Override
+	public boolean hasLuongNhanVien(int nhanVien, String thang, String nam) {
+		//language=HQL
+		String hql = "from Luongchonhanvien where (nhanVien=:nhanVien and thang=:thang and nam=:nam)";
+		Query query = this.getSession().createQuery(hql)
+				.setParameter("nhanVien", nhanVien)
+				.setParameter("thang", thang)
+				.setParameter("nam", nam);
+
+		return query.list().size() > 0;
+	}
+
+	@Override
+	public void create(Luongchonhanvien luongNv) {
+		super.create(luongNv);
+	}
+
 
 }

@@ -1,12 +1,11 @@
 package foodGroup4Quanly.controller.chinhanh;
 
 import foodGroup4Quanly.common.ChiPhiNgayValidator;
+import foodGroup4Quanly.common.DanhSachLuongValidator;
 import foodGroup4Quanly.common.TienThueNhaValidator;
 import foodGroup4Quanly.common.Utils;
 import foodGroup4Quanly.dao.TienThueNhaDao;
-import foodGroup4Quanly.dto.ChiPhiNgayDto;
-import foodGroup4Quanly.dto.TienThueNhaDto;
-import foodGroup4Quanly.dto.TongLuongNhanVienTheoThangDto;
+import foodGroup4Quanly.dto.*;
 import foodGroup4Quanly.entity.Chiphingay;
 import foodGroup4Quanly.entity.Tienthuenha;
 import foodGroup4Quanly.entity.TienthuenhaPK;
@@ -42,6 +41,9 @@ public class ChiNhanhChiPhiController {
 
     @Autowired
     LuongNhanVienService luongNhanVienService;
+
+    @Autowired
+    DanhSachLuongValidator danhSachLuongValidator;
 
     @Autowired
     TienThueNhaValidator tienThueNhaValidator;
@@ -191,6 +193,34 @@ public class ChiNhanhChiPhiController {
                 luongNhanVienService.getTongLuongTheoThang(strYear, Utils.getChinhanhHienTai().getChiNhanhId());
         model.addAttribute("listTongLuongTheoThang", listTongLuongTheoThang);
         return "chinhanh-luong-nhan-vien";
+    }
+
+    @RequestMapping(value = "/luongnhanvien/create", method = RequestMethod.GET)
+    public String getThemLuongNhanVien(Model model) {
+        DanhSachLuongNhanVienDto danhSachLuongNhanVien
+                = new DanhSachLuongNhanVienDto(Utils.getChinhanhHienTai().getNhanviens());
+        model.addAttribute("danhSachLuongNv", danhSachLuongNhanVien);
+
+        return "chinhanh-them-luong-nhan-vien";
+    }
+
+    @RequestMapping(value = "/luongnhanvien/create", method = RequestMethod.POST)
+    public String postThemLuongNhanVien(Model model,
+                                        @ModelAttribute(value = "danhSachLuongNv")
+                                                DanhSachLuongNhanVienDto danhSachLuongNhanVien,
+                                        BindingResult bindingResult) {
+        danhSachLuongValidator.validate(danhSachLuongNhanVien, bindingResult);
+        System.out.println(danhSachLuongNhanVien.getThoiGian());
+        if(bindingResult.hasErrors()) {
+            return "chinhanh-them-luong-nhan-vien";
+        }
+
+        luongNhanVienService.saveDsLuongNhanVien(danhSachLuongNhanVien);
+
+        DanhSachLuongNhanVienDto danhSachLuongNhanVienNew
+                = new DanhSachLuongNhanVienDto(Utils.getChinhanhHienTai().getNhanviens());
+        model.addAttribute("danhSachLuongNv", danhSachLuongNhanVienNew);
+        return "chinhanh-them-luong-nhan-vien";
     }
 
     private Calendar convertStringToDate(String strDate, String formatDate) {

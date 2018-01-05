@@ -11,5 +11,8 @@ public interface HoadonService {
 	void delete(Hoadon hoadon);
 	void update(Hoadon hoadon);
 	Hoadon getBillById(int id);
-	public List<Hoadon> notConfirm();
+	List<Hoadon> notConfirm();
+	
+	int getCount(String loaihoadon);
+	List<Hoadon> getlist(String loaihoadon, int begin, int maxresult);
 }

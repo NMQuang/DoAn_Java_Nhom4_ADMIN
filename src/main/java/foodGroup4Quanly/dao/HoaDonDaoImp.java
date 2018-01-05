@@ -128,6 +128,28 @@ public class HoaDonDaoImp extends HibernateUtil implements HoaDonDao{
 	}
 
 
+	@Override
+	public int getCount(String loaihoadon) {
+		String hql = "select count(*) from Hoadon where hinhThucMua = :loai and tinhTrangGiaoHang != :tinhtrang";
+		Query query = getSession().createQuery(hql);
+		query.setParameter("loai", loaihoadon);
+		query.setParameter("tinhtrang", TinhTrangGiaoHang.DANG_XU_LY);
+		int count = ((Long) query.uniqueResult()).intValue();
+		return count;
+	}
+
+
+	@Override
+	public List<Hoadon> getlist(String loaihoadon, int begin, int maxresult) {
+		String hql = "from Hoadon where hinhThucMua = :loai and tinhTrangGiaoHang != :tinhtrang order by hoaDonId desc";
+		Query query = getSession().createQuery(hql);
+		query.setParameter("loai", loaihoadon);
+		query.setParameter("tinhtrang", TinhTrangGiaoHang.DANG_XU_LY);
+		query.setFirstResult(begin).setMaxResults(maxresult);
+		return query.list();
+	}
+
+
 	
 
 	

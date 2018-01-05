@@ -48,6 +48,18 @@ public class HoadonServiceImp implements HoadonService {
 		return hoadonDAO.notConfirm();
 	}
 
+	@Override
+	public int getCount(String loaihoadon) {
+		// TODO Auto-generated method stub
+		return hoadonDAO.getCount(loaihoadon);
+	}
+
+	@Override
+	public List<Hoadon> getlist(String loaihoadon, int begin, int maxresult) {
+		// TODO Auto-generated method stub
+		return hoadonDAO.getlist(loaihoadon, begin, maxresult);
+	}
+
 
 
 

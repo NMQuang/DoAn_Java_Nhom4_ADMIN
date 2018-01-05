@@ -21,4 +21,7 @@ public interface HoaDonDao {
 	Hoadon getTheLastBillByTableStillCooking(int idBan);
 	
 	List<Hoadon> notConfirm();
+	
+	int getCount(String loaihoadon);
+	List<Hoadon> getlist(String loaihoadon, int begin, int maxresult);
 }

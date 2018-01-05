@@ -58,10 +58,10 @@
                             <td class="text-center"><fmt:formatDate value="${tongLuongTheoThang.ngayChi}" pattern="dd/MM/yyyy" /></td>
                             <td class="text-center">${tongLuongTheoThang.tongTien} VNĐ </td>
                             <td>
-                                <a class="btn btn-warning">Sửa</a>
+                                <a href="<c:url value="/chinhanh/chiphi/luongnhanvien/update?month=${tongLuongTheoThang.thang}&year=${tongLuongTheoThang.nam}"/>" class="btn btn-warning">Sửa</a>
                             </td>
                             <td>
-                                <a class="btn btn-danger">Xóa</a>
+                                <%--<a class="btn btn-danger">Xóa</a>--%>
                             </td>
                         </tr>
                         </c:forEach>

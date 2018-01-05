@@ -3,7 +3,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 
 <!-- Dung cho jquery -->
-<c:out value="${tienThueNha.thoiGian}"/>
 <input type="hidden" id="dateChosenThemCpThang" value="${tienThueNha.thoiGian}"/>
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">

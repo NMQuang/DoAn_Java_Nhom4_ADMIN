@@ -47,5 +47,24 @@ public class LuongNhanVienServiceImp implements LuongNhanVienService {
         }
     }
 
+    @Override
+    public List<Luongchonhanvien> getListLuong(String month, String year, int chiNhanhId) {
+        return luongChoNhanVienDao.getLuongNhanVien(month, year, chiNhanhId);
+    }
+
+    @Override
+    public void updateDsLuongNhanVien(DanhSachLuongNhanVienDto danhSachLuongNhanVien) {
+        String thang = danhSachLuongNhanVien.getThang();
+        String nam = danhSachLuongNhanVien.getNam();
+        for(LuongNhanVienDto luongNvDto: danhSachLuongNhanVien.getListLuongNhanVien()) {
+            Luongchonhanvien luongNv = luongChoNhanVienDao.findById(luongNvDto.getId(), thang, nam);
+
+            luongNv.setMoTa(luongNvDto.getMota());
+            luongNv.setTien(luongNvDto.getLuong());
+
+            luongChoNhanVienDao.update(luongNv);
+        }
+    }
+
 
 }

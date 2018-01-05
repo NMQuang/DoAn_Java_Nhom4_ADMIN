@@ -11,24 +11,30 @@
             <li><a href="#">
                 <em class="fa fa-home"></em>
             </a></li>
-            <li><a href="<c:url value="/chinhanh/chiphi/luongnhanvien"/>">Xem thông tin nhập lương nhân viên</a></li>
+            <li><a href="<c:url value="/chinhanh/chiphi/luongnhanvien"/>">Xem thông tin lương nhân viên</a></li>
             <li>Tạo danh sách lương nhân viên</li>
         </ol>
     </div><!--/.row-->
 
     <div class="row">
         <div class="col-md-12">
-            <form:form action="/chinhanh/chiphi/luongnhanvien/create" method="post" modelAttribute="danhSachLuongNv">
+            <c:set var="action" value="${type == 'update' ? '/chinhanh/chiphi/luongnhanvien/update' : '/chinhanh/chiphi/luongnhanvien/create'}"/>
+            <form:form action="${action}" method="post" modelAttribute="danhSachLuongNv">
             <div class="form-horizontal">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Tạo danh sách lương nhân viên
+                        <c:if test="${type == 'update'}">
+                            Cập nhật lương nhân viên
+                        </c:if>
+                        <c:if test="${type != 'update'}">
+                            Tạo danh sách lương nhân viên
+                        </c:if>
                     </div>
                     <div class="panel-body">
                         <div class="form-group row">
                             <label class="control-label col-md-2">Chọn tháng</label>
                             <div class="col-md-4">
-                                <div class="input-group date" id="chon-thang-them-luong-nv" style="width:160px">
+                                <div class="input-group date ${type == 'update' ? 'disabledbutton' : ''}" id="chon-thang-them-luong-nv" style="width:160px">
                                     <form:input path="thoiGian" type="text" class="form-control" style="border: 1px solid #cccccc;"/>
                                     <div class="input-group-addon">
                                         <span class="fa fa-calendar"></span>
@@ -37,6 +43,10 @@
                                 <form:errors path="thoiGian" cssClass="my_error"/>
                             </div>
                         </div>
+                        <c:if test="${type == 'update'}">
+                        <form:hidden path="thang"/>
+                        <form:hidden path="nam"/>
+                        </c:if>
                         <table class="table table-striped custab table-don-hang">
                             <thead>
                             <tr>
@@ -71,7 +81,12 @@
                         </table>
                 </div>
             </div>
-            <button class="btn btn-success btn-lg center-block" type="submit">Tạo danh sách lương mới</button>
+                <c:if test="${type == 'update'}">
+                    <button class="btn btn-warning btn-lg center-block" type="submit">Cập nhật</button>
+                </c:if>
+                <c:if test="${type != 'update'}">
+                    <button class="btn btn-primary btn-lg center-block" type="submit">Tạo danh sách lương mới</button>
+                </c:if>
             <hr>
         </div>
             </form:form>

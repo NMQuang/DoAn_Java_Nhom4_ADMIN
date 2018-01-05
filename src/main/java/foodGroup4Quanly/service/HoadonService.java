@@ -18,7 +18,6 @@ public interface HoadonService {
 	int countTongDai();
 	int countMangVe();
 	int countTaiQuan();
-	public List<Hoadon> notConfirm();
 	List<Hoadon> notConfirm();
 	
 	int getCount(String loaihoadon);

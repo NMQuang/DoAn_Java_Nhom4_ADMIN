@@ -29,21 +29,24 @@ public class DanhSachLuongValidator implements Validator {
         try {
             DanhSachLuongNhanVienDto dsLuongNhanVien =
                     (DanhSachLuongNhanVienDto) o;
-            Date date = Utils.parseDate(dsLuongNhanVien.getThoiGian(), "MM-yyyy");
-            if (date == null) {
-                errors.rejectValue("thoiGian", "luongnhanvien.thoiGian.invalid");
-            } else {
-                Calendar cal = Utils.convertDateToCalendar(date);
-                String strMonth = String.format("%02d", cal.get(Calendar.MONTH) + 1);
-                String strYear = String.format("%04d", cal.get(Calendar.YEAR));
 
-                Nhanvien nvBk = null;
-                if(Utils.getChinhanhHienTai().getNhanviens() != null) {
-                    nvBk = Utils.getChinhanhHienTai().getNhanviens().iterator().next();
-                }
-                if(nvBk != null) {
-                    if (luongNhanVienService.hasLuongNhanVien(nvBk.getNhanVienId(), strMonth, strYear)) {
-                        errors.rejectValue("thoiGian", "luongnhanvien.thoiGian.dumplicate");
+            if(!dsLuongNhanVien.getUpdate()) {
+                Date date = Utils.parseDate(dsLuongNhanVien.getThoiGian(), "MM-yyyy");
+                if (date == null) {
+                    errors.rejectValue("thoiGian", "luongnhanvien.thoiGian.invalid");
+                } else {
+                    Calendar cal = Utils.convertDateToCalendar(date);
+                    String strMonth = String.format("%02d", cal.get(Calendar.MONTH) + 1);
+                    String strYear = String.format("%04d", cal.get(Calendar.YEAR));
+
+                    Nhanvien nvBk = null;
+                    if (Utils.getChinhanhHienTai().getNhanviens() != null) {
+                        nvBk = Utils.getChinhanhHienTai().getNhanviens().iterator().next();
+                    }
+                    if (nvBk != null) {
+                        if (luongNhanVienService.hasLuongNhanVien(nvBk.getNhanVienId(), strMonth, strYear)) {
+                            errors.rejectValue("thoiGian", "luongnhanvien.thoiGian.dumplicate");
+                        }
                     }
                 }
             }

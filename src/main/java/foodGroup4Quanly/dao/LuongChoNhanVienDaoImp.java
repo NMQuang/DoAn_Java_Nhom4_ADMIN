@@ -76,5 +76,27 @@ public class LuongChoNhanVienDaoImp extends HibernateUtil implements LuongChoNha
 		super.create(luongNv);
 	}
 
+	@Override
+	public List<Luongchonhanvien> getLuongNhanVien(String month, String year, int chiNhanhId) {
+		//language=HQL
+		String hql = "from Luongchonhanvien where thang=:month and nam=:year and nhanvien.chinhanh.id=:chiNhanhId";
+		Query query = getSession().createQuery(hql)
+				.setParameter("month", month)
+				.setParameter("year", year)
+				.setParameter("chiNhanhId", chiNhanhId);
+
+		return query.list();
+	}
+
+	@Override
+	public Luongchonhanvien findById(int idNhanVien, String thang, String nam) {
+		return super.fetchById(new LuongchonhanvienPK(idNhanVien, thang, nam), Luongchonhanvien.class);
+	}
+
+	@Override
+	public void update(Luongchonhanvien luongNv) {
+		super.update(luongNv);
+	}
+
 
 }

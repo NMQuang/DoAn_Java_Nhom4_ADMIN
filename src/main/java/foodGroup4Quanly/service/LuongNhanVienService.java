@@ -15,4 +15,9 @@ public interface LuongNhanVienService {
     boolean hasLuongNhanVien(int nhanVien, String thang, String nam);
 
     void saveDsLuongNhanVien(DanhSachLuongNhanVienDto danhSachLuongNhanVien);
+
+    List<Luongchonhanvien> getListLuong(String month, String year, int chiNhanhId);
+
+    void updateDsLuongNhanVien(DanhSachLuongNhanVienDto danhSachLuongNhanVien);
+
 }

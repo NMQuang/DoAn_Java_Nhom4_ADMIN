@@ -1,5 +1,6 @@
 package foodGroup4Quanly.dto;
 
+import foodGroup4Quanly.entity.Luongchonhanvien;
 import foodGroup4Quanly.entity.Nhanvien;
 
 import java.util.ArrayList;
@@ -9,13 +10,18 @@ import java.util.Set;
 public class DanhSachLuongNhanVienDto {
     private String thoiGian;
     private List<LuongNhanVienDto> listLuongNhanVien = new ArrayList<>();
+    private boolean isUpdate = false;
 
     public DanhSachLuongNhanVienDto() {
 
     }
 
-    public DanhSachLuongNhanVienDto(Set<Nhanvien> listNhanVien) {
-        tranferDataFromDb(listNhanVien);
+    public DanhSachLuongNhanVienDto(Set<Nhanvien> setNhanVien) {
+        tranferDataFromDb(setNhanVien);
+    }
+
+    public DanhSachLuongNhanVienDto(List<Luongchonhanvien> listLuongNv) {
+        tranferDataFromDb(listLuongNv);
     }
 
     private void tranferDataFromDb(Set<Nhanvien> listNhanVien) {
@@ -26,6 +32,20 @@ public class DanhSachLuongNhanVienDto {
             luongNv.setLuong(nv.getLuong());
             listLuongNhanVien.add(luongNv);
         }
+    }
+
+    private void tranferDataFromDb(List<Luongchonhanvien> listLuongNv) {
+        for(Luongchonhanvien luongNv: listLuongNv) {
+            LuongNhanVienDto luongNvDto = new LuongNhanVienDto();
+
+            luongNvDto.setId(luongNv.getNhanvien().getNhanVienId());
+            luongNvDto.setTen(luongNv.getNhanvien().getTen());
+            luongNvDto.setLuong(luongNv.getTien());
+            luongNvDto.setMota(luongNv.getMoTa());
+
+            listLuongNhanVien.add(luongNvDto);
+        }
+        this.thoiGian = listLuongNv.get(0).getThang() + "-" + listLuongNv.get(0).getNam();
     }
 
     public String getThang() {
@@ -50,5 +70,13 @@ public class DanhSachLuongNhanVienDto {
 
     public void setListLuongNhanVien(List<LuongNhanVienDto> listLuongNhanVien) {
         this.listLuongNhanVien = listLuongNhanVien;
+    }
+
+    public boolean getUpdate() {
+        return isUpdate;
+    }
+
+    public void setUpdate(boolean update) {
+        isUpdate = update;
     }
 }

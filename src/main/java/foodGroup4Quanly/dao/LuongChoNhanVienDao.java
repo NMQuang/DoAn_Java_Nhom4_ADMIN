@@ -19,4 +19,9 @@ public interface LuongChoNhanVienDao {
 
     void create(Luongchonhanvien luongNv);
 
+    List<Luongchonhanvien> getLuongNhanVien(String month, String year, int chiNhanhId);
+
+    Luongchonhanvien findById(int id, String thang, String nam);
+
+	void update(Luongchonhanvien luongNv);
 }

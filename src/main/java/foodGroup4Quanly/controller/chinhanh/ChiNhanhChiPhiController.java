@@ -7,6 +7,7 @@ import foodGroup4Quanly.common.Utils;
 import foodGroup4Quanly.dao.TienThueNhaDao;
 import foodGroup4Quanly.dto.*;
 import foodGroup4Quanly.entity.Chiphingay;
+import foodGroup4Quanly.entity.Luongchonhanvien;
 import foodGroup4Quanly.entity.Tienthuenha;
 import foodGroup4Quanly.entity.TienthuenhaPK;
 import foodGroup4Quanly.service.ChiPhiNgayService;
@@ -221,6 +222,40 @@ public class ChiNhanhChiPhiController {
                 = new DanhSachLuongNhanVienDto(Utils.getChinhanhHienTai().getNhanviens());
         model.addAttribute("danhSachLuongNv", danhSachLuongNhanVienNew);
         return "chinhanh-them-luong-nhan-vien";
+    }
+
+    @RequestMapping(value = "/luongnhanvien/update", method = RequestMethod.GET)
+    public String getUpdateLuongNhanVien(Model model,
+                                       @RequestParam("month") String month,
+                                       @RequestParam("year") String year) {
+        List<Luongchonhanvien> listLuongNv =
+                luongNhanVienService.getListLuong(month, year, Utils.getChinhanhHienTai().getChiNhanhId());
+
+        DanhSachLuongNhanVienDto danhSachLuongNhanVien
+                = new DanhSachLuongNhanVienDto(listLuongNv);
+        model.addAttribute("danhSachLuongNv", danhSachLuongNhanVien);
+        model.addAttribute("type", "update");
+
+        return "chinhanh-them-luong-nhan-vien";
+    }
+
+    @RequestMapping(value = "/luongnhanvien/update", method = RequestMethod.POST)
+    public String postUpdateLuongNhanVien(Model model,
+                                          @ModelAttribute(value = "danhSachLuongNv")
+                                                  DanhSachLuongNhanVienDto danhSachLuongNhanVien,
+                                          @RequestParam("thang") String thang,
+                                          @RequestParam("nam") String nam,
+                                          BindingResult bindingResult) {
+        danhSachLuongNhanVien.setUpdate(true);
+        danhSachLuongValidator.validate(danhSachLuongNhanVien, bindingResult);
+        if(bindingResult.hasErrors()) {
+            model.addAttribute("type", "update");
+            return "chinhanh-them-luong-nhan-vien";
+        }
+
+        luongNhanVienService.updateDsLuongNhanVien(danhSachLuongNhanVien);
+
+        return "redirect:/chinhanh/chiphi/luongnhanvien/update?month="+thang+"&year="+nam;
     }
 
     private Calendar convertStringToDate(String strDate, String formatDate) {

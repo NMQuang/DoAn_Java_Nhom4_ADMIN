@@ -20,7 +20,7 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-md-4">
-                            Lương nhân viên năm 2018
+                            Danh sách lương nhân viên
                         </div>
                         <div class="col-md-5 col-md-offset-1">
                             <div class="form-group form-inline">

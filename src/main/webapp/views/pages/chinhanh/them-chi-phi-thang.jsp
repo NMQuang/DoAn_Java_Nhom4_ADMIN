@@ -66,7 +66,7 @@
                     <button class="btn btn-warning btn-lg center-block" type="submit">Cập nhật</button>
                 </c:if>
                 <c:if test="${type != 'update'}">
-                    <button class="btn btn-success btn-lg center-block" type="submit">Tạo chi phí mới</button>
+                    <button class="btn btn-primary btn-lg center-block" type="submit">Tạo chi phí mới</button>
                 </c:if>
                 <hr>
             </form:form>

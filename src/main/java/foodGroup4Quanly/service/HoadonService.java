@@ -19,4 +19,8 @@ public interface HoadonService {
 	int countMangVe();
 	int countTaiQuan();
 	public List<Hoadon> notConfirm();
+	List<Hoadon> notConfirm();
+	
+	int getCount(String loaihoadon);
+	List<Hoadon> getlist(String loaihoadon, int begin, int maxresult);
 }

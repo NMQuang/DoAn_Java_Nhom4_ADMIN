@@ -27,4 +27,7 @@ public interface HoaDonDao {
 	int countMangVe();
 	
 	List<Hoadon> notConfirm();
+	
+	int getCount(String loaihoadon);
+	List<Hoadon> getlist(String loaihoadon, int begin, int maxresult);
 }

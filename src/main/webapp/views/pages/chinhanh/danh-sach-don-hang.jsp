@@ -1,4 +1,5 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
@@ -16,10 +17,10 @@
                 <div class="panel-heading">
                     <div class="col-md-6">
                         Danh sách
-                        <select id="select-danh-sach-don-hang">
-                            <option value="option-don-hang-online">đơn hàng từ tổng đài và đặt online</option>
-                            <option value="option-don-hang-tai-quan">đơn hàng tại quán</option>
-                            <option value="option-don-hang-mang-ve">đơn hàng mang về</option>
+                        <select id="type_mon"  name="type">
+                            <option ${type.equals('tong_dai') ? 'selected' : ''} value="tong_dai">đơn hàng từ tổng đài và đặt online</option>
+                            <option ${type.equals('tai_cho') ? 'selected' : ''} value="tai_cho">đơn hàng tại quán</option>
+                            <option ${type.equals('mang_ve') ? 'selected' : ''} value="mang_ve">đơn hàng mang về</option>
                         </select>
                     </div>
                     <div class="input-group col-md-4 pull-right">
@@ -38,198 +39,46 @@
                             <thead>
                             <tr>
                                 <th width="5%" class="text-center red-text-table">ID</th>
-                                <th width="15%" class="text-center">ID khách hàng</th>
-                                <th>Tên khách hàng</th>
+                                <th width="15%" class="text-center">Tên khách hàng</th>
+                                <th>SĐT khách hàng</th>
                                 <th width="10%" class="text-center">Tổng tiền</th>
                                 <th width="15%" class="text-center">Tình trạng</th>
                                 <th width="5%"></th>
                             </tr>
                             </thead>
                             <tbody>
+                            <c:forEach items="${hoadon }" var="item">
                             <tr>
-                                <td class="text-center red-text-table">1</td>
-                                <td class="text-center">Đồ rán</td>
-                                <td>Gà rán nguyên con</td>
-                                <td><input class="expanded-input"></td>
-                                <td></td>
+                                <td class="text-center red-text-table">${item.hoaDonId }</td>
+                                <td class="text-center">${item.khachhang.ten }</td>
+                                <td>${item.khachhang.sdt }</td>
+                                <td>${item.tongTien}</td>
+                                <c:choose>
+								    <c:when test="${item.tinhTrangThanhToan =='0'}">
+								      <td>Chưa thanh toán</td>
+								    </c:when>
+								    <c:otherwise>
+								      <td>Thanh toán</td>
+								    </c:otherwise>
+								</c:choose>
                                 <td width="5%">
                                     <a href="chi-tiet-don-hang.html" class="btn btn-info">Xem</a>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center red-text-table">2</td>
-                                <td class="text-center">Đồ chiên</td>
-                                <td>Vịt chiên nguyên con</td>
-                                <td><input class="expanded-input"></td>
-                                <td></td>
                                 <td width="5%">
-                                    <a href="chi-tiet-don-hang.html" class="btn btn-info">Xem</a>
-                                </td>
+				                <c:choose>
+				                	<c:when test="${type == 'tai_cho'}">
+									     <a href="${pageContext.request.contextPath}/chinhanh/thanhtoandonhang/${item.hoaDonId}" class="btn btn-success">Thanh toán</a>
+									</c:when>
+
+				                </c:choose>
+				                </td>
                             </tr>
-                            <tr>
-                                <td class="text-center red-text-table">1</td>
-                                <td class="text-center">Đồ rán</td>
-                                <td>Gà rán nguyên con</td>
-                                <td><input class="expanded-input"></td>
-                                <td></td>
-                                <td width="5%">
-                                    <a href="chi-tiet-don-hang.html" class="btn btn-info">Xem</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center red-text-table">3</td>
-                                <td class="text-center">Đồ nướng</td>
-                                <td>Heo nướng nguyên con</td>
-                                <td><input class="expanded-input"></td>
-                                <td></td>
-                                <td width="5%">
-                                    <a href="chi-tiet-don-hang.html" class="btn btn-info">Xem</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center red-text-table">1</td>
-                                <td class="text-center">Đồ rán</td>
-                                <td>Gà rán nguyên con</td>
-                                <td><input class="expanded-input"></td>
-                                <td></td>
-                                <td width="5%">
-                                    <a href="chi-tiet-don-hang.html" class="btn btn-info">Xem</a>
-                                </td>
-                            </tr>
+							</c:forEach>
                             </tbody>
                         </table>
-                    </div>
-                    <div class="select-danh-sach-don-hang" id="option-don-hang-tai-quan">
-                        <table class="table table-striped custab table-don-hang">
-                            <thead>
-                            <tr>
-                                <th width="5%" class="text-center red-text-table">ID</th>
-                                <th width="15%" class="text-center">ID khách hàng</th>
-                                <th>Tên khách hàng</th>
-                                <th width="10%" class="text-center">Tổng tiền</th>
-                                <th width="15%" class="text-center">Tình trạng</th>
-                                <th width="5%"></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td class="text-center red-text-table">1</td>
-                                <td class="text-center">Đồ rán</td>
-                                <td>Gà rán nguyên con</td>
-                                <td><input class="expanded-input"></td>
-                                <td></td>
-                                <td width="5%">
-                                    <a href="chi-tiet-don-hang.html" class="btn btn-info">Xem</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center red-text-table">2</td>
-                                <td class="text-center">Đồ chiên</td>
-                                <td>Vịt chiên nguyên con</td>
-                                <td><input class="expanded-input"></td>
-                                <td></td>
-                                <td width="5%">
-                                    <a href="chi-tiet-don-hang.html" class="btn btn-info">Xem</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center red-text-table">1</td>
-                                <td class="text-center">Đồ rán</td>
-                                <td>Gà rán nguyên con</td>
-                                <td><input class="expanded-input"></td>
-                                <td></td>
-                                <td width="5%">
-                                    <a href="chi-tiet-don-hang.html" class="btn btn-info">Xem</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center red-text-table">3</td>
-                                <td class="text-center">Đồ nướng</td>
-                                <td>Heo nướng nguyên con</td>
-                                <td><input class="expanded-input"></td>
-                                <td></td>
-                                <td width="5%">
-                                    <a href="chi-tiet-don-hang.html" class="btn btn-info">Xem</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center red-text-table">1</td>
-                                <td class="text-center">Đồ rán</td>
-                                <td>Gà rán nguyên con</td>
-                                <td><input class="expanded-input"></td>
-                                <td></td>
-                                <td width="5%">
-                                    <a href="chi-tiet-don-hang.html" class="btn btn-info">Xem</a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="select-danh-sach-don-hang" id="option-don-hang-mang-ve">
-                        <table class="table table-striped custab table-don-hang">
-                            <thead>
-                            <tr>
-                                <th width="5%" class="text-center red-text-table">ID</th>
-                                <th width="15%" class="text-center">ID khách hàng</th>
-                                <th>Tên khách hàng</th>
-                                <th width="10%" class="text-center">Tổng tiền</th>
-                                <th width="15%" class="text-center">Tình trạng</th>
-                                <th width="5%"></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td class="text-center red-text-table">1</td>
-                                <td class="text-center">Đồ rán</td>
-                                <td>Gà rán nguyên con</td>
-                                <td><input class="expanded-input"></td>
-                                <td></td>
-                                <td width="5%">
-                                    <a href="chi-tiet-don-hang.html" class="btn btn-info">Xem</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center red-text-table">2</td>
-                                <td class="text-center">Đồ chiên</td>
-                                <td>Vịt chiên nguyên con</td>
-                                <td><input class="expanded-input"></td>
-                                <td></td>
-                                <td width="5%">
-                                    <a href="chi-tiet-don-hang.html" class="btn btn-info">Xem</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center red-text-table">1</td>
-                                <td class="text-center">Đồ rán</td>
-                                <td>Gà rán nguyên con</td>
-                                <td><input class="expanded-input"></td>
-                                <td></td>
-                                <td width="5%">
-                                    <a href="chi-tiet-don-hang.html" class="btn btn-info">Xem</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center red-text-table">3</td>
-                                <td class="text-center">Đồ nướng</td>
-                                <td>Heo nướng nguyên con</td>
-                                <td><input class="expanded-input"></td>
-                                <td></td>
-                                <td width="5%">
-                                    <a href="chi-tiet-don-hang.html" class="btn btn-info">Xem</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center red-text-table">1</td>
-                                <td class="text-center">Đồ rán</td>
-                                <td>Gà rán nguyên con</td>
-                                <td><input class="expanded-input"></td>
-                                <td></td>
-                                <td width="5%">
-                                    <a href="chi-tiet-don-hang.html" class="btn btn-info">Xem</a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <div style="text-align: center">
+        <ul id="pagination-demo" data-index="${index }" data-pages="${pages }" class="pagination-md" ></ul>
+        </div>
                     </div>
                 </div>
             </div>

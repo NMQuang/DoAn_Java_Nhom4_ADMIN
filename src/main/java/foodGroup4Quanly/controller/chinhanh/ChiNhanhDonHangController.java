@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import foodGroup4Quanly.common.JasperExportUtils;
 import foodGroup4Quanly.common.MyBadRequestException;
+import foodGroup4Quanly.common.state.TinhTrangGiaoHang;
 import foodGroup4Quanly.common.state.TinhTrangThanhToan;
 import foodGroup4Quanly.entity.Ban;
 import foodGroup4Quanly.entity.Chitiethoadon;
@@ -51,21 +52,49 @@ public class ChiNhanhDonHangController {
 
 	@Autowired
 	private ChiTietHoaDonService chiTietHoaDonService;
-	
+
 	@Autowired
 	private KhachHangService khachHangService;
-	
+
 	@Autowired
 	private BanService banService;
-	
+
 	@Autowired
 	private JasperExportUtils jasperExportUtils;
-	
+
 	@Autowired
 	private InHoaDonService inHoaDonService;
-	
+
 	@RequestMapping(value = "/danhsachdonhang")
-	public String getDanhSachDonHang(Model model) {
+	public String getDanhSachDonHang(Model model, @RequestParam(value = "type",required=false) String type, @RequestParam(required= false) Integer index) {
+
+		int begin;
+		int id = 1;
+		if (index == null || index < 1) {
+			begin = 0;
+		} else {
+			id = index;
+			begin = 10 * (id - 1);
+		}
+		int count = 0;
+    		int pages = 0;
+
+		if ("tong_dai".equals(type)) {
+			model.addAttribute("hoadon", hoadonService.getListHoaDonTongDai(10,begin));
+			count = hoadonService.countTongDai();
+			pages = count / 10 + (count %10 == 0 ? 0 : 1);
+			model.addAttribute("type", type);
+		} else if ("mang_ve".equals(type)) {
+			model.addAttribute("hoadon", hoadonService.getListHoaDonMangVe(10,begin));
+			count = hoadonService.countMangVe();
+			pages = count / 10 + (count %10 == 0 ? 0 : 1);
+			model.addAttribute("type", type);
+		} else {
+			model.addAttribute("hoadon", hoadonService.getListHoaDonTaiQuan(10,begin));
+			count = hoadonService.countTaiQuan();
+			pages = count / 10 + (count %10 == 0 ? 0 : 1);
+			model.addAttribute("type", type);
+		}
 		return "chinhanh-danh-sach-don-hang";
 	}
 
@@ -79,17 +108,17 @@ public class ChiNhanhDonHangController {
 		Hoadon hoadon = hoadonService.getBillById(idDonHang);
 		System.out.println(hoadon.getTinhTrangThanhToan() + " " + hoadon.getHoaDonId());
 		if (hoadon == null || hoadon.getTinhTrangThanhToan() == TinhTrangThanhToan.DA_THANH_TOAN)
-			model.addAttribute("error", "Đơn hàng không tồn tại");
+			model.addAttribute("error", "ﾄ脆｡n hﾃ�ng khﾃｴng t盻渡 t蘯｡i");
 		else{
 			System.out.println(hoadon == null);
 			List<Chitiethoadon> cthdlist = chiTietHoaDonService.getByIDHoaDon(hoadon.getHoaDonId());
 			hoadon.setChitiethoadons(new HashSet<Chitiethoadon>(cthdlist));
 			model.addAttribute("hoadon", hoadon);
 		}
-			
+
 		return "chinhanh-thanh-toan-don-hang";
 	}
-	
+
 	@RequestMapping(value = "/thanhtoandonhang/{idDonHang}", method = RequestMethod.POST)
 	public String thanhToanDonHang(Model model, @PathVariable int idDonHang, @RequestParam String sdt_khach, @RequestParam String ten_khach_hang) {
 		Hoadon hoadon = hoadonService.getBillById(idDonHang);
@@ -114,13 +143,14 @@ public class ChiNhanhDonHangController {
 				banService.update(ban);
 			}
 			hoadon.setTinhTrangThanhToan(TinhTrangThanhToan.DA_THANH_TOAN);
+			hoadon.setTinhTrangGiaoHang(TinhTrangGiaoHang.DA_GIAO_HANG);
 			hoadon.setNgayTraTien(new Timestamp(new Date().getTime()));
 			hoadonService.update(hoadon);
 		}
-			
+
 		return "redirect:/chinhanh/inhoadon/" + idDonHang;
 	}
-	
+
 	@RequestMapping("/inhoadon/{idHoaDon}")
 	@ResponseBody
 	public void inHoaDon(HttpServletResponse response, @PathVariable int idHoaDon) throws MyBadRequestException{
@@ -148,13 +178,14 @@ public class ChiNhanhDonHangController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@RequestMapping("/chuyendonhangxuongbep/{idHoaDon}")
 	@ResponseBody
 	public void chuyenDonHangXuongBep(HttpServletResponse response, @PathVariable int idHoaDon) throws MyBadRequestException{
 		Map<String, Object> parameters = new HashMap<>();
 		List<Map<String, Object>> data = new ArrayList<Map<String,Object>>();
 		Hoadon hoadon = hoadonService.getBillById(idHoaDon);
+		hoadon.setTinhTrangGiaoHang(TinhTrangGiaoHang.DANG_CHE_BIEN);
 		if(hoadon == null || hoadon.getTinhTrangThanhToan() == TinhTrangThanhToan.DA_THANH_TOAN){
 			throw new MyBadRequestException("redirect:/chinhanh/taodonhang/taiquan");
 		}
@@ -175,7 +206,7 @@ public class ChiNhanhDonHangController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@ExceptionHandler(MyBadRequestException.class)
 	public String handleError(MyBadRequestException ex){
 		return ex.getMessage();

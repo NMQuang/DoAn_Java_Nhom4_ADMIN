@@ -15,6 +15,7 @@
     <div class="divider"></div>
     <ul class="nav menu">
         <li><a href="<c:url value="/tongdai/tao-don-hang-dien-thoai"/>"><em class="fa fa-list-alt">&nbsp;</em> Tạo đơn hàng </a></li>
+        <li><a href="<c:url value="/tongdai/duyet-don-hang"/>"><em class="fa fa fa-list-ul">&nbsp;</em> Duyệt đơn hàng</a></li>
         <li><a href="<c:url value="/tongdai/danh-sach-don-hang"/>"><em class="fa fa fa-list-ul">&nbsp;</em> DS đơn hàng qua đt</a></li>
         <li><a href="#" onclick="postLogout()"><em class="fa fa-power-off">&nbsp;</em> Đăng xuất</a></li>
     </ul>

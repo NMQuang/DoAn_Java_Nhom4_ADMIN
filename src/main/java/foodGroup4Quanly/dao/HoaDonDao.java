@@ -19,4 +19,6 @@ public interface HoaDonDao {
 	long getCount(Date begin, Date end, String sdt);
 	
 	Hoadon getTheLastBillByTableStillCooking(int idBan);
+	
+	List<Hoadon> notConfirm();
 }

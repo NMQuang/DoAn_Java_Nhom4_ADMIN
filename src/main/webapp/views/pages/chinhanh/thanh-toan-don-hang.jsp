@@ -75,8 +75,8 @@
                             	<tr>
                                 <td class="text-center red-text-table">${cthd.pk.mon.monId }</td>
                                 <td>${cthd.pk.mon.danhmuc.ten }</td>
-                                <td>Gà rán nguyên con</td>
-                                <td><input class="input-sl-mon-an-dem-ve" value="${cthd.soLuong}" price="80000" type="number" style="width: 90px" disabled></td>
+                                <td>${ cthd.pk.mon.ten}</td>
+                                <td><input class="input-sl-mon-an-dem-ve" value="${cthd.soLuong}"  type="number" style="width: 90px" disabled></td>
                                 <td><input class="input-gia-mon-an" value="${cthd.tongTien}" type="text" style="width: 110px" disabled></td>
                             </tr>
                             </c:forEach>

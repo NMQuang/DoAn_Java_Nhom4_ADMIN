@@ -3,6 +3,7 @@ package foodGroup4Quanly.controller.tongdai.api;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import foodGroup4Quanly.entity.Mon;
 import foodGroup4Quanly.pojo.ChiTietHoaDonCustom;
 import foodGroup4Quanly.pojo.DonHangTongDai;
 import foodGroup4Quanly.service.ChiNhanhService;
+import foodGroup4Quanly.service.ChiTietHoaDonService;
 import foodGroup4Quanly.service.FoodService;
 import foodGroup4Quanly.service.HoadonService;
 import foodGroup4Quanly.service.KhachHangService;
@@ -44,8 +46,11 @@ public class HoaDonTongDaiApi {
 	@Autowired
 	private HoadonService hoadonService;
 	
+	@Autowired
+	private ChiTietHoaDonService chiTietHoaDonService;
+	
 	@RequestMapping(value="/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	ResponseEntity taoDonHang(@RequestBody DonHangTongDai donHangTongDai){
+	public ResponseEntity taoDonHang(@RequestBody DonHangTongDai donHangTongDai){
 		Hoadon hoadon = new Hoadon();
 		hoadon.setChinhanh(chiNhanhService.getInfoBranch(donHangTongDai.getId_Chinhanh()));
 		hoadon.setDiaChiGiao(donHangTongDai.getDia_chi_nhan());
@@ -54,7 +59,7 @@ public class HoaDonTongDaiApi {
 		hoadon.setHoTenNguoiNhan(donHangTongDai.getHo_ten_nguoi_nhan());
 		hoadon.setNgay(new Timestamp(new Date().getTime()));
 		hoadon.setSdtNguoiNhan(donHangTongDai.getSdt_nguoi_nhan());
-		hoadon.setTinhTrangGiaoHang(TinhTrangGiaoHang.DANG_XU_LY);
+		hoadon.setTinhTrangGiaoHang(TinhTrangGiaoHang.CHO_CHE_BIEN);
 		Set<Chitiethoadon> chitiethoadons = new HashSet<Chitiethoadon>();
 		int tongtien = 0;
 		for(ChiTietHoaDonCustom cth : donHangTongDai.getListChiTiet()){
@@ -81,5 +86,15 @@ public class HoaDonTongDaiApi {
 		hoadon.setKhachhang(kh);
 		hoadonService.create(hoadon);
 		return new ResponseEntity(HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/lay-don-hang-can-confirm", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity getDonHangChuaXacNhan(){
+		List<Hoadon> list = hoadonService.notConfirm();
+		for(Hoadon hd : list){
+			List<Chitiethoadon> cthdlist = chiTietHoaDonService.getByIDHoaDon(hd.getHoaDonId());
+			hd.setChitiethoadons(new HashSet<Chitiethoadon>(cthdlist));
+		}
+		return new ResponseEntity(list, HttpStatus.OK);
 	}
 }

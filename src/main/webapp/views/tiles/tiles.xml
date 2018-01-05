@@ -37,127 +37,127 @@
     </definition>
 
     <definition name="quanly-list-chi-nhanh" extends="quanly-definition">
-        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="title" value="Danh sách chi nhánh" />
         <put-attribute name="content" value="/views/pages/quanly/list-chi-nhanh.jsp" />
     </definition>
 
     <definition name="quanly-thong-tin-day-du-chi-nhanh" extends="quanly-definition">
-        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="title" value="Chi tiết chi nhánh" />
         <put-attribute name="content" value="/views/pages/quanly/thong-tin-day-du-chi-nhanh.jsp" />
     </definition>
 
     <definition name="quanly-chi-tiet-chi-nhanh" extends="quanly-definition">
-        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="title" value="Chi tiết chi nhánh" />
         <put-attribute name="content" value="/views/pages/quanly/chi-tiet-chi-nhanh.jsp" />
     </definition>
 
     <definition name="quanly-sua-chi-nhanh-mon-an" extends="quanly-definition">
-        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="title" value="Món ăn trong chi nhánh" />
         <put-attribute name="content" value="/views/pages/quanly/chi-tiet-chi-nhanh-mon-an.jsp" />
     </definition>
 
         <definition name="quanly-chi-tiet-chi-nhanh-menu" extends="quanly-definition">
-        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="title" value="Menu chi nhánh" />
         <put-attribute name="content" value="/views/pages/quanly/chi-tiet-chi-nhanh-menu.jsp" />
     </definition>
 
         <definition name="quanly-chi-tiet-chi-nhanh-ban" extends="quanly-definition">
-        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="title" value="Chi tiết chi nhánh - bàn" />
         <put-attribute name="content" value="/views/pages/quanly/chi-tiet-chi-nhanh-ban.jsp" />
     </definition>
 
     <definition name="quanly-them-chi-nhanh" extends="quanly-definition">
-        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="title" value="Thêm chi nhánh" />
         <put-attribute name="content" value="/views/pages/quanly/them-chi-nhanh.jsp" />
     </definition>
 
     <definition name="quanly-them-ban" extends="quanly-definition">
-        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="title" value="Thêm bà" />
         <put-attribute name="content" value="/views/pages/quanly/them-ban.jsp" />
     </definition>
 
         <definition name="quanly-chi-tiet-ban" extends="quanly-definition">
-        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="title" value="Chi tiết bàn" />
         <put-attribute name="content" value="/views/pages/quanly/chi-tiet-ban.jsp" />
     </definition>
 
     <definition name="quanly-list-danh-muc" extends="quanly-definition">
-        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="title" value="Danh sách danh mục" />
         <put-attribute name="content" value="/views/pages/quanly/list-danh-muc.jsp" />
     </definition>
 
     <definition name="quanly-chi-tiet-danh-muc" extends="quanly-definition">
-        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="title" value="Chi tiết danh mục" />
         <put-attribute name="content" value="/views/pages/quanly/chi-tiet-danh-muc.jsp" />
     </definition>
 
     <definition name="quanly-them-danh-muc" extends="quanly-definition">
-        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="title" value="Thêm danh mục" />
         <put-attribute name="content" value="/views/pages/quanly/them-danh-muc.jsp" />
     </definition>
 
     <definition name="quanly-list-mon-an" extends="quanly-definition">
-        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="title" value="Danh sách món ăn" />
         <put-attribute name="content" value="/views/pages/quanly/list-mon-an.jsp" />
     </definition>
 
     <definition name="quanly-chi-tiet-mon-an" extends="quanly-definition">
-        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="title" value="Chi tiết món ăn" />
         <put-attribute name="content" value="/views/pages/quanly/chi-tiet-mon-an.jsp" />
     </definition>
 
     <definition name="quanly-them-mon-an" extends="quanly-definition">
-        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="title" value="Thêm món ăn" />
         <put-attribute name="content" value="/views/pages/quanly/them-mon-an.jsp" />
     </definition>
 
     <definition name="quanly-them-mon-an-vao-danh-muc" extends="quanly-definition">
-        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="title" value="Thêm món ăn vào danh mục" />
         <put-attribute name="content" value="/views/pages/quanly/them-mon-an-vao-danh-muc.jsp" />
     </definition>
 
 	<definition name="quanly-tong-doanh-thu" extends="quanly-definition">
-        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="title" value="Tổng doanh thu" />
         <put-attribute name="content" value="/views/pages/quanly/report-tong-doanh-thu.jsp" />
     </definition>
 
     <definition name="quanly-tong-doanh-thu-chi-nhanh" extends="quanly-definition">
-        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="title" value="Tổng doanh thu theo chi nhánh" />
         <put-attribute name="content" value="/views/pages/quanly/report-tong-doanh-thu-chi-nhanh.jsp" />
     </definition>
 
     <definition name="quanly-tong-don-hang" extends="quanly-definition">
-        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="title" value="Tổng đơn hàng" />
         <put-attribute name="content" value="/views/pages/quanly/report-tong-don-hang.jsp" />
     </definition>
 
     <definition name="quanly-tong-don-hang-theo-loai" extends="quanly-definition">
-        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="title" value="Tổng đơn hàng theo loại" />
         <put-attribute name="content" value="/views/pages/quanly/report-tong-don-hang-theo-loai.jsp" />
     </definition>
 
     <definition name="quanly-tong-chi-phi" extends="quanly-definition">
-        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="title" value="Tổng chi phí" />
         <put-attribute name="content" value="/views/pages/quanly/report-tong-chi-phi.jsp" />
     </definition>
 
     <definition name="quanly-tong-chi-phi-chi-nhanh" extends="quanly-definition">
-        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="title" value="Tổng chi phí chi nhánh" />
         <put-attribute name="content" value="/views/pages/quanly/report-tong-chi-phi-chi-nhanh.jsp" />
     </definition>
 
      <definition name="quanly-tong-so-luong-mon-trong-thang" extends="quanly-definition">
-        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="title" value="Tổng số lượng món trong tháng" />
         <put-attribute name="content" value="/views/pages/quanly/report-tong-so-luong-mon-trong-thang.jsp" />
     </definition>
 
      <definition name="quanly-tong-tien-don-hang-khach" extends="quanly-definition">
-        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="title" value="Tổng tiền đơn hàng của khách" />
         <put-attribute name="content" value="/views/pages/quanly/report-tong-tien-don-hang-khach.jsp" />
     </definition>
 
      <definition name="quanly-luong-khach-moi" extends="quanly-definition">
-        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="title" value="Lượng khách hàng mới" />
         <put-attribute name="content" value="/views/pages/quanly/report-luong-khach-moi.jsp" />
     </definition>
     <!-- /QUAN LY -->

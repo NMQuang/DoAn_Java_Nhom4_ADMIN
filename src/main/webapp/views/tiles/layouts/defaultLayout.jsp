@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MyFood - danh sach mon an</title>
+    <title>MyFood Admin - <tiles:insertAttribute name="title"/> </title>
     <link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/font-awesome.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/datepicker3.css"/>" rel="stylesheet">

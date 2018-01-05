@@ -139,6 +139,7 @@
                         <div class="panel-footer text-center">
                             <button id="btn-chon-mon" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-dat-hang-tai-quan">Chọn món</button>
                             <button id="btn-thanh-toan" type="button" class="btn btn-primary">Thanh toán</button>
+                            <button id="btn-chuyen-xuong-bep" type="button" class="btn btn-primary" data-id="">Chuyển xuống bếp</button>
                         </div>
                     </div>
                 </form>

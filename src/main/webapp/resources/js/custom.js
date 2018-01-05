@@ -171,12 +171,14 @@ $(document).ready(function () {
 				$("#btn-mo-ban").text("Mở bàn")
 				$("#btn-chon-mon").attr("disabled", true)
 				$("#btn-thanh-toan").attr("disabled", true)
+				$("#btn-chuyen-xuong-bep").attr("disabled", true)
 			}
 			else{
 				$("#status-ban").val("Có khách")
 				$("#btn-mo-ban").text("Hủy bàn")
 				$("#btn-chon-mon").removeAttr("disabled")
 				$("#btn-thanh-toan").removeAttr("disabled")
+				$("#btn-chuyen-xuong-bep").removeAttr("disabled")
 				getBillByTable(banid) //lay hoa don
 			}
 				
@@ -200,6 +202,7 @@ $(document).ready(function () {
 					$("#btn-mo-ban").text("Mở bàn")
 					$("#btn-chon-mon").attr("disabled", true)
 					$("#btn-thanh-toan").attr("disabled", true)
+					$("#btn-chuyen-xuong-bep").attr("disabled", true)
 					$(".btn-dat-ban[data-id="+ banid + "]").removeClass("btn-dat-ban-occupied")
 					$("#menu-ben-phai-tong-tien").val(0)
 					$("#table-don-hang-tai-quan tbody").empty();
@@ -222,6 +225,7 @@ $(document).ready(function () {
 					$("#status-ban").val("Có khách")
 					$("#btn-chon-mon").removeAttr("disabled")
 					$("#btn-thanh-toan").removeAttr("disabled")
+					$("#btn-chuyen-xuong-bep").removeAttr("disabled")
 					$(".btn-dat-ban[data-id="+ banid + "]").addClass("btn-dat-ban-occupied")
 				}).fail(function(jqXHR, textStatus, error){
 					console.log(textStatus);
@@ -397,6 +401,23 @@ $("#btn-thanh-toan").on("click", function(){
 		console.log(jqXHR);
 	})
 })
+
+$("#btn-chuyen-xuong-bep").on("click", function(){
+	if($("#table-don-hang-tai-quan tbody tr").length == 0){
+		return alert("Không có gì để chế biến.")
+	}
+	
+	$.ajax({
+		url: globalURL +"chinhanh/api/hoadon/getBillByTable/" + banid,
+		type: 'GET'
+	}).done(function(data){
+		window.open( globalURL + "chinhanh/chuyendonhangxuongbep/" + data.hoaDonId, '_blank');
+	}).fail(function(jqXHR, textStatus, error){
+		console.log(textStatus);
+		console.log(error);
+		console.log(jqXHR);
+	})
+})
 /////////// END ĐƠN HÀNG TẠI QUÁN /////////////
 
 /////////// ĐƠN HÀNG MANG VỀ /////////////
@@ -493,6 +514,8 @@ $('#btn-mang-ve-tao-don-hang').on("click", function(){
 			})
 		}).done(function(data){
 			alert("Tạo đơn hàng thành công")
+			console.log(data)
+			window.open( globalURL + "chinhanh/chuyendonhangxuongbep/" + data.id, '_blank');
 			window.location.reload();
 		}).fail(function(jqXHR, textStatus, error){
 			console.log(textStatus);

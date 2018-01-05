@@ -1,6 +1,7 @@
 package foodGroup4Quanly.controller.chinhanh.api;
 
 import java.sql.Timestamp;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.core.JsonParser;
 
 import foodGroup4Quanly.common.state.HinhThucMua;
 import foodGroup4Quanly.common.state.HinhThucThanhToan;
@@ -148,8 +151,10 @@ public class HoaDonApi {
 		hd.setNgay(new Timestamp(new Date().getTime()));
 		hd.setHinhThucThanhToan(HinhThucThanhToan.TIEN_MAT_KHI_NHAN_HANG);
 		hd.setTinhTrangGiaoHang(TinhTrangGiaoHang.DANG_CHE_BIEN);
+		hd.setTinhTrangThanhToan(TinhTrangThanhToan.CHUA_THANH_TOAN);
 		hd.setHoTenNguoiNhan(donHangDemVe.getTen_nguoi_nhan());
 		hoadonService.create(hd);
-		return new ResponseEntity(HttpStatus.OK);
+		
+		return new ResponseEntity(Collections.singletonMap("id", hd.getHoaDonId()), HttpStatus.OK);
 	}
 }

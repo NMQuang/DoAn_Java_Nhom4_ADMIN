@@ -22,6 +22,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -127,7 +128,7 @@ public class ChiNhanhDonHangController {
 		List<Map<String, Object>> data = new ArrayList<Map<String,Object>>();
 		Hoadon hoadon = hoadonService.getBillById(idHoaDon);
 		if(hoadon == null){
-			throw new MyBadRequestException("/chinhanh/taodonhang/taiquan");
+			throw new MyBadRequestException("redirect:/chinhanh/taodonhang/taiquan");
 		}
 		if(hoadon.getBan() != null)
 			parameters.put("ban", hoadon.getBan().getTenBan());
@@ -146,5 +147,37 @@ public class ChiNhanhDonHangController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	@RequestMapping("/chuyendonhangxuongbep/{idHoaDon}")
+	@ResponseBody
+	public void chuyenDonHangXuongBep(HttpServletResponse response, @PathVariable int idHoaDon) throws MyBadRequestException{
+		Map<String, Object> parameters = new HashMap<>();
+		List<Map<String, Object>> data = new ArrayList<Map<String,Object>>();
+		Hoadon hoadon = hoadonService.getBillById(idHoaDon);
+		if(hoadon == null || hoadon.getTinhTrangThanhToan() == TinhTrangThanhToan.DA_THANH_TOAN){
+			throw new MyBadRequestException("redirect:/chinhanh/taodonhang/taiquan");
+		}
+		if(hoadon.getBan() != null)
+			parameters.put("ban", hoadon.getBan().getTenBan());
+		if(hoadon.getKhachhang() != null)
+			parameters.put("ten_khach_hang", hoadon.getHoTenNguoiNhan());
+		parameters.put("ma_hoa_don", hoadon.getHoaDonId() + "");
+		parameters.put(JRParameter.IS_IGNORE_PAGINATION, Boolean.TRUE);
+		data = inHoaDonService.inHoaDon(idHoaDon);
+		JRDataSource datasource = new JRBeanCollectionDataSource(data);
+		JasperPrint jasperPrint;
+		try {
+			jasperPrint = JasperFillManager.fillReport(getClass().getClassLoader().getResourceAsStream("reports/DemXuongBep.jasper"), parameters, datasource);
+			jasperExportUtils.export("pdf", response, jasperPrint);
+		} catch (JRException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@ExceptionHandler(MyBadRequestException.class)
+	public String handleError(MyBadRequestException ex){
+		return ex.getMessage();
 	}
 }

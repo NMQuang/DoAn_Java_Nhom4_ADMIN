@@ -39,5 +39,17 @@ public class InHoaDonServiceImp implements InHoaDonService{
 		}
 		return kq;
 	}
-
+	@Override
+	public List<Map<String, Object>> inThucDon(int idHoaDon) {
+		List<Map<String, Object>> kq = new ArrayList<Map<String, Object>>();
+		Hoadon hoaDon = ((HoaDonDaoImp)hoaDonDao).fetchById(idHoaDon, Hoadon.class);
+		if(hoaDon == null) return kq;
+		for(Chitiethoadon cthd : chiTietHoaDonService.getByIDHoaDon(hoaDon.getHoaDonId())){
+			Map <String, Object> record = new HashMap<String, Object>();
+			record.put("Ten_mon_an", cthd.getMon().getTen());
+			record.put("So_luong", (long)cthd.getSoLuong());
+			kq.add(record);
+		}
+		return kq;
+	}
 }

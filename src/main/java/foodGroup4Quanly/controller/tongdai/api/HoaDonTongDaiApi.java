@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import foodGroup4Quanly.common.state.HinhThucMua;
 import foodGroup4Quanly.common.state.HinhThucThanhToan;
 import foodGroup4Quanly.common.state.TinhTrangGiaoHang;
+import foodGroup4Quanly.common.state.TinhTrangThanhToan;
 import foodGroup4Quanly.entity.Chitiethoadon;
 import foodGroup4Quanly.entity.Hoadon;
 import foodGroup4Quanly.entity.Khachhang;
@@ -59,6 +60,7 @@ public class HoaDonTongDaiApi {
 		hoadon.setHoTenNguoiNhan(donHangTongDai.getHo_ten_nguoi_nhan());
 		hoadon.setNgay(new Timestamp(new Date().getTime()));
 		hoadon.setSdtNguoiNhan(donHangTongDai.getSdt_nguoi_nhan());
+		hoadon.setTinhTrangThanhToan(TinhTrangThanhToan.CHUA_THANH_TOAN);
 		hoadon.setTinhTrangGiaoHang(TinhTrangGiaoHang.CHO_CHE_BIEN);
 		Set<Chitiethoadon> chitiethoadons = new HashSet<Chitiethoadon>();
 		int tongtien = 0;

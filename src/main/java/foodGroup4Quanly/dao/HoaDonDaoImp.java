@@ -108,9 +108,10 @@ public class HoaDonDaoImp extends HibernateUtil implements HoaDonDao{
 
 	@Override
 	public Hoadon getTheLastBillByTableStillCooking(int idBan) {
-		String hql = "from Hoadon where tinhTrangGiaoHang =  :dang_che_bien and ban.banId = :idBan order by hoaDonId DESC";
+		String hql = "from Hoadon where tinhTrangGiaoHang =  :dang_che_bien or tinhTrangGiaoHang = :cho_che_bien and ban.banId = :idBan order by hoaDonId DESC";
 		Query query = getSession().createQuery(hql);
 		query.setParameter("dang_che_bien", TinhTrangGiaoHang.DANG_CHE_BIEN);
+		query.setParameter("cho_che_bien", TinhTrangGiaoHang.CHO_CHE_BIEN);
 		query.setParameter("idBan", idBan);
 		List dshd = query.setFirstResult(0).setMaxResults(1).list();
 		if(dshd.size() > 0)
@@ -122,7 +123,7 @@ public class HoaDonDaoImp extends HibernateUtil implements HoaDonDao{
 
 	@Override
 	public List<Hoadon> getListHoaDonTaiQuan(int maxResult, int begin) {
-		String hql = "from Hoadon where tinhTrangGiaoHang <>:dang_xu_ly and hinhThucMua =:tai_cho order by hoaDonId ASC";
+		String hql = "from Hoadon where tinhTrangGiaoHang <>:dang_xu_ly and hinhThucMua =:tai_cho order by hoaDonId desc";
 		Query query = getSession().createQuery(hql);
 		query.setParameter("dang_xu_ly", TinhTrangGiaoHang.DANG_XU_LY);
 		query.setParameter("tai_cho", HinhThucMua.TAI_CHO);
@@ -167,7 +168,7 @@ public class HoaDonDaoImp extends HibernateUtil implements HoaDonDao{
 
 	@Override
 	public List<Hoadon> getListHoaDonMangVe(int maxResult, int begin) {
-		String hql = "from Hoadon where tinhTrangGiaoHang <>:dang_xu_ly and hinhThucMua =:mang_ve order by hoaDonId ASC";
+		String hql = "from Hoadon where tinhTrangGiaoHang <>:dang_xu_ly and hinhThucMua =:mang_ve order by hoaDonId desc";
 		Query query = getSession().createQuery(hql);
 		query.setParameter("dang_xu_ly", TinhTrangGiaoHang.DANG_XU_LY);
 		query.setParameter("mang_ve", HinhThucMua.MANG_VE);
@@ -181,7 +182,7 @@ public class HoaDonDaoImp extends HibernateUtil implements HoaDonDao{
 
 	@Override
 	public List<Hoadon> getListHoaDonTongDai(int maxResult, int begin) {
-		String hql = "from Hoadon where tinhTrangGiaoHang <>:dang_xu_ly and hinhThucMua =:tong_dai order by hoaDonId ASC";
+		String hql = "from Hoadon where tinhTrangGiaoHang <>:dang_xu_ly and hinhThucMua =:tong_dai order by hoaDonId desc";
 		Query query = getSession().createQuery(hql);
 		query.setParameter("dang_xu_ly", TinhTrangGiaoHang.DANG_XU_LY);
 		query.setParameter("tong_dai", HinhThucMua.TONG_DAI);

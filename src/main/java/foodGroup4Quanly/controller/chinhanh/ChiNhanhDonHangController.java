@@ -20,6 +20,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -28,6 +29,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.ibm.icu.util.Calendar;
 
 import foodGroup4Quanly.common.JasperExportUtils;
 import foodGroup4Quanly.common.MyBadRequestException;
@@ -77,11 +80,11 @@ public class ChiNhanhDonHangController {
 			begin = 10 * (id - 1);
 		}
 		int count = 0;
-    		int pages = 0;
+    	int pages = 1;
 
-		if ("tong_dai".equals(type)) {
-			model.addAttribute("hoadon", hoadonService.getListHoaDonTongDai(10,begin));
-			count = hoadonService.countTongDai();
+		if ("tai_cho".equals(type)) {
+			model.addAttribute("hoadon", hoadonService.getListHoaDonTaiQuan(10,begin));
+			count = hoadonService.countTaiQuan();
 			pages = count / 10 + (count %10 == 0 ? 0 : 1);
 			model.addAttribute("type", type);
 		} else if ("mang_ve".equals(type)) {
@@ -90,25 +93,74 @@ public class ChiNhanhDonHangController {
 			pages = count / 10 + (count %10 == 0 ? 0 : 1);
 			model.addAttribute("type", type);
 		} else {
-			model.addAttribute("hoadon", hoadonService.getListHoaDonTaiQuan(10,begin));
-			count = hoadonService.countTaiQuan();
+			model.addAttribute("hoadon", hoadonService.getListHoaDonTongDai(10,begin));
+			count = hoadonService.countTongDai();
 			pages = count / 10 + (count %10 == 0 ? 0 : 1);
-			model.addAttribute("type", type);
+			model.addAttribute("type", "tong_dai");
 		}
+		model.addAttribute("index", id);
+		model.addAttribute("pages", pages);
 		return "chinhanh-danh-sach-don-hang";
 	}
 
-	@RequestMapping(value = "/chitietdonhang")
-	public String getChiTietDonHang(Model model) {
+	@RequestMapping(value = "/chitietdonhang/{idHoaDon}", method = RequestMethod.GET)
+	public String getChiTietDonHang(Model model, @PathVariable int idHoaDon) {
+		Hoadon hoadon = hoadonService.getBillById(idHoaDon);
+    	if(hoadon != null){
+	    	List<Chitiethoadon> cthdlist = chiTietHoaDonService.getByIDHoaDon(hoadon.getHoaDonId());
+	    	hoadon.setChitiethoadons(new HashSet<Chitiethoadon>(cthdlist));
+	    	if(hoadon.getThoiGianGiaoDuKien() != null){
+	    		SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+	    		Date d = new Date(hoadon.getThoiGianGiaoDuKien().getTime());
+	    		model.addAttribute("thoi_gian", format.format(d));
+	    	}
+    	}
+    	model.addAttribute("hoadon",hoadon );
 		return "chinhanh-chi-tiet-don-hang";
 	}
-
+	@RequestMapping(value = "/chitietdonhang/{idHoaDon}", method = RequestMethod.POST)
+    public String updateChiTietDonHang(Model model, @PathVariable int idHoaDon, @RequestParam int tinh_trang_don_hang, @RequestParam(required = false) @DateTimeFormat(pattern ="HH:mm") Date thoi_gian_giao) {
+    	Hoadon hoadon = hoadonService.getBillById(idHoaDon);
+    	if(hoadon != null){
+	    	hoadon.setTinhTrangGiaoHang(tinh_trang_don_hang);
+	    	if(thoi_gian_giao != null){
+	    		Calendar c = Calendar.getInstance();
+	    		c.setTime(new Date());
+	    		Calendar c1 = Calendar.getInstance();
+	    		c1.setTime(thoi_gian_giao);
+	    		c.set(Calendar.HOUR_OF_DAY, c1.get(Calendar.HOUR_OF_DAY));
+	    		c.set(Calendar.MINUTE, c1.get(Calendar.MINUTE));
+	    		hoadon.setThoiGianGiaoDuKien(new Timestamp(c.getTimeInMillis()));
+	    	}
+    	}
+    	hoadonService.update(hoadon);
+        return "redirect:/chinhanh/chitietdonhang/" + hoadon.getHoaDonId();
+    }
+	@RequestMapping(value = "/xoa/{idHoaDon}")
+    public String xoa(Model model, @PathVariable int idHoaDon) {
+    	Hoadon hoadon = hoadonService.getBillById(idHoaDon);
+    	if(hoadon != null){
+    		System.out.println(hoadon.getBan());
+    		if(hoadon.getBan() != null){
+    			System.out.println(hoadon.getBan().getBanId());
+    			Hoadon h = hoadonService.getTheLastBillByTableStillCooking(hoadon.getBan().getBanId());
+    			System.out.println(h);
+    			if(h != null && h.getHoaDonId() == idHoaDon){
+    				Ban b = banService.getInfoBan(hoadon.getBan().getBanId());
+    				System.out.println(b.getBanId());
+    				b.setTinhTrang(0);
+    				banService.update(b);
+    			}
+    		}
+    		hoadonService.delete(hoadon);
+    	}
+        return "redirect:/chinhanh/danhsachdonhang";
+    }
 	@RequestMapping(value = "/thanhtoandonhang/{idDonHang}", method = RequestMethod.GET)
 	public String getThanhToanDonHang(Model model, @PathVariable int idDonHang) {
 		Hoadon hoadon = hoadonService.getBillById(idDonHang);
-		System.out.println(hoadon.getTinhTrangThanhToan() + " " + hoadon.getHoaDonId());
 		if (hoadon == null || hoadon.getTinhTrangThanhToan() == TinhTrangThanhToan.DA_THANH_TOAN)
-			model.addAttribute("error", "ﾄ脆｡n hﾃ�ng khﾃｴng t盻渡 t蘯｡i");
+			model.addAttribute("error", "Hóa đơn này không tồn tại");
 		else{
 			System.out.println(hoadon == null);
 			List<Chitiethoadon> cthdlist = chiTietHoaDonService.getByIDHoaDon(hoadon.getHoaDonId());
@@ -136,12 +188,15 @@ public class ChiNhanhDonHangController {
 					khachHangService.create(kh);
 				}
 				hoadon.setKhachhang(kh);
+				hoadon.setSdtNguoiNhan(kh.getSdt());
+				hoadon.setHoTenNguoiNhan(kh.getTen());
 			}
 			Ban ban = hoadon.getBan();
 			if(ban != null){
 				ban.setTinhTrang(0);
 				banService.update(ban);
 			}
+			
 			hoadon.setTinhTrangThanhToan(TinhTrangThanhToan.DA_THANH_TOAN);
 			hoadon.setTinhTrangGiaoHang(TinhTrangGiaoHang.DA_GIAO_HANG);
 			hoadon.setNgayTraTien(new Timestamp(new Date().getTime()));
@@ -187,12 +242,19 @@ public class ChiNhanhDonHangController {
 		Hoadon hoadon = hoadonService.getBillById(idHoaDon);
 		hoadon.setTinhTrangGiaoHang(TinhTrangGiaoHang.DANG_CHE_BIEN);
 		if(hoadon == null || hoadon.getTinhTrangThanhToan() == TinhTrangThanhToan.DA_THANH_TOAN){
+			if(hoadon != null && hoadon.getTinhTrangThanhToan() == TinhTrangThanhToan.DA_THANH_TOAN)
+			{
+				hoadon.setTinhTrangGiaoHang(TinhTrangGiaoHang.DA_GIAO_HANG);
+				hoadonService.update(hoadon);
+			}
 			throw new MyBadRequestException("redirect:/chinhanh/taodonhang/taiquan");
 		}
 		if(hoadon.getBan() != null)
 			parameters.put("ban", hoadon.getBan().getTenBan());
 		if(hoadon.getKhachhang() != null)
 			parameters.put("ten_khach_hang", hoadon.getHoTenNguoiNhan());
+		hoadon.setTinhTrangGiaoHang(TinhTrangGiaoHang.DANG_CHE_BIEN);
+		hoadonService.update(hoadon);
 		parameters.put("ma_hoa_don", hoadon.getHoaDonId() + "");
 		parameters.put(JRParameter.IS_IGNORE_PAGINATION, Boolean.TRUE);
 		data = inHoaDonService.inHoaDon(idHoaDon);

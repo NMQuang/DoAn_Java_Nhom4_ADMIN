@@ -68,8 +68,8 @@
                                 <label class="control-label col-md-5" for="tinh-trang-thanh-toan">Tình trạng thanh toán</label>
                                 <div class="col-md-7">
                                     <select class="expanded-input" id="tinh-trang-thanh-toan"  disabled>
-                                        <option value="1" ${hoadon.tinhTrangThanhToan == 1 ? selected : "" }>Chưa thanh toán</option>
-                                        <option value="0" ${hoadon.tinhTrangThanhToan == 0 ? selected : "" }>Đã thanh toán</option>
+                                        <option value="1" ${hoadon.tinhTrangThanhToan == 1 ? 'selected' : "" }>Chưa thanh toán</option>
+                                        <option value="0" ${hoadon.tinhTrangThanhToan == 0 ? 'selected' : "" }>Đã thanh toán</option>
                                     </select>
                                 </div>
                             </div>
@@ -109,7 +109,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-5" for="tinh-trang-don-hang">Tình trạng đơn hàng</label>
                                 <div class="col-md-7">
-                                    <select class="expanded-input"   name="tinh_trang_don_hang" ${hoadon.tinhTrangThanhToan == TinhTrangThanhToan.DA_THANH_TOAN? disabled: '' }>
+                                    <select class="expanded-input"   name="tinh_trang_don_hang" >
                                     	<option value="0" ${hoadon.tinhTrangGiaoHang == 0 ? 'selected' : '' }>${TinhTrangGiaoHang.codeToString(0) }</option>
                                     	<option value="4" ${hoadon.tinhTrangGiaoHang == 4 ? 'selected' : '' }>${TinhTrangGiaoHang.codeToString(4) }</option>
                                     	<option value="1" ${hoadon.tinhTrangGiaoHang == 1 ? 'selected' : '' }>${TinhTrangGiaoHang.codeToString(1) }</option>

@@ -10,51 +10,8 @@
         </ol>
     </div><!--/.row-->
 
-    <div class="panel panel-info">
-        <div class="panel-heading">
-            <a href="#" class="btn btn-default pull-right fix"><b>+</b> Add new categories</a>
-        </div>
-
-        <table class="table table-striped custab">
-            <thead>
-            <tr>
-                <th class="text-center red-text-table">ID</th>
-                <th>Danh muc</th>
-                <th>Ten</th>
-                <th>Don vi tinh</th>
-                <th>Mo ta</th>
-                <th>Hinh anh</th>
-                <th>So luong ban</th>
-            </tr>
-            </thead>
-            <tr>
-                <td class="text-center red-text-table">1</td>
-                <td>ten danh muc</td>
-                <td>ten san pham</td>
-                <td>don vi tinh</td>
-                <td>mo ta</td>
-                <td>hinh anh</td>
-                <td>so luong ban</td>
-            </tr>
-            <tr>
-                <td class="text-center red-text-table">2</td>
-                <td>ten danh muc</td>
-                <td>ten san pham</td>
-                <td>don vi tinh</td>
-                <td>mo ta</td>
-                <td>hinh anh</td>
-                <td>so luong ban</td>
-            </tr>
-            <tr>
-                <td class="text-center red-text-table">3</td>
-                <td>ten danh muc</td>
-                <td>ten san pham</td>
-                <td>don vi tinh</td>
-                <td>mo ta</td>
-                <td>hinh anh</td>
-                <td>so luong ban</td>
-                <!--      <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td> -->
-            </tr>
-        </table>
-    </div>
+    <p style="font-size: 35px; font-family:Times ; margin-top: 100px;" class="text-center">
+			<b>Chúc mừng</b> <br>
+			Bạn đã thành công quay trở lại với hệ thống <b style="color: red">MyFood</b>
+		</p>
 </div>

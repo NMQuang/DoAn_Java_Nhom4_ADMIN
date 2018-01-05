@@ -1,9 +1,23 @@
 package foodGroup4Quanly.controller.chinhanh;
 
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRParameter;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +26,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import foodGroup4Quanly.common.JasperExportUtils;
+import foodGroup4Quanly.common.MyBadRequestException;
 import foodGroup4Quanly.common.state.TinhTrangThanhToan;
 import foodGroup4Quanly.entity.Ban;
 import foodGroup4Quanly.entity.Chitiethoadon;
@@ -21,6 +38,7 @@ import foodGroup4Quanly.entity.Khachhang;
 import foodGroup4Quanly.service.BanService;
 import foodGroup4Quanly.service.ChiTietHoaDonService;
 import foodGroup4Quanly.service.HoadonService;
+import foodGroup4Quanly.service.InHoaDonService;
 import foodGroup4Quanly.service.KhachHangService;
 
 @Controller
@@ -38,6 +56,12 @@ public class ChiNhanhDonHangController {
 	
 	@Autowired
 	private BanService banService;
+	
+	@Autowired
+	private JasperExportUtils jasperExportUtils;
+	
+	@Autowired
+	private InHoaDonService inHoaDonService;
 	
 	@RequestMapping(value = "/danhsachdonhang")
 	public String getDanhSachDonHang(Model model) {
@@ -93,6 +117,34 @@ public class ChiNhanhDonHangController {
 			hoadonService.update(hoadon);
 		}
 			
-		return "redirect:/chinhanh/taodonhang/taiquan";
+		return "redirect:/chinhanh/inhoadon/" + idDonHang;
+	}
+	
+	@RequestMapping("/inhoadon/{idHoaDon}")
+	@ResponseBody
+	public void inHoaDon(HttpServletResponse response, @PathVariable int idHoaDon) throws MyBadRequestException{
+		Map<String, Object> parameters = new HashMap<>();
+		List<Map<String, Object>> data = new ArrayList<Map<String,Object>>();
+		Hoadon hoadon = hoadonService.getBillById(idHoaDon);
+		if(hoadon == null){
+			throw new MyBadRequestException("/chinhanh/taodonhang/taiquan");
+		}
+		if(hoadon.getBan() != null)
+			parameters.put("ban", hoadon.getBan().getTenBan());
+		if(hoadon.getKhachhang() != null)
+			parameters.put("ten_khach_hang", hoadon.getKhachhang().getTen());
+		parameters.put("ma_hoa_don", hoadon.getHoaDonId() + "");
+		parameters.put("tong_tien", (long)hoadon.getTongTien());
+		parameters.put(JRParameter.IS_IGNORE_PAGINATION, Boolean.TRUE);
+		data = inHoaDonService.inHoaDon(idHoaDon);
+		JRDataSource datasource = new JRBeanCollectionDataSource(data);
+		JasperPrint jasperPrint;
+		try {
+			jasperPrint = JasperFillManager.fillReport(getClass().getClassLoader().getResourceAsStream("reports/HoaDon.jasper"), parameters, datasource);
+			jasperExportUtils.export("pdf", response, jasperPrint);
+		} catch (JRException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

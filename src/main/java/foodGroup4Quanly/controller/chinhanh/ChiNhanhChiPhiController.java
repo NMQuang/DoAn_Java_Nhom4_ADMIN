@@ -180,16 +180,16 @@ public class ChiNhanhChiPhiController {
         return "redirect:/chinhanh/chiphi/thang/update" + "?month=" + thang + "&year=" + nam;
     }
 
-    @RequestMapping(value = "luongnhanvien")
+    @RequestMapping(value = "/luongnhanvien", method = RequestMethod.GET)
     public String getChiLuongNhanVien(Model model,
-                                      @RequestParam("year") String strYear) {
+                                      @RequestParam(value = "year", required = false) String strYear) {
         if(strYear == null) {
             strYear = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
         }
 
         List<TongLuongNhanVienTheoThangDto> listTongLuongTheoThang =
                 luongNhanVienService.getTongLuongTheoThang(strYear, Utils.getChinhanhHienTai().getChiNhanhId());
-
+        model.addAttribute("listTongLuongTheoThang", listTongLuongTheoThang);
         return "chinhanh-luong-nhan-vien";
     }
 

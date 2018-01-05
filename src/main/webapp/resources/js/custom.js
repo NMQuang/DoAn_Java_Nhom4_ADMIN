@@ -811,7 +811,33 @@ $(function(){
 			alert("Có lỗi xảy ra")
 		})
 	})
-})
+});
+
+///////////////////////////////////////////
+// CHON NAM SHOW LUONG NHAN VIEN
+$(function () {
+    $('#chon-nam-luong-nv').datepicker({
+        format: 'yyyy',
+        minViewMode: 2,
+        endDate: new Date(),
+        "autoclose": true
+    });
+
+    $('#chon-nam-luong-nv').datepicker().on('changeDate', function(ev){
+        var newUrl = '/chinhanh/chiphi/luongnhanvien?year='+ev.format();
+        window.location.replace(newUrl);
+    });
+
+    var yearUse;
+    if($('#dateLuongNv').val() != "") {
+        yearUse = $('#dateLuongNv').val();
+    } else {
+        var currentDate = new Date();
+        yearUse = currentDate.getFullYear().toString(10);
+    }
+
+    $('#chon-nam-luong-nv').datepicker('update', yearUse);
+});
 
 
 

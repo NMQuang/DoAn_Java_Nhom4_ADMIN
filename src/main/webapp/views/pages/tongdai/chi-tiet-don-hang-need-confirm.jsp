@@ -68,8 +68,8 @@
                                 <label class="control-label col-md-5" for="tinh-trang-thanh-toan">Tình trạng thanh toán</label>
                                 <div class="col-md-7">
                                     <select class="expanded-input" id="tinh-trang-thanh-toan" name="tinh-trang-thanh-toan" disabled>
-                                        <option value="1" ${hoadon.tinhTrangThanhToan == 1 ? selected : "" }>Chưa thanh toán</option>
-                                        <option value="0" ${hoadon.tinhTrangThanhToan == 0 ? selected : "" }>Đã thanh toán</option>
+                                        <option value="1" ${hoadon.tinhTrangThanhToan == 1 ? 'selected' : "" }>Chưa thanh toán</option>
+                                        <option value="0" ${hoadon.tinhTrangThanhToan == 0 ? 'selected' : "" }>Đã thanh toán</option>
                                     </select>
                                 </div>
                             </div>

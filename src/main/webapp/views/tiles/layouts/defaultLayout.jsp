@@ -12,7 +12,7 @@
     <link href="<c:url value="/resources/css/font-awesome.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/datepicker3.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/styles.css"/>" rel="stylesheet">
-
+	<link href="<c:url value="/resources/css/jquery.timepicker.css"/>" rel="stylesheet">
     <!--Custom Font-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i"
           rel="stylesheet">
@@ -37,6 +37,7 @@
 <script src="<c:url value="/resources/js/easypiechart-data.js"/>"></script>
 <script src="<c:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery.twbsPagination.js"/>"></script>
+<script src="<c:url value="/resources/js/jquery.timepicker.min.js"/>"></script>
 <script src="<c:url value="/resources/js/custom.js"/>"></script>
 </body>
 </html>

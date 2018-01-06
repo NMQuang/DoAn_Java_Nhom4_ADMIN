@@ -182,10 +182,11 @@ public class HoaDonDaoImp extends HibernateUtil implements HoaDonDao{
 
 	@Override
 	public List<Hoadon> getListHoaDonTongDai(int maxResult, int begin) {
-		String hql = "from Hoadon where tinhTrangGiaoHang <>:dang_xu_ly and hinhThucMua =:tong_dai order by hoaDonId desc";
+		String hql = "from Hoadon where tinhTrangGiaoHang <>:dang_xu_ly and (hinhThucMua =:tong_dai or hinhThucMua =:online) order by hoaDonId desc";
 		Query query = getSession().createQuery(hql);
 		query.setParameter("dang_xu_ly", TinhTrangGiaoHang.DANG_XU_LY);
 		query.setParameter("tong_dai", HinhThucMua.TONG_DAI);
+		query.setParameter("online", HinhThucMua.ONLINE);
 		List dshd = query.setFirstResult(begin).setMaxResults(maxResult).list();
 		if(dshd.size() > 0)
 			return dshd;
@@ -196,9 +197,10 @@ public class HoaDonDaoImp extends HibernateUtil implements HoaDonDao{
 
 	@Override
 	public int countTongDai() {
-		Query query = getSession().createQuery("select count(*)  from Hoadon where tinhTrangGiaoHang <>:dang_xu_ly and hinhThucMua =:tong_dai")
+		Query query = getSession().createQuery("select count(*)  from Hoadon where tinhTrangGiaoHang <>:dang_xu_ly and (hinhThucMua =:tong_dai or hinhThucMua =:online) ")
 				.setParameter("dang_xu_ly", TinhTrangGiaoHang.DANG_XU_LY)
-				.setParameter("tong_dai", HinhThucMua.TONG_DAI);
+				.setParameter("tong_dai", HinhThucMua.TONG_DAI).
+				setParameter("online", HinhThucMua.ONLINE);
 	    	int count = ((Long) query.uniqueResult()).intValue();
 	    	return count;
 	}

@@ -39,7 +39,7 @@
                 <td>${item.donViTinh }</td>
                 <td>${item.soLuongDaBan }</td>
                 <td width="5%">
-                    <a href="<c:url value="/quanly/monan/1"/>" class="btn btn-info">Xem</a>
+                    <a href="<c:url value="/quanly/monan/${item.monId }"/>" class="btn btn-info">Xem</a>
                 </td>
                 <td width="5%">
                 <c:choose>

@@ -7,7 +7,7 @@
             <li><a href="#">
                 <em class="fa fa-home"></em>
             </a></li>
-            <li>Tạo đơn hàng mang về </li>
+            <li>Tạo đơn hàng </li>
         </ol>
     </div><!--/.row-->
 

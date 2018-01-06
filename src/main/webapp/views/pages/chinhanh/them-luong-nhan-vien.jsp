@@ -18,7 +18,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <c:set var="action" value="${type == 'update' ? '/chinhanh/chiphi/luongnhanvien/update' : '/chinhanh/chiphi/luongnhanvien/create'}"/>
+            <c:url var="action" value="${type == 'update' ? '/chinhanh/chiphi/luongnhanvien/update' : '/chinhanh/chiphi/luongnhanvien/create'}"/>
             <form:form action="${action}" method="post" modelAttribute="danhSachLuongNv">
             <div class="form-horizontal">
                 <div class="panel panel-default">

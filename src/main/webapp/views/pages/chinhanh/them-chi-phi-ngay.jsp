@@ -13,7 +13,7 @@
         </ol>
     </div><!--/.row-->
 
-    <c:set var="action" value="${type == 'update' ? '/chinhanh/chiphi/ngay/update' : '/chinhanh/chiphi/ngay/create'}"/>
+    <c:url var="action" value="${type == 'update' ? '/chinhanh/chiphi/ngay/update' : '/chinhanh/chiphi/ngay/create'}"/>
     <div class="row">
         <div class="col-md-12">
             <form:form action="${action}" method="post" modelAttribute="chiPhiNgay" class="form-horizontal">
